@@ -6,6 +6,8 @@ import { readPct } from '../state/reading';
 import { TopBar } from './Chrome';
 import Diagram from './Diagram';
 import Exercise from './Exercise';
+import Media from './media/Media';
+import { mediaAfter } from '../content/cn1-media';
 import Wayfinder, { crumbsFor, go } from './Wayfinder';
 
 // Narrow screens (see swiss.css “V5 · Mobile and tablet”): at ≤1200px the
@@ -31,7 +33,21 @@ const Article = memo(function Article({ section }: { section: number }) {
       <h1 id="sec-title" className="art-title">
         {s.title}
       </h1>
-      {s.blocks.map((b, i) => renderBlock(b, i, section, b.kind === 'diagram' ? ++fig : 0))}
+      {s.blocks.map((b, i) => {
+        const media = mediaAfter(section, i);
+        const el = renderBlock(b, i, section, b.kind === 'diagram' ? ++fig : 0);
+        if (!media.length) return el;
+        // Teaching components follow their anchor block. They are additions:
+        // the draft's text, tables, diagrams and exercises are all kept.
+        return [
+          el,
+          ...media.map((m) => (
+            <div key={`m-${section}-${i}-${m}`} className="blk blk-media" data-media={m}>
+              <Media id={m} />
+            </div>
+          )),
+        ];
+      })}
     </article>
   );
 });

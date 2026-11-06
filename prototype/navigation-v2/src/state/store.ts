@@ -45,6 +45,11 @@ export const bumpProgress = (section: number, frac: number) => {
 export const getExercise = (id: string) => read<string>(KEY_EX + id, '');
 export const setExercise = (id: string, v: string) => write(KEY_EX + id, v);
 
+/** State of an interactive teaching component (choices only, never scored). */
+const KEY_MEDIA = 'philopilot.v2.cn1.media.';
+export const getMedia = <T,>(id: string, fallback: T) => read<T>(KEY_MEDIA + id, fallback);
+export const setMedia = (id: string, v: unknown) => write(KEY_MEDIA + id, v);
+
 // How the learner reached a course is stored with each browser-history entry
 // (see router.ts), not in a single session-wide trail.
 export type { Crumb } from '../router';
