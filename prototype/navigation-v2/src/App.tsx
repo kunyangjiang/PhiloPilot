@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { routeToHash, useRoute, type Route } from './router';
-import { useMotion, useStyle } from './state/store';
 import Home from './ui/Home';
 import Questions from './ui/Questions';
 import Topic from './ui/Topic';
@@ -28,14 +27,7 @@ function Page({ route }: { route: Route }) {
 
 export default function App() {
   const route = useRoute();
-  const style = useStyle();
-  const motion = useMotion();
   const first = useRef(true);
-
-  useEffect(() => {
-    document.documentElement.dataset.style = style;
-    document.documentElement.dataset.motion = motion;
-  }, [style, motion]);
 
   useEffect(() => {
     document.title = titleFor(route);

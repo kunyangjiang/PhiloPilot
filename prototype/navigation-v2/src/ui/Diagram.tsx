@@ -1,33 +1,24 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { useStyle, type StyleId } from '../state/store';
+// Mermaid diagrams from the draft, drawn flat in the Swiss ink and paper
+// colours. Mermaid is loaded lazily, only when a diagram is on screen.
 
-// Mermaid diagrams from the draft, drawn flat in the current style's ink and
-// paper colours. Mermaid is loaded lazily, only when a diagram is on screen.
-
-const THEMES: Record<StyleId, { font: string; vars: Record<string, string> }> = {
-  swiss: {
-    font: '"Noto Sans SC", Arial, sans-serif',
-    vars: { primaryColor: '#ffffff', primaryBorderColor: '#111111', primaryTextColor: '#111111', lineColor: '#111111', secondaryColor: '#f2f2ee', tertiaryColor: '#f7f7f4', clusterBkg: '#f2f2ee', clusterBorder: '#111111', edgeLabelBackground: '#ffffff' },
-  },
-  transit: {
-    font: '"Jost", "Noto Sans SC", sans-serif',
-    vars: { primaryColor: '#ffffff', primaryBorderColor: '#1d2a44', primaryTextColor: '#1d2a44', lineColor: '#2f6fd6', secondaryColor: '#eef2f8', tertiaryColor: '#f4f6fa', clusterBkg: '#eef2f8', clusterBorder: '#1d2a44', edgeLabelBackground: '#ffffff' },
-  },
-  catalogue: {
-    font: '"Courier Prime", "Noto Serif SC", monospace',
-    vars: { primaryColor: '#fbf6e8', primaryBorderColor: '#3a3326', primaryTextColor: '#2b261c', lineColor: '#3a3326', secondaryColor: '#f1e8d2', tertiaryColor: '#f6efdc', clusterBkg: '#f1e8d2', clusterBorder: '#8a7a5a', edgeLabelBackground: '#fbf6e8' },
-  },
+const THEME = {
+  font: '"Noto Sans SC", Arial, sans-serif',
+  vars: { primaryColor: '#ffffff', primaryBorderColor: '#111111', primaryTextColor: '#111111', lineColor: '#111111', secondaryColor: '#f2f2ee', tertiaryColor: '#f7f7f4', clusterBkg: '#f2f2ee', clusterBorder: '#111111', edgeLabelBackground: '#ffffff' },
 };
 
-type Mermaid = typeof import('mermaid').default;
+/** Overlay zoom steps; 0 = fit to the screen, otherwise a width multiple. */
+const ZOOMS = [1, 1.5, 2, 3, 4];
+
+type Mermaid =typeof import('mermaid').default;
 let mermaidPromise: Promise<Mermaid> | null = null;
 let queue: Promise<unknown> = Promise.resolve();
-function render(id: string, code: string, style: StyleId): Promise<string> {
+function render(id: string, code: string): Promise<string> {
   if (!mermaidPromise) mermaidPromise = import('mermaid').then((m) => m.default);
-  // Renders are serialised because each one re-initialises the theme.
+  // Renders are serialised: mermaid keeps global state while it renders.
   const job = queue.then(() =>
     mermaidPromise!.then((m) => {
-      const t = THEMES[style];
+      const t = THEME;
       m.initialize({
         startOnLoad: false,
         securityLevel: 'strict',
@@ -45,25 +36,26 @@ function render(id: string, code: string, style: StyleId): Promise<string> {
 
 export default function Diagram({ code, index }: { code: string; index: number }) {
   const uid = useId().replace(/[^a-zA-Z0-9]/g, '');
-  const style = useStyle();
   const [svg, setSvg] = useState('');
   const [err, setErr] = useState(false);
   const [open, setOpen] = useState(false);
+  const [zoom, setZoom] = useState(0);
   const btnRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     let alive = true;
-    render(`mmd-${uid}-${style}`, code, style)
+    render(`mmd-${uid}`, code)
       .then((s) => alive && setSvg(s))
       .catch(() => alive && setErr(true));
     return () => {
       alive = false;
     };
-  }, [code, uid, style]);
+  }, [code, uid]);
 
   useEffect(() => {
     if (!open) return;
+    setZoom(0);
     closeRef.current?.focus();
     const k = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -101,7 +93,18 @@ export default function Diagram({ code, index }: { code: string; index: number }
         >
           <div className="dg-big" onClick={(e) => e.stopPropagation()}>
             <div className="dg-big-head">
-              <span>图 {index} · 本章教学整理</span>
+              <span className="dg-big-t">图 {index}</span>
+              <span className="dg-zoom" role="group" aria-label="缩放">
+                <button onClick={() => setZoom((z) => Math.max(0, z - 1))} disabled={zoom === 0} aria-label="缩小">
+                  −
+                </button>
+                <span className="dg-zoom-v" aria-live="polite">
+                  {zoom === 0 ? '适合屏幕' : `${ZOOMS[zoom] * 100}%`}
+                </span>
+                <button onClick={() => setZoom((z) => Math.min(ZOOMS.length - 1, z + 1))} disabled={zoom === ZOOMS.length - 1} aria-label="放大">
+                  +
+                </button>
+              </span>
               <button
                 ref={closeRef}
                 className="dg-close"
@@ -110,10 +113,17 @@ export default function Diagram({ code, index }: { code: string; index: number }
                   btnRef.current?.focus({ preventScroll: true });
                 }}
               >
-                关闭（Esc）
+                关闭<span className="dg-esc">（Esc）</span>
               </button>
             </div>
-            <div className="dg-svg dg-svg--big" dangerouslySetInnerHTML={{ __html: svg }} />
+            <div className="dg-pan">
+              <div
+                className={'dg-svg dg-svg--big' + (zoom > 0 ? ' is-zoomed' : '')}
+                style={zoom > 0 ? { width: `${ZOOMS[zoom] * 100}%` } : undefined}
+                dangerouslySetInnerHTML={{ __html: svg }}
+              />
+            </div>
+            {zoom > 0 && <p className="dg-pan-hint">拖动或滑动查看图的其他部分</p>}
           </div>
         </div>
       )}

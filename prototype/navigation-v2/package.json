@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.2.0",
   "type": "module",
-  "description": "PhiloPilot Phase 3B — navigation and reading prototype V2: three 20th-century design directions with a style switcher (local only)",
+  "description": "PhiloPilot web app: Swiss-style navigation and reading interface for desktop and mobile (static, no backend)",
   "scripts": {
     "dev": "vite --port 5179",
     "build": "tsc --noEmit && vite build",

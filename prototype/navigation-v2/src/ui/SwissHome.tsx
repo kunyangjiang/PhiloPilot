@@ -1,4 +1,4 @@
-import { useState, type KeyboardEvent } from 'react';
+import { useRef, useState, type KeyboardEvent } from 'react';
 import { REGIONS, type RegionId } from '../data/catalog';
 import { UNITS, type Unit } from '../data/units';
 import { readingStatus } from '../state/reading';
@@ -23,6 +23,9 @@ export default function SwissHome() {
   const [unit, setUnit] = useState<Unit | null>(null);
   const [cursor, setCursor] = useState(CELLS.findIndex((u) => u.code === 'CN1'));
   const status = readingStatus();
+  const touch = useRef(false);
+  const pick = CELLS[cursor];
+  const move = (d: number) => setCursor((c) => Math.min(CELLS.length - 1, Math.max(0, c + d)));
 
   const openUnit = (u: Unit) => {
     if (IMPLEMENTED.has(u.code)) goCourse(u.code);
@@ -51,14 +54,13 @@ export default function SwissHome() {
           <h1 className="sh-display">哲学</h1>
         </div>
         <div className="sh-intro">
-          <p className="sh-kicker">PhiloPilot · 哲学课程总览（原型）</p>
+          <p className="sh-kicker">
+            PhiloPilot · 哲学课程总览<span className="nowrap">（原型）</span>
+          </p>
           <p className="sh-q">从哪里开始读？</p>
           <p className="sh-sub">
-            四个入口通向同一套 72 门课程。常见路径：
-            <span className="sh-levels">
-              入口 <i>›</i> 问题 <i>›</i> 课程 <i>›</i> 阅读
-            </span>
-            <small>（「问题」只在哲学问题入口中出现；也可以用搜索或「继续阅读」直接进入课程）</small>
+            四个入口，同一套 72 门课程：从传统、问题、对话或方法读起都可以。
+            <small>每个入口进入后的步骤写在下面的方块里；也可以用搜索或「继续阅读」直接回到课程。</small>
           </p>
         </div>
         {status.state === 'progress' ? (
@@ -143,11 +145,13 @@ export default function SwissHome() {
           onFocus={() => setUnit(CELLS[cursor])}
           onBlur={() => setUnit(null)}
           onMouseLeave={() => setUnit(null)}
+          onPointerDown={(e) => (touch.current = e.pointerType !== 'mouse')}
         >
           {CELLS.map((u, i) => {
             const first = i > 0 && CELLS[i - 1].region !== u.region;
             const open = IMPLEMENTED.has(u.code);
-            const cls = 'sh-cell sh-cell--' + u.region + (first ? ' is-first' : '') + (open ? ' is-open' : '') + (unit?.code === u.code ? ' is-on' : '');
+            const cls =
+              'sh-cell sh-cell--' + u.region + (first ? ' is-first' : '') + (open ? ' is-open' : '') + (unit?.code === u.code ? ' is-on' : '') + (i === cursor ? ' is-cur' : '');
             return (
               <span
                 key={u.code}
@@ -161,10 +165,43 @@ export default function SwissHome() {
                   setUnit(u);
                   setCursor(i);
                 }}
-                onClick={() => openUnit(u)}
+                onClick={() => {
+                  // Touch: a tap selects (the cells are too small to aim at
+                  // reliably); the course opens from the preview below.
+                  if (touch.current) {
+                    setCursor(i);
+                    setUnit(u);
+                  } else openUnit(u);
+                }}
               />
             );
           })}
+        </div>
+        {/* Narrow screens: a readable preview of the selected course, with
+            steps so the tiny cells are not the only way to choose one. */}
+        <div className="sh-pick">
+          <button className="sh-pick-step" onClick={() => move(-1)} disabled={cursor === 0} aria-label="上一门课程">
+            ‹
+          </button>
+          <div className="sh-pick-body" aria-live="polite">
+            <span className="sh-pick-k">
+              <span className={'sw-shape sw-shape--' + pick.region} aria-hidden="true" /> {REGION_TITLE[pick.region]} · {pick.group} · {TIER[pick.tier]}
+            </span>
+            <span className="sh-pick-t">{pick.name}</span>
+            <span className="sh-pick-s">
+              第 {cursor + 1} / {CELLS.length} 门 ·{' '}
+              {IMPLEMENTED.has(pick.code) ? (
+                <button className="sh-pick-open" onClick={() => openUnit(pick)}>
+                  可阅读 · 打开课程 →
+                </button>
+              ) : (
+                '原型未实现'
+              )}
+            </span>
+          </div>
+          <button className="sh-pick-step" onClick={() => move(1)} disabled={cursor === CELLS.length - 1} aria-label="下一门课程">
+            ›
+          </button>
         </div>
       </figure>
     </div>

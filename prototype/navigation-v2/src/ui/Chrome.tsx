@@ -1,99 +1,28 @@
 import { useEffect } from 'react';
 import { navigate } from '../router';
-import { setMotion, setStyle, STYLES, useMotion, useStyle, type Crumb } from '../state/store';
 import { openSearch } from './SearchPalette';
 
-/** Masthead: brand, breadcrumb, search, style switcher and motion switch. */
-export function TopBar({ crumbs }: { crumbs?: Crumb[] }) {
+/** Masthead: the PhiloPilot identity and search. Where the learner is, and the
+ *  way back, is shown by the level bar (Wayfinder) directly below it. */
+export function TopBar() {
   return (
     <header className="topbar">
       <button className="brand" onClick={() => navigate({ name: 'home' })} aria-label="PhiloPilot 首页">
         <span className="brand-mark" aria-hidden="true" />
         <span className="brand-name">PhiloPilot</span>
+        <span className="brand-sub">哲学课程</span>
       </button>
-      {crumbs && crumbs.length > 1 ? <Breadcrumb crumbs={crumbs} /> : <span className="topbar-fill" />}
-      <div className="topbar-tools">
-        <button className="tool tool-search" onClick={openSearch} aria-keyshortcuts="Control+K">
-          <span>搜索</span>
-          <kbd>Ctrl K</kbd>
-        </button>
-        <StyleSwitch />
-        <MotionSwitch />
-      </div>
+      <button className="tool-search" onClick={openSearch} aria-keyshortcuts="Control+K /" aria-label="搜索课程与章节">
+        <span className="ts-icon" aria-hidden="true" />
+        <span className="ts-text">搜索课程与章节</span>
+        <span className="ts-short" aria-hidden="true">
+          搜索
+        </span>
+        <kbd>Ctrl K</kbd>
+      </button>
     </header>
   );
 }
-
-export function StyleSwitch() {
-  const style = useStyle();
-  return (
-    <div className="switch" role="radiogroup" aria-label="视觉风格">
-      <span className="switch-label" aria-hidden="true">
-        风格
-      </span>
-      {STYLES.map((s) => (
-        <button
-          key={s.id}
-          role="radio"
-          aria-checked={style === s.id}
-          className={style === s.id ? 'on' : ''}
-          title={s.note}
-          onClick={() => setStyle(s.id)}
-        >
-          {s.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-export function MotionSwitch() {
-  const motion = useMotion();
-  return (
-    <div className="switch" role="radiogroup" aria-label="动效（默认跟随系统“减少动态效果”设置）">
-      <span className="switch-label" aria-hidden="true">
-        动效
-      </span>
-      <button role="radio" aria-checked={motion === 'subtle'} className={motion === 'subtle' ? 'on' : ''} onClick={() => setMotion('subtle')}>
-        轻微
-      </button>
-      <button role="radio" aria-checked={motion === 'none'} className={motion === 'none' ? 'on' : ''} onClick={() => setMotion('none')}>
-        关闭
-      </button>
-    </div>
-  );
-}
-
-export function Breadcrumb({ crumbs }: { crumbs: Crumb[] }) {
-  return (
-    <nav className="crumbs" aria-label="当前位置">
-      <ol>
-        {crumbs.map((c, i) => {
-          const last = i === crumbs.length - 1;
-          return (
-            <li key={c.hash + i}>
-              {last ? (
-                <span aria-current="location">{c.label}</span>
-              ) : (
-                <a
-                  href={c.hash}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    history.pushState(null, '', c.hash);
-                    window.dispatchEvent(new HashChangeEvent('hashchange'));
-                  }}
-                >
-                  {c.label}
-                </a>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  );
-}
-
 
 /** Escape goes one level up, unless the search palette or a dialog is open. */
 export function useEscape(fn: () => void) {

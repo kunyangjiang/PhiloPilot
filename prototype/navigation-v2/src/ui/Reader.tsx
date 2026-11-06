@@ -6,7 +6,13 @@ import { readPct } from '../state/reading';
 import { TopBar } from './Chrome';
 import Diagram from './Diagram';
 import Exercise from './Exercise';
-import Wayfinder from './Wayfinder';
+import Wayfinder, { crumbsFor, go } from './Wayfinder';
+
+// Narrow screens (see swiss.css “V5 · Mobile and tablet”): at ≤1200px the
+// context panel is a bottom sheet; at ≤900px the rail is a drawer opened from
+// the compact reader bar.
+const SHEET_MQ = '(max-width: 1200px)';
+const matches = (q: string) => window.matchMedia?.(q).matches ?? false;
 
 type ReaderRoute = Extract<Route, { name: 'reader' }>;
 type Section = (typeof SECTIONS)[number];
@@ -86,11 +92,18 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   const [frac, setFrac] = useState(0);
   const [progress, setProg] = useState(getProgress);
   const [flash, setFlash] = useState<number | null>(null);
+  const [drawer, setDrawer] = useState(false);
+  const [barsHidden, setBarsHidden] = useState(false);
   const userMoved = useRef(false);
+  const lastTop = useRef(0);
+  const tocBtn = useRef<HTMLButtonElement>(null);
+  const railRef = useRef<HTMLElement>(null);
+  const noteRef = useRef<HTMLDivElement>(null);
 
   // Section change or restore: jump to the saved block, or the top.
   useLayoutEffect(() => {
     setNote(null);
+    setDrawer(false);
     userMoved.current = false;
     const sc = scrollRef.current;
     if (!sc) return;
@@ -113,6 +126,12 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     const max = sc.scrollHeight - sc.clientHeight;
     const f = max > 0 ? sc.scrollTop / max : 1;
     setFrac(f);
+    // Phones: the masthead slides away while reading down, returns on the way up.
+    const dy = sc.scrollTop - lastTop.current;
+    if (Math.abs(dy) > 6) {
+      setBarsHidden(dy > 0 && sc.scrollTop > 120);
+      lastTop.current = sc.scrollTop;
+    }
     // Progress counts only the learner's own reading, never a programmatic jump
     // (resume, search result, back/forward).
     if (userMoved.current) bumpProgress(section, f > 0.97 ? 1 : f);
@@ -188,21 +207,66 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   const closeNote = () => {
     if (!note) return;
     note.btn.setAttribute('aria-expanded', 'false');
-    note.btn.focus();
+    note.btn.focus({ preventScroll: true });
     setNote(null);
   };
+
+  // Bottom sheet: the text gets matching bottom padding, and the marker that
+  // opened the sheet is moved into the visible part above it, so the sheet
+  // never hides the sentence being explained.
+  useLayoutEffect(() => {
+    const sc = scrollRef.current;
+    if (!sc) return;
+    if (!note || !matches(SHEET_MQ) || !noteRef.current) {
+      sc.style.paddingBottom = '';
+      return;
+    }
+    const h = noteRef.current.getBoundingClientRect().height;
+    sc.style.paddingBottom = h + 'px';
+    const box = sc.getBoundingClientRect();
+    const r = note.btn.getBoundingClientRect();
+    const visibleBottom = window.innerHeight - h - 16;
+    if (r.bottom > visibleBottom || r.top < box.top + 8) {
+      const target = box.top + (visibleBottom - box.top) * 0.35;
+      sc.scrollTop += r.top - target;
+    }
+  }, [note]);
+
+  // Drawer: focus moves into it, and back to the 目录 button when it closes.
+  const closeDrawer = (refocus = true) => {
+    setDrawer(false);
+    if (refocus) tocBtn.current?.focus({ preventScroll: true });
+  };
+  useEffect(() => {
+    if (drawer) railRef.current?.querySelector<HTMLElement>('.rail-close')?.focus({ preventScroll: true });
+  }, [drawer]);
 
   useEffect(() => {
     const k = (e: KeyboardEvent) => {
       if (e.key !== 'Escape' || e.defaultPrevented || document.querySelector('.palette, .dg-overlay')) return;
-      if (note) closeNote();
+      if (drawer) closeDrawer();
+      else if (note) closeNote();
       else navigate({ name: 'course', code: 'CN1' });
     };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
   });
 
+  // Wide tables scroll sideways on small screens; mark the ones that do so
+  // the hint above them shows.
+  useEffect(() => {
+    const mark = () =>
+      scrollRef.current?.querySelectorAll<HTMLElement>('.tbl-wrap').forEach((w) => {
+        if (w.scrollWidth > w.clientWidth + 2) w.dataset.overflow = '';
+        else delete w.dataset.overflow;
+      });
+    mark();
+    window.addEventListener('resize', mark);
+    return () => window.removeEventListener('resize', mark);
+  }, [section]);
+
   const goSection = (i: number) => navigate({ name: 'reader', code: 'CN1', section: i });
+  const back = crumbsFor({ page: 'reader', section: '' }).slice(0, -1);
   const pct = readPct(progress, userMoved.current ? { section, frac } : undefined);
   const sourcesIndex = APPENDIX.find((x) => x.title.startsWith('来源'))?.index;
   const label = (x: Section) => (isAppendix(x.index) ? `附录 · ${x.title}` : x.title);
@@ -212,7 +276,13 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     const cls = (x.index === section ? 'is-current ' : '') + (isAppendix(x.index) ? 'is-appendix' : p > 0.97 ? 'is-done' : p > 0.02 ? 'is-started' : '');
     return (
       <li key={x.index} className={cls}>
-        <button onClick={() => goSection(x.index)} aria-current={x.index === section ? 'page' : undefined}>
+        <button
+          onClick={() => {
+            if (x.index === section) closeDrawer(false);
+            goSection(x.index);
+          }}
+          aria-current={x.index === section ? 'page' : undefined}
+        >
           <span className="rail-mark" aria-hidden="true" />
           <span className="rail-text">{x.title}</span>
         </button>
@@ -224,6 +294,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
                   href={'#' + h.id}
                   onClick={(e) => {
                     e.preventDefault();
+                    if (drawer) closeDrawer(false);
                     const el = document.getElementById(h.id);
                     const sc = scrollRef.current;
                     if (el && sc)
@@ -244,17 +315,54 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   };
 
   return (
-    <div className="reader">
+    <div className={'reader' + (barsHidden ? ' bars-hidden' : '') + (drawer ? ' has-drawer' : '')}>
       <TopBar />
       <Wayfinder page="reader" section={shortTitle(s.title)} appendix={isAppendix(section)} />
+      {/* Narrow screens: one compact bar instead of the level bar. */}
+      <div className="reader-bar">
+        <button className="rb-back" onClick={() => navigate({ name: 'course', code: 'CN1' })} aria-label="返回课程扉页">
+          <span aria-hidden="true">‹</span> 扉页
+        </button>
+        <p className="rb-where">
+          <span className="rb-pos">{isAppendix(section) ? '附录' : `第 ${partNo(section)} / ${READING.length} 部分`}</span>
+          <span className="rb-title">{shortTitle(s.title)}</span>
+        </p>
+        <button ref={tocBtn} className="rb-toc" aria-expanded={drawer} aria-controls="reader-rail" onClick={() => (drawer ? closeDrawer() : setDrawer(true))}>
+          目录 <small>{pct}%</small>
+        </button>
+      </div>
       <div className="reader-progress" aria-hidden="true">
         <span style={{ transform: `scaleX(${frac})` }} />
       </div>
+      {drawer && <div className="rail-backdrop" onClick={() => closeDrawer()} aria-hidden="true" />}
       <div className="reader-scroll" ref={scrollRef} id="main" tabIndex={-1}>
         <div className="reader-grid">
           {/* The rail is for this course only: parts, sub-headings, progress.
-              Site-level ways back live in the breadcrumb above. */}
-          <nav className="rail" aria-label="本课目录">
+              Site-level ways back live in the breadcrumb above. On narrow
+              screens it is a drawer and also shows the way the learner came. */}
+          <nav className={'rail' + (drawer ? ' is-open' : '')} id="reader-rail" aria-label="本课目录" ref={railRef}>
+            <div className="rail-drawer-head">
+              <p className="rail-path" aria-label="来路">
+                {back.map((c, i) => (
+                  <span key={c.hash + i}>
+                    {i > 0 && <i aria-hidden="true"> › </i>}
+                    <a
+                      href={c.hash}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setDrawer(false);
+                        go(c.hash);
+                      }}
+                    >
+                      {c.label}
+                    </a>
+                  </span>
+                ))}
+              </p>
+              <button className="rail-close" onClick={() => closeDrawer()}>
+                关闭
+              </button>
+            </div>
             <p className="rail-title">
               目录 · {READING.length} 部分 <span className="rail-pct">已读 {pct}%</span>
             </p>
@@ -271,7 +379,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
             <Article section={section} />
             <aside className="margin" aria-label="注释与出处">
               {note && (
-                <div className="margin-note" style={{ top: note.top }} role="note" aria-label={note.kind === 'fn' ? `注释 ${note.n}` : '原文出处'}>
+                <div ref={noteRef} className="margin-note" style={{ top: note.top }} role="note" aria-label={note.kind === 'fn' ? `注释 ${note.n}` : '原文出处'}>
                   {note.kind === 'fn' ? (
                     <>
                       <span className="mn-num">注 {note.n}</span>
@@ -292,7 +400,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
                     </>
                   )}
                   <button className="mn-close" onClick={closeNote}>
-                    收起（Esc）
+                    收起<span className="dg-esc">（Esc）</span>
                   </button>
                 </div>
               )}

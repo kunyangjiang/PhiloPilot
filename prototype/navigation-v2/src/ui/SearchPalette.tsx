@@ -92,10 +92,12 @@ export default function SearchPalette() {
   return (
     <div className="palette-backdrop" onClick={() => setOpen(false)}>
       <div className="palette" role="dialog" aria-modal="true" aria-label="搜索" onClick={(e) => e.stopPropagation()}>
+        <div className="pl-head">
         <input
           ref={inputRef}
           value={q}
-          placeholder="搜索课程、问题、课文章节……（例如：牛山、四端、荀子）"
+          placeholder="搜索课程、问题、章节（如：牛山、四端）"
+          enterKeyHint="go"
           aria-label="搜索"
           aria-controls="palette-list"
           onChange={(e) => {
@@ -109,6 +111,10 @@ export default function SearchPalette() {
             if (e.key === 'Enter') pick(items[sel]);
           }}
         />
+          <button className="pl-close" onClick={() => setOpen(false)}>
+            关闭
+          </button>
+        </div>
         <ul id="palette-list" role="listbox">
           {items.length === 0 && <li className="pl-empty">没有找到匹配的内容</li>}
           {items.map((it, i) => (
@@ -127,7 +133,9 @@ export default function SearchPalette() {
             </li>
           ))}
         </ul>
-        <p className="pl-foot">↑↓ 选择 · Enter 打开 · Esc 关闭 · 灰色条目在原型中尚未实现</p>
+        <p className="pl-foot">
+          <span className="pl-keys">↑↓ 选择 · Enter 打开 · Esc 关闭 · </span>灰色条目在原型中尚未实现
+        </p>
       </div>
     </div>
   );

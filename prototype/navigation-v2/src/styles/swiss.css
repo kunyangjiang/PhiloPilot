@@ -53,25 +53,21 @@
 }
 
 /* Entrance tones (level bar, tiles, cells) */
-[data-style='swiss'] .wf--history,
 .sh-tile--history,
 .sh-cell--history {
   --tone: var(--c-history);
   --tone-ink: #111;
 }
-[data-style='swiss'] .wf--questions,
 .sh-tile--questions,
 .sh-cell--questions {
   --tone: var(--c-questions);
   --tone-ink: #fff;
 }
-[data-style='swiss'] .wf--dialogue,
 .sh-tile--dialogue,
 .sh-cell--dialogue {
   --tone: var(--c-dialogue);
   --tone-ink: #fff;
 }
-[data-style='swiss'] .wf--methods,
 .sh-tile--methods,
 .sh-cell--methods {
   --tone: var(--c-methods);
@@ -137,22 +133,18 @@
   font-size: 15px;
   color: var(--ink-2);
 }
-.sh-levels {
-  display: inline-block;
-  margin: 0 6px;
-  padding: 1px 10px;
-  border: 1.5px solid var(--ink);
-  font-weight: 700;
-  color: var(--ink);
-}
-.sh-levels i {
-  font-style: normal;
-  color: var(--ink-3);
-  margin: 0 3px;
-}
 .sh-sub small {
+  display: block;
+  margin-top: 2px;
   font-size: 12.5px;
   color: var(--ink-3);
+}
+.nowrap {
+  white-space: nowrap;
+}
+/* Course preview under the strip: narrow screens only (see V5 section). */
+.sh-pick {
+  display: none;
 }
 .sh-continue {
   display: grid;
@@ -385,11 +377,7 @@
 }
 
 /* ── Inner pages ───────────────────────────────────────────────────────────── */
-.pg-bignum,
-.art-no,
-.seal {
-  display: none;
-}
+
 [data-style='swiss'] .pg-body {
   padding-top: 32px;
 }
@@ -528,4 +516,1003 @@
 }
 [data-style='swiss'] .rail-sub {
   border-left-color: transparent;
+}
+
+/* ═════ V5 · Mobile and tablet ═════════════════════════════════════════════ */
+/* ── Controls that only exist on narrow screens ──────────────────────────────── */
+.reader-bar,
+.rail-drawer-head,
+.rail-backdrop {
+  display: none;
+}
+.reader {
+  height: 100dvh;
+}
+
+/* Search palette: field and close button on one row (all sizes). */
+.pl-head {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.palette .pl-head input {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 0;
+}
+.pl-close {
+  flex: none;
+  padding: 0 16px;
+  font-size: 13px;
+  color: var(--ink-2);
+  border-left: 1px solid var(--rule);
+}
+.pl-close:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* Diagram overlay: zoom steps and a panning area (all sizes). */
+.dg-big {
+  display: flex;
+  flex-direction: column;
+}
+.dg-big-head {
+  align-items: center;
+  gap: 16px;
+}
+.dg-big-t {
+  font-weight: 700;
+}
+.dg-zoom {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  border: 1px solid var(--ink);
+}
+.dg-zoom button {
+  width: 34px;
+  height: 32px;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
+}
+.dg-zoom button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--bg);
+}
+.dg-zoom button:disabled {
+  color: var(--rule);
+  cursor: default;
+}
+.dg-zoom-v {
+  min-width: 72px;
+  padding: 0 6px;
+  text-align: center;
+  font-size: 12px;
+  border-left: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  line-height: 32px;
+}
+.dg-pan {
+  display: flex;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+/* Auto margins centre the figure without clipping it when it is larger. */
+.dg-pan > .dg-svg--big {
+  flex: none;
+  width: 100%;
+  margin: auto 0;
+}
+.dg-svg--big.is-zoomed svg {
+  width: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+.dg-pan-hint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* ── ≤1200px: the context panel is a bottom sheet ────────────────────────────────
+   The reader pads its text by the sheet's height and scrolls the marker above
+   it (Reader.tsx), so the sheet never covers the sentence it explains.        */
+@media (max-width: 1200px) {
+  .margin {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    z-index: 30;
+  }
+  .margin-note,
+  [data-style='swiss'] .margin-note {
+    position: relative;
+    top: auto !important;
+    max-height: min(50dvh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 14px max(var(--page-margin), calc((100vw - 720px) / 2)) 18px;
+    border: 0;
+    border-top: 6px solid var(--c-dialogue);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12);
+    font-size: 14.5px;
+  }
+  [data-motion='subtle'] .margin-note {
+    animation: sheet-in 0.18s ease-out both;
+  }
+  .mn-close {
+    position: absolute;
+    top: 8px;
+    right: max(var(--page-margin), calc((100vw - 720px) / 2));
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .mn-num {
+    display: block;
+    min-height: 36px;
+    line-height: 36px;
+    margin-top: -8px;
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+/* ── ≤900px: tablet. One column everywhere, the reader rail becomes a drawer ── */
+@media (max-width: 900px) {
+  :root {
+    --page-margin: 24px;
+    --col-gap: 32px;
+  }
+  .topbar {
+    gap: 12px;
+  }
+  .tool-search {
+    width: 240px;
+  }
+  .tool-search kbd {
+    display: none;
+  }
+
+  /* Level bar: scrolls sideways, the current place is kept in view. */
+  .wayfinder ol {
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .wayfinder ol::-webkit-scrollbar {
+    display: none;
+  }
+  .wf-step {
+    flex: none;
+    padding: 6px 22px 6px 12px;
+  }
+  .wf-step a,
+  .wf-label {
+    max-width: 14em;
+    font-size: 13.5px;
+  }
+  .wf-step a {
+    display: block;
+  }
+  /* The whole segment (kind label included) is the touch target. */
+  .wf-step a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  .course-main .kicker a,
+  .note .inline-link {
+    display: inline-block;
+    padding: 8px 0;
+    margin: -8px 0;
+  }
+
+  /* Homepage: scrolls; the four entrances in a 2 × 2 grid. */
+  .home {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+  .sh {
+    display: grid;
+    gap: 22px;
+    padding: 20px var(--page-margin) 28px;
+  }
+  .sh-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    row-gap: 18px;
+    column-gap: 28px;
+  }
+  .sh-display {
+    font-size: 120px;
+  }
+  .sh-disc {
+    left: 120px;
+    width: 106px;
+    height: 106px;
+  }
+  .sh-continue {
+    grid-column: 1 / -1;
+    max-width: none;
+    padding: 12px 16px;
+  }
+  /* Equal rows, so all four entrances are the same size. */
+  .sh-tiles {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    gap: 12px;
+  }
+  .sh-tile {
+    min-height: 0;
+  }
+  .sh-title {
+    margin-top: 28px;
+  }
+  .sh-foot {
+    margin-top: auto;
+  }
+  .sh-path {
+    margin-bottom: 14px;
+  }
+  .sh-strip-head {
+    flex-direction: column;
+    gap: 2px;
+  }
+  /* The preview card below the cells replaces the one-line readout. */
+  .sh-readout {
+    display: none;
+  }
+  .sh-cell.is-cur {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .sh-pick {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    min-height: 84px;
+    margin-top: 12px;
+    border: 2px solid var(--ink);
+  }
+  .sh-pick-step {
+    font-size: 26px;
+    line-height: 1;
+    text-align: center;
+  }
+  .sh-pick-step:first-child {
+    border-right: 1px solid var(--rule);
+  }
+  .sh-pick-step:last-child {
+    border-left: 1px solid var(--rule);
+  }
+  .sh-pick-step:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .sh-pick-step:disabled {
+    color: var(--rule);
+    cursor: default;
+  }
+  .sh-pick-body {
+    display: grid;
+    align-content: center;
+    gap: 2px;
+    min-width: 0;
+    padding: 10px 14px;
+  }
+  .sh-pick-k {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .sh-pick-t {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .sh-pick-s {
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .sh-pick-open {
+    display: inline-block;
+    padding: 6px 0;
+    margin: -6px 0;
+    font-weight: 700;
+    color: var(--open);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .sh-cells {
+    display: grid;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    grid-auto-rows: 22px;
+    gap: 3px;
+    height: auto;
+  }
+  .sh-cell.is-first {
+    margin-left: 0;
+  }
+
+  /* Exploration pages */
+  .pg-body,
+  [data-style='swiss'] .pg-body {
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+  .pg-head {
+    margin-bottom: 26px;
+  }
+  [data-style='swiss'] .pg-head h1 {
+    font-size: 38px;
+  }
+  .lede--q {
+    font-size: 19px;
+  }
+  .q-layout,
+  .topic-layout,
+  .course-grid,
+  .region-cols {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 36px;
+  }
+  .qf-title {
+    font-size: 36px;
+  }
+  /* Question detail: the recommendation comes right after the question. */
+  .topic-main {
+    display: contents;
+  }
+  .topic-main > section {
+    order: 2;
+  }
+  .start-card-wrap {
+    position: static;
+    order: 1;
+  }
+
+  /* Course front page: title, then the reading action, then the rest. */
+  .course-main {
+    display: flex;
+    flex-direction: column;
+  }
+  .course-main > * {
+    order: 1;
+  }
+  .course-main > .course-title,
+  .course-main > .course-en,
+  .course-main > .read-card {
+    order: 0;
+  }
+  .course-main > .kicker {
+    margin: 4px 0 0;
+  }
+  .read-card {
+    margin: 20px 0 22px;
+  }
+  [data-style='swiss'] .course-title {
+    font-size: 32px;
+  }
+
+  /* Reader: one column; compact bar; rail as a drawer. */
+  .reader .wayfinder {
+    display: none;
+  }
+  .reader-bar {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 10px;
+    height: 46px;
+    padding: 0 var(--page-margin);
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-strong);
+  }
+  .rb-back {
+    flex: none;
+    align-self: stretch;
+    padding-right: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    border-right: 1px solid var(--rule);
+  }
+  .rb-back span {
+    font-size: 20px;
+    line-height: 1;
+    margin-right: 2px;
+  }
+  .rb-where {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    display: grid;
+    line-height: 1.25;
+  }
+  .rb-pos {
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .rb-title {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rb-toc {
+    flex: none;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    border: 1.5px solid var(--ink);
+  }
+  .rb-toc small {
+    font-weight: 400;
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .rb-toc[aria-expanded='true'] {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .reader-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .reader-body {
+    grid-column: 1;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .reader .rail {
+    position: fixed;
+    z-index: 40;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(88vw, 380px);
+    max-height: none;
+    padding: 16px 22px 28px;
+    background: var(--paper);
+    border-right: 2px solid var(--ink);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.2s ease-out, visibility 0s linear 0.2s;
+  }
+  .reader .rail.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.2s ease-out;
+  }
+  .rail-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 39;
+    background: rgba(0, 0, 0, 0.35);
+  }
+  .rail-drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rail-path {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+  .rail-path a {
+    text-underline-offset: 3px;
+  }
+  .rail-path i {
+    font-style: normal;
+    color: var(--ink-3);
+  }
+  .rail-close {
+    flex: none;
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    font-size: 13px;
+  }
+  .rail > ol > li > button {
+    padding: 9px 0;
+    font-size: 14px;
+  }
+  .rail-sub a {
+    padding: 7px 0 7px 10px;
+    font-size: 13px;
+  }
+  .rail-back button {
+    min-height: 40px;
+  }
+  /* Search: no keyboard hints on touch screens. */
+  .pl-keys {
+    display: none;
+  }
+}
+
+/* ── ≤600px: phones ────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  :root,
+  :root[data-style] {
+    --page-margin: 16px;
+    --col-gap: 24px;
+    --topbar-h: 48px;
+  }
+  .brand-name {
+    font-size: 16px;
+  }
+  .brand-sub {
+    font-size: 12px;
+  }
+  .tool-search {
+    width: auto;
+    height: 38px;
+    padding: 0 14px;
+    gap: 8px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .ts-text {
+    display: none;
+  }
+  .ts-short {
+    display: inline;
+  }
+
+  .wf-step {
+    padding: 5px 20px 5px 10px;
+  }
+  .wf-home {
+    padding-left: 0;
+  }
+  .wf-level {
+    font-size: 10px;
+  }
+  .wf-step a,
+  .wf-label {
+    max-width: 11em;
+    font-size: 13px;
+  }
+
+  /* Homepage. The kicker sits beside 哲学 instead of under it, and the gaps
+     are tighter, so the entrances start higher on the first screen. */
+  .sh {
+    gap: 16px;
+    padding: 14px var(--page-margin) 24px;
+  }
+  .sh-head {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 14px;
+    row-gap: 8px;
+  }
+  .sh-intro {
+    display: contents;
+  }
+  .sh-kicker {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    margin: 0 0 4px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .sh-q,
+  .sh-sub,
+  .sh-continue {
+    grid-column: 1 / -1;
+  }
+  .sh-display {
+    font-size: 84px;
+  }
+  .sh-disc {
+    left: 84px;
+    top: -4px;
+    width: 76px;
+    height: 76px;
+  }
+  .sh-q {
+    margin-top: 2px;
+    font-size: 24px;
+  }
+  .sh-sub {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  /* The per-entrance steps on each tile already say this. */
+  .sh-sub small {
+    display: none;
+  }
+  .sh-continue {
+    margin-top: 6px;
+    padding: 10px 14px;
+    border-width: 2px;
+  }
+  .sh-c-t {
+    white-space: normal;
+  }
+  .sh-tiles {
+    gap: 8px;
+  }
+  .sh-tile {
+    padding: 14px 14px 12px;
+  }
+  .sh-no {
+    font-size: 12px;
+  }
+  .sh-tile-top {
+    min-height: 22px;
+  }
+  .sh-shape {
+    width: 22px;
+    height: 22px;
+  }
+  .sh-shape.sw-shape--methods {
+    width: 28px;
+    height: 8px;
+    margin-top: 7px;
+  }
+  .sh-title {
+    margin-top: 18px;
+    font-size: 21px;
+    line-height: 1.2;
+  }
+  .sh-en {
+    margin-bottom: 10px;
+    font-size: 11px;
+  }
+  .sh-line,
+  .sh-path-k,
+  .sh-foot {
+    display: none;
+  }
+  /* Same size boxes: titles share one line, steps sit on the bottom edge. */
+  .sh-path {
+    order: 3;
+    gap: 3px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top-width: 1px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .sh-path-step {
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .sh-path-step i {
+    width: 15px;
+    height: 15px;
+    flex: none;
+    font-size: 9.5px;
+    border-width: 1px;
+  }
+  .sh-badge {
+    position: static;
+    order: 2;
+    align-self: flex-start;
+    margin: -4px 0 10px;
+    padding: 1px 6px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .sh-cells {
+    grid-template-columns: repeat(18, minmax(0, 1fr));
+    grid-auto-rows: 20px;
+  }
+  .sh-strip-head {
+    font-size: 12.5px;
+  }
+
+  /* Exploration */
+  [data-style='swiss'] .pg-head h1 {
+    font-size: 32px;
+  }
+  .lede {
+    font-size: 15.5px;
+  }
+  .lede--q {
+    font-size: 18px;
+  }
+  .core-q p {
+    font-size: 16px;
+  }
+  .q-feature {
+    padding: 22px 20px 20px;
+  }
+  .qf-title {
+    font-size: 30px;
+  }
+  .qf-q {
+    font-size: 17px;
+  }
+  .q-others ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .qo-c {
+    white-space: normal;
+  }
+  .q-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+  .qr-no {
+    font-size: 22px;
+  }
+  .qr-body h3 {
+    font-size: 16.5px;
+  }
+  .qr-courses .qr-link {
+    padding: 4px 0 !important;
+  }
+  .start-card {
+    padding: 20px 18px 18px;
+  }
+  .sc-go {
+    min-height: 48px;
+  }
+  .doc-links li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+  .course-table th,
+  .course-table td {
+    padding: 9px 6px;
+  }
+  .course-table .btn--small {
+    min-height: 34px;
+    white-space: nowrap;
+  }
+  .trad-list li {
+    padding: 10px 0;
+  }
+
+  /* Course front page */
+  [data-style='swiss'] .course-title {
+    font-size: 28px;
+  }
+  .course-en {
+    font-size: 13.5px;
+  }
+  .read-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .rc-go {
+    padding: 16px 18px;
+  }
+  .rc-t {
+    font-size: 24px;
+  }
+  .rc-s {
+    white-space: normal;
+  }
+  .rc-alt {
+    max-width: none;
+    padding: 12px 18px;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
+  }
+  .rc-alt br {
+    display: none;
+  }
+  .course-summary {
+    font-size: 15px;
+  }
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .toc-list .toc-link {
+    grid-template-columns: 22px minmax(0, 1fr) 44px;
+    gap: 10px;
+    padding: 12px 2px;
+  }
+  .toc-list .tl-k {
+    display: none;
+  }
+
+  /* Reader: the masthead slides away while reading down. */
+  .reader .topbar {
+    position: relative;
+    transition: margin-top 0.2s ease-out;
+  }
+  .reader.bars-hidden:not(.has-drawer) .topbar {
+    margin-top: calc(-1 * var(--topbar-h));
+  }
+  .reader-bar {
+    height: 44px;
+  }
+  .article,
+  [data-style='swiss'] .article {
+    padding: 22px 0 12px;
+    font-size: 17px;
+    line-height: 1.9;
+  }
+  [data-style='swiss'] .art-title {
+    margin-bottom: 20px;
+    font-size: 27px;
+  }
+  /* Long source URLs in the appendix wrap instead of widening the page. */
+  .article a,
+  .mn-text a {
+    overflow-wrap: anywhere;
+  }
+  .art-h {
+    margin-top: 32px;
+    font-size: 19.5px;
+  }
+  .source {
+    margin: 20px 0;
+    padding: 14px 14px 12px;
+  }
+  .source-text p {
+    font-size: 17px;
+    line-height: 1.95;
+  }
+  .source figcaption {
+    margin-top: 6px;
+  }
+  .src-cite {
+    padding: 6px 0;
+  }
+  .callout {
+    padding: 2px 14px;
+    font-size: 15px;
+  }
+  .fn-ref {
+    position: relative;
+    min-width: 1.7em;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+  .fn-ref::after {
+    content: '';
+    position: absolute;
+    inset: -10px -6px;
+  }
+  /* Tables: each column keeps a readable width and the table scrolls sideways. */
+  .article th,
+  .article td {
+    min-width: 7em;
+  }
+  .tbl-wrap {
+    margin: 20px calc(-1 * var(--page-margin));
+    padding: 0 var(--page-margin);
+    overscroll-behavior-x: contain;
+  }
+  .tbl-wrap[data-overflow]::before {
+    content: '← 左右滑动查看整张表 →';
+    position: sticky;
+    left: 0;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .exercise,
+  [data-style='swiss'] .exercise {
+    padding: 14px 16px 16px;
+  }
+  .exercise textarea {
+    font-size: 16px;
+  }
+  .exercise .btn--small,
+  .ex-hint-btn {
+    min-height: 40px;
+  }
+  .dg-expand {
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+  }
+  .dg-label {
+    align-items: center;
+  }
+  .dg-overlay {
+    padding: 0;
+  }
+  .dg-big {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    padding: 10px 12px 14px;
+  }
+  .dg-esc {
+    display: none;
+  }
+  .dg-close {
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+  }
+  .dg-pan {
+    flex: 1;
+  }
+  .dg-svg--big:not(.is-zoomed) svg {
+    max-height: calc(100dvh - 90px);
+  }
+  .section-nav {
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 0 56px;
+  }
+  .section-nav button {
+    max-width: none;
+    padding: 10px 0;
+    font-size: 15.5px;
+  }
+
+  /* Search: a full-screen panel. */
+  .palette-backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+  .palette {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    border: 0;
+  }
+  .pl-head {
+    flex: none;
+    min-height: 54px;
+  }
+  .palette ul {
+    flex: 1;
+    max-height: none;
+    overscroll-behavior: contain;
+  }
+  .palette li {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'g s' 'l l';
+    gap: 2px 10px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pl-group {
+    grid-area: g;
+  }
+  .pl-sub {
+    grid-area: s;
+  }
+  .pl-label {
+    grid-area: l;
+  }
+  .pl-empty {
+    display: block !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-sub {
+    display: none;
+  }
 }

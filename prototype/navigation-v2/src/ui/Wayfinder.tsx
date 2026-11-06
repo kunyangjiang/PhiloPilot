@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import type { RegionId } from '../data/catalog';
 import { currentCtx, navigate, parseHash, type Crumb } from '../router';
 import { QUESTIONS_CRUMB, regionCrumb, topicCrumb } from './nav';
@@ -35,7 +36,7 @@ export function crumbsFor(p: Page): Crumb[] {
   }
 }
 
-function go(hash: string) {
+export function go(hash: string) {
   const r = parseHash(hash);
   // Inside a course the origin travels with the move; elsewhere a plain push.
   if (r.name === 'course' || r.name === 'reader') navigate(r);
@@ -47,9 +48,15 @@ function go(hash: string) {
 
 export default function Wayfinder(props: Page) {
   const crumbs = crumbsFor(props);
+  const ref = useRef<HTMLOListElement>(null);
+  // On narrow screens the bar scrolls sideways; keep the current place in view.
+  useLayoutEffect(() => {
+    const ol = ref.current;
+    if (ol) ol.scrollLeft = ol.scrollWidth;
+  });
   return (
     <nav className="wayfinder" aria-label="当前位置">
-      <ol>
+      <ol ref={ref}>
         {crumbs.map((c, i) => {
           const current = i === crumbs.length - 1;
           return (
