@@ -1,52 +1,28 @@
-import { useRef, useState } from 'react';
-import { getExercise, setExercise } from '../state/store';
+import { useState } from 'react';
+import type { Block } from '../content/course';
+import { practiceFor } from '../content/practiceSets';
+import Practice from './Practice';
 
-/** “想一想”: the draft's own prompt and hint, with a private local answer box. */
-export default function Exercise({ id, promptHtml, hintHtml }: { id: string; promptHtml: string; hintHtml: string }) {
-  const [open, setOpen] = useState(() => !!getExercise(id));
+type ExerciseBlock = Extract<Block, { kind: 'exercise' }>;
+
+/** “想一想”: the course's selection questions for this block when it has
+ *  them (see content/practiceSets.ts); otherwise the manuscript's own prompt
+ *  and hint, to think through without typing anything here. */
+export default function Exercise({ code, block }: { code: string; block: ExerciseBlock }) {
+  const set = practiceFor(code, block.text);
   const [hint, setHint] = useState(false);
-  const [text, setText] = useState(() => getExercise(id));
-  const [saved, setSaved] = useState(false);
-  const timer = useRef<number>(0);
+  if (set) return <Practice code={code} exerciseId={block.id} set={set} promptHtml={block.promptHtml} hintHtml={block.hintHtml} />;
 
   return (
     <aside className="exercise" aria-label="想一想（练习）">
       <p className="ex-tag">想一想</p>
-      <div className="ex-prompt" dangerouslySetInnerHTML={{ __html: promptHtml }} />
-      {!open ? (
-        <button className="btn btn--small" onClick={() => setOpen(true)}>
-          写下我的答案
-        </button>
-      ) : (
-        <div className="ex-work">
-          <label className="ex-label" htmlFor={'ex-' + id}>
-            我的答案（只保存在这台设备上，不计分）
-          </label>
-          <textarea
-            id={'ex-' + id}
-            value={text}
-            rows={5}
-            autoFocus={!text}
-            onChange={(e) => {
-              setText(e.target.value);
-              setExercise(id, e.target.value);
-              setSaved(true);
-              window.clearTimeout(timer.current);
-              timer.current = window.setTimeout(() => setSaved(false), 1400);
-            }}
-            placeholder={'前提 1：……\n前提 2：……\n结论：……'}
-          />
-          <span className="ex-saved" aria-live="polite">
-            {saved ? '已保存' : ''}
-          </span>
-        </div>
-      )}
-      {hintHtml && (
+      <div className="ex-prompt" dangerouslySetInnerHTML={{ __html: block.promptHtml }} />
+      {block.hintHtml && (
         <>
           <button className="ex-hint-btn" aria-expanded={hint} onClick={() => setHint((h) => !h)}>
-            {hint ? '收起提示' : text.trim() ? '对照提示' : '先写，再看提示'}
+            {hint ? '收起提示' : '先想一想，再看提示'}
           </button>
-          {hint && <div className="ex-hint" dangerouslySetInnerHTML={{ __html: hintHtml }} />}
+          {hint && <div className="ex-hint" dangerouslySetInnerHTML={{ __html: block.hintHtml }} />}
         </>
       )}
     </aside>

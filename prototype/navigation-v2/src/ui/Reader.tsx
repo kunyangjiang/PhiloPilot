@@ -37,7 +37,7 @@ const Article = memo(function Article({ code, section }: { code: string; section
       </h1>
       {s.blocks.map((b, i) => {
         const media = mediaAfter(code, section, i);
-        const el = renderBlock(b, i, section, b.kind === 'diagram' ? ++fig : 0);
+        const el = renderBlock(code, b, i, section, b.kind === 'diagram' ? ++fig : 0);
         if (!media.length) return el;
         // Teaching components follow their anchor block. They are additions:
         // the draft's text, tables, diagrams and exercises are all kept.
@@ -54,7 +54,7 @@ const Article = memo(function Article({ code, section }: { code: string; section
   );
 });
 
-function renderBlock(b: Block, i: number, section: number, fig: number) {
+function renderBlock(code: string, b: Block, i: number, section: number, fig: number) {
   const id = `b-${section}-${i}`;
   switch (b.kind) {
     case 'heading':
@@ -84,7 +84,7 @@ function renderBlock(b: Block, i: number, section: number, fig: number) {
     case 'exercise':
       return (
         <div key={id} data-block={i} className="blk">
-          <Exercise id={b.id} promptHtml={b.promptHtml} hintHtml={b.hintHtml} />
+          <Exercise code={code} block={b} />
         </div>
       );
     case 'diagram':

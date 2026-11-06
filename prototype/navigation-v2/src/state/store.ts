@@ -47,6 +47,28 @@ const exKey = (id: string) => key(id.split('-')[0], 'exercise.') + id;
 export const getExercise = (id: string) => read<string>(exKey(id), '');
 export const setExercise = (id: string, v: string) => write(exKey(id), v);
 
+/** Answers to one 想一想 question set: question id → the options picked and
+ *  where the learner is. Stored under its own key (…practice.<set>), so old
+ *  free-text answers (…exercise.<id>, plain strings) never reach it. Anything
+ *  that is not in the expected shape is dropped on read. */
+export type PracticeStage = 'open' | 'wrong' | 'right' | 'shown';
+export type PracticeState = Record<string, { pick: string[]; stage: PracticeStage }>;
+const STAGES: PracticeStage[] = ['open', 'wrong', 'right', 'shown'];
+export const getPractice = (code: string, set: string): PracticeState => {
+  const raw = read<unknown>(key(code, 'practice.') + set, {});
+  const out: PracticeState = {};
+  if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
+    for (const [q, v] of Object.entries(raw as Record<string, unknown>)) {
+      const r = v as { pick?: unknown; stage?: unknown } | null;
+      if (r && Array.isArray(r.pick) && r.pick.every((p) => typeof p === 'string') && STAGES.includes(r.stage as PracticeStage)) {
+        out[q] = { pick: r.pick as string[], stage: r.stage as PracticeStage };
+      }
+    }
+  }
+  return out;
+};
+export const setPractice = (code: string, set: string, v: PracticeState) => write(key(code, 'practice.') + set, v);
+
 /** State of an interactive teaching component (choices only, never scored). */
 export const getMedia = <T,>(code: string, id: string, fallback: T) => read<T>(key(code, 'media.') + id, fallback);
 export const setMedia = (code: string, id: string, v: unknown) => write(key(code, 'media.') + id, v);

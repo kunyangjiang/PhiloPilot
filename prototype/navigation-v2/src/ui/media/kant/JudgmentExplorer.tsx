@@ -5,9 +5,9 @@ import { getMedia, setMedia } from '../../../state/store';
 // (content: analytic / synthetic; grounds: a priori / a posteriori) so they
 // are never conflated. Sentences and classifications come from 二 · 第二步:
 // Kant's own examples carry his verdict; the chapter's added examples carry
-// the chapter's; the four exercise sentences have no answer key, so the
-// panel only returns guiding questions (and, for 3 and 4, the chapter's own
-// hint). Nothing is scored.
+// the chapter's; the four exercise sentences carry no verdict here: the
+// panel returns guiding questions (and, for 3 and 4, the chapter's own hint);
+// the 想一想（二）questions above discuss the reasons. Nothing is scored.
 
 type A = 'an' | 'syn';
 type B = 'pri' | 'post';
@@ -23,11 +23,11 @@ interface Sentence {
 }
 
 const SENTENCES: Sentence[] = [
-  { t: '三角形有三个角。', src: '想一想（二）·（1）', note: '本章不给答案。试问：“有三个角”是否已经包含在“三角形”的概念里？如果是，你还需要去测量三角形吗？' },
+  { t: '三角形有三个角。', src: '想一想（二）·（1）', note: '试问：“有三个角”是否已经包含在“三角形”的概念里？如果是，你还需要去测量三角形吗？' },
   {
     t: '水在一个标准大气压下 100 摄氏度沸腾。',
     src: '想一想（二）·（2）',
-    note: '本章不给答案。试问：“水”的概念里包含沸点吗？你能无矛盾地设想水在别的温度沸腾吗？你是怎样知道这件事的？',
+    note: '试问：“水”的概念里包含沸点吗？你能无矛盾地设想水在别的温度沸腾吗？你是怎样知道这件事的？（上面想一想（二）的第 1 题讨论了这一句。）',
   },
   {
     t: '每一个事件都有原因。',
