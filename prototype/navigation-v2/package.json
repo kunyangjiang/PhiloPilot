@@ -1,0 +1,32 @@
+{
+  "name": "philopilot-navigation-v2",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "description": "PhiloPilot Phase 3B — navigation and reading prototype V2: three 20th-century design directions with a style switcher (local only)",
+  "scripts": {
+    "dev": "vite --port 5179",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview --port 5179"
+  },
+  "dependencies": {
+    "@fontsource/courier-prime": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jost": "^5.3.0",
+    "@fontsource/noto-sans-sc": "^5.3.1",
+    "@fontsource/noto-serif-sc": "^5.3.1",
+    "markdown-it": "^15.0.3",
+    "mermaid": "^12.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.6"
+  }
+}

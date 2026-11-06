@@ -1,0 +1,271 @@
+/* ── 3. Library card catalogue ──────────────────────────────────────────────────
+   Manila card stock, ruled index cards, typewriter headings, oak drawers,
+   one red stamp colour.                                                         */
+[data-style='catalogue'] {
+  --bg: #e9e1cd;
+  --paper: #fbf6e8;
+  --ink: #2b261c;
+  --ink-2: #5a5242;
+  --ink-3: #8a7f68;
+  --rule: #d6cbae;
+  --rule-strong: #2b261c;
+  --accent: #b3261e;
+  --accent-ink: #fbf6e8;
+  --open: #b3261e;
+  --flash: rgba(179, 38, 30, 0.1);
+  --hover: rgba(43, 38, 28, 0.06);
+  --head: 'Courier Prime', 'Noto Serif SC', monospace;
+  --body: 'Noto Serif SC', serif;
+  --mono: 'Courier Prime', 'Noto Serif SC', monospace;
+  --body-read: 'Noto Serif SC', serif;
+  --radius: 2px;
+  --card-lines: repeating-linear-gradient(180deg, transparent 0 27px, rgba(70, 110, 170, 0.18) 27px 28px);
+}
+[data-style='catalogue'] .reader {
+  --paper: #f8f2e2;
+}
+[data-style='catalogue'] .topbar {
+  background: #2b261c;
+  color: #f3ead2;
+  border-bottom: 0;
+  --ink: #f3ead2;
+  --ink-2: #d8ccae;
+  --ink-3: #a99d82;
+  --rule: #5a5242;
+  --bg: #2b261c;
+}
+[data-style='catalogue'] .brand-mark {
+  border-radius: 50%;
+}
+[data-style='catalogue'] .pg-head h1,
+[data-style='catalogue'] .course-title,
+[data-style='catalogue'] .art-title {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+[data-style='catalogue'] .sec-h {
+  border-top: 0;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 0 4px;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+
+/* Index-card treatment for cards, questions, notes and exercises. */
+[data-style='catalogue'] .topic-grid {
+  border-top: 0;
+  gap: 16px;
+}
+[data-style='catalogue'] .tg-item {
+  border: 0;
+}
+[data-style='catalogue'] .tg-card,
+[data-style='catalogue'] .q-item,
+[data-style='catalogue'] .exercise,
+[data-style='catalogue'] .margin-note,
+[data-style='catalogue'] .ct-card {
+  background: var(--paper);
+  box-shadow: 0 1px 0 #c9bc9a, 0 2px 0 #ddd2b6;
+  border: 0;
+  border-top: 2px solid var(--accent);
+  border-radius: var(--radius);
+}
+[data-style='catalogue'] .tg-card {
+  min-height: 170px;
+}
+[data-style='catalogue'] .tg-item.is-open .tg-card:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+[data-style='catalogue'] .tg-item:not(.is-open) .tg-card {
+  opacity: 0.8;
+  border-top-color: var(--ink-3);
+}
+[data-style='catalogue'] .q-item {
+  padding: 14px 18px 16px;
+  margin-bottom: 14px;
+}
+[data-style='catalogue'] .q-item + .q-item {
+  border-top: 2px solid var(--accent);
+  padding-top: 14px;
+}
+[data-style='catalogue'] .exercise {
+  padding: 16px 20px;
+}
+[data-style='catalogue'] .ex-tag {
+  background: var(--accent);
+  font-family: var(--mono);
+}
+[data-style='catalogue'] .source {
+  border-left: 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 14px 4px;
+}
+[data-style='catalogue'] .qbar {
+  background: var(--accent);
+}
+[data-style='catalogue'] .line-map::before {
+  height: 1px;
+  top: 8px;
+  background: var(--ink);
+}
+[data-style='catalogue'] .lm-dot {
+  border-width: 1.5px;
+  border-radius: 2px;
+}
+[data-style='catalogue'] .not-built {
+  font-family: var(--mono);
+  border-style: solid;
+  transform: rotate(-2deg);
+}
+
+/* Home: an index card on the left, a four-drawer cabinet on the right. */
+.ct-home {
+  display: grid;
+  grid-template-columns: 440px minmax(0, 1fr);
+  gap: 48px;
+  padding: 36px 56px 36px;
+  min-height: 0;
+}
+.ct-guide {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+.ct-card {
+  display: block;
+  padding: 18px 24px 20px;
+  background: var(--card-lines), var(--paper) !important;
+  background-position: 0 18px !important;
+  font-size: 14.5px;
+  line-height: 28px;
+}
+.ct-card--guide h1 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 30px;
+  line-height: 56px;
+}
+.ct-card--guide p {
+  margin: 0;
+}
+.ct-card--guide p + p {
+  margin-top: 28px;
+}
+.ct-card p,
+.ct-card span {
+  line-height: 28px;
+}
+.ct-card-no {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.ct-small {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.ct-card--slip {
+  width: 86%;
+  margin-left: 24px;
+  display: grid;
+  text-align: left;
+  border-top-color: var(--ink) !important;
+  transform: rotate(-1.2deg);
+  transition: background var(--t);
+}
+.ct-card--slip:hover {
+  background: var(--paper) !important;
+  outline: 2px solid var(--accent);
+}
+.ct-slip-k {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.ct-slip-t {
+  font-family: var(--mono);
+  font-size: 19px;
+  font-weight: 700;
+}
+.ct-slip-w {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.ct-cabinet {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+  padding: 14px;
+  background: #6b4a2e;
+  border-radius: 3px;
+  min-height: 0;
+  box-shadow: inset 0 0 0 3px #5a3d25;
+}
+.ct-drawer {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 14px;
+  background: #946640;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 2px #7d5534, inset 0 -6px 0 #845a37;
+  color: #f6e9cc;
+  transition: background var(--t);
+}
+.ct-drawer:hover {
+  background: #a5744b;
+}
+.ct-drawer:focus-visible {
+  outline: 3px solid #fbf6e8;
+  outline-offset: -6px;
+}
+.ct-holder {
+  padding: 5px;
+  background: linear-gradient(180deg, #e2c27c, #b9934b);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 #5a3d25;
+}
+.ct-label {
+  display: grid;
+  gap: 2px;
+  min-width: 240px;
+  padding: 10px 16px;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+}
+.ct-label b {
+  font-family: var(--mono);
+  font-size: 22px;
+}
+.ct-label small {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.ct-pull {
+  width: 84px;
+  height: 22px;
+  border: 5px solid #d4b26a;
+  border-top: 0;
+  border-radius: 0 0 42px 42px;
+}
+.ct-drawer-no {
+  position: absolute;
+  left: 14px;
+  top: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: #e9d6ae;
+}
+.ct-drawer-stat {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: #f3e3c2;
+}

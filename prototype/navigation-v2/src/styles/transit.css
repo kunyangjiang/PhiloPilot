@@ -1,0 +1,255 @@
+/* ── 2. Modernist transit diagram ───────────────────────────────────────────────
+   Flat coloured lines at 0°/45°/90°, a geometric sans, a plain night ground.
+   Reading pages switch to a light ground for long text.                        */
+[data-style='transit'] {
+  --bg: #161a22;
+  --paper: #1b2029;
+  --ink: #ece8df;
+  --ink-2: #b9b6ae;
+  --ink-3: #858a94;
+  --rule: #2f3542;
+  --rule-strong: #ece8df;
+  --accent: #f08a24;
+  --accent-ink: #161a22;
+  --open: #f08a24;
+  --flash: rgba(240, 138, 36, 0.14);
+  --hover: rgba(255, 255, 255, 0.08);
+  --head: 'Jost', 'Noto Sans SC', sans-serif;
+  --body: 'Jost', 'Noto Sans SC', sans-serif;
+  --mono: 'Jost', 'Noto Sans SC', sans-serif;
+  --body-read: 'Noto Sans SC', sans-serif;
+  --radius: 3px;
+  --l-history: #f08a24;
+  --l-questions: #3e8ede;
+  --l-dialogue: #d6457a;
+  --l-methods: #3baa6e;
+}
+/* Long-form reading on a light ground, keeping the line colours as accents. */
+[data-style='transit'] .reader {
+  --bg: #f4f1ea;
+  --paper: #f4f1ea;
+  --ink: #1d2a44;
+  --ink-2: #44506a;
+  --ink-3: #7b8395;
+  --rule: #d9d5ca;
+  --rule-strong: #1d2a44;
+  --accent: #d96d0b;
+  --accent-ink: #ffffff;
+  --open: #2f6fd6;
+  --flash: rgba(62, 142, 222, 0.12);
+  --hover: rgba(0, 0, 0, 0.05);
+}
+[data-style='transit'] .sec-h {
+  border-top-width: 6px;
+  border-top-color: var(--l-questions);
+}
+[data-style='transit'] .pg-region--history .sec-h {
+  border-top-color: var(--l-history);
+}
+[data-style='transit'] .pg-region--dialogue .sec-h {
+  border-top-color: var(--l-dialogue);
+}
+[data-style='transit'] .pg-region--methods .sec-h {
+  border-top-color: var(--l-methods);
+}
+[data-style='transit'] .btn--primary,
+[data-style='transit'] .btn--accent {
+  border-radius: 999px;
+}
+[data-style='transit'] .line-map::before {
+  height: 8px;
+  top: 5px;
+  background: var(--l-history);
+}
+[data-style='transit'] .lm-dot {
+  border-color: var(--bg);
+  background: var(--ink);
+}
+[data-style='transit'] .line-map li.is-here .lm-dot {
+  background: var(--bg);
+  border: 4px solid var(--ink);
+}
+[data-style='transit'] .tg-item.is-open .tg-card {
+  box-shadow: inset 0 6px 0 var(--l-questions);
+}
+[data-style='transit'] .tg-item.is-open .tg-card:hover {
+  background: var(--l-questions);
+  color: #fff;
+}
+[data-style='transit'] .matrix td.is-open .mx-dot {
+  background: var(--bg);
+  border: 3px solid var(--ink);
+}
+
+/* Home: the diagram fills the screen below the masthead. */
+.tr-home {
+  min-height: 0;
+  padding: 8px 24px 12px;
+  display: grid;
+}
+.tr-map {
+  width: 100%;
+  height: 100%;
+  font-family: var(--head);
+}
+.tr-line {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tr-line--history {
+  stroke: var(--l-history);
+}
+.tr-line--questions {
+  stroke: var(--l-questions);
+}
+.tr-line--dialogue {
+  stroke: var(--l-dialogue);
+}
+.tr-line--methods {
+  stroke: var(--l-methods);
+}
+.tr-st line {
+  stroke-width: 4;
+}
+.tr-st--history line {
+  stroke: var(--l-history);
+}
+.tr-st--questions line {
+  stroke: var(--l-questions);
+}
+.tr-st--dialogue line {
+  stroke: var(--l-dialogue);
+}
+.tr-st--methods line {
+  stroke: var(--l-methods);
+}
+.tr-st text,
+.tr-st-label {
+  fill: #d9d6cf;
+  font-size: 13px;
+}
+.tr-st-label {
+  font-weight: 500;
+}
+.tr-title .tr-h1 {
+  fill: #fff;
+  font-size: 32px;
+  font-weight: 500;
+}
+.tr-title .tr-h2 {
+  fill: var(--ink-2);
+  font-size: 14px;
+}
+.tr-title .tr-p {
+  fill: var(--ink-3);
+  font-size: 13px;
+}
+.tr-badge rect {
+  transition: fill var(--t);
+}
+.tr-badge text {
+  fill: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+}
+.tr-badge--history rect {
+  fill: var(--l-history);
+}
+.tr-badge--questions rect {
+  fill: var(--l-questions);
+}
+.tr-badge--dialogue rect {
+  fill: var(--l-dialogue);
+}
+.tr-badge--methods rect {
+  fill: var(--l-methods);
+}
+.tr-badge:hover rect,
+.tr-badge:focus-visible rect {
+  fill: #fff;
+}
+.tr-badge:hover text,
+.tr-badge:focus-visible text {
+  fill: var(--bg);
+}
+.tr-map a {
+  outline: none;
+}
+.tr-map a:focus-visible rect,
+.tr-map a:focus-visible .tr-ix {
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-dasharray: 4 3;
+}
+.tr-open--topic rect {
+  fill: var(--bg);
+  stroke: var(--l-questions);
+  stroke-width: 2;
+  transition: fill var(--t);
+}
+.tr-open--topic text {
+  fill: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+.tr-open--topic:hover rect {
+  fill: var(--l-questions);
+}
+.tr-ix {
+  fill: var(--bg);
+  stroke: #fff;
+  stroke-width: 5;
+}
+.tr-ix-in {
+  fill: #fff;
+  transition: r var(--t);
+}
+.tr-open--cn1:hover .tr-ix-in {
+  fill: var(--l-history);
+}
+.tr-ix-code {
+  fill: #fff;
+  font-size: 17px;
+  font-weight: 500;
+}
+.tr-open--cn1:hover .tr-ix-code {
+  text-decoration: underline;
+}
+.tr-ix-sub {
+  fill: var(--ink-2);
+  font-size: 12px;
+}
+.tr-legend text {
+  fill: var(--ink-2);
+  font-size: 13px;
+}
+.tr-legend .tr-leg-h {
+  fill: #fff;
+  font-weight: 500;
+}
+.tr-legend .tr-line {
+  stroke-width: 8;
+}
+.tr-legend .tr-leg-note {
+  fill: var(--ink-3);
+  font-size: 12px;
+}
+.tr-continue rect {
+  fill: #ece8df;
+  transition: fill var(--t);
+}
+.tr-continue:hover rect {
+  fill: #fff;
+}
+.tr-continue .tr-c-k {
+  fill: #5a6070;
+  font-size: 12px;
+}
+.tr-continue .tr-c-t {
+  fill: var(--bg);
+  font-size: 15px;
+  font-weight: 500;
+}

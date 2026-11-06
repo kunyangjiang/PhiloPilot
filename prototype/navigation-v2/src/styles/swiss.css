@@ -1,0 +1,531 @@
+/* ── 1. Modernist mix ───────────────────────────────────────────────────────────
+   Skeleton: Swiss grid and flush-left grotesque (Inter + Noto Sans SC).
+   Flat colour does the wayfinding:
+     yellow ■ 历史与传统 · red ● 哲学问题 · blue ▲ 跨传统对话 · black ▬ 哲学方法
+   Each page has one filled block that is the next step; everything else is
+   white with thin rules. Course codes are never shown, only names.            */
+[data-style='swiss'] {
+  --bg: #ffffff;
+  --paper: #ffffff;
+  --ink: #111111;
+  --ink-2: #444444;
+  --ink-3: #85847f;
+  --rule: #dddcd5;
+  --rule-strong: #111111;
+  --accent: #d7261e;
+  --accent-ink: #ffffff;
+  --open: #d7261e;
+  --flash: rgba(215, 38, 30, 0.07);
+  --head: Inter, 'Noto Sans SC', Arial, sans-serif;
+  --body: Inter, 'Noto Sans SC', Arial, sans-serif;
+  --mono: Inter, 'Noto Sans SC', Arial, sans-serif;
+  --body-read: Inter, 'Noto Sans SC', sans-serif;
+  --radius: 0;
+  --c-history: #f2b707;
+  --c-questions: #d7261e;
+  --c-dialogue: #1f4fa8;
+  --c-methods: #111111;
+}
+
+/* Bauhaus shapes: ■ history, ● questions, ▲ dialogue, ▬ methods */
+.sw-shape {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  flex: none;
+}
+.sw-shape--history {
+  background: var(--c-history);
+}
+.sw-shape--questions {
+  background: var(--c-questions);
+  border-radius: 50%;
+}
+.sw-shape--dialogue {
+  background: var(--c-dialogue);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.sw-shape--methods {
+  background: var(--c-methods);
+  height: 6px;
+  width: 16px;
+  align-self: center;
+}
+
+/* Entrance tones (level bar, tiles, cells) */
+[data-style='swiss'] .wf--history,
+.sh-tile--history,
+.sh-cell--history {
+  --tone: var(--c-history);
+  --tone-ink: #111;
+}
+[data-style='swiss'] .wf--questions,
+.sh-tile--questions,
+.sh-cell--questions {
+  --tone: var(--c-questions);
+  --tone-ink: #fff;
+}
+[data-style='swiss'] .wf--dialogue,
+.sh-tile--dialogue,
+.sh-cell--dialogue {
+  --tone: var(--c-dialogue);
+  --tone-ink: #fff;
+}
+[data-style='swiss'] .wf--methods,
+.sh-tile--methods,
+.sh-cell--methods {
+  --tone: var(--c-methods);
+  --tone-ink: #fff;
+}
+
+/* ── Homepage ──────────────────────────────────────────────────────────────── */
+.sh {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 22px;
+  padding: 20px var(--page-margin) 22px;
+  min-height: 0;
+  max-width: var(--page-max);
+  width: 100%;
+  margin: 0 auto;
+}
+.sh-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 40px;
+}
+/* The display word: very large, with a yellow disc behind 学 */
+.sh-mark {
+  position: relative;
+  isolation: isolate;
+}
+.sh-disc {
+  position: absolute;
+  left: 160px;
+  top: -6px;
+  width: 142px;
+  height: 142px;
+  border-radius: 50%;
+  background: var(--c-history);
+  z-index: -1;
+}
+.sh-display {
+  margin: 0;
+  font-size: 160px;
+  line-height: 0.84;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.sh-intro {
+  padding-bottom: 2px;
+}
+.sh-kicker {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+.sh-q {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.sh-sub {
+  margin: 10px 0 0;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.sh-levels {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 1px 10px;
+  border: 1.5px solid var(--ink);
+  font-weight: 700;
+  color: var(--ink);
+}
+.sh-levels i {
+  font-style: normal;
+  color: var(--ink-3);
+  margin: 0 3px;
+}
+.sh-sub small {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.sh-continue {
+  display: grid;
+  gap: 2px;
+  max-width: 360px;
+  padding: 10px 16px;
+  border: 2px solid var(--ink);
+  transition: background var(--t), color var(--t);
+}
+.sh-continue:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.sh-c-k {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.sh-continue:hover .sh-c-k {
+  color: inherit;
+  opacity: 0.75;
+}
+.sh-c-t {
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The four entrances: the one focal block of the page */
+.sh-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  min-height: 0;
+}
+.sh-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 22px 24px 20px;
+  background: var(--tone);
+  color: var(--tone-ink);
+  text-decoration: none;
+  transition: opacity var(--t);
+}
+.sh.has-hot .sh-tile:not(:hover):not(:focus-visible) {
+  opacity: 0.35;
+}
+.sh-tile:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+.sh-tile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.sh-no {
+  font-size: 15px;
+  font-weight: 700;
+}
+.sh-shape {
+  width: 34px;
+  height: 34px;
+  background: var(--tone-ink) !important;
+}
+.sh-shape.sw-shape--methods {
+  width: 44px;
+  height: 12px;
+  margin-top: 10px;
+}
+.sh-title {
+  margin-top: auto;
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+.sh-en {
+  margin-top: 2px;
+  font-size: 12.5px;
+  opacity: 0.75;
+}
+.sh-line {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.sh-path {
+  display: grid;
+  gap: 4px;
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1.5px solid currentColor;
+  font-size: 13.5px;
+}
+.sh-path-k {
+  font-size: 12px;
+  opacity: 0.75;
+}
+.sh-path-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sh-path-step i {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+.sh-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1.5px solid currentColor;
+  font-size: 15px;
+}
+.sh-go {
+  font-weight: 700;
+}
+.sh-tile:hover .sh-go,
+.sh-tile:focus-visible .sh-go {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.sh-badge {
+  position: absolute;
+  top: 54px;
+  left: 24px;
+  padding: 2px 8px;
+  background: #fff;
+  color: var(--c-questions);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Strip: 72 cells, one per course */
+.sh-strip {
+  margin: 0;
+}
+.sh-strip-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.sh-strip-head b {
+  color: var(--ink);
+}
+.sh-readout {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sh-readout small {
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.sh-cells {
+  display: flex;
+  gap: 2px;
+  height: 22px;
+}
+.sh-cell {
+  flex: 1;
+  min-width: 0;
+  background: var(--tone);
+  transition: opacity var(--t);
+}
+.sh-cell.is-first {
+  margin-left: 8px;
+}
+.sh-cell.is-open {
+  cursor: pointer;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #111;
+}
+.sh-cell.is-on {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.sh.has-hot .sh-cell {
+  opacity: 0.18;
+}
+.sh-hot--history .sh-cell--history,
+.sh-hot--questions .sh-cell--questions,
+.sh-hot--dialogue .sh-cell--dialogue,
+.sh-hot--methods .sh-cell--methods {
+  opacity: 1 !important;
+}
+
+@media (max-height: 860px) {
+  .sh {
+    gap: 16px;
+    padding-top: 14px;
+    padding-bottom: 16px;
+  }
+  .sh-display {
+    font-size: 128px;
+  }
+  .sh-disc {
+    left: 128px;
+    width: 114px;
+    height: 114px;
+  }
+  .sh-q {
+    font-size: 26px;
+  }
+  .sh-title {
+    font-size: 28px;
+  }
+  .sh-tile {
+    padding: 18px 20px 16px;
+  }
+  .sh-line {
+    margin-top: 8px;
+    font-size: 13.5px;
+  }
+}
+
+/* ── Inner pages ───────────────────────────────────────────────────────────── */
+.pg-bignum,
+.art-no,
+.seal {
+  display: none;
+}
+[data-style='swiss'] .pg-body {
+  padding-top: 32px;
+}
+[data-style='swiss'] .wayfinder {
+  border-bottom: 1px solid var(--rule-strong);
+}
+[data-style='swiss'] .pg-head h1 {
+  font-size: 48px;
+  letter-spacing: -0.01em;
+}
+[data-style='swiss'] .kicker {
+  font-size: 13px;
+}
+[data-style='swiss'] .sec-h {
+  border-top-width: 2px;
+}
+/* One colour hint per region page: a thick rule in the entrance colour. */
+[data-style='swiss'] .pg-region .pg-head {
+  padding-top: 14px;
+  border-top: 8px solid var(--c-methods);
+}
+[data-style='swiss'] .pg-region--history .pg-head {
+  border-top-color: var(--c-history);
+}
+[data-style='swiss'] .pg-region--dialogue .pg-head {
+  border-top-color: var(--c-dialogue);
+}
+[data-style='swiss'] .pg-questions .pg-head,
+[data-style='swiss'] .pg-topic .pg-head {
+  padding-top: 14px;
+  border-top: 8px solid var(--c-questions);
+}
+
+/* Topic: the core question is quiet; the start card is the only red field. */
+[data-style='swiss'] .core-q {
+  border-left: 4px solid var(--ink);
+}
+[data-style='swiss'] .core-q p {
+  font-family: var(--serif);
+}
+
+/* Course */
+[data-style='swiss'] .course-title {
+  font-size: 40px;
+  letter-spacing: -0.01em;
+}
+[data-style='swiss'] .core-q--course .core-q-k {
+  color: var(--ink-3);
+}
+[data-style='swiss'] .facts {
+  border-top: 1px solid var(--rule-strong);
+}
+[data-style='swiss'] .facts dt {
+  color: var(--ink-3);
+}
+[data-style='swiss'] .pbar::after {
+  background: var(--ink);
+}
+
+/* Reader */
+[data-style='swiss'] .art-kicker {
+  color: var(--ink-3);
+}
+[data-style='swiss'] .art-title {
+  font-size: 38px;
+  letter-spacing: -0.01em;
+}
+[data-style='swiss'] .art-h {
+  padding-top: 10px;
+  border-top: 2px solid var(--ink);
+}
+[data-style='swiss'] .article {
+  font-size: 16.5px;
+}
+[data-style='swiss'] .source {
+  border-left: 6px solid var(--accent);
+  background: #faf8f2;
+}
+[data-style='swiss'] .source-text p {
+  font-family: 'Noto Serif SC', serif;
+}
+[data-style='swiss'] .exercise {
+  border: 0;
+  border-top: 6px solid var(--c-history);
+  background: #fbf8ee;
+}
+[data-style='swiss'] .ex-tag {
+  background: var(--c-history);
+  color: var(--ink);
+}
+[data-style='swiss'] .margin-note {
+  border-top: 6px solid var(--c-dialogue);
+}
+[data-style='swiss'] .mn-num {
+  color: var(--c-dialogue);
+}
+[data-style='swiss'] .fn-ref {
+  background: var(--c-dialogue);
+}
+[data-style='swiss'] .reader-progress span {
+  background: var(--ink);
+}
+/* Rail: sections are stations on one vertical line. */
+[data-style='swiss'] .rail > ol {
+  position: relative;
+  padding-left: 4px;
+}
+[data-style='swiss'] .rail > ol::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  background: var(--ink);
+}
+[data-style='swiss'] .rail-mark {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border: 2.5px solid var(--ink);
+  background: #fff;
+}
+[data-style='swiss'] .rail li.is-done .rail-mark {
+  background: var(--ink);
+}
+[data-style='swiss'] .rail li.is-started .rail-mark {
+  background: linear-gradient(90deg, var(--ink) 50%, #fff 50%);
+}
+[data-style='swiss'] .rail li.is-current .rail-mark {
+  width: 14px;
+  height: 14px;
+  margin-left: -2px;
+  border: 4px solid var(--accent);
+  background: #fff;
+}
+[data-style='swiss'] .rail-sub {
+  border-left-color: transparent;
+}
