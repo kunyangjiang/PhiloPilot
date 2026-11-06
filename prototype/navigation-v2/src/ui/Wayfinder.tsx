@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
-import type { RegionId } from '../data/catalog';
+import { nameOf, type RegionId } from '../data/catalog';
+import { PUBLISHED } from '../content/courses';
 import { currentCtx, navigate, parseHash, type Crumb } from '../router';
 import { QUESTIONS_CRUMB, regionCrumb, topicCrumb } from './nav';
 
@@ -15,11 +16,11 @@ type Page =
   | { page: 'region'; region: RegionId }
   | { page: 'questions' }
   | { page: 'topic'; topic: string }
-  | { page: 'course' }
-  | { page: 'reader'; section: string; appendix?: boolean };
+  | { page: 'course'; code: string }
+  | { page: 'reader'; code: string; section: string; appendix?: boolean };
 
 const HOME: Crumb = { label: '首页', hash: '#/', kind: '首页' };
-const COURSE: Crumb = { label: '孔子、孟子与荀子', hash: '#/course/CN1', kind: '课程' };
+const courseCrumb = (code: string): Crumb => ({ label: PUBLISHED[code]?.name ?? nameOf(code), hash: `#/course/${code}`, kind: '课程' });
 
 export function crumbsFor(p: Page): Crumb[] {
   switch (p.page) {
@@ -30,9 +31,9 @@ export function crumbsFor(p: Page): Crumb[] {
     case 'topic':
       return [HOME, QUESTIONS_CRUMB, topicCrumb(p.topic)];
     case 'course':
-      return [HOME, ...currentCtx(), COURSE];
+      return [HOME, ...currentCtx(), courseCrumb(p.code)];
     case 'reader':
-      return [HOME, ...currentCtx(), COURSE, { label: p.section, hash: location.hash, kind: p.appendix ? '附录' : '章节' }];
+      return [HOME, ...currentCtx(), courseCrumb(p.code), { label: p.section, hash: location.hash, kind: p.appendix ? '附录' : '章节' }];
   }
 }
 

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { COURSES, REGIONS, TOPICS } from '../data/catalog';
-import { SECTIONS } from '../content/cn1';
+import { PUBLISHED } from '../content/courses';
 import { navigate, type Route } from '../router';
 
 // Discreet global search over regions, questions, prototype courses and the
-// real CN1 headings. Opens with Ctrl/⌘+K or “/”.
+// real headings of every published course. Opens with Ctrl/⌘+K or “/”.
 
 let opener: (() => void) | null = null;
 export const openSearch = () => opener?.();
@@ -72,15 +72,17 @@ export default function SearchPalette() {
         sub: c.implemented ? '可阅读（样章草稿）' : '原型未实现',
         go: c.implemented ? to({ name: 'course', code: c.code }) : undefined,
       })),
-      ...SECTIONS.flatMap((s) => [
-        { group: '课文章节', label: s.title, sub: '孔子、孟子与荀子', go: to({ name: 'reader', code: 'CN1', section: s.index }) },
-        ...s.headings.map((h) => ({
-          group: '课文章节',
-          label: h.text,
-          sub: s.title,
-          go: to({ name: 'reader', code: 'CN1', section: s.index, block: h.block }),
-        })),
-      ]),
+      ...Object.values(PUBLISHED).flatMap((c) =>
+        c.text.SECTIONS.flatMap((s) => [
+          { group: '课文章节', label: s.title, sub: c.name, go: to({ name: 'reader', code: c.code, section: s.index }) },
+          ...s.headings.map((h) => ({
+            group: '课文章节',
+            label: h.text,
+            sub: `${c.name} · ${s.title}`,
+            go: to({ name: 'reader', code: c.code, section: s.index, block: h.block }),
+          })),
+        ]),
+      ),
     ];
     const needle = q.trim().toLowerCase();
     const list = needle ? all.filter((i) => (i.label + i.sub).toLowerCase().includes(needle)) : all.filter((i) => i.group !== '课文章节').slice(0, 14);
@@ -96,7 +98,7 @@ export default function SearchPalette() {
         <input
           ref={inputRef}
           value={q}
-          placeholder="搜索课程、问题、章节（如：牛山、四端）"
+          placeholder="搜索课程、问题、章节（如：牛山、定言命令）"
           enterKeyHint="go"
           aria-label="搜索"
           aria-controls="palette-list"

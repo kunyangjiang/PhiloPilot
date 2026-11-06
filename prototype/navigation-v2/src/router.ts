@@ -57,7 +57,7 @@ export interface Crumb {
   hash: string;
   kind?: string;
 }
-type CtxResolver = (from: Route) => Crumb[];
+type CtxResolver = (from: Route, to: Route) => Crumb[];
 let resolveCtx: CtxResolver = () => [];
 /** Registered by the UI layer: how each exploration page names itself as an origin. */
 export const setCtxResolver = (f: CtxResolver) => (resolveCtx = f);
@@ -74,7 +74,7 @@ export function navigate(r: Route, opts: { replace?: boolean; ctx?: Crumb[] } = 
     if (opts.ctx) ctx = opts.ctx;
     // Moving inside one course (front page ↔ sections) keeps the origin.
     else if (inCourse(here) && (here as { code: string }).code === (r as { code: string }).code) ctx = currentCtx();
-    else ctx = resolveCtx(here);
+    else ctx = resolveCtx(here, r);
   }
   const state = ctx ? { ctx } : null;
   if (opts.replace) history.replaceState(state, '', h);

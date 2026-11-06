@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { APPENDIX, FOOTNOTES, READING, SECTIONS, isAppendix, partNo, shortTitle, type Block } from '../content/cn1';
+import { shortTitle, type Block, type Section } from '../content/course';
+import { PUBLISHED } from '../content/courses';
 import { navigate, type Route } from '../router';
 import { bumpProgress, getProgress, isReduced, setPosition } from '../state/store';
 import { readPct } from '../state/reading';
@@ -7,7 +8,7 @@ import { TopBar } from './Chrome';
 import Diagram from './Diagram';
 import Exercise from './Exercise';
 import Media from './media/Media';
-import { mediaAfter } from '../content/cn1-media';
+import { mediaAfter } from '../content/media';
 import Wayfinder, { crumbsFor, go } from './Wayfinder';
 
 // Narrow screens (see swiss.css “V5 · Mobile and tablet”): at ≤1200px the
@@ -17,10 +18,11 @@ const SHEET_MQ = '(max-width: 1200px)';
 const matches = (q: string) => window.matchMedia?.(q).matches ?? false;
 
 type ReaderRoute = Extract<Route, { name: 'reader' }>;
-type Section = (typeof SECTIONS)[number];
 
 /** The section body. Memoised so note and rail state never re-render the text. */
-const Article = memo(function Article({ section }: { section: number }) {
+const Article = memo(function Article({ code, section }: { code: string; section: number }) {
+  const { text, name } = PUBLISHED[code];
+  const { SECTIONS, READING, isAppendix, partNo } = text;
   const s = SECTIONS[section];
   let fig = 0;
   // Figure numbers continue across sections, as in the draft.
@@ -28,13 +30,13 @@ const Article = memo(function Article({ section }: { section: number }) {
   return (
     <article className="article" aria-labelledby="sec-title">
       <p className="art-kicker">
-        {isAppendix(section) ? '孔子、孟子与荀子 · 附录（不计入阅读进度）' : `孔子、孟子与荀子 · 第 ${partNo(section)} 部分 / 共 ${READING.length} 部分`}
+        {isAppendix(section) ? `${name} · 附录（不计入阅读进度）` : `${name} · 第 ${partNo(section)} 部分 / 共 ${READING.length} 部分`}
       </p>
       <h1 id="sec-title" className="art-title">
         {s.title}
       </h1>
       {s.blocks.map((b, i) => {
-        const media = mediaAfter(section, i);
+        const media = mediaAfter(code, section, i);
         const el = renderBlock(b, i, section, b.kind === 'diagram' ? ++fig : 0);
         if (!media.length) return el;
         // Teaching components follow their anchor block. They are additions:
@@ -43,7 +45,7 @@ const Article = memo(function Article({ section }: { section: number }) {
           el,
           ...media.map((m) => (
             <div key={`m-${section}-${i}-${m}`} className="blk blk-media" data-media={m}>
-              <Media id={m} />
+              <Media code={code} id={m} />
             </div>
           )),
         ];
@@ -67,6 +69,16 @@ function renderBlock(b: Block, i: number, section: number, fig: number) {
             </button>
             <span className="src-note">原文据中文维基文库，字形保留繁体</span>
           </figcaption>
+        </figure>
+      );
+    case 'primary':
+      // Original-language passage (lang="de") and the course's own translation.
+      return (
+        <figure key={id} data-block={i} className="blk source source--primary">
+          <p className="src-label">原文</p>
+          <div className="source-text source-orig" lang="de" dangerouslySetInnerHTML={{ __html: b.origHtml }} />
+          <p className="src-label">本章试译</p>
+          <div className="source-trans" dangerouslySetInnerHTML={{ __html: b.transHtml }} />
         </figure>
       );
     case 'exercise':
@@ -99,6 +111,9 @@ interface Note {
 }
 
 export default function Reader({ route }: { route: ReaderRoute }) {
+  const code = route.code;
+  const course = PUBLISHED[code];
+  const { SECTIONS, READING, APPENDIX, FOOTNOTES, isAppendix, partNo } = course.text;
   const section = Math.max(0, Math.min(SECTIONS.length - 1, route.section));
   const s = SECTIONS[section];
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -106,7 +121,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   const [note, setNote] = useState<Note | null>(null);
   const [activeH, setActiveH] = useState<string | null>(null);
   const [frac, setFrac] = useState(0);
-  const [progress, setProg] = useState(getProgress);
+  const [progress, setProg] = useState(() => getProgress(code));
   const [flash, setFlash] = useState<number | null>(null);
   const [drawer, setDrawer] = useState(false);
   const [barsHidden, setBarsHidden] = useState(false);
@@ -116,7 +131,12 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   const railRef = useRef<HTMLElement>(null);
   const noteRef = useRef<HTMLDivElement>(null);
 
-  // Section change or restore: jump to the saved block, or the top.
+  // Every navigation to the reader (section change, a search result, resume,
+  // back/forward) jumps to its block, or the top. It depends on the route
+  // object, which useRoute creates once per navigation, so an explicit jump
+  // to the section or block already open still wins over where the learner
+  // had scrolled. The jump is programmatic: userMoved is reset, so it never
+  // counts as reading or moves the saved position.
   useLayoutEffect(() => {
     setNote(null);
     setDrawer(false);
@@ -133,7 +153,8 @@ export default function Reader({ route }: { route: ReaderRoute }) {
         return () => window.clearTimeout(t);
       }
     }
-  }, [section, route.block]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [route]);
 
   // Scroll: progress, scroll-spy and the saved reading position.
   const onScroll = useCallback(() => {
@@ -150,7 +171,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     }
     // Progress counts only the learner's own reading, never a programmatic jump
     // (resume, search result, back/forward).
-    if (userMoved.current) bumpProgress(section, f > 0.97 ? 1 : f);
+    if (userMoved.current) bumpProgress(code, section, f > 0.97 ? 1 : f);
     const blocks = [...sc.querySelectorAll<HTMLElement>('.article [data-block]')];
     const y = sc.getBoundingClientRect().top + 140;
     let cur = blocks[0];
@@ -167,7 +188,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     // Only the learner's own scrolling moves the saved position; programmatic
     // jumps (opening a section, back/forward) never overwrite it.
     if (cur && userMoved.current) {
-      setPosition({
+      setPosition(code, {
         section,
         block: Number(cur.dataset.block),
         sectionTitle: s.title,
@@ -175,7 +196,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
         at: Date.now(),
       });
     }
-  }, [section, s]);
+  }, [code, section, s]);
 
   useEffect(() => {
     const sc = scrollRef.current;
@@ -190,14 +211,14 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     const evs = ['wheel', 'pointerdown', 'touchstart', 'keydown'] as const;
     evs.forEach((ev) => sc.addEventListener(ev, mark, { passive: true }));
     onScroll();
-    const iv = window.setInterval(() => setProg(getProgress()), 1200);
+    const iv = window.setInterval(() => setProg(getProgress(code)), 1200);
     return () => {
       sc.removeEventListener('scroll', h);
       evs.forEach((ev) => sc.removeEventListener(ev, mark));
       cancelAnimationFrame(raf);
       window.clearInterval(iv);
     };
-  }, [onScroll]);
+  }, [onScroll, code]);
 
   // Context panel: delegation on the reading column.
   useEffect(() => {
@@ -262,7 +283,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
       if (e.key !== 'Escape' || e.defaultPrevented || document.querySelector('.palette, .dg-overlay')) return;
       if (drawer) closeDrawer();
       else if (note) closeNote();
-      else navigate({ name: 'course', code: 'CN1' });
+      else navigate({ name: 'course', code });
     };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
@@ -281,9 +302,9 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     return () => window.removeEventListener('resize', mark);
   }, [section]);
 
-  const goSection = (i: number) => navigate({ name: 'reader', code: 'CN1', section: i });
-  const back = crumbsFor({ page: 'reader', section: '' }).slice(0, -1);
-  const pct = readPct(progress, userMoved.current ? { section, frac } : undefined);
+  const goSection = (i: number) => navigate({ name: 'reader', code, section: i });
+  const back = crumbsFor({ page: 'reader', code, section: '' }).slice(0, -1);
+  const pct = readPct(code, progress, userMoved.current ? { section, frac } : undefined);
   const sourcesIndex = APPENDIX.find((x) => x.title.startsWith('来源'))?.index;
   const label = (x: Section) => (isAppendix(x.index) ? `附录 · ${x.title}` : x.title);
 
@@ -333,10 +354,10 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   return (
     <div className={'reader' + (barsHidden ? ' bars-hidden' : '') + (drawer ? ' has-drawer' : '')}>
       <TopBar />
-      <Wayfinder page="reader" section={shortTitle(s.title)} appendix={isAppendix(section)} />
+      <Wayfinder page="reader" code={code} section={shortTitle(s.title)} appendix={isAppendix(section)} />
       {/* Narrow screens: one compact bar instead of the level bar. */}
       <div className="reader-bar">
-        <button className="rb-back" onClick={() => navigate({ name: 'course', code: 'CN1' })} aria-label="返回课程扉页">
+        <button className="rb-back" onClick={() => navigate({ name: 'course', code })} aria-label="返回课程扉页">
           <span aria-hidden="true">‹</span> 扉页
         </button>
         <p className="rb-where">
@@ -386,13 +407,13 @@ export default function Reader({ route }: { route: ReaderRoute }) {
             <p className="rail-group">附录 · 不计入进度</p>
             <ol className="rail-appendix">{APPENDIX.map(railItem)}</ol>
             <div className="rail-back">
-              <button onClick={() => navigate({ name: 'course', code: 'CN1' })}>← 课程扉页</button>
+              <button onClick={() => navigate({ name: 'course', code })}>← 课程扉页</button>
             </div>
           </nav>
 
           <div className="reader-body" ref={bodyRef} key={section}>
             <style>{flash != null ? `.article [data-block="${flash}"]{background: var(--flash)}` : ''}</style>
-            <Article section={section} />
+            <Article code={code} section={section} />
             <aside className="margin" aria-label="注释与出处">
               {note && (
                 <div ref={noteRef} className="margin-note" style={{ top: note.top }} role="note" aria-label={note.kind === 'fn' ? `注释 ${note.n}` : '原文出处'}>
@@ -406,7 +427,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
                       <span className="mn-num">原文出处</span>
                       <div className="mn-text">
                         <p>{note.n}</p>
-                        <p className="mn-small">原文据中文维基文库，字形保留繁体。版本与授权见附录。</p>
+                        <p className="mn-small">{course.sourceNote}</p>
                         {sourcesIndex != null && (
                           <button className="inline-link" onClick={() => goSection(sourcesIndex)}>
                             查看「来源与权利说明」→

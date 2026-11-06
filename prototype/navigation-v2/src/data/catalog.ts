@@ -3,8 +3,12 @@
 // Source: planning/CURRICULUM_REFERENCE_DRAFT.md (course codes, tiers, sections,
 // links). Chinese course titles other than CN1 are short presentation labels
 // translated for this prototype only (示意译名); they are not curriculum text.
-// Only CN1 is implemented: every other course is marked `implemented: false`
-// and is never presented as an openable control.
+// Only the published courses (content/courses.ts) are implemented: every other
+// course is marked `implemented: false` and is never presented as an openable
+// control.
+
+import { isPublished } from '../content/courses';
+import { NAMES } from './units';
 
 export type Tier = 'core' | 'elective' | 'extended';
 
@@ -29,7 +33,7 @@ const c = (code: string, title: string, tier: Tier, domain: Course['domain'], tr
   tier,
   domain,
   tradition,
-  implemented: code === 'CN1',
+  implemented: isPublished(code),
 });
 
 export const COURSES: Course[] = [
@@ -52,7 +56,7 @@ export const COURSES: Course[] = [
   c('GR4', '希腊化与罗马学派：作为生活的哲学', 'extended', 'B', 'gr'),
   c('IN2', '早期佛教与阿毗达磨：苦、无我与缘起', 'core', 'B', 'in'),
   c('EA3', '经验论、启蒙与自由主义的起源', 'core', 'B', 'ea'),
-  c('EA4', '康德：批判、自律与判断', 'core', 'B', 'ea'),
+  c('EA4', '康德：批判、自主与判断', 'core', 'B', 'ea'),
   c('EA11', '1950 年后的道德与政治哲学', 'extended', 'B', 'ea'),
   c('AF1', '非洲哲学思想：来源、争论与方法', 'core', 'B', 'af'),
   c('KR1', '韩国哲学：佛教、理学论争与现代', 'elective', 'B', 'ot'),
@@ -87,11 +91,12 @@ const SHORT: Record<string, string> = {
   CN6: '宋明理学',
   CN7: '近代中国哲学',
   CN8: '当代中国哲学',
+  EA4: '康德',
 };
 /** Short readable name of a course, e.g. CN1 → 孔子、孟子与荀子. */
 export function nameOf(code: string, names?: Record<string, string>): string {
   if (SHORT[code]) return SHORT[code];
-  const t = courseByCode(code)?.title ?? names?.[code] ?? code;
+  const t = courseByCode(code)?.title ?? names?.[code] ?? NAMES[code] ?? code;
   return t.split('：')[0];
 }
 /** Replace any course code inside a sentence with its 「name」. */
@@ -222,7 +227,7 @@ export const HUMAN_NATURE = {
       text: '伦理从品格、关系还是规则出发？',
       links: [
         { code: 'D4', where: '§1 品格 · §2 关系 · §3 关怀' },
-        { code: 'EA4', where: '§4 义务与自律' },
+        { code: 'EA4', where: '四、道德哲学：善良意志、定言命令与自主' },
         { code: 'EA11', where: '§2 德性伦理的回归 · §6 关怀伦理' },
         { code: 'AF1', where: '§5 伦理与 Ubuntu' },
       ],
@@ -256,15 +261,4 @@ export const topicCourseCodes = (): string[] => {
   return [...set];
 };
 
-// ── CN1 front-page facts from the curriculum file ───────────────────────────
-
-export const CN1_META = {
-  code: 'CN1',
-  tier: '● 核心',
-  en: 'Confucius, Mencius, Xunzi: Cultivation, Ritual and Human Nature',
-  method: '跨译本分析“仁”“礼”等厚概念；比较对立的人性理论',
-  background: '无前置要求，可以直接阅读',
-  leadsTo: ['CN6', 'S7', 'D4'],
-  chineseLine: ['CN1', 'CN2', 'CN3', 'CN4', 'CN5', 'CN6', 'CN7', 'CN8'],
-  recommendFromCN1: ['CN2', 'CN3', 'CN4'], // these list CN1 as recommended background
-};
+// Front-page facts of the published courses live in content/courses.ts.

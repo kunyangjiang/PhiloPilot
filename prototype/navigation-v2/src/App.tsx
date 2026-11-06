@@ -7,6 +7,8 @@ import Region from './ui/Region';
 import CoursePage from './ui/CoursePage';
 import Reader from './ui/Reader';
 import SearchPalette from './ui/SearchPalette';
+import { isPublished } from './content/courses';
+import { nameOf } from './data/catalog';
 
 function Page({ route }: { route: Route }) {
   switch (route.name) {
@@ -21,7 +23,9 @@ function Page({ route }: { route: Route }) {
     case 'course':
       return <CoursePage code={route.code} />;
     case 'reader':
-      return <Reader route={route} />;
+      // Only published courses have a reader; anything else shows the
+      // course page, which says the course is not available.
+      return isPublished(route.code) ? <Reader route={route} /> : <CoursePage code={route.code} />;
   }
 }
 
@@ -37,8 +41,9 @@ export default function App() {
     first.current = false;
   }, [route]);
 
-  // The reader keeps its own key so section changes do not remount the page.
-  const key = route.name === 'reader' ? 'reader' : routeToHash(route);
+  // The reader keeps its own key so section changes do not remount the page
+  // (a different course does).
+  const key = route.name === 'reader' ? 'reader-' + route.code : routeToHash(route);
   return (
     <div className={'app app--' + route.name}>
       <a className="skip-link" href="#main" onClick={(e) => (e.preventDefault(), document.getElementById('main')?.focus())}>
@@ -64,8 +69,8 @@ function titleFor(r: Route) {
     case 'topic':
       return `${base} · 人性与道德`;
     case 'course':
-      return `${base} · 孔子、孟子与荀子`;
+      return `${base} · ${nameOf(r.code)}`;
     case 'reader':
-      return `${base} · 阅读：孔子、孟子与荀子`;
+      return `${base} · 阅读：${nameOf(r.code)}`;
   }
 }

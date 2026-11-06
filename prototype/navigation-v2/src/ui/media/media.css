@@ -528,6 +528,558 @@
   overflow-wrap: anywhere;
 }
 
+/* ── Kant: timeline of works ── */
+.kc-life {
+  position: relative;
+  height: 44px;
+  margin: 6px 8px 8px;
+}
+.kc-life-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 10px;
+  background: #fff;
+  border: 1px solid var(--ink);
+}
+.kc-critical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--c-history);
+}
+.kc-pin {
+  position: absolute;
+  top: -6px;
+  width: 2px;
+  height: 20px;
+  margin-left: -1px;
+  background: var(--ink);
+}
+.kc-pin.is-cur {
+  width: 4px;
+  margin-left: -2px;
+  height: 26px;
+  top: -9px;
+  background: var(--accent);
+}
+.kc-life-y {
+  position: absolute;
+  top: 24px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.kc-life-y--mid {
+  transform: translateX(-50%);
+}
+.kc-life-y--end {
+  transform: translateX(-100%);
+}
+.kc-works {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.kc-work {
+  display: grid;
+  grid-template-columns: 3.4em 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  width: 100%;
+  min-height: 40px;
+  padding: 6px 4px;
+  border-top: 1px solid var(--rule);
+  text-align: left;
+  line-height: 1.45;
+}
+.kc-y {
+  font-weight: 700;
+}
+.kc-age {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.kc-work.is-cur {
+  background: #fff;
+  box-shadow: inset 6px 0 0 var(--accent);
+  padding-left: 12px;
+}
+.kc-work.is-cur .kc-y {
+  color: var(--accent);
+}
+.kc-work:hover .kc-t {
+  text-decoration: underline;
+}
+
+/* ── Kant: judgment explorer ── */
+.je-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 14px;
+}
+.je-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  max-width: 100%;
+  min-height: 34px;
+  padding: 4px 10px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+}
+.je-chip.is-done .je-n {
+  color: var(--accent);
+}
+.je-chip.is-cur {
+  background: var(--ink);
+  color: #fff;
+}
+.je-chip.is-cur .je-n {
+  color: var(--c-history);
+}
+.je-n {
+  font-weight: 700;
+}
+.je-work {
+  padding: 12px 14px;
+  background: #fff;
+  border-left: 6px solid var(--ink);
+}
+.article .je-sent {
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+}
+.je-src {
+  display: block;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.je-axes {
+  display: grid;
+  gap: 10px;
+}
+.je-grid-wrap {
+  margin: 14px 0 0;
+}
+.je-grid {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.je-grid th {
+  padding: 4px 6px;
+  text-align: left;
+  font-weight: 700;
+}
+.je-grid thead th,
+.je-grid thead td {
+  border-bottom: 2px solid var(--ink);
+}
+.je-col-h {
+  width: 3.6em;
+}
+.je-cell {
+  height: 64px;
+  padding: 4px 6px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  vertical-align: top;
+}
+.je-cell--an-post {
+  background: repeating-linear-gradient(135deg, #fff 0 6px, #ecebe5 6px 7px);
+}
+.je-cell--syn-pri {
+  border-width: 2px;
+}
+.je-cell.is-here {
+  outline: 3px solid var(--accent);
+  outline-offset: -3px;
+}
+.je-cell-k {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.je-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 4px;
+}
+.je-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.je-mark.is-cur {
+  background: var(--accent);
+}
+.je-ref {
+  padding: 10px 14px;
+  background: #fff;
+  border-left: 6px solid var(--c-history);
+}
+.article .je-ref p {
+  margin: 0 0 6px;
+}
+
+/* ── Kant: cognition explorer ── */
+.ce-fig {
+  margin: 0;
+}
+.ce-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+.ce-svg text {
+  font-family: var(--sans);
+}
+.ce-part,
+.ce-layer {
+  opacity: 0.18;
+  transition: opacity 0.35s ease;
+}
+.ce-layer {
+  opacity: 0;
+}
+.ce-part.is-on,
+.ce-layer.is-on {
+  opacity: 1;
+}
+.ce-part.is-off {
+  opacity: 0.18;
+}
+.ce-part.is-hot .ce-frame,
+.ce-part.is-hot .ce-box {
+  stroke: var(--accent);
+  stroke-width: 4;
+}
+.ce-unknown {
+  fill: #fff;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+}
+.ce-q {
+  font-size: 40px;
+  font-weight: 700;
+  fill: var(--ink-3);
+}
+.ce-small {
+  font-size: 15px;
+  fill: var(--ink-2);
+}
+.ce-label {
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+.ce-frame {
+  fill: #fbf8ee;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.ce-gridlines line {
+  stroke: #e6e1d2;
+  stroke-width: 1;
+}
+.ce-box {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.ce-dash-arrow {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.ce-head {
+  fill: var(--ink-3);
+}
+.ce-cond {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.ce-dot {
+  fill: var(--ink);
+}
+.ce-edge {
+  stroke: var(--c-dialogue);
+  stroke-width: 3;
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  transition: stroke-dashoffset 0.8s ease;
+}
+.ce-layer.is-on .ce-edge {
+  stroke-dashoffset: 0;
+}
+.ce-object {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.ce-obj-t {
+  font-size: 15px;
+  font-weight: 700;
+  fill: var(--accent);
+}
+.ce-verdict {
+  font-size: 44px;
+  font-weight: 700;
+  fill: var(--accent);
+}
+.ce-text {
+  min-height: 7em;
+  margin-top: 12px;
+}
+.article .ce-text p {
+  margin: 0 0 6px;
+}
+.ce-cut {
+  margin-top: 10px;
+}
+.article .ce-cut-t {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  background: #fff;
+  border-left: 6px solid var(--accent);
+}
+
+/* ── Kant: appearance explorer ── */
+.ae-switch {
+  margin-bottom: 12px;
+}
+.ae-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.ae-stage.is-tr {
+  grid-template-columns: 1.5fr 1fr;
+}
+.ae-st {
+  padding: 10px 12px 12px;
+  border: 2px solid var(--ink);
+  background: #fbf8ee;
+}
+.article .ae-st-k,
+.article .ae-blank-k {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.ae-levels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ae-level {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  background: #fff;
+  border: 1px solid var(--ink);
+  animation: ae-in 0.35s ease;
+}
+.ae-bow {
+  width: 72px;
+  height: 27px;
+  flex: none;
+}
+.ae-bow path {
+  fill: none;
+  stroke-width: 5;
+}
+.ae-bow-1 {
+  stroke: var(--accent);
+}
+.ae-bow-2 {
+  stroke: var(--c-history);
+}
+.ae-bow-3 {
+  stroke: var(--c-dialogue);
+}
+.ae-level-k {
+  font-weight: 700;
+}
+.ae-level-s {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.ae-tag {
+  margin-left: auto;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+}
+.ae-tag--all {
+  display: table;
+  margin: 2px 0 8px;
+  background: var(--ink);
+  color: #fff;
+}
+.ae-deeper {
+  min-height: 36px;
+  padding: 4px 12px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font-size: 13px;
+}
+.ae-deeper:disabled {
+  color: var(--ink-3);
+  border-style: dashed;
+}
+.ae-deeper:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.ae-blank {
+  padding: 10px 12px;
+  border: 2px dashed var(--ink-3);
+  background: #fff;
+  font-size: 13.5px;
+  animation: ae-in 0.35s ease;
+}
+.article .ae-blank p {
+  margin: 0 0 6px;
+}
+.ae-explain {
+  margin-top: 12px;
+}
+.article .ae-explain p {
+  margin: 0;
+}
+.ae-quiz {
+  margin-top: 14px;
+}
+@keyframes ae-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ── Kant: categorical imperative workshop ── */
+.ci-cases {
+  margin-bottom: 14px;
+}
+.ci-worked,
+.ci-ex {
+  padding: 12px 14px;
+  background: #fff;
+  border-left: 6px solid var(--ink);
+}
+.ci-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ci-steps li {
+  padding: 8px 0;
+  border-top: 1px solid var(--rule);
+  animation: ae-in 0.35s ease;
+}
+.ci-steps li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.article .ci-steps p,
+.article .ci-step p {
+  margin: 0 0 4px;
+}
+.article .ci-k {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.article .ci-q {
+  font-family: var(--serif);
+  font-size: 16.5px;
+}
+.ci-out {
+  font-weight: 700;
+}
+.ci-next {
+  margin-top: 8px;
+}
+.article .ci-prompt {
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-size: 17px;
+}
+.ci-step {
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+.ci-fields {
+  display: grid;
+  gap: 6px;
+}
+.ci-field {
+  display: grid;
+  grid-template-columns: 4.6em 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.ci-field input,
+.ci-why {
+  width: 100%;
+  min-width: 0;
+  min-height: 36px;
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font: inherit;
+  font-weight: 400;
+  font-size: 14px;
+}
+.ci-why {
+  margin-top: 6px;
+  resize: vertical;
+}
+.ci-field input:focus-visible,
+.ci-why:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+[data-motion='none'] .ce-part,
+[data-motion='none'] .ce-layer,
+[data-motion='none'] .ce-edge {
+  transition: none;
+}
+[data-motion='none'] .ae-level,
+[data-motion='none'] .ae-blank,
+[data-motion='none'] .ci-steps li {
+  animation: none;
+}
+
 /* ── Narrow screens ── */
 @media (hover: none), (max-width: 900px) {
   .md-kbd {
@@ -589,5 +1141,46 @@
   }
   .tl-obj img {
     max-width: 280px;
+  }
+  .kc-work {
+    grid-template-columns: 3em 1fr;
+  }
+  .kc-age {
+    display: none;
+  }
+  .je-chip {
+    font-size: 12.5px;
+  }
+  .je-cell {
+    height: 56px;
+  }
+  .je-col-h {
+    width: 2.8em;
+  }
+  .ae-stage.is-tr {
+    grid-template-columns: 1fr;
+  }
+  /* The diagram scales to ~0.7 here: larger SVG text keeps labels ≥12px.
+     Sizes are checked against the box widths in the viewBox (480 × 320). */
+  .ce-small {
+    font-size: 18px;
+  }
+  .ce-label {
+    font-size: 20px;
+  }
+  .ce-label--long {
+    font-size: 18px;
+  }
+  .ce-obj-t {
+    font-size: 18px;
+  }
+  .ci-worked,
+  .ci-ex,
+  .je-work {
+    padding: 10px 10px;
+  }
+  .ci-field {
+    grid-template-columns: 1fr;
+    gap: 2px;
   }
 }

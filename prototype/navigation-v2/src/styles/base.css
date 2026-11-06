@@ -758,6 +758,47 @@ main:focus,
   line-height: 2;
   margin: 0 0 0.5em;
 }
+/* Original-language passage + this chapter's translation (EA4 German). */
+.source--primary .src-label {
+  margin: 0 0 4px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.source--primary .src-label + .source-trans {
+  margin-top: 0;
+}
+.source--primary .source-trans {
+  padding-top: 0;
+}
+.source--primary .src-label:not(:first-child) {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+[data-style] .source--primary .source-orig p {
+  font-family: Georgia, 'Times New Roman', 'Noto Serif', serif;
+  font-size: 17px;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+.source-trans p {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.95;
+  margin: 0 0 0.4em;
+}
+@media (max-width: 600px) {
+  [data-style] .source--primary .source-orig p {
+    font-size: 16px;
+  }
+  .source-trans p {
+    font-size: 16px;
+  }
+}
 .source figcaption {
   display: flex;
   flex-wrap: wrap;

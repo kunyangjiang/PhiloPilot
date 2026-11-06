@@ -1,7 +1,8 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
 import { REGIONS, type RegionId } from '../data/catalog';
 import { UNITS, type Unit } from '../data/units';
-import { readingStatus } from '../state/reading';
+import { lastReading } from '../state/reading';
+import { PUBLISHED } from '../content/courses';
 import { continueReading, goCourse, goTopic, regionHash } from './nav';
 
 // Modernist-mix homepage (Display Grid).
@@ -15,14 +16,15 @@ const ORDER: RegionId[] = ['history', 'questions', 'dialogue', 'methods'];
 const COUNT = Object.fromEntries(ORDER.map((r) => [r, UNITS.filter((u) => u.region === r).length])) as Record<RegionId, number>;
 const CELLS = ORDER.flatMap((r) => UNITS.filter((u) => u.region === r));
 const TIER = { core: '核心', elective: '核心选修', extended: '拓展' } as const;
-const IMPLEMENTED = new Set(['CN1']);
+const IMPLEMENTED = new Set(Object.keys(PUBLISHED));
 const REGION_TITLE = Object.fromEntries(REGIONS.map((r) => [r.id, r.title])) as Record<RegionId, string>;
 
 export default function SwissHome() {
   const [hot, setHot] = useState<RegionId | null>(null);
   const [unit, setUnit] = useState<Unit | null>(null);
   const [cursor, setCursor] = useState(CELLS.findIndex((u) => u.code === 'CN1'));
-  const status = readingStatus();
+  // The course read most recently (null before any reading).
+  const status = lastReading();
   const touch = useRef(false);
   const pick = CELLS[cursor];
   const move = (d: number) => setCursor((c) => Math.min(CELLS.length - 1, Math.max(0, c + d)));
@@ -63,15 +65,18 @@ export default function SwissHome() {
             <small>每个入口进入后的步骤写在下面的方块里；也可以用搜索或「继续阅读」直接回到课程。</small>
           </p>
         </div>
-        {status.state === 'progress' ? (
-          <button className="sh-continue" onClick={continueReading}>
+        {status?.state === 'progress' ? (
+          <button className="sh-continue" onClick={() => continueReading(status.code)}>
             <span className="sh-c-k">继续阅读 · 已读 {status.pct}%</span>
-            <span className="sh-c-t">孔子、孟子与荀子{status.where ? ` · ${status.where}` : ''}</span>
+            <span className="sh-c-t">
+              {PUBLISHED[status.code].name}
+              {status.where ? ` · ${status.where}` : ''}
+            </span>
           </button>
-        ) : status.state === 'done' ? (
-          <button className="sh-continue" onClick={() => goCourse('CN1', [])}>
+        ) : status?.state === 'done' ? (
+          <button className="sh-continue" onClick={() => goCourse(status.code, [])}>
             <span className="sh-c-k">已读完 · 可重读或复习</span>
-            <span className="sh-c-t">孔子、孟子与荀子</span>
+            <span className="sh-c-t">{PUBLISHED[status.code].name}</span>
           </button>
         ) : (
           <button className="sh-continue" onClick={() => goTopic()}>

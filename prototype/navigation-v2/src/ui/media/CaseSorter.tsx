@@ -49,7 +49,7 @@ function Choice<T extends string>({ name, legend, options, value, onPick }: { na
 
 export default function CaseSorter() {
   const [rows, setRows] = useState<Row[]>(() => {
-    const saved = getMedia<Row[]>(ID, []);
+    const saved = getMedia<Row[]>('CN1', ID, []);
     return CASES.map((_, i) => saved[i] ?? {});
   });
   const [defs, setDefs] = useState(false);
@@ -57,12 +57,12 @@ export default function CaseSorter() {
   const update = (i: number, patch: Row) => {
     const next = rows.map((r, j) => (j === i ? { ...r, ...patch } : r));
     setRows(next);
-    setMedia(ID, next);
+    setMedia('CN1', ID, next);
   };
   const reset = () => {
     const empty = CASES.map(() => ({}));
     setRows(empty);
-    setMedia(ID, empty);
+    setMedia('CN1', ID, empty);
   };
 
   const done = rows.every((r) => r.m && r.x && r.why);

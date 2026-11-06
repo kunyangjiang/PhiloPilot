@@ -1,9 +1,9 @@
 // Local, per-browser state only (no accounts, no sync). V2 keys are separate
-// from V1 so the two prototypes never overwrite each other.
+// from V1 so the two prototypes never overwrite each other. Every course has
+// its own keys (philopilot.v2.<code>.…); the CN1 keys are unchanged from
+// earlier builds so saved reading survives.
 
-const KEY_POS = 'philopilot.v2.cn1.position';
-const KEY_PROGRESS = 'philopilot.v2.cn1.progress';
-const KEY_EX = 'philopilot.v2.cn1.exercise.';
+const key = (code: string, what: string) => `philopilot.v2.${code.toLowerCase()}.${what}`;
 
 export interface ReadingPosition {
   section: number;
@@ -29,26 +29,27 @@ const write = (k: string, v: unknown) => {
   }
 };
 
-export const getPosition = () => read<ReadingPosition | null>(KEY_POS, null);
-export const setPosition = (p: ReadingPosition) => write(KEY_POS, p);
+export const getPosition = (code: string) => read<ReadingPosition | null>(key(code, 'position'), null);
+export const setPosition = (code: string, p: ReadingPosition) => write(key(code, 'position'), p);
 
 /** Highest fraction (0–1) of each section the reader has scrolled through. */
-export const getProgress = () => read<Record<number, number>>(KEY_PROGRESS, {});
-export const bumpProgress = (section: number, frac: number) => {
-  const p = getProgress();
+export const getProgress = (code: string) => read<Record<number, number>>(key(code, 'progress'), {});
+export const bumpProgress = (code: string, section: number, frac: number) => {
+  const p = getProgress(code);
   if ((p[section] ?? 0) < frac) {
     p[section] = Math.min(1, frac);
-    write(KEY_PROGRESS, p);
+    write(key(code, 'progress'), p);
   }
 };
 
-export const getExercise = (id: string) => read<string>(KEY_EX + id, '');
-export const setExercise = (id: string, v: string) => write(KEY_EX + id, v);
+/** Exercise ids already start with the course prefix (cn1-…, ea4-…). */
+const exKey = (id: string) => key(id.split('-')[0], 'exercise.') + id;
+export const getExercise = (id: string) => read<string>(exKey(id), '');
+export const setExercise = (id: string, v: string) => write(exKey(id), v);
 
 /** State of an interactive teaching component (choices only, never scored). */
-const KEY_MEDIA = 'philopilot.v2.cn1.media.';
-export const getMedia = <T,>(id: string, fallback: T) => read<T>(KEY_MEDIA + id, fallback);
-export const setMedia = (id: string, v: unknown) => write(KEY_MEDIA + id, v);
+export const getMedia = <T,>(code: string, id: string, fallback: T) => read<T>(key(code, 'media.') + id, fallback);
+export const setMedia = (code: string, id: string, v: unknown) => write(key(code, 'media.') + id, v);
 
 // How the learner reached a course is stored with each browser-history entry
 // (see router.ts), not in a single session-wide trail.

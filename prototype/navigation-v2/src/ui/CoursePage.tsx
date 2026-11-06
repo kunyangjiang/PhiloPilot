@@ -1,20 +1,27 @@
-import { CN1_META, courseByCode, nameOf } from '../data/catalog';
-import { APPENDIX, CORE_QUESTION, MENCIUS_SECTION, READING, SECTIONS, STATUS_HTML, SUBTITLE, SUMMARY, TITLE, TOTAL_CHARS, shortTitle } from '../content/cn1';
+import { courseByCode, nameOf } from '../data/catalog';
+import { NAMES } from '../data/units';
+import { shortTitle } from '../content/course';
+import { PUBLISHED } from '../content/courses';
 import { currentCtx, navigate } from '../router';
 import { getProgress } from '../state/store';
 import { readingStatus, resumeTarget } from '../state/reading';
 import { TopBar, NotBuilt, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
-import { CANONICAL } from './nav';
+import { canonicalOf } from './nav';
+
+const TRADITION_NAME = { cn: '中国哲学', ea: '欧洲与北大西洋哲学' } as const;
+
+/** Label for a curriculum link to another course. */
+const linkKind = (code: string, tradition: 'cn' | 'ea') =>
+  code.startsWith('S') ? '哲学问题' : code.startsWith('D') ? '跨传统对话' : code.toLowerCase().startsWith(tradition) ? `${TRADITION_NAME[tradition]} · 后续` : '后续';
 
 // Course front page. One focal point: the red reading block, whose action
 // follows the reading state (开始 / 继续 / 已读完). Parts, length and progress
-// all use the instructional sections only (see content/cn1.ts).
+// all use the instructional sections only (see content/course.ts).
 export default function CoursePage({ code }: { code: string }) {
   const ctx = currentCtx();
   const fromTopic = ctx.some((c) => c.hash === '#/questions/human-nature');
-  const status = readingStatus();
-  const progress = getProgress();
+  const course = PUBLISHED[code];
 
   useEscape(() => {
     const back = ctx[ctx.length - 1]?.hash ?? '#/';
@@ -22,11 +29,11 @@ export default function CoursePage({ code }: { code: string }) {
     window.dispatchEvent(new HashChangeEvent('hashchange'));
   });
 
-  if (code !== 'CN1' || !courseByCode(code)?.implemented)
+  if (!course)
     return (
       <main id="main" tabIndex={-1} className="pg">
         <TopBar />
-        <Wayfinder page="course" />
+        <Wayfinder page="course" code={code} />
         <div className="pg-body">
           <h1>{nameOf(code)}</h1>
           <p className="lede">这门课在原型中尚未实现。</p>
@@ -34,14 +41,30 @@ export default function CoursePage({ code }: { code: string }) {
       </main>
     );
 
+  const { TITLE, SUBTITLE, STATUS_HTML, SECTIONS, READING, APPENDIX, TOTAL_CHARS, CORE_QUESTION, SUMMARY } = course.text;
+  const status = readingStatus(code);
+  const progress = getProgress(code);
   const read = (section: number, block?: number) => navigate({ name: 'reader', code, section, block });
   const first = READING[0].index;
-  const canonical = CANONICAL.CN1;
+  const canonical = canonicalOf(code);
+  const linked = (c: string) => {
+    const pub = PUBLISHED[c];
+    const title = courseByCode(c)?.title ?? NAMES[c] ?? c;
+    return pub ? (
+      <button className="inline-link" onClick={() => navigate({ name: 'course', code: c })}>
+        {title}
+      </button>
+    ) : (
+      <>
+        {title} <NotBuilt>原型未实现</NotBuilt>
+      </>
+    );
+  };
 
   return (
     <main id="main" tabIndex={-1} className="pg pg-course">
       <TopBar />
-      <Wayfinder page="course" />
+      <Wayfinder page="course" code={code} />
       <div className="pg-body course-grid">
         <section className="course-main">
           <p className="kicker">
@@ -52,7 +75,7 @@ export default function CoursePage({ code }: { code: string }) {
                 <a href={c.hash}>{c.label}</a>
               </span>
             ))}{' '}
-            · 第 1 门 · {CN1_META.tier}课程 <span className="draft-tag">样章草稿</span>
+            · 第 {course.position} 门 · {course.tier}课程 <span className="draft-tag">样章草稿</span>
           </p>
           <h1 className="course-title">{TITLE}</h1>
           <p className="course-en">{SUBTITLE}</p>
@@ -66,7 +89,13 @@ export default function CoursePage({ code }: { code: string }) {
               </button>
             )}
             {status.state === 'progress' && (
-              <button className="rc-go" onClick={() => { const t = resumeTarget(); read(t.section, t.block); }}>
+              <button
+                className="rc-go"
+                onClick={() => {
+                  const t = resumeTarget(code);
+                  read(t.section, t.block);
+                }}
+              >
                 <span className="rc-k">已读 {status.pct}%</span>
                 <span className="rc-t">继续阅读 →</span>
                 <span className="rc-s">{status.pos ? `回到：${status.where}` : '从第一个未读完的部分继续'}</span>
@@ -79,11 +108,11 @@ export default function CoursePage({ code }: { code: string }) {
                 <span className="rc-s">从「{shortTitle(READING[0].title)}」再读一遍，或在右侧目录中挑一部分复习</span>
               </button>
             )}
-            {status.state !== 'done' && fromTopic && MENCIUS_SECTION >= 0 && (
-              <button className="rc-alt" onClick={() => read(MENCIUS_SECTION)}>
+            {status.state !== 'done' && fromTopic && course.topicSection != null && (
+              <button className="rc-alt" onClick={() => read(course.topicSection!)}>
                 直接读与「人性与道德」
                 <br />
-                最相关的「{shortTitle(SECTIONS[MENCIUS_SECTION].title)}」
+                最相关的「{shortTitle(SECTIONS[course.topicSection].title)}」
               </button>
             )}
           </div>
@@ -96,11 +125,11 @@ export default function CoursePage({ code }: { code: string }) {
           <dl className="facts">
             <div>
               <dt>推荐背景</dt>
-              <dd>{CN1_META.background}</dd>
+              <dd>{course.background}</dd>
             </div>
             <div>
               <dt>方法重点</dt>
-              <dd>{CN1_META.method}</dd>
+              <dd>{course.method}</dd>
             </div>
             <div>
               <dt>篇幅</dt>
@@ -149,17 +178,18 @@ export default function CoursePage({ code }: { code: string }) {
 
           <h2 className="sec-h">读完以后</h2>
           <ul className="next-list">
-            {CN1_META.recommendFromCN1.map((c) => (
-              <li key={c}>
-                <span className="nl-k">中国哲学 · 下一门</span> {courseByCode(c)!.title} <NotBuilt>原型未实现</NotBuilt>
+            {course.recommendFrom.map((c) => (
+              <li key={'r' + c}>
+                <span className="nl-k">{TRADITION_NAME[course.tradition]} · 下一门</span> {linked(c)}
               </li>
             ))}
-            {CN1_META.leadsTo.map((c) => (
-              <li key={c}>
-                <span className="nl-k">{c.startsWith('CN') ? '中国哲学 · 后续' : c.startsWith('S') ? '哲学问题' : '跨传统对话'}</span> {courseByCode(c)!.title}{' '}
-                <NotBuilt>原型未实现</NotBuilt>
-              </li>
-            ))}
+            {course.leadsTo
+              .filter((c) => !course.recommendFrom.includes(c))
+              .map((c) => (
+                <li key={c}>
+                  <span className="nl-k">{linkKind(c, course.tradition)}</span> {linked(c)}
+                </li>
+              ))}
           </ul>
           <p className="note">以上联系均来自课程大纲。</p>
         </section>

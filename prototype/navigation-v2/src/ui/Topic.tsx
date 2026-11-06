@@ -12,7 +12,7 @@ const QS = HUMAN_NATURE.questions;
 // sub-question as a plain secondary text link.
 export default function Topic({ topic }: { topic: string }) {
   const tp = TOPICS.find((t) => t.id === topic) ?? TOPICS[5];
-  const status = readingStatus();
+  const status = readingStatus('CN1');
   useEscape(() => navigate({ name: 'questions' }));
 
   if (!tp.implemented)
@@ -76,7 +76,7 @@ export default function Topic({ topic }: { topic: string }) {
                 </li>
               ))}
             </ol>
-            <p className="note">问题与课程小节的分组是本原型的编辑示意。只有《孔子、孟子与荀子》可以打开，其余课程在原型中未实现。</p>
+            <p className="note">问题与课程小节的分组是本原型的编辑示意。《孔子、孟子与荀子》和《康德》可以打开，其余课程在原型中未实现。</p>
           </section>
         </div>
 
@@ -86,7 +86,7 @@ export default function Topic({ topic }: { topic: string }) {
             <h2>建议从这门课开始</h2>
             <p className="sc-title">{courseByCode('CN1')!.title}</p>
             <p className="sc-why">
-              四个具体问题里有 {viaCN1} 个都连到这门课，它也是原型中唯一可以阅读的课程。
+              四个具体问题里有 {viaCN1} 个都连到这门课。原型中可以阅读的另一门课《康德》，连到第 3 个问题。
             </p>
             <button className="sc-go" onClick={() => open('CN1')}>
               打开这门课 →

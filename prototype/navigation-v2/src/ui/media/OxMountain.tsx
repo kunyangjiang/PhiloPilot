@@ -132,9 +132,9 @@ function Scene({ show }: { show: Layer[] }) {
 }
 
 export default function OxMountain() {
-  const [step, setStepRaw] = useState(() => Math.min(STEPS.length - 1, Math.max(0, getMedia<{ step?: number }>(ID, {}).step ?? 0)));
-  const [pick, setPickRaw] = useState<string | null>(() => getMedia<{ pick?: string | null }>(ID, {}).pick ?? null);
-  const save = (s: number, p: string | null) => setMedia(ID, { step: s, pick: p });
+  const [step, setStepRaw] = useState(() => Math.min(STEPS.length - 1, Math.max(0, getMedia<{ step?: number }>('CN1', ID, {}).step ?? 0)));
+  const [pick, setPickRaw] = useState<string | null>(() => getMedia<{ pick?: string | null }>('CN1', ID, {}).pick ?? null);
+  const save = (s: number, p: string | null) => setMedia('CN1', ID, { step: s, pick: p });
   const setStep = (s: number) => {
     const n = Math.min(STEPS.length - 1, Math.max(0, s));
     setStepRaw(n);
