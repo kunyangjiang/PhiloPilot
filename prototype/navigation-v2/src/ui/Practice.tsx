@@ -39,7 +39,11 @@ function QuestionView({
   onChange: (v: PracticeState[string]) => void;
 }) {
   const pick = st?.pick ?? [];
-  const stage = st?.stage ?? 'open';
+  // A true/false question has only two options, so a wrong answer already
+  // gives the answer away: it goes straight to the answer and explanation
+  // (also for answers saved under the older two-step flow).
+  const saved = st?.stage ?? 'open';
+  const stage = q.type === 'tf' && saved === 'wrong' ? 'shown' : saved;
   const fbRef = useRef<HTMLDivElement>(null);
   const options = q.type === 'tf' ? TF : q.options;
   const multi = q.type === 'multi';
@@ -53,7 +57,8 @@ function QuestionView({
   };
   const submit = () => {
     if (!pick.length) return;
-    onChange({ pick, stage: q.type === 'view' ? 'shown' : isRight(q, pick) ? 'right' : 'wrong' });
+    const ok = isRight(q, pick);
+    onChange({ pick, stage: q.type === 'view' ? 'shown' : ok ? 'right' : q.type === 'tf' ? 'shown' : 'wrong' });
     // Move focus to the feedback so keyboard and screen-reader users land on it.
     window.setTimeout(() => fbRef.current?.focus(), 0);
   };
@@ -137,15 +142,19 @@ function QuestionView({
                 再试一次
               </button>
               <button type="button" className="pq-link" onClick={show}>
-                显示答案和解析
+                直接看答案
               </button>
             </div>
           </>
         )}
         {reveal && q.type !== 'view' && (
           <>
-            <p className={'pq-verdict' + (stage === 'right' ? ' pq-verdict--yes' : '')}>
-              {stage === 'right' ? '回答正确。' : q.type === 'tf' ? `答案：${q.answer ? '对' : '不对'}。` : '答案与解析'}
+            <p className={'pq-verdict ' + (stage === 'right' ? 'pq-verdict--yes' : 'pq-verdict--no')}>
+              {stage === 'right'
+                ? '回答正确。'
+                : q.type === 'tf'
+                  ? `还不对：这句话${q.answer ? '是对的' : '不对'}。`
+                  : `答案是 ${answers.map((a) => LETTERS[options.findIndex((o) => o.id === a)]).join('、')}。`}
             </p>
             {q.type === 'tf' && stage === 'shown' && pick.length > 0 && !isRight(q, pick) && <p>{q.wrong}</p>}
             {q.type !== 'tf' && (
