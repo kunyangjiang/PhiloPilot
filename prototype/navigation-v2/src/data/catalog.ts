@@ -54,6 +54,7 @@ export const COURSES: Course[] = [
   // Domain B — others used in the topic view
   c('GR3', '亚里士多德：实体、原因、逻辑与好生活', 'core', 'B', 'gr'),
   c('GR4', '希腊化与罗马学派：作为生活的哲学', 'extended', 'B', 'gr'),
+  c('IN1', '印度哲学的起源与早期思想争论：自我、宇宙与解脱', 'core', 'B', 'in'),
   c('IN2', '早期佛教与阿毗达磨：苦、无我与缘起', 'core', 'B', 'in'),
   c('EA3', '经验论、启蒙与自由主义的起源', 'core', 'B', 'ea'),
   c('EA4', '康德：批判、自主与判断', 'core', 'B', 'ea'),
@@ -92,6 +93,7 @@ const SHORT: Record<string, string> = {
   CN7: '近代中国哲学',
   CN8: '当代中国哲学',
   EA4: '康德',
+  IN1: '印度哲学的起源',
 };
 /** Short readable name of a course, e.g. CN1 → 孔子、孟子与荀子. */
 export function nameOf(code: string, names?: Record<string, string>): string {
@@ -220,6 +222,7 @@ export const HUMAN_NATURE = {
         { code: 'S7', where: '§6 修养与实践' },
         { code: 'GR3', where: '§6 德性与幸福' },
         { code: 'GR4', where: '§6 作为治疗的哲学' },
+        { code: 'IN1', where: '三、行动、再生与解脱 · 四、沙门的另一条路（不害与苦行）' },
       ],
     },
     {

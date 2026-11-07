@@ -1,5 +1,6 @@
 import { HUMAN_NATURE, nameOf, TOPICS, topicCourseCodes } from '../data/catalog';
 import { NAMES } from '../data/units';
+import { PUBLISHED } from '../content/courses';
 import { navigate } from '../router';
 import { TopBar, NotBuilt, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
@@ -30,7 +31,7 @@ export default function Questions() {
               <span className="qf-title">{open.title}</span>
               <span className="qf-q">{open.question}</span>
               <span className="qf-meta">
-                {HUMAN_NATURE.questions.length} 个具体问题 · 连到 {topicCourseCodes().length} 门课 · 可读到《孔子、孟子与荀子》
+                {HUMAN_NATURE.questions.length} 个具体问题 · 连到 {topicCourseCodes().length} 门课 · 可读到{topicCourseCodes().filter((c) => c in PUBLISHED).map((c) => `《${PUBLISHED[c].name}》`).join('')}
               </span>
               <span className="qf-go">进入这个问题 →</span>
             </button>

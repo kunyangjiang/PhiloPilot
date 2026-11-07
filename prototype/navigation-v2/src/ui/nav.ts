@@ -2,7 +2,7 @@
 import { COURSES, REGIONS, TOPICS, TRADITIONS, type RegionId } from '../data/catalog';
 import { navigate, setCtxResolver, type Crumb, type Route } from '../router';
 import { lastReading, resumeTarget } from '../state/reading';
-import { PUBLISHED } from '../content/courses';
+import { PUBLISHED, TRADITION_NAME, type Tradition } from '../content/courses';
 
 export const regionHash = (id: RegionId) => (id === 'questions' ? '#/questions' : `#/region/${id}`);
 export const regionCrumb = (id: RegionId): Crumb => ({ label: REGIONS.find((r) => r.id === id)!.title, hash: regionHash(id), kind: '入口' });
@@ -11,8 +11,7 @@ export const QUESTIONS_CRUMB: Crumb = { label: '哲学问题', hash: '#/question
 export const topicCrumb = (id: string): Crumb => ({ label: TOPICS.find((t) => t.id === id)?.title ?? id, hash: `#/questions/${id}`, kind: '问题' });
 
 /** Traditions are sections of the 历史与传统 page (no separate routes). */
-const TRADITION_LABEL: Record<'cn' | 'ea', string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学' };
-export const traditionCrumb = (t: 'cn' | 'ea'): Crumb => ({ label: TRADITION_LABEL[t], hash: `#/region/history?t=${t}`, kind: '传统' });
+export const traditionCrumb = (t: Tradition): Crumb => ({ label: TRADITION_NAME[t], hash: `#/region/history?t=${t}`, kind: '传统' });
 export const TRADITION_CN_CRUMB = traditionCrumb('cn');
 
 const courseOf = (r: Route) => (r.name === 'course' || r.name === 'reader' ? PUBLISHED[r.code] : undefined);

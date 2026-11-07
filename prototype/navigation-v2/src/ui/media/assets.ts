@@ -23,3 +23,14 @@ export const KANT_PORTRAIT = {
   credit: 'Johann Leonhard Raab after Döbler, Portret van Immanuel Kant, steel engraving (detail). Rijksmuseum, Amsterdam, RP-P-1914-3253. Public Domain.',
   url: 'https://id.rijksmuseum.nl/200307487',
 };
+
+export const MAHAVIRA_FOLIO = {
+  /** Recorded in public/media/in1/SOURCES.md (licence checked 2026-11-06). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/in1/tonsure-of-mahavira-18-104-4.jpg',
+  width: 599,
+  height: 268,
+  alt: '一页横长的写本：左边大部分是几行黑色的手写文字，文字中间和纸页两侧各有一个红色圆点；右边是一幅小画，红色底子上，两个人物相对而坐，上方画着树。',
+  credit: 'Tonsure of Mahavira: Folio from a Kalpasutra Manuscript. India (Gujarat), 1461 (Samvat 1519). The Metropolitan Museum of Art, Rogers Fund, 1918, 18.104.4. Public Domain.',
+  url: 'https://www.metmuseum.org/art/collection/search/37840',
+};

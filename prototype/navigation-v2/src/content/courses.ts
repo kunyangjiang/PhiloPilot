@@ -1,10 +1,15 @@
 import { CN1, MENCIUS_SECTION } from './cn1';
 import { EA4 } from './ea4';
+import { IN1 } from './in1';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
 // planning/CURRICULUM_REFERENCE_DRAFT.md (method focus, background, links);
 // Chinese wording is a presentation translation.
+
+/** Tradition sections of 历史与传统 that have a readable course. */
+export type Tradition = 'cn' | 'ea' | 'in';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学' };
 
 export interface PublishedCourse {
   code: string;
@@ -16,7 +21,7 @@ export interface PublishedCourse {
   method: string;
   background: string;
   /** Tradition section of 历史与传统 this course belongs to, and its place there. */
-  tradition: 'cn' | 'ea';
+  tradition: Tradition;
   position: number;
   /** Courses that list this one as recommended background. */
   recommendFrom: string[];
@@ -24,6 +29,8 @@ export interface PublishedCourse {
   leadsTo: string[];
   /** Shown when a primary-source citation is opened. */
   sourceNote: string;
+  /** Language of the original-language passages (lang attribute), decided per passage. */
+  origLang?: (origHtml: string) => string;
   /** Section most relevant to the 人性与道德 question, if any. */
   topicSection?: number;
 }
@@ -57,8 +64,29 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     recommendFrom: ['EA5'],
     leadsTo: ['EA5', 'S1', 'S7'],
     sourceNote: '德文原文据普鲁士科学院版《康德全集》（AA），保留十八世纪拼写；卷页见注释。中文是本章试译。',
+    origLang: () => 'de',
     topicSection: (() => {
       const i = EA4.SECTIONS.findIndex((s) => s.title.startsWith('四、道德哲学'));
+      return i >= 0 ? i : undefined;
+    })(),
+  },
+  IN1: {
+    code: 'IN1',
+    text: IN1,
+    name: '印度哲学的起源',
+    tier: '● 核心',
+    en: 'Origins and Early Debates: Vedic Thought, Upaniṣads and the Śramaṇa Schools',
+    method: '公平地呈现对立的立场；从对话中重构论证',
+    background: '无前置要求，可以直接阅读',
+    tradition: 'in',
+    position: 1,
+    recommendFrom: ['IN2', 'IN5', 'IN6', 'IN7'],
+    leadsTo: ['IN2', 'IN5', 'IN6', 'IN7'],
+    sourceNote: '梵文据 GRETIL 所收电子本，巴利文据 SuttaCentral 所载摩诃僧祇本；版本与权利见附录。中文是本章试译。',
+    // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
+    origLang: (html) => (html.includes('ṁ') ? 'pi' : 'sa'),
+    topicSection: (() => {
+      const i = IN1.SECTIONS.findIndex((s) => s.title.startsWith('三、'));
       return i >= 0 ? i : undefined;
     })(),
   },

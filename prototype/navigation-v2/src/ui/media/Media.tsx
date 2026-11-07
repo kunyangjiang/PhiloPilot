@@ -12,6 +12,10 @@ const COMPONENTS = {
   'cognition-explorer': lazy(() => import('./kant/CognitionExplorer')),
   'appearance-explorer': lazy(() => import('./kant/AppearanceExplorer')),
   'ci-workshop': lazy(() => import('./kant/CIWorkshop')),
+  'dialogue-explorer': lazy(() => import('./in1/DialogueExplorer')),
+  'mahavira-folio': lazy(() => import('./in1/MahaviraFolio')),
+  'many-sided': lazy(() => import('./in1/ManySided')),
+  'evidence-workshop': lazy(() => import('./in1/EvidenceWorkshop')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

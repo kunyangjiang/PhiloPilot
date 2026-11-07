@@ -4,6 +4,7 @@ import { UNITS } from '../data/units';
 import { navigate } from '../router';
 import { TopBar, NotBuilt, useEscape } from './Chrome';
 import { goCourse, REGION_NO } from './nav';
+import { PUBLISHED, TRADITION_NAME } from '../content/courses';
 import Wayfinder from './Wayfinder';
 
 type R = 'history' | 'dialogue' | 'methods';
@@ -46,9 +47,9 @@ function CourseTable({ codes }: { codes: string[] }) {
 export default function Region({ region }: { region: R }) {
   const r = REGIONS.find((x) => x.id === region)!;
   useEscape(() => navigate({ name: 'home' }));
-  // A tradition in the breadcrumb (?t=cn, ?t=ea) points at its section of this page.
+  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in) points at its section of this page.
   useEffect(() => {
-    const m = location.hash.match(/t=(cn|ea)/);
+    const m = location.hash.match(/t=(cn|ea|in)/);
     if (!m) return;
     const t = window.setTimeout(() => {
       const h = document.getElementById('trad-' + m[1]);
@@ -79,18 +80,20 @@ export default function Region({ region }: { region: R }) {
               <h2 className="sec-h">七个传统</h2>
               <ol className="trad-list">
                 {TRADITIONS.map((t, i) => (
-                  <li key={t.id} className={t.id === 'cn' || t.id === 'ea' ? 'is-here' : ''}>
+                  <li key={t.id} className={t.id in TRADITION_NAME ? 'is-here' : ''}>
                     <span className="tl-no">{String(i + 1).padStart(2, '0')}</span>
                     <span className="tl-name">{t.name}</span>
                     <span className="tl-count">{t.count} 门</span>
                   </li>
                 ))}
               </ol>
-              <p className="pg-note">原型展开「中国」和「欧洲与北大西洋」两个传统。</p>
+              <p className="pg-note">原型展开「中国」「印度」和「欧洲与北大西洋」三个传统。</p>
             </section>
             <section>
               <h2 className="sec-h" id="trad-cn" tabIndex={-1}>中国哲学 · 8 门课</h2>
               <CourseTable codes={COURSES.filter((c) => c.tradition === 'cn').map((c) => c.code)} />
+              <h2 className="sec-h" id="trad-in" tabIndex={-1}>印度哲学 · 8 门课</h2>
+              <CourseTable codes={UNITS.filter((u) => /^IN\d/.test(u.code)).map((u) => u.code)} />
               <h2 className="sec-h" id="trad-ea" tabIndex={-1}>欧洲与北大西洋哲学 · 12 门课</h2>
               <CourseTable codes={UNITS.filter((u) => /^EA\d/.test(u.code)).map((u) => u.code)} />
             </section>
@@ -119,7 +122,7 @@ export default function Region({ region }: { region: R }) {
             </section>
           </div>
         )}
-        <p className="pg-note">本区域只展示课程结构；可阅读的内容目前有《孔子、孟子与荀子》和《康德》。按 Esc 回到总览。</p>
+        <p className="pg-note">本区域只展示课程结构；可阅读的内容目前有{Object.values(PUBLISHED).map((c) => `《${c.name}》`).join('')}。按 Esc 回到总览。</p>
       </div>
     </main>
   );

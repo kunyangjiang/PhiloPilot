@@ -785,6 +785,12 @@ main:focus,
   overflow-wrap: break-word;
   hyphens: auto;
 }
+/* Sanskrit and Pāli in romanisation: one face that has every diacritic
+   (ṃ, ṁ, ṛ, ḥ …), so no letter falls back to another font. */
+[data-style] .source--primary .source-orig:is(:lang(sa), :lang(pi)) p {
+  font-family: 'Times New Roman', 'Noto Serif', 'DejaVu Serif', serif;
+  hyphens: manual;
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;

@@ -72,11 +72,11 @@ function renderBlock(code: string, b: Block, i: number, section: number, fig: nu
         </figure>
       );
     case 'primary':
-      // Original-language passage (lang="de") and the course's own translation.
+      // Original-language passage (German, Sanskrit or Pāli, per course) and the course's own translation.
       return (
         <figure key={id} data-block={i} className="blk source source--primary">
           <p className="src-label">原文</p>
-          <div className="source-text source-orig" lang="de" dangerouslySetInnerHTML={{ __html: b.origHtml }} />
+          <div className="source-text source-orig" lang={PUBLISHED[code].origLang?.(b.origHtml) ?? 'de'} dangerouslySetInnerHTML={{ __html: b.origHtml }} />
           <p className="src-label">本章试译</p>
           <div className="source-trans" dangerouslySetInnerHTML={{ __html: b.transHtml }} />
         </figure>

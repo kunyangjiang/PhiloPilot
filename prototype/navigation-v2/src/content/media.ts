@@ -17,7 +17,12 @@ export type MediaId =
   | 'judgment-explorer'
   | 'cognition-explorer'
   | 'appearance-explorer'
-  | 'ci-workshop';
+  | 'ci-workshop'
+  // 印度哲学的起源
+  | 'dialogue-explorer'
+  | 'mahavira-folio'
+  | 'many-sided'
+  | 'evidence-workshop';
 
 interface Anchor {
   id: MediaId;
@@ -44,6 +49,15 @@ const ANCHORS: Anchor[] = [
   { id: 'appearance-explorer', code: 'EA4', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('两个比喻的共同毛病') },
   // 四 · 普遍法则公式: after the exercise (六) on universalising a maxim.
   { id: 'ci-workshop', code: 'EA4', section: '四、', match: (b) => b.kind === 'exercise' && b.text.includes('普遍化一条准则') },
+
+  // 二 · after the four dialogues (the note comparing Yājñavalkya and Prajāpati on deep sleep).
+  { id: 'dialogue-explorer', code: 'IN1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('一个值得注意的对照') },
+  // 四 · after the paragraph introducing Mahāvīra and the tīrthaṅkaras (museum object).
+  { id: 'mahavira-folio', code: 'IN1', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('tīrthaṅkara') && b.text.includes('大雄') },
+  // 四 · 第三步: after the paragraph explaining syāt and the red pot.
+  { id: 'many-sided', code: 'IN1', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('syādvāda') && b.text.includes('不可言说') },
+  // 五 · after the two readings of the Cārvāka and the boundary problem that follows them.
+  { id: 'evidence-workshop', code: 'IN1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('当然，即使接受温和的读法') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

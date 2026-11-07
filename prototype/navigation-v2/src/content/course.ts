@@ -47,7 +47,10 @@ export interface CourseText {
 }
 
 const APPENDIX_TITLES = ['注释', '来源与权利说明'];
-const plain = (s: string) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+/** Text of an HTML fragment as displayed: tags removed, the entities markdown-it writes decoded. */
+const htmlText = (s: string) =>
+  s.replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+const plain = (s: string) => htmlText(s).replace(/\s+/g, ' ').trim();
 const FN_TOKEN = (n: string) => `⁣FN${n}⁣`;
 const withFnButtons = (html: string) =>
   html.replace(/⁣FN(\d+)⁣/g, (_, n) => `<button type="button" class="fn-ref" data-fn="${n}" aria-expanded="false" aria-label="注释 ${n}">${n}</button>`);
@@ -224,7 +227,7 @@ export function parseCourse(code: string, raw: string, opts: ParseOptions): Cour
     // (body text, quotations, exercises and tables; punctuation included;
     // diagrams, notes and the sources appendix excluded).
     TOTAL_CHARS: READING.reduce((s, x) => s + x.chars, 0),
-    CORE_QUESTION: coreM ? coreM[1] : '',
+    CORE_QUESTION: coreM ? htmlText(coreM[1]) : '',
     SUMMARY: sumB ? sumB.text : '',
   };
 }

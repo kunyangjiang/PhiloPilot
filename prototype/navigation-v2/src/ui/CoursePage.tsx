@@ -1,7 +1,7 @@
 import { courseByCode, nameOf } from '../data/catalog';
 import { NAMES } from '../data/units';
 import { shortTitle } from '../content/course';
-import { PUBLISHED } from '../content/courses';
+import { PUBLISHED, TRADITION_NAME, type Tradition } from '../content/courses';
 import { currentCtx, navigate } from '../router';
 import { getProgress } from '../state/store';
 import { readingStatus, resumeTarget } from '../state/reading';
@@ -9,10 +9,8 @@ import { TopBar, NotBuilt, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
 import { canonicalOf } from './nav';
 
-const TRADITION_NAME = { cn: '中国哲学', ea: '欧洲与北大西洋哲学' } as const;
-
 /** Label for a curriculum link to another course. */
-const linkKind = (code: string, tradition: 'cn' | 'ea') =>
+const linkKind = (code: string, tradition: Tradition) =>
   code.startsWith('S') ? '哲学问题' : code.startsWith('D') ? '跨传统对话' : code.toLowerCase().startsWith(tradition) ? `${TRADITION_NAME[tradition]} · 后续` : '后续';
 
 // Course front page. One focal point: the red reading block, whose action
