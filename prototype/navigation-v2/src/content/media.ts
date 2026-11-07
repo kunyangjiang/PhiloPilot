@@ -22,7 +22,12 @@ export type MediaId =
   | 'dialogue-explorer'
   | 'mahavira-folio'
   | 'many-sided'
-  | 'evidence-workshop';
+  | 'evidence-workshop'
+  // 古希腊哲学的起源
+  | 'parmenides-explorer'
+  | 'change-explorer'
+  | 'sokrates-gem'
+  | 'laches-workshop';
 
 interface Anchor {
   id: MediaId;
@@ -58,6 +63,15 @@ const ANCHORS: Anchor[] = [
   { id: 'many-sided', code: 'IN1', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('syādvāda') && b.text.includes('不可言说') },
   // 五 · after the two readings of the Cārvāka and the boundary problem that follows them.
   { id: 'evidence-workshop', code: 'IN1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('当然，即使接受温和的读法') },
+
+  // 二 · after the step-by-step reconstruction of Parmenides' argument (end of fragment 8).
+  { id: 'parmenides-explorer', code: 'GR1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('在残篇 8 的后面部分') },
+  // 三 · after the comparison table of the three answers and the open question on motion.
+  { id: 'change-explorer', code: 'GR1', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('还有一个问题，这里只能提出') },
+  // 五 · after the paragraph introducing Socrates (museum object).
+  { id: 'sokrates-gem', code: 'GR1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('苏格拉底（Socrates）生于') },
+  // 五 · after the step-by-step reading of the Laches, where the dialogue ends.
+  { id: 'laches-workshop', code: 'GR1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('对话就在这里结束') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

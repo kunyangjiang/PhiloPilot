@@ -47,9 +47,9 @@ function CourseTable({ codes }: { codes: string[] }) {
 export default function Region({ region }: { region: R }) {
   const r = REGIONS.find((x) => x.id === region)!;
   useEscape(() => navigate({ name: 'home' }));
-  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in) points at its section of this page.
+  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in, ?t=gr) points at its section of this page.
   useEffect(() => {
-    const m = location.hash.match(/t=(cn|ea|in)/);
+    const m = location.hash.match(/t=(cn|ea|in|gr)/);
     if (!m) return;
     const t = window.setTimeout(() => {
       const h = document.getElementById('trad-' + m[1]);
@@ -87,9 +87,11 @@ export default function Region({ region }: { region: R }) {
                   </li>
                 ))}
               </ol>
-              <p className="pg-note">原型展开「中国」「印度」和「欧洲与北大西洋」三个传统。</p>
+              <p className="pg-note">原型展开「希腊与罗马」「中国」「印度」和「欧洲与北大西洋」四个传统。</p>
             </section>
             <section>
+              <h2 className="sec-h" id="trad-gr" tabIndex={-1}>希腊与罗马哲学 · 4 门课</h2>
+              <CourseTable codes={UNITS.filter((u) => /^GR\d/.test(u.code)).map((u) => u.code)} />
               <h2 className="sec-h" id="trad-cn" tabIndex={-1}>中国哲学 · 8 门课</h2>
               <CourseTable codes={COURSES.filter((c) => c.tradition === 'cn').map((c) => c.code)} />
               <h2 className="sec-h" id="trad-in" tabIndex={-1}>印度哲学 · 8 门课</h2>

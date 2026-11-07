@@ -34,3 +34,14 @@ export const MAHAVIRA_FOLIO = {
   credit: 'Tonsure of Mahavira: Folio from a Kalpasutra Manuscript. India (Gujarat), 1461 (Samvat 1519). The Metropolitan Museum of Art, Rogers Fund, 1918, 18.104.4. Public Domain.',
   url: 'https://www.metmuseum.org/art/collection/search/37840',
 };
+
+export const SOKRATES_GEM = {
+  /** Recorded in public/media/gr1/SOURCES.md (licence checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/gr1/sokrates-gem-81-6-81.jpg',
+  width: 589,
+  height: 624,
+  alt: '一枚椭圆形的红玉髓宝石，刻着一个人的半身像：秃顶，留着胡须，上身赤裸，肩上搭着衣褶，一只手抬起。',
+  credit: 'Carnelian engraved gem with a portrait of Sokrates. Roman, Late Republican or Early Imperial, ca. 1st century BCE–1st century CE. The Metropolitan Museum of Art, Gift of John Taylor Johnston, 1881, 81.6.81. Public Domain.',
+  url: 'https://www.metmuseum.org/art/collection/search/244952',
+};

@@ -1,6 +1,7 @@
 import { CN1, MENCIUS_SECTION } from './cn1';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
+import { GR1 } from './gr1';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -8,8 +9,8 @@ import type { CourseText } from './course';
 // Chinese wording is a presentation translation.
 
 /** Tradition sections of 历史与传统 that have a readable course. */
-export type Tradition = 'cn' | 'ea' | 'in';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学' };
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学' };
 
 export interface PublishedCourse {
   code: string;
@@ -87,6 +88,26 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     origLang: (html) => (html.includes('ṁ') ? 'pi' : 'sa'),
     topicSection: (() => {
       const i = IN1.SECTIONS.findIndex((s) => s.title.startsWith('三、'));
+      return i >= 0 ? i : undefined;
+    })(),
+  },
+  GR1: {
+    code: 'GR1',
+    text: GR1,
+    name: '古希腊哲学的起源',
+    tier: '● 核心',
+    en: 'Origins of Greek Philosophy: From Nature to the Examined Life',
+    method: '解读残篇式的史料；从残篇中重构巴门尼德的论证',
+    background: '无前置要求，可以直接阅读',
+    tradition: 'gr',
+    position: 1,
+    recommendFrom: ['GR2'],
+    leadsTo: ['GR2', 'S7'],
+    sourceNote: '希腊文据希腊文维基文库、维基语录和 Perseus 数字本（Burnet、Ross 牛津本）；版本与权利见附录。中文是本章试译。',
+    origLang: () => 'grc',
+    // 五 · 苏格拉底: “美德即知识？” bears on the 人性与道德 question.
+    topicSection: (() => {
+      const i = GR1.SECTIONS.findIndex((s) => s.title.startsWith('五、'));
       return i >= 0 ? i : undefined;
     })(),
   },

@@ -1,0 +1,376 @@
+/* ── 古希腊哲学的起源: Parmenides explorer, change explorer, Laches workshop ──
+   Built from the shared .md panel, segmented radios and buttons (media.css).
+   No new tokens; the four "roots" use the existing ink/accent plus two greys
+   and a pattern so they stay distinguishable without colour. */
+
+/* Shared */
+.md-seg.gr-col {
+  flex-direction: column;
+  align-items: stretch;
+}
+.md-seg.gr-col .md-seg-opt span {
+  display: flex;
+  width: 100%;
+  padding: 6px 10px;
+  line-height: 1.5;
+}
+.article .pe-orig,
+.article .lw-grc .pe-orig {
+  margin: 2px 0 4px;
+  font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', 'DejaVu Serif', serif;
+  font-size: 16.5px;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+.article .pe-src {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.article .pe-zh {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 15px;
+}
+
+/* Parmenides explorer */
+.article .pe-reading-t {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.pe-steps {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  border-top: 2px solid var(--ink);
+}
+.pe-step {
+  border-bottom: 1px solid var(--rule);
+  background: #fff;
+  transition: opacity var(--t, 0.15s);
+}
+.pe-step--derived {
+  background: transparent;
+}
+.pe-step.is-hinge {
+  box-shadow: inset 6px 0 0 var(--accent);
+}
+.pe-row {
+  display: grid;
+  grid-template-columns: 2.2em 1fr;
+  gap: 8px;
+  padding: 8px 10px;
+}
+.pe-n {
+  font-weight: 700;
+  font-size: 15px;
+}
+.pe-step.is-off .pe-n,
+.pe-step.is-off .pe-text {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+.article .pe-kind {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.pe-deps {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.pe-state {
+  margin-left: 8px;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-weight: 700;
+}
+.pe-state.is-off {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.article .pe-text {
+  margin: 2px 0 4px;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.pe-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+.pe-actions .btn[aria-pressed='true'] {
+  background: var(--ink);
+  color: #fff;
+}
+.pe-more {
+  margin: 6px 0 2px;
+  padding: 8px 10px;
+  border-left: 2px solid var(--ink);
+  background: #f6f5f1;
+}
+.article .pe-note {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+
+/* Change and persistence explorer */
+.article .ce2-who {
+  margin: 10px 0 4px;
+  font-weight: 700;
+}
+.ce2-fig {
+  margin: 0;
+}
+.ce2-svg {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+.ce2-ctl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 8px 0 12px;
+  font-size: 13px;
+}
+.ce2-slider {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ce2-slider input {
+  width: 180px;
+  max-width: 50vw;
+  accent-color: var(--ink);
+}
+.ce2-ctl .md-disclose[aria-pressed='true'] {
+  color: var(--ink);
+  font-weight: 700;
+}
+.ce-bank {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.ce-drop {
+  fill: var(--ink-3);
+}
+.ce-drop.is-new {
+  fill: var(--accent);
+}
+.ce-lbl {
+  font-family: var(--sans);
+  font-size: 13px;
+  fill: var(--ink);
+}
+.ce-lbl--inv {
+  fill: #fff;
+  font-weight: 700;
+}
+.ce-op {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+.ce-being {
+  fill: var(--ink);
+}
+.ce-root {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.ce-root--0 {
+  fill: var(--ink);
+}
+.ce-root--1 {
+  fill: var(--accent);
+}
+.ce-root--2 {
+  fill: #fff;
+}
+.ce-root--3 {
+  fill: #9a9893;
+}
+.ce-atom {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+/* Laches workshop */
+.lw-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+.lw-steps button {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0 6px;
+  min-width: 64px;
+  min-height: 44px;
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: left;
+}
+.lw-steps button.is-cur {
+  background: var(--ink);
+  color: #fff;
+}
+.lw-n {
+  font-weight: 700;
+}
+.lw-steps button.is-done .lw-n {
+  color: var(--accent);
+}
+.lw-kind {
+  grid-column: 1 / -1;
+  font-weight: 700;
+}
+.lw-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 14px;
+  align-items: start;
+}
+.lw-move {
+  min-width: 0;
+  padding: 12px 14px;
+  background: #fff;
+  border-left: 6px solid var(--ink);
+}
+.article .lw-who {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.lw-ref-l {
+  margin-right: 8px;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.article .lw-zh {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.8;
+}
+.lw-grc {
+  margin: 6px 0;
+  padding: 6px 10px;
+  border-left: 2px solid var(--ink);
+  background: #f6f5f1;
+}
+.lw-q,
+.lw-cases {
+  margin-top: 12px;
+}
+.lw-case {
+  padding: 8px 0;
+  border-top: 1px solid var(--rule);
+}
+.article .lw-case-t {
+  margin: 0 0 6px;
+}
+.article .lw-cover {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.lw-commit {
+  padding: 10px 12px;
+  background: #fff;
+  border-top: 2px solid var(--ink);
+  font-size: 13.5px;
+}
+.lw-commit ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lw-commit li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.5;
+}
+.lw-commit li small {
+  display: block;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.lw-commit li.is-hot {
+  box-shadow: inset 4px 0 0 var(--accent);
+  padding-left: 10px;
+  color: var(--accent);
+}
+.lw-commit li.is-dropped {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.article .lw-clash {
+  margin: 8px 0 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+.lw-nav {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 4px;
+}
+
+/* Museum object (section 五) */
+.gr1-gem {
+  margin: 28px 0;
+}
+.gr1-gem img {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  background: #fff;
+}
+.article .gr1-gem figcaption p {
+  margin: 10px 0 0;
+}
+.gr1-gem .md-note a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .lw-grid {
+    grid-template-columns: 1fr;
+  }
+  .lw-steps button {
+    min-width: 56px;
+  }
+  .pe-row {
+    grid-template-columns: 1.6em 1fr;
+    padding: 8px 6px;
+  }
+  .pe-state {
+    display: inline-block;
+    margin: 2px 0 0;
+  }
+}
+
+[data-motion='none'] .pe-step,
+[data-motion='none'] .md-seg-opt span {
+  transition: none;
+}

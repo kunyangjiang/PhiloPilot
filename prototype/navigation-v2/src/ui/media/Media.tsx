@@ -16,6 +16,10 @@ const COMPONENTS = {
   'mahavira-folio': lazy(() => import('./in1/MahaviraFolio')),
   'many-sided': lazy(() => import('./in1/ManySided')),
   'evidence-workshop': lazy(() => import('./in1/EvidenceWorkshop')),
+  'parmenides-explorer': lazy(() => import('./gr1/ParmenidesExplorer')),
+  'change-explorer': lazy(() => import('./gr1/ChangeExplorer')),
+  'sokrates-gem': lazy(() => import('./gr1/SokratesGem')),
+  'laches-workshop': lazy(() => import('./gr1/LachesWorkshop')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

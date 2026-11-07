@@ -51,6 +51,9 @@ export const COURSES: Course[] = [
   c('CN6', '宋明理学至清代：理、心与实学', 'core', 'B', 'cn'),
   c('CN7', '中国哲学与现代：从晚清到新文化运动', 'core', 'B', 'cn'),
   c('CN8', '体系、马克思主义与当代中国哲学', 'extended', 'B', 'cn'),
+  // Domain B — Greek and Roman
+  c('GR1', '古希腊哲学的起源：从自然到经省察的人生', 'core', 'B', 'gr'),
+  c('GR2', '柏拉图：知识、灵魂与正义之城', 'core', 'B', 'gr'),
   // Domain B — others used in the topic view
   c('GR3', '亚里士多德：实体、原因、逻辑与好生活', 'core', 'B', 'gr'),
   c('GR4', '希腊化与罗马学派：作为生活的哲学', 'extended', 'B', 'gr'),
@@ -94,6 +97,8 @@ const SHORT: Record<string, string> = {
   CN8: '当代中国哲学',
   EA4: '康德',
   IN1: '印度哲学的起源',
+  GR1: '古希腊哲学的起源',
+  GR2: '柏拉图',
 };
 /** Short readable name of a course, e.g. CN1 → 孔子、孟子与荀子. */
 export function nameOf(code: string, names?: Record<string, string>): string {
@@ -242,6 +247,7 @@ export const HUMAN_NATURE = {
         { code: 'S8', where: '§5 情感 · §6 意志软弱' },
         { code: 'EA3', where: '§4 休谟论道德与宗教' },
         { code: 'IN2', where: '§6 伦理与心' },
+        { code: 'GR1', where: '五、苏格拉底与省察 · 美德即知识？' },
         { code: 'CN1', where: '三、孟子 · 心：会感受，也会思考' },
       ],
     },

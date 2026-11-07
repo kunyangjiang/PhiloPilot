@@ -791,6 +791,12 @@ main:focus,
   font-family: 'Times New Roman', 'Noto Serif', 'DejaVu Serif', serif;
   hyphens: manual;
 }
+/* Polytonic Greek: faces with the Greek Extended block (ἔ, ῇ, ὦ …); Georgia
+   has only monotonic Greek, so accented letters would fall back mid-word. */
+[data-style] .source--primary .source-orig:lang(grc) p {
+  font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', 'DejaVu Serif', serif;
+  hyphens: manual;
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;
