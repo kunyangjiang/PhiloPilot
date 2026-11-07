@@ -4,6 +4,8 @@
 
 *Phase 5B update (2026-11-06): the manuscript has been corrected (early materialism vs the Cārvāka school, Mahāvīra vs later Jaina doctrine, Ājīvika naming, unattributed readings, GRETIL rights) and integrated into the navigation-v2 prototype as a readable sample draft, not published. Of the components proposed below, three were built in revised form: a dialogue explorer for part 二, the red-pot "many-sided" component for part 四, and an evidence-sorting workshop for part 五. A Met Museum public-domain Kalpasūtra folio (18.104.4) was added to part 四, with provenance recorded in `prototype/navigation-v2/public/media/in1/SOURCES.md`. The 18 practice questions are integrated from §practice below, with three small wording revisions in sets 一 and 五. Proposals below that were not built remain proposals.*
 
+*Critiques & Responses update (2026-11-06): a 后世批判与回应 part was added after part 六, before the appendices. It covers three debates: the early Buddhist not-self arguments (SN 22.59, MN 22) and the scholarly claims of Upaniṣadic echoes; the Vedānta readings of Chāndogya 6 (Śaṅkara, Rāmānuja, Madhva, with Brereton 1986); and Śaṅkara's and Dharmakīrti's objections to many-sidedness, with the replies of Akalaṅka and Samantabhadra. Notes 68–86 and the sources appendix record what was read and how. Item 5 in §4 below is superseded by this update.*
+
 ## 1. Structure and philosophical coverage
 
 | Part | Sections | Core problem | Key passages read in the original |
