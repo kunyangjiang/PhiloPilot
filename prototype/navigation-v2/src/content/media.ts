@@ -27,7 +27,14 @@ export type MediaId =
   | 'parmenides-explorer'
   | 'change-explorer'
   | 'sokrates-gem'
-  | 'laches-workshop';
+  | 'laches-workshop'
+  // 柏拉图
+  | 'clarke-plato'
+  | 'euthyphro-workshop'
+  | 'divided-line'
+  | 'cave-explorer'
+  | 'third-man'
+  | 'plato-head';
 
 interface Anchor {
   id: MediaId;
@@ -72,6 +79,19 @@ const ANCHORS: Anchor[] = [
   { id: 'sokrates-gem', code: 'GR1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('苏格拉底（Socrates）生于') },
   // 五 · after the step-by-step reading of the Laches, where the dialogue ends.
   { id: 'laches-workshop', code: 'GR1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('对话就在这里结束') },
+
+  // 一 · after the paragraph on the dialogue's opening (manuscript page, fol. 1r).
+  { id: 'clarke-plato', code: 'GR2', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('《游叙弗伦》的开头交代了两场官司') },
+  // 一 · after the reading of the Euthyphro, where the dialogue ends (before the Crito interlude).
+  { id: 'euthyphro-workshop', code: 'GR2', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('最后，对话还有一层戏剧上的反讽') },
+  // 五 · after the Divided Line and its "equal middle segments" puzzle.
+  { id: 'divided-line', code: 'GR2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('线段的一个著名难题') },
+  // 五 · after "what the Cave is not", once education, the Good and the return have been read.
+  { id: 'cave-explorer', code: 'GR2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('这些区别并不是说，现代的用法都是错的') },
+  // 六 · after the three premises and the regress they generate.
+  { id: 'third-man', code: 'GR2', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('有了这三个前提，就可以推出无穷倒退') },
+  // 七 · after the reminder that Plato never speaks in his own name (museum object).
+  { id: 'plato-head', code: 'GR2', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('本课一开始就提醒过：柏拉图从不在对话中以自己的名义说话') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

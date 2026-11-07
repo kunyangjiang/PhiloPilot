@@ -248,6 +248,7 @@ export const HUMAN_NATURE = {
         { code: 'EA3', where: '§4 休谟论道德与宗教' },
         { code: 'IN2', where: '§6 伦理与心' },
         { code: 'GR1', where: '五、苏格拉底与省察 · 美德即知识？' },
+        { code: 'GR2', where: '四、正义在灵魂与城邦中 · 灵魂的三个部分' },
         { code: 'CN1', where: '三、孟子 · 心：会感受，也会思考' },
       ],
     },

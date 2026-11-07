@@ -1,0 +1,296 @@
+/* ── 柏拉图: Euthyphro workshop, Divided Line, Cave, Third Man, objects ──
+   Built on the shared .md panel (media.css) and the GR1 workshop classes
+   (gr1.css: .lw-*, .pe-*, .gr-col). No new tokens; highlights use the
+   existing accent and line weight so they stay readable without colour.
+   No animation: state changes are instant, and the global
+   [data-motion='none'] rule removes the few short transitions. */
+
+/* Divided Line */
+.dl-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.dl-fig {
+  margin: 0;
+}
+.dl-svg {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  font-family: var(--sans);
+}
+.dl-seg {
+  cursor: pointer;
+}
+.dl-seg rect {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.dl-seg.is-on rect {
+  fill: var(--ink);
+}
+.dl-seg text {
+  font-size: 14px;
+  fill: var(--ink);
+}
+.dl-seg.is-on text {
+  font-weight: 700;
+  fill: var(--accent);
+}
+.dl-seg .dl-grc {
+  font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', serif;
+  font-size: 13px;
+  fill: var(--ink-2);
+}
+.dl-cut {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+.dl-side {
+  font-size: 12px;
+  fill: var(--ink-3);
+  text-anchor: middle;
+}
+.dl-dir path {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+.dl-svg marker path {
+  fill: var(--accent);
+}
+.dl-panel {
+  min-width: 0;
+}
+.dl-g {
+  font-style: normal;
+  font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', serif;
+}
+.dl-card {
+  margin: 10px 0;
+  padding: 10px 14px;
+  background: #fff;
+  border-left: 6px solid var(--ink);
+}
+.article .dl-card p {
+  margin: 0 0 6px;
+}
+.article .dl-dirtext {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
+.dl-quote {
+  margin-top: 14px;
+}
+
+/* Cave */
+.cv-fig {
+  margin: 0 0 12px;
+}
+.cv-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  font-family: var(--sans);
+}
+.cv-cave {
+  fill: #ecebe5;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.cv-part {
+  opacity: 0.45;
+  transition: opacity var(--t, 0.15s);
+}
+.cv-part.is-hi {
+  opacity: 1;
+}
+.cv-part path,
+.cv-part circle {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.cv-part.is-hi path,
+.cv-part.is-hi circle {
+  stroke-width: 2.5;
+}
+.cv-part .cv-shadow,
+.cv-part .cv-obj {
+  fill: var(--ink-2);
+  stroke: none;
+}
+.cv-part .cv-fire {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+.cv-part .cv-sun {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.cv-part .cv-pass {
+  stroke-dasharray: 6 4;
+}
+.cv-part .cv-chain {
+  stroke-dasharray: 2 3;
+}
+.cv-person circle,
+.cv-person path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.cv-freed .cv-person circle,
+.cv-freed .cv-person path {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.cv-lbl {
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+.article .cv-reading {
+  margin: 6px 0;
+  font-size: 14.5px;
+}
+
+/* Third Man */
+.tm-prem {
+  display: grid;
+  gap: 6px;
+}
+.tm-p {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.tm-p.is-on {
+  border-left: 6px solid var(--ink);
+}
+.tm-p:not(.is-on) {
+  color: var(--ink-3);
+  border-style: dashed;
+}
+.tm-p:not(.is-on) .tm-p-t {
+  text-decoration: line-through;
+}
+.tm-p-n {
+  font-weight: 700;
+}
+.tm-p-n small {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.tm-p-t {
+  grid-column: 1;
+}
+.tm-p-s {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.tm-p.is-on .tm-p-s {
+  color: var(--accent);
+}
+.tm-levels {
+  list-style: none;
+  margin: 14px 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 6px;
+}
+.tm-levels li {
+  padding: 8px 12px;
+  background: #fff;
+  border-left: 6px solid var(--ink);
+}
+.tm-levels li.is-stop {
+  border-left-color: var(--accent);
+}
+.article .tm-group,
+.article .tm-step,
+.article .tm-stop {
+  margin: 0;
+  font-size: 14px;
+}
+.tm-k {
+  margin-right: 8px;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.tm-item {
+  display: inline-block;
+  min-width: 1.8em;
+  margin: 0 3px 2px 0;
+  padding: 0 5px;
+  border: 1px solid var(--ink);
+  text-align: center;
+}
+.tm-item.is-form {
+  background: var(--ink);
+  color: #fff;
+}
+.tm-is {
+  margin-left: 4px;
+}
+.tm-uses {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--accent);
+}
+.article .tm-stop {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Museum objects (sections 二, 五) */
+.gr2-obj {
+  margin: 28px 0;
+}
+.gr2-obj img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  background: #fff;
+}
+.article .gr2-obj figcaption p {
+  margin: 10px 0 0;
+}
+.gr2-obj .md-note a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .dl-grid {
+    grid-template-columns: 1fr;
+  }
+  .dl-svg {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+}
+
+[data-motion='none'] .cv-part {
+  transition: none;
+}

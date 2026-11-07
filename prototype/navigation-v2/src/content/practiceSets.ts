@@ -3,6 +3,7 @@ import { CN1_PRACTICE } from './practice-cn1';
 import { EA4_PRACTICE } from './practice-ea4';
 import { IN1_PRACTICE } from './practice-in1';
 import { GR1_PRACTICE } from './practice-gr1';
+import { GR2_PRACTICE } from './practice-gr2';
 
 // Question sets of each published course. A course without an entry here
 // shows its manuscript prompts as before (read-only, no answer box).
@@ -11,6 +12,7 @@ const SETS: Record<string, PracticeSet[]> = {
   EA4: EA4_PRACTICE,
   IN1: IN1_PRACTICE,
   GR1: GR1_PRACTICE,
+  GR2: GR2_PRACTICE,
 };
 
 export const MAX_QUESTIONS = 3;

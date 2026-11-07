@@ -2,6 +2,7 @@ import { CN1, MENCIUS_SECTION } from './cn1';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
+import { GR2 } from './gr2';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -108,6 +109,26 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     // 五 · 苏格拉底: “美德即知识？” bears on the 人性与道德 question.
     topicSection: (() => {
       const i = GR1.SECTIONS.findIndex((s) => s.title.startsWith('五、'));
+      return i >= 0 ? i : undefined;
+    })(),
+  },
+  GR2: {
+    code: 'GR2',
+    text: GR2,
+    name: '柏拉图',
+    tier: '● 核心',
+    en: 'Plato: Knowledge, Soul and the Just City',
+    method: '从对话形式中重构论证；区分说话者、人物与作者',
+    background: '大纲建议先读「古希腊哲学的起源」（推荐背景，不是必需）',
+    tradition: 'gr',
+    position: 2,
+    recommendFrom: ['GR3'],
+    leadsTo: ['S1', 'S9', 'D3'],
+    sourceNote: '希腊文据 Perseus 数字本（Burnet 牛津本《柏拉图全集》；第欧根尼·拉尔修据 Hicks 本）；版本与权利见附录。中文是本章试译。',
+    origLang: () => 'grc',
+    // 四 · 灵魂与城邦中的正义: the three parts of the soul bear on the 人性与道德 question.
+    topicSection: (() => {
+      const i = GR2.SECTIONS.findIndex((s) => s.title.startsWith('四、'));
       return i >= 0 ? i : undefined;
     })(),
   },

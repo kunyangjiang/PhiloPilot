@@ -20,6 +20,12 @@ const COMPONENTS = {
   'change-explorer': lazy(() => import('./gr1/ChangeExplorer')),
   'sokrates-gem': lazy(() => import('./gr1/SokratesGem')),
   'laches-workshop': lazy(() => import('./gr1/LachesWorkshop')),
+  'clarke-plato': lazy(() => import('./gr2/ClarkePlato')),
+  'euthyphro-workshop': lazy(() => import('./gr2/EuthyphroWorkshop')),
+  'divided-line': lazy(() => import('./gr2/DividedLine')),
+  'cave-explorer': lazy(() => import('./gr2/CaveExplorer')),
+  'third-man': lazy(() => import('./gr2/ThirdMan')),
+  'plato-head': lazy(() => import('./gr2/PlatoHead')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {
