@@ -324,18 +324,41 @@
   flex: 1;
   min-width: 0;
   background: var(--tone);
-  transition: opacity var(--t);
+  transform-origin: 50% 100%;
+  transition: opacity var(--t), transform 0.18s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 .sh-cell.is-first {
   margin-left: 8px;
 }
+/* Every course is a solid block; readable ones are told apart by the readout
+   and the pointer cursor, not by a different mark. */
 .sh-cell.is-open {
   cursor: pointer;
-  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px #111;
 }
+/* Hover: the block rises a little. */
+.sh-cell:hover {
+  transform: translateY(-3px);
+}
+/* Selected (pointer or arrow keys): the block stays raised and taller, with
+   an outline; it arrives with a short pop. */
 .sh-cell.is-on {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
+  transform: translateY(-3px) scaleY(1.2);
+}
+[data-motion='subtle'] .sh-cell.is-on {
+  animation: sh-cell-pick 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+@keyframes sh-cell-pick {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  55% {
+    transform: translateY(-5px) scaleY(1.32);
+  }
+  100% {
+    transform: translateY(-3px) scaleY(1.2);
+  }
 }
 .sh.has-hot .sh-cell {
   opacity: 0.18;
@@ -779,6 +802,37 @@
   .sh-cell.is-cur {
     outline: 2px solid var(--ink);
     outline-offset: 1px;
+  }
+  /* Cells wrap into rows here: grow from the centre instead of rising, so a
+     selected cell does not cover the row above. */
+  .sh-cell,
+  .sh-cell.is-on {
+    transform-origin: 50% 50%;
+  }
+  .sh-cell:hover,
+  .sh-cell.is-on {
+    transform: none;
+  }
+  .sh-cell.is-cur {
+    transform: scale(1.12);
+    z-index: 1;
+  }
+  [data-motion='subtle'] .sh-cell.is-on {
+    animation: none;
+  }
+  [data-motion='subtle'] .sh-cell.is-cur {
+    animation: sh-cell-pick-sm 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  @keyframes sh-cell-pick-sm {
+    0% {
+      transform: scale(1);
+    }
+    55% {
+      transform: scale(1.22);
+    }
+    100% {
+      transform: scale(1.12);
+    }
   }
   .sh-pick {
     display: grid;
