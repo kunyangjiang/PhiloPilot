@@ -48,6 +48,11 @@ const COMPONENTS = {
   'butterfly-dream': lazy(() => import('./cn3/ButterflyDream')),
   'cook-ding': lazy(() => import('./cn3/CookDing')),
   'zeshin-scroll': lazy(() => import('./cn3/ZeshinScroll')),
+  'xingming-workshop': lazy(() => import('./cn4/XingMingWorkshop')),
+  'five-phases': lazy(() => import('./cn4/FivePhases')),
+  'hexagram-explorer': lazy(() => import('./cn4/HexagramExplorer')),
+  'coincidence-sim': lazy(() => import('./cn4/CoincidenceSimulator')),
+  'qin-slips': lazy(() => import('./cn4/QinSlips')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

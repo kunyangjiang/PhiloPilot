@@ -1,6 +1,7 @@
 import { CN1, MENCIUS_SECTION } from './cn1';
 import { CN2, ETHICS_SECTION } from './cn2';
 import { CN3, SKILL_SECTION } from './cn3';
+import { CN4, INCENTIVE_SECTION } from './cn4';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
@@ -86,6 +87,21 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['CN5', 'D3'],
     sourceNote: '原文据中文维基文库，字形保留繁体；出土写本的释文来源见注释。版本与授权见附录。',
     topicSection: SKILL_SECTION >= 0 ? SKILL_SECTION : undefined,
+  },
+  CN4: {
+    code: 'CN4',
+    text: CN4,
+    name: '法家与汉代思想',
+    tier: '● 核心',
+    en: 'Legalism, the Han Synthesis and Correlative Cosmology',
+    method: '比较相互竞争的统治理论；评估关联式的解释',
+    background: '大纲建议先读「孔子、孟子与荀子」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 4,
+    recommendFrom: [],
+    leadsTo: ['S9', 'D5'],
+    sourceNote: '原文据中文维基文库，字形保留繁体；文库整理者的校改见正文和注释。版本与授权见附录。',
+    topicSection: INCENTIVE_SECTION >= 0 ? INCENTIVE_SECTION : undefined,
   },
   EA4: {
     code: 'EA4',

@@ -135,3 +135,14 @@ export const ZESHIN_BUTTERFLY = {
   credit: '柴田是真《庄子梦蝶图》，1888 年，纸本水墨立轴。檀香山艺术博物馆藏（13879.1）。照片由 Wikimedia Commons 用户拍摄并上传，原作已进入公有领域；本课未作任何修改。',
   url: 'https://commons.wikimedia.org/wiki/File:%27Zhuangzi_Dreaming_of_a_Butterfly%27_by_Shibata_Zeshin,_1888,_Honolulu_Museum_of_Art,_13879.1.JPG',
 };
+
+export const QIN_LAWS_SLIPS = {
+  /** Recorded in public/media/cn4/SOURCES.md (rights checked 2026-11-08). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn4/shuihudi-qinlu-shibazhong.jpg',
+  width: 1920,
+  height: 1280,
+  alt: '博物馆展柜中的一组竹简：二十多枚细长的深色竹简竖着嵌在白色展板的窄槽里，每枚竹简旁边印着竖排的释文；展板下方的说明牌写着"《秦律十八种》 秦（221-207 BC） 1975年云梦睡虎地11号墓出土 共计201枚竹简"，并列出《田律》《厩苑律》《仓律》等篇名，下面有英文说明。',
+  credit: '湖北省博物馆"文字的历史"展览中展出的睡虎地秦简《秦律十八种》（展品是否为出土原件，未能核实）。照片：Gary Todd，2010 年 12 月 3 日，CC0，经 Wikimedia Commons；本课只使用了 Wikimedia 缩放的 1920 像素版本，未作其他修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:Eighteen_Laws_of_Qin_on_Qin_Bamboo_Slips_(10160622885).jpg',
+};

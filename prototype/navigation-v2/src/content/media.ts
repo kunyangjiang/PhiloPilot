@@ -60,7 +60,13 @@ export type MediaId =
   | 'perspective-lab'
   | 'butterfly-dream'
   | 'cook-ding'
-  | 'zeshin-scroll';
+  | 'zeshin-scroll'
+  // 法家与汉代思想
+  | 'xingming-workshop'
+  | 'five-phases'
+  | 'hexagram-explorer'
+  | 'coincidence-sim'
+  | 'qin-slips';
 
 interface Anchor {
   id: MediaId;
@@ -166,6 +172,17 @@ const ANCHORS: Anchor[] = [
   { id: 'zeshin-scroll', code: 'CN3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('读法三') },
   // 五 · after the stages table, the 每至於族 caution and the effort/spontaneity paradox.
   { id: 'cook-ding', code: 'CN3', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('《庄子》并没有直接讨论这个悖论') },
+
+  // 二 · after the 典冠 story, its two readings and the closing caution.
+  { id: 'xingming-workshop', code: 'CN4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('请注意：这个故事展示的是韩非的原则') },
+  // 四 · after the correspondence table and its second remark (the table is not one unified system).
+  { id: 'five-phases', code: 'CN4', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('第二，它不是一套统一的系统') },
+  // 五 · end of the worked example 泰之临 (how changing lines are read).
+  { id: 'hexagram-explorer', code: 'CN4', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('有了变爻，应当怎样解释') },
+  // 六 · end of 批评六 (卜筮): coincidence, "適與相逢".
+  { id: 'coincidence-sim', code: 'CN4', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('但王充并没有完全否定占卜') },
+  // 三 · end of the Shuihudi section: a museum display of the 秦律十八种 slips.
+  { id: 'qin-slips', code: 'CN4', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('本课没有直接阅读睡虎地秦简的释文') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

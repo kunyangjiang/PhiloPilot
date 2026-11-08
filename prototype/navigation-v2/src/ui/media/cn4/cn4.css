@@ -1,0 +1,333 @@
+/* ── 法家与汉代思想: Xing-ming workshop, Five Phases explorer, Hexagram
+   explorer, Coincidence simulator ──
+   Built on the shared .md panel (media.css) and the GR4 / CN2 / CN3 classes.
+   No new tokens. States are marked by text, line style or shape as well as
+   colour. The only transitions are colour changes, removed with reduced
+   motion. */
+
+.c4 {
+  min-width: 0;
+}
+.article .c4 .md-feedback p {
+  margin: 0 0 6px;
+}
+.c4-limits {
+  margin: 14px 0 0;
+  padding: 10px 14px 4px;
+  border: 1px dashed var(--ink-3);
+  background: #fff;
+}
+.article .c4-limits p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.c4-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+/* compact radio rows (line values, phases) */
+.c4-vals {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.c4-vals--wide {
+  display: flex;
+  margin: 0 0 10px;
+}
+.c4-val {
+  position: relative;
+  cursor: pointer;
+}
+.c4-val input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.c4-val span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--ink);
+  margin: 0 -1px -1px 0;
+  background: #fff;
+  font-family: var(--serif);
+  font-size: 16px;
+  transition: background 0.15s, color 0.15s;
+}
+.c4-val.is-on span {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+.c4-val:hover:not(.is-on) span {
+  background: #ecebe5;
+}
+.md .c4-val input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  position: relative;
+}
+.c4-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.c4-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ink);
+}
+
+/* sliders */
+.c4-sliders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  margin: 8px 0 10px;
+}
+.c4-slider {
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  min-width: 0;
+}
+.c4-slider input {
+  width: 100%;
+  min-height: 32px;
+  accent-color: var(--ink);
+}
+
+/* hexagram explorer */
+.c4-prob th,
+.c4-prob td {
+  text-align: center;
+  white-space: nowrap;
+}
+.c4-prob tr.is-std th,
+.c4-prob tr.is-std td {
+  font-weight: 700;
+  background: #ecebe5;
+}
+.c4-hx {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 12px 0 0;
+  align-items: start;
+}
+.c4-hx-rows {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  background: #fff;
+}
+.c4-hx-row {
+  display: grid;
+  grid-template-columns: 3.2em minmax(60px, 160px) auto;
+  gap: 10px;
+  align-items: center;
+}
+.c4-hx-pos {
+  font-family: var(--serif);
+  font-size: 15px;
+}
+.c4-line {
+  display: block;
+  width: 100%;
+  max-width: 140px;
+  height: auto;
+}
+.c4-line rect {
+  fill: var(--ink);
+}
+.c4-line .c4-mark {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.c4-hx-out {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  min-width: 0;
+}
+.c4-hx-rows .c4-vals {
+  flex-wrap: nowrap;
+}
+.article .c4-hx-name {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+}
+.c4-hx-no {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink-2);
+}
+.c4-mini {
+  display: grid;
+  gap: 4px;
+  width: 96px;
+  margin: 4px 0 10px;
+}
+
+/* five phases */
+.c4-fp {
+  max-width: 420px;
+}
+.c4-node {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 2;
+  transition: fill 0.15s;
+}
+.c4-node.is-on {
+  fill: var(--ink);
+}
+.c4-node-t {
+  font-family: var(--serif);
+  font-size: 20px;
+  fill: var(--ink);
+}
+.c4-node-t.is-on {
+  fill: #fff;
+  font-weight: 700;
+}
+.c4-sheng,
+.c4-ke {
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  fill: none;
+}
+.c4-ke {
+  stroke-dasharray: 5 4;
+}
+.c4-sheng.is-on {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c4-ke.is-on {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.c4-ah {
+  fill: var(--ink);
+}
+.c4-ah2 {
+  fill: var(--accent);
+}
+.c4-dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 12px;
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+.c4-dl dt {
+  color: var(--ink-2);
+}
+.c4-dl dd {
+  margin: 0;
+  font-family: var(--serif);
+}
+.c4-cmp {
+  font-family: inherit;
+  font-size: 13px;
+}
+.c4-cmp.is-diff {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* xing-ming */
+.c4-xm th {
+  width: 6.5em;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* coincidence simulator */
+.c4-assume {
+  margin: 0 0 10px;
+  padding-left: 1.2em;
+  font-size: 14px;
+}
+.c4-grid {
+  display: grid;
+  gap: 4px;
+  margin: 8px 0;
+}
+.c4-cell {
+  display: grid;
+  justify-items: center;
+  padding: 4px 0;
+  border: 1px dashed var(--ink-3);
+  background: #fff;
+  font-family: var(--serif);
+  font-size: 14px;
+  line-height: 1.3;
+}
+.c4-cell.is-match {
+  border: 2px solid var(--ink);
+  background: #ecebe5;
+  font-weight: 700;
+}
+.c4-hist {
+  max-width: 420px;
+  margin: 8px 0;
+}
+.c4-bar {
+  fill: var(--ink-3);
+}
+.c4-bar.is-high {
+  fill: var(--accent);
+}
+.c4-thresh {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+@media (max-width: 600px) {
+  .c4-hx-out,
+  .c4-sliders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .c4-hx-row {
+    grid-template-columns: 3em minmax(40px, 1fr) auto;
+    gap: 6px;
+  }
+  .c4-val span {
+    min-width: 38px;
+  }
+  .c4-cell {
+    font-size: 12.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c4-val span,
+  .c4-node {
+    transition: none;
+  }
+}
+
+/* photograph: a landscape museum display, shown at the column width */
+.c4-photo img {
+  max-width: 100%;
+  border: 1px solid var(--rule);
+}
