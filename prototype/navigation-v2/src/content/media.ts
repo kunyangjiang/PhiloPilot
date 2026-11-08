@@ -34,7 +34,14 @@ export type MediaId =
   | 'divided-line'
   | 'cave-explorer'
   | 'third-man'
-  | 'plato-head';
+  | 'plato-head'
+  // 亚里士多德
+  | 'bekker-page'
+  | 'aristotle-head'
+  | 'syllogism-lab'
+  | 'matter-form-change'
+  | 'four-causes'
+  | 'virtue-mean';
 
 interface Anchor {
   id: MediaId;
@@ -92,6 +99,19 @@ const ANCHORS: Anchor[] = [
   { id: 'third-man', code: 'GR2', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('有了这三个前提，就可以推出无穷倒退') },
   // 七 · after the reminder that Plato never speaks in his own name (museum object).
   { id: 'plato-head', code: 'GR2', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('本课一开始就提醒过：柏拉图从不在对话中以自己的名义说话') },
+
+  // 导读 · after the paragraph explaining Bekker numbers (printed page, p. 1094).
+  { id: 'bekker-page', code: 'GR3', section: '本章导读', match: (b) => b.kind === 'html' && b.text.includes('贝克尔页码。') && b.text.includes('1098a16') },
+  // 一 · after the paragraph on the School of Athens impression (museum object).
+  { id: 'aristotle-head', code: 'GR3', section: '一、', match: (b) => b.kind === 'html' && b.text.includes('柏拉图的反对者') && b.text.includes('雅典学园') },
+  // 二 · after the three figures, at "本课不要求读者记住全部有效式" (before what syllogistic cannot do).
+  { id: 'syllogism-lab', code: 'GR3', section: '二、', match: (b) => b.kind === 'html' && b.text.includes('本课不要求读者记住全部有效式') },
+  // 三 · end of "潜能与现实": matter/form, the kinds of change and both senses of potentiality read.
+  { id: 'matter-form-change', code: 'GR3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('后来的研究者常把这两种情况称为') },
+  // 四 · end of "目的不是意图": the four causes, the eclipse and the teleology debate read.
+  { id: 'four-causes', code: 'GR3', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('亚里士多德特意说，燕子和蜘蛛') },
+  // 六 · end of "没有中道的行为", after the table of virtues and vices.
+  { id: 'virtue-mean', code: 'GR3', section: '六、', match: (b) => b.kind === 'html' && b.text.includes('把弯曲的木头扳直') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

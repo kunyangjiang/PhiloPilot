@@ -1,0 +1,386 @@
+/* ── 亚里士多德: Syllogism lab, Matter/form/change, Four causes, Virtue & mean ──
+   Built on the shared .md panel (media.css) and the GR1 workshop classes
+   (gr1.css: .lw-*, .pe-*, .gr-col). No new tokens. Term roles and verdicts
+   are marked by line style and text as well as colour, so they stay
+   readable without it. No animation. */
+
+/* shared */
+.sy-panel,
+.fc-panel,
+.vm-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  min-width: 0;
+}
+.article .sy-panel p,
+.article .fc-panel p,
+.article .vm-panel p {
+  margin: 0;
+}
+.article .md-feedback p {
+  margin: 0 0 8px;
+}
+.mf-nat {
+  margin-left: 6px;
+  font-size: 11.5px;
+  opacity: 0.75;
+}
+.md-seg-opt span small {
+  font-weight: 400;
+}
+
+/* Syllogism lab */
+.sy-lines {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--ink);
+}
+.sy-lines li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rule);
+  background: #fff;
+  font-size: 15px;
+}
+.sy-lines li small {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.sy-lines .sy-concl {
+  border-top: 2px solid var(--ink);
+  font-weight: 700;
+}
+.sy-lines small.is-t,
+.sy-lines small.is-f {
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-weight: 700;
+  color: var(--ink);
+}
+.sy-lines small.is-f {
+  border-color: var(--accent);
+  border-style: dashed;
+  color: var(--accent);
+}
+.sy-t {
+  padding: 0 2px;
+  font-weight: 700;
+}
+.sy-t--S {
+  border-bottom: 2px solid var(--ink);
+}
+.sy-t--M {
+  border-bottom: 2px solid var(--accent);
+  color: var(--accent);
+}
+.sy-t--P {
+  border-bottom: 2px dotted var(--ink);
+}
+.sy-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 6px 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+}
+.sy-next {
+  margin-top: 8px;
+}
+.sy-slot legend {
+  font-weight: 400;
+}
+.sy-abs {
+  font-weight: 700;
+  color: var(--ink);
+}
+.sy-subs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.sy-sub {
+  display: grid;
+  gap: 2px;
+  font-size: 13px;
+  min-width: 0;
+}
+.sy-sub select {
+  width: 100%;
+  min-height: 36px;
+  padding: 2px 6px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font: inherit;
+}
+.sy-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+/* Matter, form and change */
+.mf-predict {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.mf .cs-group + .cs-group {
+  margin-top: 10px;
+}
+.mf-views {
+  margin: 4px 0 12px;
+}
+.mf-diagram {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0 8px;
+  align-items: stretch;
+  margin: 0 0 12px;
+}
+.mf-state {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  min-width: 0;
+}
+.mf-state--after {
+  border-width: 2px;
+}
+.mf-state b {
+  font-size: 15px;
+}
+.mf-state small,
+.mf-sub small {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.mf-cap {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+.mf-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+}
+.mf-arrow span::after {
+  content: ' →';
+}
+.mf-sub {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 2px;
+  margin-top: -1px;
+  padding: 6px 10px;
+  border-top: 3px solid var(--accent);
+  background: #ecebe5;
+  font-size: 14px;
+}
+
+/* Four causes */
+.fc-q {
+  padding: 8px 0 0;
+  border-top: 1px solid var(--rule);
+}
+.fc-q legend {
+  font-size: 14px;
+  color: var(--ink);
+}
+.fc-name {
+  margin-left: 8px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.fc-q.is-right {
+  box-shadow: inset 4px 0 0 var(--ink);
+  padding-left: 10px;
+}
+.fc-q.is-wrong {
+  box-shadow: inset 4px 0 0 var(--accent);
+  padding-left: 10px;
+}
+.article .fc-fb,
+.fc-fb {
+  display: block;
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.fc-claims {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+/* Virtue and the mean */
+.article .vm-h {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.vm-scale {
+  position: relative;
+  height: 30px;
+  margin: 0 18px 4px;
+  border-bottom: 2px solid var(--ink);
+}
+.vm-scale span {
+  position: absolute;
+  bottom: 4px;
+  transform: translateX(-50%);
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.vm-scale span:last-child {
+  transform: translateX(-70%);
+}
+.vm-scale .is-mid {
+  font-weight: 700;
+  color: var(--accent);
+}
+.vm-scale .is-mid::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  height: 10px;
+  border-left: 2px solid var(--accent);
+}
+.vm-inline {
+  font-size: 14px;
+}
+.vm-inline span[lang='grc'] {
+  font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', 'DejaVu Serif', serif;
+  font-size: 16px;
+}
+.vm-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+.vm-row legend {
+  float: left;
+  min-width: 7em;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+.vm-row .fc-fb {
+  flex-basis: 100%;
+  margin: 0;
+}
+.vm-setup {
+  padding: 8px 12px;
+  border-left: 6px solid var(--ink);
+  background: #fff;
+}
+.vm-reads {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+.vm-read {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-left-width: 6px;
+  background: #fff;
+  font-size: 14px;
+}
+.vm-read--mean {
+  border-left-color: var(--ink);
+}
+.vm-read--open {
+  border-left-color: var(--ink-3);
+  border-left-style: dashed;
+}
+.vm-read--lack,
+.vm-read--excess {
+  border-left-color: var(--accent);
+}
+.vm-read.is-mine {
+  outline: 2px solid var(--ink);
+  outline-offset: -1px;
+}
+.vm-v {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-2);
+}
+.vm-read.is-mine .vm-v::after {
+  content: ' · 你的选择';
+  font-weight: 400;
+}
+.vm-at {
+  font-size: 12.5px;
+  color: var(--accent);
+}
+.vm-t {
+  color: var(--ink-2);
+}
+
+/* Portrait and page figures */
+.gr3-fig {
+  margin: 28px 0;
+}
+.gr3-fig img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  background: #fff;
+}
+.gr3-fig--page img {
+  max-width: 420px;
+  border: 1px solid var(--rule);
+}
+.article .gr3-fig figcaption p {
+  margin: 10px 0 0;
+}
+.gr3-fig .md-note a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .sy-subs {
+    grid-template-columns: 1fr;
+  }
+  .mf-diagram {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mf-arrow {
+    min-height: 28px;
+  }
+  .mf-arrow span::after {
+    content: ' ↓';
+  }
+  .vm-row legend {
+    float: none;
+    width: 100%;
+  }
+}

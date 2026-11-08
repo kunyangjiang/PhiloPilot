@@ -3,6 +3,7 @@ import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
+import { GR3 } from './gr3';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -129,6 +130,26 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     // 四 · 灵魂与城邦中的正义: the three parts of the soul bear on the 人性与道德 question.
     topicSection: (() => {
       const i = GR2.SECTIONS.findIndex((s) => s.title.startsWith('四、'));
+      return i >= 0 ? i : undefined;
+    })(),
+  },
+  GR3: {
+    code: 'GR3',
+    text: GR3,
+    name: '亚里士多德',
+    tier: '● 核心',
+    en: 'Aristotle: Substance, Causes, Logic and the Good Life',
+    method: '掌握一套专门术语（实体、原因）；运用三段论',
+    background: '大纲建议先读「柏拉图」（推荐背景，不是必需）',
+    tradition: 'gr',
+    position: 3,
+    recommendFrom: ['GR4', 'IA2', 'EA1'],
+    leadsTo: ['IA2', 'EA1', 'S7'],
+    sourceNote: '希腊文据 Perseus 与 First1KGreek 数字本（Bywater、Ross、Bekker、Langkavel 诸本）；版本与权利见附录。中文是本章试译。',
+    origLang: () => 'grc',
+    // 六 · 德性、实践智慧与人的繁荣 bears on the 人性与道德 question.
+    topicSection: (() => {
+      const i = GR3.SECTIONS.findIndex((s) => s.title.startsWith('六、'));
       return i >= 0 ? i : undefined;
     })(),
   },

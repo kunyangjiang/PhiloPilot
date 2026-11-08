@@ -69,3 +69,25 @@ export const CLARKE_PLATO = {
   url: 'https://archive.org/details/ldpd_10972550_003/page/n23/mode/1up',
   record: 'https://digital.bodleian.ox.ac.uk/objects/f57d074b-cff1-4172-8236-797c7b8f0403/',
 };
+
+export const ARISTOTLE_HEAD = {
+  /** Recorded in public/media/gr3/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/gr3/aristotle-altemps-8575.jpg',
+  width: 960,
+  height: 1285,
+  alt: '一尊白色大理石男子半身像的正面：短而卷曲的头发，前额较高，满脸卷曲的胡须，眼睛没有雕出瞳孔；肩上披着一件黄褐色、带条纹的石质披风，与白色的头像明显不同。',
+  credit: 'Portrait of Aristotle, Roman marble copy after a Greek original; the alabaster mantle is a modern addition. Museo Nazionale Romano, Palazzo Altemps, Rome, inv. 8575 (Ludovisi collection). Photo: Jastrow (2006), Wikimedia Commons, public domain.',
+  url: 'https://commons.wikimedia.org/wiki/File:Aristotle_Altemps_Inv8575.jpg',
+};
+
+export const BEKKER_1094 = {
+  /** Recorded in public/media/gr3/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/gr3/bekker-1831-p1094.jpg',
+  width: 1482,
+  height: 1953,
+  alt: '一页印刷的希腊文书页：左上角印着页码 1094，标题是"ΗΘΙΚΩΝ ΝΙΚΟΜΑΧΕΙΩΝ Α"，正文分左右两栏，栏间印有行号；页面下方是两段小字的校勘记。',
+  credit: 'Aristotelis opera, ed. I. Bekker, vol. 2 (Berlin: G. Reimer, 1831), p. 1094: the opening of the Nicomachean Ethics. Scan: Johns Hopkins University, Eisenhower Library, Internet Archive aristotelisopera02arisrich. Public domain.',
+  url: 'https://archive.org/details/aristotelisopera02arisrich/page/n309/mode/1up',
+};

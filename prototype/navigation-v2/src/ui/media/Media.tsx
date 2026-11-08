@@ -26,6 +26,12 @@ const COMPONENTS = {
   'cave-explorer': lazy(() => import('./gr2/CaveExplorer')),
   'third-man': lazy(() => import('./gr2/ThirdMan')),
   'plato-head': lazy(() => import('./gr2/PlatoHead')),
+  'bekker-page': lazy(() => import('./gr3/BekkerPage')),
+  'aristotle-head': lazy(() => import('./gr3/AristotleHead')),
+  'syllogism-lab': lazy(() => import('./gr3/SyllogismLab')),
+  'matter-form-change': lazy(() => import('./gr3/MatterFormChange')),
+  'four-causes': lazy(() => import('./gr3/FourCausesWorkshop')),
+  'virtue-mean': lazy(() => import('./gr3/VirtueMean')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {
