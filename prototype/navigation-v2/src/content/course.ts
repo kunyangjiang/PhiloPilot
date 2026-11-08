@@ -88,6 +88,9 @@ export interface ParseOptions {
   /** Treat every blockquote ending in a 《…》 citation as a classical source, even when it
    *  lacks 「」/曰/也 (terse canon lines such as the Later Mohist definitions). */
   citedQuotesAreSources?: boolean;
+  /** Citations may name the author before the title: （严复《论世变之亟》）, as in the
+   *  modern-period courses. Without this only （《书·篇》） is recognised. */
+  authorCites?: boolean;
 }
 
 export function parseCourse(code: string, raw: string, opts: ParseOptions): CourseText {
@@ -180,9 +183,12 @@ export function parseCourse(code: string, raw: string, opts: ParseOptions): Cour
           });
           continue;
         }
-        const cite = text.match(/（(《[^（）]*》[^（）]*)）\s*$/);
+        const cite = text.match(opts.authorCites ? /（([^（）《》]*《[^（）]*》[^（）]*)）\s*$/ : /（(《[^（）]*》[^（）]*)）\s*$/);
         if (cite && (opts.citedQuotesAreSources || /[「」]|曰|也/.test(text))) {
-          out.push({ kind: 'source', html: html.replace(/（《[^（）]*》[^（）]*）\s*(<\/p>\s*<\/blockquote>\s*)$/, '$1'), cite: cite[1], text });
+          const tail = opts.authorCites
+            ? /（[^（）《》]*《[^（）]*》[^（）]*）\s*(<\/p>\s*<\/blockquote>\s*)$/
+            : /（《[^（）]*》[^（）]*）\s*(<\/p>\s*<\/blockquote>\s*)$/;
+          out.push({ kind: 'source', html: html.replace(tail, '$1'), cite: cite[1], text });
           continue;
         }
         out.push({ kind: 'callout', html, text });

@@ -1,0 +1,194 @@
+/* 中国哲学与现代 / 体系、马克思主义与当代中国哲学 components.
+   Built on the shared md-* and c2/c3/c5 classes; only what they lack is here. */
+
+.c7-orig {
+  margin: 4px 0;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.article .c7-q {
+  margin: 8px 0;
+}
+
+/* basis tags: what a statement rests on (text, never colour alone) */
+.c7-tag {
+  display: inline-block;
+  margin: 2px 6px 2px 0;
+  padding: 0 6px;
+  border: 1px solid var(--ink-3);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+.c7-tag--text,
+.c7-tag--cited {
+  border-color: var(--ink);
+  color: var(--ink);
+  font-weight: 700;
+}
+.c7-tag--course {
+  border-style: dashed;
+}
+
+/* concept cards in the translation lab */
+.c7-terms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 10px 0;
+  border: 1px solid var(--ink);
+}
+.c7-terms > div {
+  padding: 8px 10px;
+  border-right: 1px solid var(--rule);
+  min-width: 0;
+}
+.c7-terms > div:last-child {
+  border-right: 0;
+}
+.c7-terms .c7-k {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.c7-terms .c7-v {
+  margin: 2px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.c7-terms .c7-s {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* argument layers in the debate workshop and the explorer */
+.c7-layers {
+  display: grid;
+  gap: 0;
+  margin: 10px 0;
+  border-left: 3px solid var(--ink);
+}
+.c7-layer {
+  padding: 6px 12px 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.c7-layer:last-child {
+  border-bottom: 0;
+}
+.article .c7-layer > p {
+  margin: 4px 0;
+}
+.c7-layer-h {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.c7-layer.is-limit {
+  border-left: 3px dashed var(--accent);
+  margin-left: -3px;
+}
+
+/* the three-layer board (论证 / 应用 / 政治) */
+.c7-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.c7-col {
+  padding: 8px;
+  border: 1px solid var(--ink);
+  min-width: 0;
+}
+.article .c7-col > p {
+  margin: 0 0 6px;
+}
+.c7-chip {
+  display: block;
+  margin: 0 0 6px;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  font-size: 13px;
+  background: #fff;
+}
+
+/* the knowing cycle (SVG) */
+.c7-cycle {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 8px 0;
+}
+.c7-cycle .c7-node rect {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  transition: fill var(--t);
+}
+.c7-cycle .c7-node.is-on rect {
+  fill: var(--ink);
+}
+.c7-cycle .c7-node text {
+  font-size: 15px;
+  fill: var(--ink);
+}
+.c7-cycle .c7-node.is-on text {
+  fill: #fff;
+  font-weight: 700;
+}
+.c7-cycle .c7-arrow {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+}
+.c7-cycle .c7-arrow.is-on {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.c7-cycle .c7-cap {
+  font-size: 12px;
+  fill: var(--ink-2);
+}
+
+/* the comparison grid */
+.c7-grid th button {
+  text-align: left;
+}
+.c7-grid td.is-dim,
+.c7-grid p.is-dim {
+  opacity: 0.45;
+}
+.c7-grid td.is-col,
+.c7-grid th.is-col {
+  background: var(--flash);
+}
+.c7-grid td p {
+  margin: 0 0 4px;
+}
+
+@media (max-width: 640px) {
+  .c7-terms,
+  .c7-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .c7-terms > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .c7-terms > div:last-child {
+    border-bottom: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c7-cycle .c7-node rect {
+    transition: none;
+  }
+}
+[data-motion='none'] .c7-cycle .c7-node rect {
+  transition: none;
+}

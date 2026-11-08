@@ -85,7 +85,11 @@ export type MediaId =
   | 'zhu-wang-workshop'
   | 'zhixing-explorer'
   | 'evidential-workshop'
-  | 'women-evidence-board';
+  | 'women-evidence-board'
+  | 'translation-lab'
+  | 'debate-workshop'
+  | 'new-confucian-comparison'
+  | 'practice-contradiction';
 
 interface Anchor {
   id: MediaId;
@@ -225,6 +229,14 @@ const ANCHORS: Anchor[] = [
   { id: 'evidential-workshop', code: 'CN6', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('考据学是不是') },
   // 七 · after the note on Ko and Mann: the four-column evidence board.
   { id: 'women-evidence-board', code: 'CN6', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('但请注意：本课只查阅了这两部书') },
+  // 二 · after "为什么这些区分对哲学重要？": seven concepts, translation as a philosophical act.
+  { id: 'translation-lab', code: 'CN7', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('为什么这些区分对哲学重要') },
+  // 五 · after the three levels of the debate: participants, boundary cases, levels.
+  { id: 'debate-workshop', code: 'CN7', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('很多参与者在这三个层次之间来回跳跃') },
+  // 三 · after 「分歧的地图」: 熊、唐、牟 compared, with the basis of every cell.
+  { id: 'new-confucian-comparison', code: 'CN8', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('据 SEP 的条目，牟宗三和唐君毅在情感') },
+  // 四 · after 「论证、应用与政治」: the knowing cycle, three theses, three levels.
+  { id: 'practice-contradiction', code: 'CN8', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('三个层次之间有联系，但不能互相代替') },
   // Images approved 2026-11-08 (content/PHASE13B_IMAGE_APPROVAL_SHEET.md).
   // 二 · after the paragraph on which of 罗什's translations became standard.
   { id: 'p2179-colophon', code: 'CN5', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('罗什的译本后来成为中国佛教最通行的版本') },

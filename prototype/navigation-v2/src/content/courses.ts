@@ -4,6 +4,8 @@ import { CN3, SKILL_SECTION } from './cn3';
 import { CN4, INCENTIVE_SECTION } from './cn4';
 import { CN5, AWAKENING_SECTION } from './cn5';
 import { CN6, NATURE_SECTION } from './cn6';
+import { CN7 } from './cn7';
+import { CN8 } from './cn8';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
@@ -38,6 +40,8 @@ export interface PublishedCourse {
   leadsTo: string[];
   /** Shown when a primary-source citation is opened. */
   sourceNote: string;
+  /** Short note under each quoted source, decided per citation. Default: the classical-course wording. */
+  srcNote?: (cite: string) => string;
   /** Language of the original-language passages (lang attribute), decided per passage. */
   origLang?: (origHtml: string) => string;
   /** Section most relevant to the 人性与道德 question, if any. */
@@ -136,6 +140,38 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['CN7'],
     sourceNote: '原文据中文维基文库，字形保留繁体；文库文本的错字与异文见正文和注释。版本与授权见附录。',
     topicSection: NATURE_SECTION >= 0 ? NATURE_SECTION : undefined,
+  },
+  CN7: {
+    code: 'CN7',
+    text: CN7,
+    name: '中国哲学与现代',
+    tier: '● 核心',
+    en: 'Chinese Philosophy and Modernity: Late Qing Reform to the New Culture Movement',
+    method: '评估对传统的重新诠释；评估关于哲学史写法的论证',
+    background: '大纲建议先读「宋明理学至清代」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 7,
+    // CN8 lists this course as recommended background.
+    recommendFrom: ['CN8'],
+    leadsTo: ['CN8', 'D1', 'D6'],
+    sourceNote: '近代文献据中文维基文库录文，繁体字、简化字和异体字照录；文库录文的错字见正文和注释。版本与授权见附录。',
+    srcNote: (cite) => (/转引/.test(cite) ? '转引的文字，本课没有见到原文；见正文' : '据中文维基文库录文，字形照录'),
+  },
+  CN8: {
+    code: 'CN8',
+    text: CN8,
+    name: '体系、马克思主义与当代中国哲学',
+    tier: '○ 拓展',
+    en: 'Philosophical Systems, Marxism and Contemporary Chinese Philosophy',
+    method: '对照古典来源和西方来源，评估建立哲学体系的论证',
+    background: '大纲建议先读「中国哲学与现代」；「宋明理学至清代」也有帮助（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 8,
+    recommendFrom: [],
+    leadsTo: ['D1', 'D6'],
+    sourceNote: '毛泽东著作据中文马克思主义文库所载《毛泽东选集》本（不是1937年的讲稿）；其他文本据中文维基文库；冯友兰、金岳霖的几句话是转引，出处见注释。版本与授权见附录。',
+    srcNote: (cite) =>
+      /转引/.test(cite) ? '转引的文字，出处见注释' : /^毛泽东/.test(cite) ? '据中文马克思主义文库所载《毛泽东选集》本' : '据中文维基文库录文，字形照录',
   },
   EA4: {
     code: 'EA4',
