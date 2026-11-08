@@ -213,6 +213,10 @@
   height: 34px;
   background: var(--tone-ink) !important;
 }
+/* All four entry symbols are white, including on the yellow card (whose text stays dark). */
+.sh-tile--history .sh-shape {
+  background: #fff !important;
+}
 .sh-shape.sw-shape--methods {
   width: 44px;
   height: 12px;
