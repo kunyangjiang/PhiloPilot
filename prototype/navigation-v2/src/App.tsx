@@ -7,6 +7,7 @@ import Region from './ui/Region';
 import CoursePage from './ui/CoursePage';
 import Reader from './ui/Reader';
 import SearchPalette from './ui/SearchPalette';
+import BackToTop from './ui/BackToTop';
 import { isPublished } from './content/courses';
 import { nameOf } from './data/catalog';
 
@@ -53,6 +54,7 @@ export default function App() {
         <Page route={route} />
       </div>
       <SearchPalette />
+      <BackToTop />
     </div>
   );
 }
