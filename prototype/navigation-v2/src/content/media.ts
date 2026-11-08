@@ -66,7 +66,26 @@ export type MediaId =
   | 'five-phases'
   | 'hexagram-explorer'
   | 'coincidence-sim'
-  | 'qin-slips';
+  | 'qin-slips'
+  // 魏晋玄学与中国佛学
+  | 'emptiness-explorer'
+  | 'threefold-truth'
+  | 'huayan-explorer'
+  | 'sudden-gradual'
+  | 'concept-map-cn5'
+  | 'p2179-colophon'
+  | 'liangkai-bamboo'
+  | 'liangkai-sutra'
+  // 宋明理学至清代
+  | 'taiji-tu'
+  | 'zhuxi-letter'
+  | 'shiguan-page'
+  | 'concept-map-cn6'
+  | 'liqi-explorer'
+  | 'zhu-wang-workshop'
+  | 'zhixing-explorer'
+  | 'evidential-workshop'
+  | 'women-evidence-board';
 
 interface Anchor {
   id: MediaId;
@@ -183,6 +202,42 @@ const ANCHORS: Anchor[] = [
   { id: 'coincidence-sim', code: 'CN4', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('但王充并没有完全否定占卜') },
   // 三 · end of the Shuihudi section: a museum display of the 秦律十八种 slips.
   { id: 'qin-slips', code: 'CN4', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('本课没有直接阅读睡虎地秦简的释文') },
+
+  // 三 · after the 本无宗 / 僧肇 contrast: the word "空" through its layers, 僧肇's two-part argument.
+  { id: 'emptiness-explorer', code: 'CN5', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('最后一行说明了问题的微妙') },
+  // 四 · after the mirror metaphor and its limit: sequential vs simultaneous 空假中.
+  { id: 'threefold-truth', code: 'CN5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('镜子的比喻很有用，但它也可能误导') },
+  // 五 · end of "比喻的限度": rafter argument, six marks, models and their limits.
+  { id: 'huayan-explorer', code: 'CN5', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('本课的看法是：比喻是华严思想不可缺少的部分') },
+  // 六 · after 竺道生: verse versions, documented positions on 顿/渐, timeline.
+  { id: 'sudden-gradual', code: 'CN5', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('请注意道生说的第一句话') },
+  // 六 · end: the shared concept map (this course's configuration).
+  { id: 'concept-map-cn5', code: 'CN5', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('但请记住：宋明理学不是') },
+  // 导读 · the shared concept map (this course's configuration).
+  { id: 'concept-map-cn6', code: 'CN6', section: '本章导读', match: (b) => b.kind === 'html' && b.text.startsWith('本课与《魏晋玄学与中国佛学') },
+  // 三 · after the triangle analogy: 理 and 气 from 周敦颐 to 戴震.
+  { id: 'liqi-explorer', code: 'CN6', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('用一个现代的比喻') },
+  // 四 · after the comparison table: 孝的理在哪里.
+  { id: 'zhu-wang-workshop', code: 'CN6', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('请看第三行。双方都认为理是普遍的') },
+  // 五 · after 反驳三: four readings of 知行合一 and five cases.
+  { id: 'zhixing-explorer', code: 'CN6', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('王阳明的本意显然只是第一个方向') },
+  // 六 · after "考据：一种新的学问方式": evidence layers and conclusions.
+  { id: 'evidential-workshop', code: 'CN6', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('考据学是不是') },
+  // 七 · after the note on Ko and Mann: the four-column evidence board.
+  { id: 'women-evidence-board', code: 'CN6', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('但请注意：本课只查阅了这两部书') },
+  // Images approved 2026-11-08 (content/PHASE13B_IMAGE_APPROVAL_SHEET.md).
+  // 二 · after the paragraph on which of 罗什's translations became standard.
+  { id: 'p2179-colophon', code: 'CN5', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('罗什的译本后来成为中国佛教最通行的版本') },
+  // 六 · after "所以，本部分要做的，不是讲述……" (how the 惠能 story was formed).
+  { id: 'liangkai-bamboo', code: 'CN5', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('所以，本部分要做的，不是讲述') },
+  // 六 · 「不立文字？」, after the paradox paragraph.
+  { id: 'liangkai-sutra', code: 'CN5', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('但这里有一个明显的悖论：主张"不立文字"') },
+  // 二 · after the paragraph on 自無極而為太極 / 無極而太極.
+  { id: 'taiji-tu', code: 'CN6', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('请注意第一句。本课所据的维基文库本') },
+  // 三 · after the note on what kind of text 《朱子语类》 is.
+  { id: 'zhuxi-letter', code: 'CN6', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('读《朱子语类》时要记住') },
+  // 七 · after the 袁枚 evidence paragraph.
+  { id: 'shiguan-page', code: 'CN6', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('这是一条关于实际活动的证据：十三位女性聚会') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

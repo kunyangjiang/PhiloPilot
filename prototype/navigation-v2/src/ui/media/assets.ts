@@ -146,3 +146,78 @@ export const QIN_LAWS_SLIPS = {
   credit: '湖北省博物馆"文字的历史"展览中展出的睡虎地秦简《秦律十八种》（展品是否为出土原件，未能核实）。照片：Gary Todd，2010 年 12 月 3 日，CC0，经 Wikimedia Commons；本课只使用了 Wikimedia 缩放的 1920 像素版本，未作其他修改。',
   url: 'https://commons.wikimedia.org/wiki/File:Eighteen_Laws_of_Qin_on_Qin_Bamboo_Slips_(10160622885).jpg',
 };
+
+// 魏晋玄学与中国佛学 and 宋明理学至清代: approved by the Product Owner on
+// 2026-11-08 (content/PHASE13B_IMAGE_APPROVAL_SHEET.md); recorded in
+// public/media/cn5/SOURCES.md and public/media/cn6/SOURCES.md.
+const CC_BY_SA_4 = 'https://creativecommons.org/licenses/by-sa/4.0/deed.zh-hans';
+
+export const LIANGKAI_BAMBOO = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn5/liangkai-sixth-patriarch-bamboo.jpg',
+  width: 636,
+  height: 1392,
+  alt: '一幅细长的立轴水墨画。左边是一棵斜伸的老树，枝干用淡墨扫出；画面下部，一个光头的老人弓着腰蹲在地上，一只手抬起扶着一根细竹，另一只手握着一把刀正要砍；人物衣纹只用几笔粗重的折线画成。左边树干旁有墨书落款，左下角有一方红印，四周是浅褐色的织锦裱边。',
+  title: '传梁楷《六祖斫竹图》',
+  credit: '传梁楷《六祖斫竹图》，南宋，纸本水墨立轴，东京国立博物馆藏（据 Wikimedia Commons 文件说明）。照片：Xh77，经 Wikimedia Commons，以 CC BY-SA 4.0 授权；本课使用原文件，未作修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:The_Sixth_Patriarch_Cutting_the_Bamboo.jpg',
+  license: { name: 'CC BY-SA 4.0', url: CC_BY_SA_4 },
+};
+
+export const LIANGKAI_SUTRA = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn5/liangkai-sixth-patriarch-sutra.jpg',
+  width: 648,
+  height: 1492,
+  alt: '一幅细长的立轴水墨画。上方斜伸出一根松枝，松针像散开的细线；画面中下部，一个光头、留着胡须的老人侧身站着，左手高举一张写着字的纸，右手正在撕扯另一卷经卷，脚边散落着几片撕碎的纸。衣纹用粗重的墨线画成，右下角有一方红印。',
+  title: '传梁楷《六祖破经图》',
+  credit: '传梁楷《六祖破经图》，南宋，纸本水墨立轴，三井纪念美术馆藏（Wikimedia Commons 文件说明误拼为 "Mitsu Memorial Museum"）。照片：Xh77，经 Wikimedia Commons，以 CC BY-SA 4.0 授权；本课使用原文件，未作修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:The_Sixth_Patriarch_Tearing_a_Sutra.jpg',
+  license: { name: 'CC BY-SA 4.0', url: CC_BY_SA_4 },
+};
+
+export const P2179_COLOPHON = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn5/p2179-chengshilun-colophon-514.jpg',
+  width: 1920,
+  height: 1153,
+  alt: '一段展开的米黄色纸本写卷，放在灰色背景上，边缘残破，有水渍。右半部是十几行工整的竖写楷书经文；中间一行稍大的字写"誠實論卷第八"，旁边盖着法国国家图书馆的红色圆印；左边两行小字是题记，开头是"延昌三年歲次甲午六月十四日敦煌鎮經生師令狐崇哲於法海寺寫此論成訖竟"；再往左是"用帋廿六張"和"校經道人"字样，下面有一方墨印。',
+  title: '敦煌写本《成实论》卷八卷尾（P.2179）',
+  credit: '敦煌写本《成实论》卷八（鸠摩罗什译）卷尾及题记，北魏延昌三年（514）。法国国家图书馆藏，Pelliot chinois 2179（Source gallica.bnf.fr / BnF）。图像经 Wikimedia Commons，公有领域；本课使用 Wikimedia 缩放的 1920 像素版本，未作其他修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:Cheng_shi_lun_%E6%88%90_%E5%AF%A6_%E8%AB%96_(traduction_de_Kum%C4%81raj%C4%ABva)._-_btv1b8302845s_(15_of_15).jpg',
+  record: 'http://archivesetmanuscrits.bnf.fr/ark:/12148/cc118804h',
+};
+
+export const ZHUXI_LETTER = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn6/zhuxi-qiushen-tie-1194.jpg',
+  width: 1259,
+  height: 900,
+  alt: '一页横向的册页，米色纸上是十几行竖写的行草书，字迹流畅，大小不一；右上第一行开头是"八月七日熹"。纸面上和四周盖着多方红色收藏印，中间有一道折缝。',
+  title: '朱熹《致會之知郡尺牘》（秋深帖）',
+  credit: '朱熹《致會之知郡尺牘》（秋深帖），《宋朱熹尺牘》册，纸本，33.3 × 47.8 厘米，绍熙五年（1194）八月七日。国立故宫博物院，臺北（故-書-000151-00000）。图像经 Wikimedia Commons，公有领域；该院亦以 CC0 开放此类低阶图像。本课未作修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:Letter_on_Government_Affairs_-_Zhu_Xi.jpg',
+  record: 'https://digitalarchive.npm.gov.tw/Collection/Detail/1424?dep=P',
+};
+
+export const TAIJI_TU = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn6/gujin-tushu-zhouzi-taiji-tu.png',
+  width: 254,
+  height: 798,
+  alt: '一幅竖长的黑白线图，自上而下：顶端写"太極"，下面是一个空心圆；第二个圆由黑白相间的同心环组成，左边写"陽動"，右边写"陰靜"；再下面是水、火、木、金、土五个小圈，用线互相连接，中间是"土"；然后又是一个空心圆，左右分别写"乾道成男""坤道成女"；最下面一个空心圆，底下写"萬物化生"。',
+  title: '《古今图书集成》所载「宋周子太极图」',
+  credit: '「宋周子太極圖」，见《古今图书集成·历象汇编·乾象典》第十五卷（陈梦雷等编，1700—1725 年间成书刊印）。Wikimedia Commons 据原书重绘的版本，公有领域；本课未作修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:Imperial_Encyclopaedia_-_Celestial_Signs_-_pic083_-_%E5%AE%8B%E5%91%A8%E5%AD%90%E5%A4%AA%E6%A5%B5%E5%9C%96.png',
+};
+
+export const SHIGUAN_PAGE = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn6/shiguan-guixiu-biejuan.jpg',
+  width: 1280,
+  height: 1118,
+  alt: '一张黑白扫描的古籍书页，左右两个半页。左半页有边框，竖排刻字，右起第一行是"詩觀二集閨秀別卷"，下面署"東吳鄧漢儀孝威評選"和"同學黃九河天濤參閱"；接着是作者"李"某的小传（"江南崑山人"）和第一首诗《再送真師》，字旁有表示圈点的小圈。版心下方刻"慎墨堂"。右半页几乎全是残损的墨迹。书页中央叠印着一个很大的灰色图书馆水印。',
+  title: '邓汉仪辑《诗观》二集「闺秀别卷」卷首',
+  credit: '邓汉仪辑《诗观》二集「闺秀别卷」卷首，慎墨堂刻本（清康熙），此本为乾隆十五至十七年（1750—1752）重修本，第 40 册第 3 页。中国国家图书馆藏（善本书号 A03320）；扫描件带有该馆水印。经 Wikimedia Commons，公有领域；本课使用 Wikimedia 生成的该页 1280 像素图像，未作其他修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:NLC892-412000006559-139026_%E8%A9%A9%E8%A7%80%E5%88%9D%E9%9B%86_%E8%A9%A9%E8%A7%80%E4%BA%8C%E9%9B%86_%E8%A9%A9%E8%A7%80%E4%BA%8C%E9%9B%86%E9%96%A8%E7%A7%80%E5%88%A5%E5%8D%B7_%E7%AC%AC40%E5%86%8A.pdf',
+};

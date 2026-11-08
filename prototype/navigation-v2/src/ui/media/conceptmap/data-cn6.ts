@@ -1,0 +1,63 @@
+import type { MapConfig } from './types';
+
+// 宋明理学至清代: the map as seen from this course. Every link restates a
+// judgement made in content/CN6_SAMPLE_DRAFT.md (the first column refers back
+// to content/CN5_SAMPLE_DRAFT.md); quoted words are the chapters' own checked
+// passages.
+
+export const CN6_MAP: MapConfig = {
+  code: 'CN6',
+  id: 'concept-map-cn6',
+  title: '概念地图：理学和佛教、理学内部、清代学术',
+  lede: '本课反复区分三种联系：有文献记载的回应、有文献记载的接触、本课自己作的比较。选一个人物或文本，看它和谁有联系，以及证据是什么。',
+  cols: ['上一门课：魏晋至唐', '北宋', '南宋', '明', '清'],
+  start: 'chengyi',
+  nodes: [
+    { id: 'wangbi', label: '王弼', sub: '以无为本；应物无累', col: 0, row: 0, where: '上一门课 一' },
+    { id: 'sengzhao', label: '僧肇', sub: '《物不迁论》', col: 0, row: 1, where: '上一门课 三' },
+    { id: 'huayan', label: '华严', sub: '一即一切', col: 0, row: 2, where: '上一门课 五' },
+    { id: 'chan', label: '禅（《坛经》）', sub: '识心见性；定慧一体', col: 0, row: 3, where: '上一门课 六' },
+    { id: 'mirror', label: '神秀偈 / 宗密', sub: '拂拭镜子', col: 0, row: 4, where: '上一门课 六' },
+    { id: 'buddhism', label: '佛教（总称）', sub: '文献与修行', col: 0, row: 5, where: '上一门课全课' },
+    { id: 'zhou', label: '周敦颐', sub: '太极；无欲', col: 1, row: 0, where: '二、周敦颐' },
+    { id: 'zhangzai', label: '张载', sub: '太虚即气', col: 1, row: 1, where: '二、张载' },
+    { id: 'chenghao', label: '程颢', sub: '识仁；《定性书》', col: 1, row: 2, where: '一、二' },
+    { id: 'chengyi', label: '程颐', sub: '性即理；今日格一件', col: 1, row: 3, where: '一、二' },
+    { id: 'zhuxi', label: '朱熹', sub: '理气；格物致知', col: 2, row: 0, where: '三、朱熹' },
+    { id: 'lu', label: '陆九渊', sub: '心即理', col: 2, row: 1, where: '四、陆九渊' },
+    { id: 'huangzhen', label: '黄震', sub: '批评"心学"', col: 2, row: 2, where: '六、顾炎武（所引）' },
+    { id: 'wangyangming', label: '王阳明', sub: '心即理；知行合一', col: 3, row: 0, where: '四、五' },
+    { id: 'gudongqiao', label: '顾东桥', sub: '"知食乃食"；近禅之疑', col: 3, row: 1, where: '五、反驳一、反驳四' },
+    { id: 'huangzongxi', label: '黄宗羲', sub: '《明儒学案》', col: 3, row: 2, where: '五、四句教' },
+    { id: 'wangfuzhi', label: '王夫之', sub: '天下惟器；性日生', col: 4, row: 0, where: '五、六' },
+    { id: 'guyanwu', label: '顾炎武', sub: '《日知录》"心学"条', col: 4, row: 1, where: '六、顾炎武' },
+    { id: 'daizhen', label: '戴震', sub: '分理；欲其物，理其则', col: 4, row: 2, where: '六、戴震' },
+  ],
+  links: [
+    { from: 'chan', to: 'chengyi', kind: 'response', note: '程颐说"聖人本天，釋氏本心"：批评佛教以心为根本。' },
+    { from: 'wangbi', to: 'zhangzai', kind: 'response', note: '张载批评"有生於無"，点名"老氏"；他针对的是一般的读法，不是王弼本人。' },
+    { from: 'buddhism', to: 'zhangzai', kind: 'response', note: '张载批评佛教"以山河大地為見病"，并说"知太虛即氣，則無無"。' },
+    { from: 'wangbi', to: 'chenghao', kind: 'comparison', note: '王弼"應物而無累於物"和程颢《定性书》"情順萬事而無情"结构相似；没有证据表明程颢在回应王弼。' },
+    { from: 'buddhism', to: 'chenghao', kind: 'contact', note: '程颐撰程颢行状说他"出入於老、釋者幾十年"。' },
+    { from: 'buddhism', to: 'zhuxi', kind: 'contact', note: '朱熹早年学过禅：据戴震所引朱熹《答汪尚书》（本课没有核对原信）。' },
+    { from: 'huayan', to: 'zhuxi', kind: 'comparison', note: '"理一分殊"（海水与一杓一碗）和华严"一即一切"结构相似；SEP提到华严影响朱熹的看法，本课把它当作一种学术观点。两者的"理"内容不同。' },
+    { from: 'mirror', to: 'zhuxi', kind: 'comparison', note: '朱熹说致知像磨镜，"逐旋磨去"；和神秀的拂拭结构相似，但镜子比喻更早见于《庄子》，所磨去的东西也不同。' },
+    { from: 'chan', to: 'zhuxi', kind: 'comparison', note: '"豁然贯通"和"顿悟"：都有长期准备后的飞跃；但朱熹的贯通是可以说出的对理的理解，而且不能跳过积累。' },
+    { from: 'chengyi', to: 'zhuxi', kind: 'response', note: '朱熹说"伊川說得好，曰：『理一分殊。』"；他的格物补传自称"竊取程子之意以補之"。' },
+    { from: 'lu', to: 'zhuxi', kind: 'response', note: '1175年鹅湖之会：陆九渊当场念出"易簡工夫終乆大，支離事業竟浮沉"，批评朱熹的方法"支离"。这是陆九渊一方的记录，朱熹一方没有同样详细的描述。' },
+    { from: 'zhuxi', to: 'wangyangming', kind: 'response', note: '王阳明格竹子的经历、把"格"解释为"正"、刻印《大学》古本，都是针对朱熹的格物说。' },
+    { from: 'lu', to: 'wangyangming', kind: 'comparison', note: '两人都说"心即理"，后人合称"陆王"；本课没有讨论王阳明怎样评价陆九渊，所以这里只作比较。' },
+    { from: 'chan', to: 'wangyangming', kind: 'comparison', note: '"定慧一体"和"知行合一"结构相似；王阳明自己否认他的学说是顿悟，没有证据表明是直接改造。' },
+    { from: 'buddhism', to: 'wangyangming', kind: 'contact', note: '据SEP的概述，王阳明早年深入学过佛教和道教。' },
+    { from: 'gudongqiao', to: 'wangyangming', kind: 'response', note: '顾东桥来信提出"知食乃食"，又担心王学"墜於佛氏明心見性、定慧頓悟之機"；王阳明逐条回信。' },
+    { from: 'wangyangming', to: 'huangzongxi', kind: 'response', note: '黄宗羲把四句教的"無善無惡"解释为"無善念惡念"，为王阳明辩护。这是有立场的后来解释。' },
+    { from: 'zhangzai', to: 'wangfuzhi', kind: 'response', note: '王夫之推崇张载《正蒙》并为它作注，把"气"论推进一步。' },
+    { from: 'zhuxi', to: 'wangfuzhi', kind: 'response', note: '《读四书大全说》逐条细读朱熹的注和朱熹后学的解释，有赞同，有修正，有批评。' },
+    { from: 'sengzhao', to: 'wangfuzhi', kind: 'comparison', note: '僧肇说"昔物不至今"以论证"物不迁"，王夫之说"质日代"以论证日新之化：同类现象，方向相反。没有证据表明王夫之在针对僧肇。' },
+    { from: 'huangzhen', to: 'guyanwu', kind: 'response', note: '《日知录》"心学"条大段引用黄震；黄震批评的是南宋的"近世"。引文到哪里结束，文库本的标点不完全清楚。' },
+    { from: 'chengyi', to: 'guyanwu', kind: 'response', note: '顾炎武指出《中庸章句》引程子"孔門傳授心法"一语，"亦是借用釋氏之言"：用考察词语来源的方法批评。' },
+    { from: 'zhou', to: 'daizhen', kind: 'response', note: '戴震批评周敦颐《通书》以"无欲"为要领，认为这是老、庄、释氏之说。' },
+    { from: 'zhuxi', to: 'daizhen', kind: 'response', note: '戴震批评把理当作"如有物焉，得於天而具於心"，认为这会让个人的意见冒充理。他在理学的同一组问题之内思考。' },
+  ],
+  caution: '第一栏属于上一门课《魏晋玄学与中国佛学：空、自然与顿悟》。从那一栏出发的线，只有三条是"接触"、三条是"回应"（都是理学家明确的批评），其余都是"比较"：这张图不支持"理学是佛教的翻版"这种说法。',
+};

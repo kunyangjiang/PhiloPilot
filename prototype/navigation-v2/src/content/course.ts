@@ -51,9 +51,12 @@ const APPENDIX_TITLES = ['注释', '来源与权利说明'];
 const htmlText = (s: string) =>
   s.replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const plain = (s: string) => htmlText(s).replace(/\s+/g, ' ').trim();
-const FN_TOKEN = (n: string) => `⁣FN${n}⁣`;
+// Footnote references are swapped for a token before markdown-it parses the text.
+// The token is wrapped in brackets that Unicode classes as punctuation, so a
+// closing ** right after CJK punctuation ("？**[^16]") still closes the bold.
+const FN_TOKEN = (n: string) => `⟦FN${n}⟧`;
 const withFnButtons = (html: string) =>
-  html.replace(/⁣FN(\d+)⁣/g, (_, n) => `<button type="button" class="fn-ref" data-fn="${n}" aria-expanded="false" aria-label="注释 ${n}">${n}</button>`);
+  html.replace(/⟦FN(\d+)⟧/g, (_, n) => `<button type="button" class="fn-ref" data-fn="${n}" aria-expanded="false" aria-label="注释 ${n}">${n}</button>`);
 
 /** Short title, e.g. “三、孟子：人性善与扩充” → “孟子：人性善与扩充”. */
 export const shortTitle = (t: string) => t.replace(/^[一二三四五六七八九十]+、/, '');
@@ -133,7 +136,7 @@ export function parseCourse(code: string, raw: string, opts: ParseOptions): Cour
     for (const g of groups) {
       const first = g[0];
       if (first.type === 'heading_open' && first.tag === 'h3') {
-        const text = g[1].content.replace(/⁣FN\d+⁣/g, '');
+        const text = g[1].content.replace(/⟦FN\d+⟧/g, '');
         const id = `s${sIndex}-h${headings.length}`;
         headings.push({ id, text, block: out.length });
         out.push({ kind: 'heading', level: 3, id, text, html: show(withFnButtons(md.renderInline(g[1].content))) });

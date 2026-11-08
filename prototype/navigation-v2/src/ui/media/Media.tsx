@@ -53,6 +53,23 @@ const COMPONENTS = {
   'hexagram-explorer': lazy(() => import('./cn4/HexagramExplorer')),
   'coincidence-sim': lazy(() => import('./cn4/CoincidenceSimulator')),
   'qin-slips': lazy(() => import('./cn4/QinSlips')),
+  'emptiness-explorer': lazy(() => import('./cn5/EmptinessExplorer')),
+  'threefold-truth': lazy(() => import('./cn5/ThreefoldTruth')),
+  'huayan-explorer': lazy(() => import('./cn5/HuayanExplorer')),
+  'sudden-gradual': lazy(() => import('./cn5/SuddenGradual')),
+  'concept-map-cn5': lazy(() => import('./conceptmap/MapCN5')),
+  'concept-map-cn6': lazy(() => import('./conceptmap/MapCN6')),
+  'liqi-explorer': lazy(() => import('./cn6/LiQiExplorer')),
+  'zhu-wang-workshop': lazy(() => import('./cn6/ZhuWangWorkshop')),
+  'zhixing-explorer': lazy(() => import('./cn6/ZhixingExplorer')),
+  'evidential-workshop': lazy(() => import('./cn6/EvidentialWorkshop')),
+  'women-evidence-board': lazy(() => import('./cn6/WomenEvidenceBoard')),
+  'p2179-colophon': lazy(() => import('./cn5/Figures').then((m) => ({ default: m.P2179Colophon }))),
+  'liangkai-bamboo': lazy(() => import('./cn5/Figures').then((m) => ({ default: m.LiangKaiBamboo }))),
+  'liangkai-sutra': lazy(() => import('./cn5/Figures').then((m) => ({ default: m.LiangKaiSutra }))),
+  'taiji-tu': lazy(() => import('./cn6/Figures').then((m) => ({ default: m.TaijiTu }))),
+  'zhuxi-letter': lazy(() => import('./cn6/Figures').then((m) => ({ default: m.ZhuXiLetter }))),
+  'shiguan-page': lazy(() => import('./cn6/Figures').then((m) => ({ default: m.ShiguanPage }))),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

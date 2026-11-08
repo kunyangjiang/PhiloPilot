@@ -1,0 +1,184 @@
+/* ── Shared concept map (魏晋玄学与中国佛学 / 宋明理学至清代) ──
+   Built on the shared .md panel and existing tokens. The three kinds of link
+   are told apart by line style and arrowheads and by their written label,
+   not by colour alone. The only transition is a colour/opacity change,
+   removed with reduced motion. */
+
+.cm {
+  min-width: 0;
+}
+.cm-kinds {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0 12px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.cm-kind {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 8px;
+  align-items: start;
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+}
+.cm-kind input {
+  margin-top: 5px;
+}
+.cm-kind svg {
+  margin-top: 7px;
+}
+.cm-kind small {
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+.cm-scroll {
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+.cm-svg {
+  display: block;
+  max-width: none;
+  font-family: var(--sans);
+}
+.cm-colrule {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.cm-coltext {
+  font-size: 11.5px;
+  font-weight: 700;
+  fill: var(--ink-3);
+}
+.cm-line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.6;
+}
+.cm-line--response {
+  stroke-dasharray: none;
+}
+.cm-line--contact {
+  stroke-dasharray: 7 4;
+}
+.cm-line--comparison {
+  stroke-dasharray: 1.5 4;
+  stroke-linecap: round;
+  stroke-width: 2.2;
+}
+.cm-arrow {
+  fill: var(--ink);
+}
+.cm-edge {
+  transition: opacity var(--t, 0.15s);
+}
+.cm-edge.is-dim {
+  opacity: 0.18;
+}
+.cm-edge.is-on .cm-line {
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+.cm-node {
+  cursor: pointer;
+}
+.cm-node rect {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.cm-node.is-linked rect {
+  stroke-width: 2;
+}
+.cm-node.is-sel rect {
+  fill: var(--ink);
+}
+.cm-node.is-sel text {
+  fill: #fff;
+}
+.cm-nlabel {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+.cm-nsub {
+  font-size: 11px;
+  fill: var(--ink-2);
+}
+.cm-pick {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.cm-pick-col {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+.article .cm-pick-col .g4-k {
+  margin: 0 0 2px;
+}
+.cm-pick-btn {
+  min-height: 34px;
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font-size: 13px;
+  text-align: left;
+}
+.cm-pick-btn.is-on {
+  background: var(--ink);
+  color: #fff;
+}
+.cm-pick-btn:hover:not(.is-on) {
+  background: #ecebe5;
+}
+.cm-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cm-li {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  background: #fff;
+  border-left: 4px solid var(--ink);
+  font-size: 14px;
+}
+.cm-li--contact {
+  border-left-style: dashed;
+}
+.cm-li--comparison {
+  border-left-style: dotted;
+}
+.cm-li-k {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.cm-badge {
+  justify-self: start;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+.cm-li--response .cm-badge {
+  background: var(--ink);
+  color: #fff;
+}
+.cm-li--contact .cm-badge {
+  border-style: dashed;
+}
+.cm-li--comparison .cm-badge {
+  border-style: dotted;
+}
+[data-motion='none'] .cm-edge {
+  transition: none;
+}

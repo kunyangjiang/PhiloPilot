@@ -2,6 +2,8 @@ import { CN1, MENCIUS_SECTION } from './cn1';
 import { CN2, ETHICS_SECTION } from './cn2';
 import { CN3, SKILL_SECTION } from './cn3';
 import { CN4, INCENTIVE_SECTION } from './cn4';
+import { CN5, AWAKENING_SECTION } from './cn5';
+import { CN6, NATURE_SECTION } from './cn6';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
@@ -53,7 +55,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '无前置要求，可以直接阅读',
     tradition: 'cn',
     position: 1,
-    recommendFrom: ['CN2', 'CN3', 'CN4'],
+    recommendFrom: ['CN2', 'CN3', 'CN4', 'CN6'],
     leadsTo: ['CN6', 'S7', 'D4'],
     sourceNote: '原文据中文维基文库，字形保留繁体。版本与授权见附录。',
     topicSection: MENCIUS_SECTION >= 0 ? MENCIUS_SECTION : undefined,
@@ -102,6 +104,38 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['S9', 'D5'],
     sourceNote: '原文据中文维基文库，字形保留繁体；文库整理者的校改见正文和注释。版本与授权见附录。',
     topicSection: INCENTIVE_SECTION >= 0 ? INCENTIVE_SECTION : undefined,
+  },
+  CN5: {
+    code: 'CN5',
+    text: CN5,
+    name: '魏晋玄学与中国佛学',
+    tier: '● 核心',
+    en: 'Wei-Jin Metaphysics and Chinese Buddhism: Emptiness, Nature and Sudden Awakening',
+    method: '追踪一个概念从翻译到重新建构的过程',
+    background: '大纲建议先读「道家传统」和「大乘哲学：中观与瑜伽行派」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 5,
+    // CN6 lists this course as recommended background; JP1 as helpful.
+    recommendFrom: ['CN6', 'JP1'],
+    leadsTo: ['CN6', 'D10'],
+    sourceNote: '原文据中文维基文库，字形保留繁体；文库文本与通行本的出入见正文和注释。版本与授权见附录。',
+    topicSection: AWAKENING_SECTION >= 0 ? AWAKENING_SECTION : undefined,
+  },
+  CN6: {
+    code: 'CN6',
+    text: CN6,
+    name: '宋明理学至清代',
+    tier: '● 核心',
+    en: 'Neo-Confucianism to Qing: Principle, Mind and Practical Learning',
+    method: '在同一个问题上比较两个体系；把注释当作哲学来读',
+    background: '大纲建议先读「孔子、孟子与荀子」和「魏晋玄学与中国佛学」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 6,
+    // CN7 and KR1 list this course as background; CN8 and JP1 as helpful.
+    recommendFrom: ['CN7', 'KR1', 'CN8', 'JP1'],
+    leadsTo: ['CN7'],
+    sourceNote: '原文据中文维基文库，字形保留繁体；文库文本的错字与异文见正文和注释。版本与授权见附录。',
+    topicSection: NATURE_SECTION >= 0 ? NATURE_SECTION : undefined,
   },
   EA4: {
     code: 'EA4',
