@@ -1,0 +1,297 @@
+/* ── 希腊化与罗马哲学: Desire explorer, Assent workshop, Fate explorer,
+   Modes lab, two museum images ──
+   Built on the shared .md panel (media.css) and the GR1 workshop classes
+   (gr1.css: .lw-*, .pe-*, .gr-col). No new tokens. States are marked by
+   text and line style as well as colour. The only movement is the cylinder
+   in the fate explorer; with reduced motion it is shown without movement. */
+
+.g4 {
+  min-width: 0;
+}
+.g4-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  min-width: 0;
+}
+.article .g4-panel p,
+.article .g4 .md-feedback p {
+  margin: 0 0 8px;
+}
+.article .g4-panel > p:last-child {
+  margin-bottom: 0;
+}
+.g4-src {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+.g4-k {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.article .g4-k {
+  margin: 0;
+}
+.g4-event {
+  padding: 10px 12px;
+  border-left: 3px solid var(--ink);
+  background: #fff;
+  font-size: 15px;
+}
+.g4-first {
+  padding: 8px 12px;
+  border: 1px dashed var(--ink);
+  background: #fff;
+}
+.g4-result,
+.g4-objection {
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  background: #fff;
+}
+.g4-objection {
+  border-style: dashed;
+}
+.g4-h {
+  margin: 18px 0 6px;
+  font-size: 15px;
+}
+.g4-case {
+  min-width: 0;
+}
+.g4-case + .g4-case {
+  margin-top: 10px;
+}
+
+/* numbered questions (desire explorer) */
+.g4-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0 0 0 22px;
+}
+.g4-steps > li {
+  padding-left: 4px;
+}
+
+/* step navigation (assent workshop): the GR1 .lw-steps, wrapping */
+.g4-stepnav {
+  flex-wrap: wrap;
+}
+
+/* tables: scroll inside their own box rather than the page */
+.g4-table,
+.g4-grid {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: 14px;
+}
+.g4-table th,
+.g4-table td,
+.g4-grid th,
+.g4-grid td {
+  padding: 6px 8px;
+  border: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.g4-table thead th,
+.g4-grid thead th {
+  border-bottom: 2px solid var(--ink);
+  font-size: 12.5px;
+}
+.g4-table tr.is-mine th,
+.g4-table tr.is-mine td {
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  font-weight: 600;
+}
+.g4-table small {
+  display: block;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.g4-grid td.is-on {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  font-weight: 700;
+}
+.g4-here {
+  margin-left: 6px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* argument maps (fate explorer) */
+.g4-arg {
+  margin-top: 10px;
+}
+.g4-doubt {
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+}
+.g4-gap {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 2px dashed var(--accent);
+  background: #fff;
+}
+.g4-warn {
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  border-left-width: 4px;
+  background: #fff;
+  font-size: 13.5px;
+}
+
+/* the cylinder: a labelled drawing, not a physics simulation */
+.g4-cyl {
+  margin: 12px 0 0;
+}
+.g4-cyl svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  color: var(--ink);
+  overflow: visible;
+}
+.g4-body,
+.g4-spin,
+.g4-hand {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 1.2s cubic-bezier(0.45, 0, 0.55, 1);
+}
+.g4-body.is-down {
+  transform: translate(220px, 84px);
+}
+.g4-body.is-nudged {
+  transform: translate(9px, 3px);
+  transition-duration: 0.3s;
+}
+.g4-spin {
+  transform: rotate(720deg);
+}
+.g4-hand {
+  transition-duration: 0.3s;
+}
+.g4-hand.is-out {
+  transform: translate(6px, 2px);
+}
+.g4-cyl-ctl {
+  margin: 8px 0;
+}
+.g4-legend {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 13.5px;
+}
+.g4-key {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  vertical-align: -2px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+}
+.g4-key--push {
+  border-radius: 0;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .g4-body,
+  .g4-spin,
+  .g4-hand {
+    transition: none;
+  }
+}
+
+/* modes lab */
+.g4-dialogue {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--ink);
+  background: #fff;
+}
+.g4-dialogue > div {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 8px;
+}
+.g4-dialogue dt {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+.g4-dialogue dd {
+  margin: 0;
+}
+.g4-chain {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: g4c;
+}
+.g4-chain li {
+  display: grid;
+  gap: 2px;
+  padding: 6px 10px;
+  border-left: 3px solid var(--rule);
+  background: #fff;
+}
+.g4-ask {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.g4-ans {
+  font-weight: 600;
+}
+
+/* museum images */
+.g4-fig {
+  margin: 28px 0;
+}
+.g4-fig img {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  background: #fff;
+}
+.article .g4-fig figcaption p {
+  margin: 10px 0 0;
+}
+.g4-fig .md-note a {
+  color: inherit;
+}
+
+@media (max-width: 600px) {
+  .g4-table,
+  .g4-grid {
+    display: block;
+    overflow-x: auto;
+    font-size: 13px;
+  }
+  .g4-dialogue > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  .g4-steps {
+    padding-left: 18px;
+  }
+}

@@ -4,6 +4,7 @@ import { IN1 } from './in1';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
+import { GR4 } from './gr4';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -150,6 +151,33 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     // 六 · 德性、实践智慧与人的繁荣 bears on the 人性与道德 question.
     topicSection: (() => {
       const i = GR3.SECTIONS.findIndex((s) => s.title.startsWith('六、'));
+      return i >= 0 ? i : undefined;
+    })(),
+  },
+  GR4: {
+    code: 'GR4',
+    text: GR4,
+    name: '希腊化与罗马哲学',
+    tier: '○ 拓展',
+    en: 'Hellenistic and Roman Schools: Living Philosophy',
+    method: '评估"哲学治疗"的主张；分析怀疑派论式的结构',
+    background: '大纲建议先读「亚里士多德」（推荐背景，不是必需）',
+    tradition: 'gr',
+    position: 4,
+    recommendFrom: [],
+    leadsTo: ['EA1', 'S1', 'D3'],
+    sourceNote: '希腊文据 First1KGreek 与 Perseus 数字本（von der Mühll、Hicks、Schenkl、Leopold、Mutschmann 诸本），拉丁文据 Perseus 数字本与 Munro 本《物性论》；版本与权利见附录。中文是本章试译。',
+    // Greek and Latin passages alternate. A passage is Greek when most of its
+    // letters are Greek (Latin passages may quote Greek words, e.g. Gellius 7.2).
+    origLang: (html) => {
+      const t = html.replace(/<[^>]+>/g, '');
+      const greek = (t.match(/[Ͱ-Ͽἀ-῿]/g) ?? []).length;
+      const latin = (t.match(/[A-Za-z]/g) ?? []).length;
+      return greek > latin ? 'grc' : 'la';
+    },
+    // 六 · 哲学作为治疗与生活方式 bears on the 人性与道德 question.
+    topicSection: (() => {
+      const i = GR4.SECTIONS.findIndex((s) => s.title.startsWith('六、'));
       return i >= 0 ? i : undefined;
     })(),
   },

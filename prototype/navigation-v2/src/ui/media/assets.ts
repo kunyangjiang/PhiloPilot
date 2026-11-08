@@ -91,3 +91,25 @@ export const BEKKER_1094 = {
   credit: 'Aristotelis opera, ed. I. Bekker, vol. 2 (Berlin: G. Reimer, 1831), p. 1094: the opening of the Nicomachean Ethics. Scan: Johns Hopkins University, Eisenhower Library, Internet Archive aristotelisopera02arisrich. Public domain.',
   url: 'https://archive.org/details/aristotelisopera02arisrich/page/n309/mode/1up',
 };
+
+export const EPICURUS_HEAD = {
+  /** Recorded in public/media/gr4/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/gr4/epicurus-met-11-90.jpg',
+  width: 960,
+  height: 1280,
+  alt: '深色背景前，一尊略向右转的白色大理石男子头像：浓密的波浪形短发，额头有皱纹，眼睛没有雕出瞳孔，鼻尖残缺，长而卷曲的胡须垂到胸前；右肩残留一段衣褶，头像安在一根金属支杆上。',
+  credit: 'Marble head of Epikouros, Roman, Imperial period, 2nd century CE; copy of a Greek statue of the first half of the 3rd century BCE. The Metropolitan Museum of Art, New York, 11.90, Rogers Fund, 1911. Photo: The Metropolitan Museum of Art (DP333053), Public Domain (Open Access); via Wikimedia Commons.',
+  url: 'https://www.metmuseum.org/art/collection/search/248475',
+};
+
+export const ZENO_HEAD = {
+  /** Recorded in public/media/gr4/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/gr4/zeno-naples-6128.jpg',
+  width: 960,
+  height: 1440,
+  alt: '近距离拍摄的一尊白色大理石男子胸像的正面：短发，额头上有深深的横纹，眉头紧皱，眼睛没有雕出瞳孔，脸颊消瘦，胡须长而呈波浪状；照片略带暖黄色调，背景模糊。',
+  credit: 'Marble bust identified as Zeno of Citium, Roman copy after a Greek original. Museo Archeologico Nazionale di Napoli, inv. 6128 (Farnese collection). Photo: Jeremy Weate (2011), CC BY 2.0, via Wikimedia Commons. Not modified by this course apart from Wikimedia’s 960 px resize.',
+  url: 'https://commons.wikimedia.org/wiki/File:Zeno_of_Citium_-_Museo_archeologico_nazionale_di_Napoli.jpg',
+};

@@ -55,8 +55,8 @@ export const COURSES: Course[] = [
   c('GR1', '古希腊哲学的起源：从自然到经省察的人生', 'core', 'B', 'gr'),
   c('GR2', '柏拉图：知识、灵魂与正义之城', 'core', 'B', 'gr'),
   c('GR3', '亚里士多德：实体、原因、逻辑与美好生活', 'core', 'B', 'gr'),
+  c('GR4', '希腊化与罗马哲学：作为生活实践的哲学', 'extended', 'B', 'gr'),
   // Domain B — others used in the topic view
-  c('GR4', '希腊化与罗马学派：作为生活的哲学', 'extended', 'B', 'gr'),
   c('IN1', '印度哲学的起源与早期思想争论：自我、宇宙与解脱', 'core', 'B', 'in'),
   c('IN2', '早期佛教与阿毗达磨：苦、无我与缘起', 'core', 'B', 'in'),
   c('EA3', '经验论、启蒙与自由主义的起源', 'core', 'B', 'ea'),
@@ -100,6 +100,7 @@ const SHORT: Record<string, string> = {
   GR1: '古希腊哲学的起源',
   GR2: '柏拉图',
   GR3: '亚里士多德',
+  GR4: '希腊化与罗马哲学',
 };
 /** Short readable name of a course, e.g. CN1 → 孔子、孟子与荀子. */
 export function nameOf(code: string, names?: Record<string, string>): string {
@@ -227,7 +228,7 @@ export const HUMAN_NATURE = {
         { code: 'CN1', where: '三、孟子 · 四、荀子 · 六、三种修养观' },
         { code: 'S7', where: '§6 修养与实践' },
         { code: 'GR3', where: '六、德性、实践智慧与人的繁荣 · 德性：两种，以及它们怎样产生' },
-        { code: 'GR4', where: '§6 作为治疗的哲学' },
+        { code: 'GR4', where: '六、哲学作为治疗与生活方式 · 练习 · 哲学治疗的限度' },
         { code: 'IN1', where: '三、行动、再生与解脱 · 四、沙门的另一条路（不害与苦行）' },
       ],
     },
@@ -251,6 +252,7 @@ export const HUMAN_NATURE = {
         { code: 'IN2', where: '§6 伦理与心' },
         { code: 'GR1', where: '五、苏格拉底与省察 · 美德即知识？' },
         { code: 'GR2', where: '四、正义在灵魂与城邦中 · 灵魂的三个部分' },
+        { code: 'GR4', where: '三、斯多亚派 · 激情：错误的判断 · 智者不是没有情感' },
         { code: 'CN1', where: '三、孟子 · 心：会感受，也会思考' },
       ],
     },

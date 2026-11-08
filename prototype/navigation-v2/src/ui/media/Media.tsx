@@ -32,6 +32,12 @@ const COMPONENTS = {
   'matter-form-change': lazy(() => import('./gr3/MatterFormChange')),
   'four-causes': lazy(() => import('./gr3/FourCausesWorkshop')),
   'virtue-mean': lazy(() => import('./gr3/VirtueMean')),
+  'epicurus-head': lazy(() => import('./gr4/EpicurusHead')),
+  'desire-explorer': lazy(() => import('./gr4/DesireExplorer')),
+  'zeno-head': lazy(() => import('./gr4/ZenoHead')),
+  'assent-workshop': lazy(() => import('./gr4/AssentWorkshop')),
+  'fate-explorer': lazy(() => import('./gr4/FateExplorer')),
+  'modes-lab': lazy(() => import('./gr4/ModesLab')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

@@ -41,7 +41,14 @@ export type MediaId =
   | 'syllogism-lab'
   | 'matter-form-change'
   | 'four-causes'
-  | 'virtue-mean';
+  | 'virtue-mean'
+  // 希腊化与罗马哲学
+  | 'epicurus-head'
+  | 'desire-explorer'
+  | 'zeno-head'
+  | 'assent-workshop'
+  | 'fate-explorer'
+  | 'modes-lab';
 
 interface Anchor {
   id: MediaId;
@@ -112,6 +119,19 @@ const ANCHORS: Anchor[] = [
   { id: 'four-causes', code: 'GR3', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('亚里士多德特意说，燕子和蜘蛛') },
   // 六 · end of "没有中道的行为", after the table of virtues and vices.
   { id: 'virtue-mean', code: 'GR3', section: '六、', match: (b) => b.kind === 'html' && b.text.includes('把弯曲的木头扳直') },
+
+  // 二 · after the plan of the Epicurean part (museum object).
+  { id: 'epicurus-head', code: 'GR4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('这一部分先讲伊壁鸠鲁派的伦理学') },
+  // 二 · after "这是禁欲主义吗？": the three kinds of desire and the calculus read.
+  { id: 'desire-explorer', code: 'GR4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('这是禁欲主义吗') },
+  // 三 · after the table of Stoic periods and how little we know of the early Stoa (museum object).
+  { id: 'zeno-head', code: 'GR4', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表说明了一个方法上的困难') },
+  // 三 · after Gellius' storm story and the note on its layers: impression, first movement, assent read.
+  { id: 'assent-workshop', code: 'GR4', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('需要注意这条材料的层次') },
+  // 四 · end of the part on fate: lazy argument, cylinder, swerve and Carneades read.
+  { id: 'fate-explorer', code: 'GR4', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('古代的讨论给我们留下的') },
+  // 五 · after "标准的问题": ten modes, five modes and the trilemma read.
+  { id: 'modes-lab', code: 'GR4', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('五论式的一个特别重要的应用') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
