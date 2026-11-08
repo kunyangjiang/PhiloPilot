@@ -1,0 +1,484 @@
+/* ── 道家传统: Butterfly dream explorer, Perspective lab, Wuwei and
+   intervention explorer, Cook Ding ──
+   Built on the shared .md panel (media.css), the GR1 workshop classes
+   (gr1.css), the GR4 panel classes (gr4.css) and the CN2 cards and SVG labels
+   (cn2.css). No new tokens. States are marked by text and line style as well
+   as colour. Transitions and the blade-path drawing are removed with reduced
+   motion. */
+
+.c3 {
+  min-width: 0;
+}
+.article .c3-orig {
+  margin: 2px 0 4px;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.article .c3 .g4-panel p,
+.article .c3 .c2-card p {
+  margin: 0 0 8px;
+}
+.article .c3-layer-k {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  border-top: 2px solid var(--ink);
+  padding-top: 8px;
+}
+.c3-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+  min-width: 0;
+}
+.c3-two--fig {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: start;
+}
+.c3-card--limit {
+  border-style: dashed;
+}
+.article .c3-cost {
+  margin: 12px 0 0;
+  font-size: 14px;
+}
+
+/* stage buttons */
+.c3-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 10px 0 0;
+  border-left: 1px solid var(--ink);
+}
+.c3-stage {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 12px;
+  border: 1px solid var(--ink);
+  border-left: 0;
+  background: #fff;
+  color: var(--ink);
+  font-size: 14px;
+  cursor: pointer;
+}
+.c3-stage-n {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.c3-stage.is-past {
+  background: #ecebe5;
+}
+.c3-stage.is-cur {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+.c3-stage.is-cur .c3-stage-n {
+  color: #fff;
+}
+.c3-stage:hover:not(.is-cur) {
+  color: var(--accent);
+}
+.md .c3-stage:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  position: relative;
+}
+
+/* drawings */
+.c3-fig {
+  margin: 12px 0 0;
+  min-width: 0;
+}
+.c3-svg {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+}
+.c3-fade {
+  transition: opacity 0.45s ease-out;
+}
+.c3-wing {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c3-head {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c3-body {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.c3-divide {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c3-divide--q {
+  stroke-dasharray: 6 6;
+  stroke-width: 2;
+}
+.c3-q {
+  fill: var(--accent);
+}
+.c3-arrows path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.c3-arrowhead {
+  fill: var(--accent);
+}
+
+/* butterfly: reading checked against the five turns */
+.c3-fitstrip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: 8px 0 10px;
+  padding: 0;
+  list-style: none;
+  border-left: 1px solid var(--ink);
+}
+.c3-fitcell {
+  display: grid;
+  gap: 2px;
+  padding: 6px 8px;
+  border: 1px solid var(--ink);
+  border-left: 0;
+  background: #fff;
+  min-width: 0;
+}
+.c3-fit-k {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+}
+.c3-fit-v {
+  font-size: 12.5px;
+}
+.c3-fitcell--fit {
+  background: var(--ink);
+  color: #fff;
+}
+.c3-fitcell--strain {
+  border-color: var(--accent);
+  color: var(--accent);
+  border-style: dashed;
+  border-left: 1px dashed var(--accent);
+}
+.c3-fitcell--open {
+  color: var(--ink-2);
+}
+
+/* perspective lab */
+.c3-matrix th,
+.c3-matrix td {
+  min-width: 6em;
+}
+.c3-cell--y {
+  font-weight: 700;
+}
+.c3-cell--n {
+  color: var(--accent);
+}
+.c3-cell--none {
+  color: var(--ink-3);
+}
+.c3-cell--q {
+  color: var(--ink-2);
+  font-style: normal;
+}
+.c3-cell--ask {
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--accent);
+}
+.c3-matrix tr.is-out th,
+.c3-matrix tr.is-out td {
+  color: var(--ink-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+.c3-matrix tr.is-out th .c3-tagline {
+  text-decoration: none;
+}
+.c3-matrix tr.is-std th {
+  background: #ecebe5;
+}
+.c3-tagline {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 4px;
+  border: 1px solid currentColor;
+  font-size: 11.5px;
+  font-weight: 400;
+}
+.c3-why {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+}
+.c3-claims {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* wuwei explorer */
+.c3-ctl {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  align-items: start;
+}
+.c3-axis {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.c3-base {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+}
+.c3-band {
+  fill: rgba(0, 0, 0, 0.08);
+  stroke: none;
+}
+.c3-run {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c3-morph {
+  transition: d 0.45s ease-out;
+}
+.c3-tick {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.c3-tick--heavy {
+  stroke-width: 2;
+}
+.c3-verdict {
+  font-weight: 700;
+}
+.c3-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.c3-key {
+  display: inline-block;
+  width: 22px;
+  height: 0;
+  margin-right: 4px;
+  vertical-align: middle;
+  border-top: 3px solid var(--ink);
+}
+.c3-key--base {
+  border-top: 2px dashed var(--ink-3);
+}
+.c3-key--tick {
+  width: 3px;
+  height: 12px;
+  border: 0;
+  background: var(--accent);
+}
+.c3-conds {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+.c3-cond-mark {
+  display: inline-block;
+  min-width: 4em;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+.c3-conds .is-ok .c3-cond-mark {
+  background: var(--ink);
+  color: #fff;
+}
+.c3-conds .is-no .c3-cond-mark {
+  border: 1px dashed var(--accent);
+  color: var(--accent);
+}
+
+/* cook ding */
+.c3-ox-body {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+  transition: fill 0.45s ease-out;
+}
+.c3-ox--s0 .c3-ox-body {
+  fill: #d9d8d1;
+}
+.c3-ox-joint {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+  opacity: 0;
+  transition:
+    opacity 0.45s ease-out,
+    stroke-width 0.45s ease-out;
+}
+.c3-ox--s1 .c3-ox-joint,
+.c3-ox--s2 .c3-ox-joint,
+.c3-ox--s3 .c3-ox-joint {
+  opacity: 1;
+}
+.c3-ox--s4 .c3-ox-joint {
+  opacity: 1;
+  stroke: #fff;
+  stroke-width: 9;
+  stroke-dasharray: none;
+}
+.c3-ox--s4 .c3-ox-body {
+  stroke-dasharray: 10 6;
+}
+.c3-ox-hit {
+  stroke: var(--accent);
+  stroke-width: 3;
+}
+.c3-ox-try {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 3;
+  stroke-dasharray: 14 10;
+}
+.c3-ox-path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  animation: c3-draw 1.6s ease-out;
+}
+.c3-ox-path--slow {
+  stroke: var(--accent);
+  animation: c3-draw-slow 3.2s linear;
+}
+.c3-ox-knot {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 3 3;
+}
+@keyframes c3-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* fast to the knot, slow through it, then on */
+@keyframes c3-draw-slow {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  25% {
+    stroke-dashoffset: 58;
+  }
+  80% {
+    stroke-dashoffset: 42;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+.c3-blades {
+  margin-top: 12px;
+}
+.c3-blades caption {
+  caption-side: top;
+  text-align: left;
+  font-size: 13px;
+  padding-bottom: 6px;
+  color: var(--ink-2);
+}
+.c3-blades tr.is-std th,
+.c3-blades tr.is-std td {
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .c3-two,
+  .c3-two--fig,
+  .c3-ctl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .c3-fitstrip {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .c3-fitcell {
+    padding: 4px;
+  }
+  .c3-fit-v {
+    font-size: 11.5px;
+  }
+  .c3-stage {
+    padding: 6px 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c3-fade,
+  .c3-morph,
+  .c3-ox-body,
+  .c3-ox-joint {
+    transition: none;
+  }
+  .c3-ox-path,
+  .c3-ox-path--slow {
+    animation: none;
+  }
+}
+
+/* a tall hanging scroll: narrow image beside its caption */
+.c3-scroll {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.c3-scroll img {
+  max-width: 180px;
+}
+@media (max-width: 600px) {
+  .c3-scroll {
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .c3-scroll img {
+    max-width: 110px;
+  }
+}

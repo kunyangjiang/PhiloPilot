@@ -67,7 +67,8 @@ function renderBlock(code: string, b: Block, i: number, section: number, fig: nu
             <button type="button" className="src-cite" data-cite={b.cite} aria-expanded="false" title="在右侧查看出处说明">
               {b.cite}
             </button>
-            <span className="src-note">原文据中文维基文库，字形保留繁体</span>
+            {/* A citation ending in “…的释文” quotes a scholar's printed transcription (CN3's two Guodian passages), not Wikisource. */}
+            <span className="src-note">{/的释文$/.test(b.cite) ? '据学者论文印出的释文，不是写本本身；见注释' : '原文据中文维基文库，字形保留繁体'}</span>
           </figcaption>
         </figure>
       );

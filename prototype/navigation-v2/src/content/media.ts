@@ -54,7 +54,13 @@ export type MediaId =
   | 'daozang-page'
   | 'classification-lab'
   | 'pinhole-demo'
-  | 'white-horse';
+  | 'white-horse'
+  // 道家传统
+  | 'wuwei-explorer'
+  | 'perspective-lab'
+  | 'butterfly-dream'
+  | 'cook-ding'
+  | 'zeshin-scroll';
 
 interface Anchor {
   id: MediaId;
@@ -149,6 +155,17 @@ const ANCHORS: Anchor[] = [
   { id: 'pinhole-demo', code: 'CN2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('现代演示能说明什么') },
   // 六 · after the table of readings of 白马非马.
   { id: 'white-horse', code: 'CN2', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表不是要读者选出') },
+
+  // 二 · after the three modern examples and their limits ("这三个例子共同说明").
+  { id: 'wuwei-explorer', code: 'CN3', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('这三个例子共同说明') },
+  // 三 · end of the 王倪 section: the four-step structure and its contested fourth step read.
+  { id: 'perspective-lab', code: 'CN3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('但这段话的形式值得注意') },
+  // 三 · after the table of the three readings of the butterfly dream and the chapter's verdict.
+  { id: 'butterfly-dream', code: 'CN3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('本课不在三种读法中作最终的选择') },
+  // 三 · after the third reading of the butterfly dream (a later painting of the story).
+  { id: 'zeshin-scroll', code: 'CN3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('读法三') },
+  // 五 · after the stages table, the 每至於族 caution and the effort/spontaneity paradox.
+  { id: 'cook-ding', code: 'CN3', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('《庄子》并没有直接讨论这个悖论') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

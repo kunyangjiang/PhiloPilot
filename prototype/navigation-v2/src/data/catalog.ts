@@ -45,7 +45,7 @@ export const COURSES: Course[] = [
   // Domain B — Chinese
   c('CN1', '孔子、孟子与荀子：修养、礼与人性', 'core', 'B', 'cn'),
   c('CN2', '墨家、名家与后期墨经：论证、语言与科学', 'core', 'B', 'cn'),
-  c('CN3', '道家传统：老子、庄子及其读者', 'core', 'B', 'cn'),
+  c('CN3', '道家传统：老子、庄子及其后世解释', 'core', 'B', 'cn'),
   c('CN4', '法家、汉代综合与阴阳五行', 'core', 'B', 'cn'),
   c('CN5', '魏晋玄学与中国佛学', 'core', 'B', 'cn'),
   c('CN6', '宋明理学至清代：理、心与实学', 'core', 'B', 'cn'),
@@ -230,6 +230,7 @@ export const HUMAN_NATURE = {
         { code: 'GR3', where: '六、德性、实践智慧与人的繁荣 · 德性：两种，以及它们怎样产生' },
         { code: 'GR4', where: '六、哲学作为治疗与生活方式 · 练习 · 哲学治疗的限度' },
         { code: 'IN1', where: '三、行动、再生与解脱 · 四、沙门的另一条路（不害与苦行）' },
+        { code: 'CN3', where: '五、生、死与变化 · 庖丁解牛：技艺与自发 · 接受是消极吗？' },
       ],
     },
     {
@@ -265,6 +266,7 @@ export const HUMAN_NATURE = {
     { from: 'CN1', to: 'D4', note: '大纲：CN1 → D4' },
     { from: 'CN1', to: 'D2', note: '大纲：D2 的背景要求含 “AF1 或 CN1”' },
     { from: 'CN1', to: 'CN2', note: '大纲：CN2 推荐先读 CN1' },
+    { from: 'CN1', to: 'CN3', note: '大纲：CN3 推荐先读 CN1' },
     { from: 'CN6', to: 'KR1', note: '大纲：KR1 的前置为 CN6' },
     { from: 'S7', to: 'S8', note: '大纲：S8 推荐先读 S7' },
     { from: 'S7', to: 'D4', note: '大纲：D4 的背景要求含 S7' },

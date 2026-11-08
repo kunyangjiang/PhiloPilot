@@ -124,3 +124,14 @@ export const DAOZANG_JINGSHANG = {
   credit: '《正統道藏》太清部沛字號第九冊《墨子》卷之十，明正統十年（1445）內府刊本。中國國家圖書館藏（善本書號 02607）。書格（shuge.org）據該館膠片整理，經 Wikimedia Commons 公有領域發佈；本課縮放並轉為 JPEG，未裁切。',
   url: 'http://read.nlc.cn/allSearch/searchDetail?searchType=10024&showType=1&indexName=data_892&fid=411999005947',
 };
+
+export const ZESHIN_BUTTERFLY = {
+  /** Recorded in public/media/cn3/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn3/zeshin-butterfly-dream-1888.jpg',
+  width: 896,
+  height: 2965,
+  alt: '一幅细长的立轴水墨画，大部分是空白的纸面。左上方用几笔淡墨画着一只小小的蝴蝶。画面下部，一个披着宽大衣袍的人伏身倚坐在石旁，闭着眼，一只手托着脸，像在打盹；身前地上放着一卷书或一把扇。右下角有竖写的落款和一方红色印章。',
+  credit: '柴田是真《庄子梦蝶图》，1888 年，纸本水墨立轴。檀香山艺术博物馆藏（13879.1）。照片由 Wikimedia Commons 用户拍摄并上传，原作已进入公有领域；本课未作任何修改。',
+  url: 'https://commons.wikimedia.org/wiki/File:%27Zhuangzi_Dreaming_of_a_Butterfly%27_by_Shibata_Zeshin,_1888,_Honolulu_Museum_of_Art,_13879.1.JPG',
+};

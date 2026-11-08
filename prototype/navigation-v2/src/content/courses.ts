@@ -1,5 +1,6 @@
 import { CN1, MENCIUS_SECTION } from './cn1';
 import { CN2, ETHICS_SECTION } from './cn2';
+import { CN3, SKILL_SECTION } from './cn3';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
@@ -70,6 +71,21 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['D3', 'S6'],
     sourceNote: '原文据中文维基文库，字形保留繁体。版本与授权见附录。',
     topicSection: ETHICS_SECTION >= 0 ? ETHICS_SECTION : undefined,
+  },
+  CN3: {
+    code: 'CN3',
+    text: CN3,
+    name: '老子、庄子与道家传统',
+    tier: '● 核心',
+    en: 'Daoist Traditions: Laozi, Zhuangzi and Their Readers',
+    method: '解读一部多声部、层层形成的文本；把论证和文学形式分开',
+    background: '大纲建议先读「孔子、孟子与荀子」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 3,
+    recommendFrom: ['CN5'],
+    leadsTo: ['CN5', 'D3'],
+    sourceNote: '原文据中文维基文库，字形保留繁体；出土写本的释文来源见注释。版本与授权见附录。',
+    topicSection: SKILL_SECTION >= 0 ? SKILL_SECTION : undefined,
   },
   EA4: {
     code: 'EA4',

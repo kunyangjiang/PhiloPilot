@@ -43,6 +43,11 @@ const COMPONENTS = {
   'classification-lab': lazy(() => import('./cn2/ClassificationLab')),
   'pinhole-demo': lazy(() => import('./cn2/PinholeDemo')),
   'white-horse': lazy(() => import('./cn2/WhiteHorseExplorer')),
+  'wuwei-explorer': lazy(() => import('./cn3/WuweiExplorer')),
+  'perspective-lab': lazy(() => import('./cn3/PerspectiveLab')),
+  'butterfly-dream': lazy(() => import('./cn3/ButterflyDream')),
+  'cook-ding': lazy(() => import('./cn3/CookDing')),
+  'zeshin-scroll': lazy(() => import('./cn3/ZeshinScroll')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {
