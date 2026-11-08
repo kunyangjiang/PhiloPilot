@@ -38,6 +38,11 @@ const COMPONENTS = {
   'assent-workshop': lazy(() => import('./gr4/AssentWorkshop')),
   'fate-explorer': lazy(() => import('./gr4/FateExplorer')),
   'modes-lab': lazy(() => import('./gr4/ModesLab')),
+  'three-standards': lazy(() => import('./cn2/ThreeStandardsWorkshop')),
+  'daozang-page': lazy(() => import('./cn2/DaozangPage')),
+  'classification-lab': lazy(() => import('./cn2/ClassificationLab')),
+  'pinhole-demo': lazy(() => import('./cn2/PinholeDemo')),
+  'white-horse': lazy(() => import('./cn2/WhiteHorseExplorer')),
 } satisfies Record<MediaId, unknown>;
 
 export default function Media({ id }: { code: string; id: MediaId }) {

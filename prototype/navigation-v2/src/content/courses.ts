@@ -1,4 +1,5 @@
 import { CN1, MENCIUS_SECTION } from './cn1';
+import { CN2, ETHICS_SECTION } from './cn2';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { GR1 } from './gr1';
@@ -54,6 +55,21 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['CN6', 'S7', 'D4'],
     sourceNote: '原文据中文维基文库，字形保留繁体。版本与授权见附录。',
     topicSection: MENCIUS_SECTION >= 0 ? MENCIUS_SECTION : undefined,
+  },
+  CN2: {
+    code: 'CN2',
+    text: CN2,
+    name: '墨家、名家与后期墨经',
+    tier: '● 核心',
+    en: 'Mohism, Names and the Later Mohist Canons: Argument, Language and Science',
+    method: '把简短的经文当作论证来读；检验定义',
+    background: '大纲建议先读「孔子、孟子与荀子」（推荐背景，不是必需）',
+    tradition: 'cn',
+    position: 2,
+    recommendFrom: ['D3'],
+    leadsTo: ['D3', 'S6'],
+    sourceNote: '原文据中文维基文库，字形保留繁体。版本与授权见附录。',
+    topicSection: ETHICS_SECTION >= 0 ? ETHICS_SECTION : undefined,
   },
   EA4: {
     code: 'EA4',

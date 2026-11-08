@@ -82,6 +82,9 @@ export interface ParseOptions {
   summaryStart?: string;
   /** Applied to rendered HTML, e.g. to show course names instead of internal codes. */
   displayText?: (html: string) => string;
+  /** Treat every blockquote ending in a 《…》 citation as a classical source, even when it
+   *  lacks 「」/曰/也 (terse canon lines such as the Later Mohist definitions). */
+  citedQuotesAreSources?: boolean;
 }
 
 export function parseCourse(code: string, raw: string, opts: ParseOptions): CourseText {
@@ -175,7 +178,7 @@ export function parseCourse(code: string, raw: string, opts: ParseOptions): Cour
           continue;
         }
         const cite = text.match(/（(《[^（）]*》[^（）]*)）\s*$/);
-        if (cite && /[「」]|曰|也/.test(text)) {
+        if (cite && (opts.citedQuotesAreSources || /[「」]|曰|也/.test(text))) {
           out.push({ kind: 'source', html: html.replace(/（《[^（）]*》[^（）]*）\s*(<\/p>\s*<\/blockquote>\s*)$/, '$1'), cite: cite[1], text });
           continue;
         }

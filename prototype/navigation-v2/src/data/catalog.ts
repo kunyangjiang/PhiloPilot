@@ -44,7 +44,7 @@ export const COURSES: Course[] = [
   c('A4', '诠释、翻译与哲学写作', 'extended', 'A'),
   // Domain B — Chinese
   c('CN1', '孔子、孟子与荀子：修养、礼与人性', 'core', 'B', 'cn'),
-  c('CN2', '墨家、名辩与后期墨经', 'core', 'B', 'cn'),
+  c('CN2', '墨家、名家与后期墨经：论证、语言与科学', 'core', 'B', 'cn'),
   c('CN3', '道家传统：老子、庄子及其读者', 'core', 'B', 'cn'),
   c('CN4', '法家、汉代综合与阴阳五行', 'core', 'B', 'cn'),
   c('CN5', '魏晋玄学与中国佛学', 'core', 'B', 'cn'),
@@ -88,7 +88,7 @@ export const courseByCode = (code: string) => COURSES.find((x) => x.code === cod
 // names. Short names are prototype labels (示意), not curriculum text.
 const SHORT: Record<string, string> = {
   CN1: '孔子、孟子与荀子',
-  CN2: '墨家与名辩',
+  CN2: '墨家与名家',
   CN3: '道家传统',
   CN4: '法家与汉代',
   CN5: '玄学与佛学',
@@ -241,6 +241,7 @@ export const HUMAN_NATURE = {
         { code: 'GR3', where: '六、德性、实践智慧与人的繁荣 · 德性是一种"品质状态"' },
         { code: 'EA11', where: '§2 德性伦理的回归 · §6 关怀伦理' },
         { code: 'AF1', where: '§5 伦理与 Ubuntu' },
+        { code: 'CN2', where: '一、墨家的伦理与政治 · 兼与别：兼爱到底要求什么 · 墨家是不是"后果主义"？' },
       ],
     },
     {
@@ -263,6 +264,7 @@ export const HUMAN_NATURE = {
     { from: 'CN1', to: 'S7', note: '大纲：CN1 → S7' },
     { from: 'CN1', to: 'D4', note: '大纲：CN1 → D4' },
     { from: 'CN1', to: 'D2', note: '大纲：D2 的背景要求含 “AF1 或 CN1”' },
+    { from: 'CN1', to: 'CN2', note: '大纲：CN2 推荐先读 CN1' },
     { from: 'CN6', to: 'KR1', note: '大纲：KR1 的前置为 CN6' },
     { from: 'S7', to: 'S8', note: '大纲：S8 推荐先读 S7' },
     { from: 'S7', to: 'D4', note: '大纲：D4 的背景要求含 S7' },

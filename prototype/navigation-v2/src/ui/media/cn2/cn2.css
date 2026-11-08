@@ -1,0 +1,224 @@
+/* ── 墨家、名家与后期墨经: Three standards workshop, Names and classification
+   lab, the 景到 pinhole demonstration, White horse explorer ──
+   Built on the shared .md panel (media.css), the GR1 workshop classes
+   (gr1.css: .lw-*, .pe-*, .gr-col) and the GR4 panel classes (gr4.css:
+   .g4-panel, .g4-table, .g4-case …). No new tokens. Fit and highlight states
+   are marked by text and line style as well as colour. Nothing moves except
+   short transitions, which are removed with reduced motion. */
+
+.c2 {
+  min-width: 0;
+}
+.article .c2-orig {
+  margin: 2px 0 4px;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.article .c2 .g4-panel p {
+  margin: 0 0 8px;
+}
+.c2-own {
+  margin-left: 6px;
+  font-weight: 400;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.c2-card {
+  padding: 10px 12px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  min-width: 0;
+}
+.article .c2-card p {
+  margin: 0 0 8px;
+}
+.c2-stepnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.c2-layer {
+  margin-top: 0;
+  padding: 12px;
+  border: 1px solid var(--ink);
+  border-top: 0;
+  background: #fff;
+}
+
+/* fit labels: text first, colour and line second */
+.c2-fit {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid var(--ink);
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.c2-fit--ok {
+  background: var(--ink);
+  color: #fff;
+}
+.c2-fit--mid {
+  border-style: dashed;
+  background: #fff;
+}
+.c2-fit--hard {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #fff;
+}
+.c2-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.c2-grid th,
+.c2-grid td {
+  min-width: 5.5em;
+}
+.c2-grid th .md-disclose {
+  text-align: left;
+}
+
+/* drawings */
+.c2-fig,
+.c2-model {
+  margin: 12px 0 0;
+  min-width: 0;
+}
+.c2-svg {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  background: #fff;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+}
+.c2-svg--small {
+  max-width: 320px;
+}
+.c2-wall {
+  stroke: var(--ink);
+  stroke-width: 6;
+}
+.c2-dark {
+  fill: #ecebe5;
+}
+.c2-screen {
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.c2-cone {
+  stroke-width: 1;
+  transition: all 0.25s ease-out;
+}
+.c2-cone--foot {
+  fill: rgba(0, 0, 0, 0.1);
+  stroke: var(--ink);
+}
+.c2-cone--head {
+  fill: rgba(0, 0, 0, 0.06);
+  stroke: var(--accent);
+  stroke-dasharray: 4 3;
+}
+.c2-obj,
+.c2-img {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c2-obj-head,
+.c2-img-head {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.c2-img-blur {
+  stroke: var(--ink);
+  stroke-opacity: 0.18;
+  stroke-linecap: round;
+}
+.c2-lbl {
+  font-family: var(--sans);
+  font-size: 15px;
+  fill: var(--ink);
+}
+.c2-lbl--big {
+  font-size: 24px;
+  font-weight: 700;
+}
+.c2-lbl--s {
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+.c2-set {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.c2-set--in {
+  stroke-dasharray: 5 3;
+}
+.c2-set--in.is-on {
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-dasharray: none;
+}
+.c2-dot {
+  fill: var(--ink);
+}
+.c2-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 6px;
+  padding: 0;
+  list-style: none;
+}
+.c2-chips li {
+  display: grid;
+  padding: 6px 10px;
+  border: 1px solid var(--ink);
+  background: #fff;
+  font-size: 13.5px;
+}
+.c2-chips li span {
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+
+/* sliders */
+.c2-ctl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 18px;
+  margin: 10px 0 12px;
+  font-size: 13px;
+}
+.c2-slider {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.c2-slider input {
+  width: 100%;
+  min-height: 32px;
+  accent-color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .c2-ctl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .c2-layer {
+    padding: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c2-cone {
+    transition: none;
+  }
+}

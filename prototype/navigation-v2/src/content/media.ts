@@ -48,7 +48,13 @@ export type MediaId =
   | 'zeno-head'
   | 'assent-workshop'
   | 'fate-explorer'
-  | 'modes-lab';
+  | 'modes-lab'
+  // 墨家、名家与后期墨经
+  | 'three-standards'
+  | 'daozang-page'
+  | 'classification-lab'
+  | 'pinhole-demo'
+  | 'white-horse';
 
 interface Anchor {
   id: MediaId;
@@ -132,6 +138,17 @@ const ANCHORS: Anchor[] = [
   { id: 'fate-explorer', code: 'GR4', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('古代的讨论给我们留下的') },
   // 五 · after "标准的问题": ten modes, five modes and the trilemma read.
   { id: 'modes-lab', code: 'GR4', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('五论式的一个特别重要的应用') },
+
+  // 二 · end of "后果成功，能证明一句话是真的吗？": both Mozi cases and the well/firecracker example read.
+  { id: 'three-standards', code: 'CN2', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('这个例子说明：三表作为一组提醒') },
+  // 三 · after the paragraph on how the canons are cited (one page of the 1445 道藏 print).
+  { id: 'daozang-page', code: 'CN2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('引用时，本课以通行本') },
+  // 三 · after 形貌/居运 and the children's-ticket example: 同异, 狂举 and the two kinds of name read.
+  { id: 'classification-lab', code: 'CN2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这个区分可以帮助我们看清日常分类中的许多困惑') },
+  // 五 · end of "小孔成倒像": text, reconstruction and what a modern demonstration shows.
+  { id: 'pinhole-demo', code: 'CN2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('现代演示能说明什么') },
+  // 六 · after the table of readings of 白马非马.
+  { id: 'white-horse', code: 'CN2', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表不是要读者选出') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

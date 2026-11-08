@@ -1,5 +1,6 @@
 import type { PracticeSet } from './practice';
 import { CN1_PRACTICE } from './practice-cn1';
+import { CN2_PRACTICE } from './practice-cn2';
 import { EA4_PRACTICE } from './practice-ea4';
 import { IN1_PRACTICE } from './practice-in1';
 import { GR1_PRACTICE } from './practice-gr1';
@@ -11,6 +12,7 @@ import { GR4_PRACTICE } from './practice-gr4';
 // shows its manuscript prompts as before (read-only, no answer box).
 const SETS: Record<string, PracticeSet[]> = {
   CN1: CN1_PRACTICE,
+  CN2: CN2_PRACTICE,
   EA4: EA4_PRACTICE,
   IN1: IN1_PRACTICE,
   GR1: GR1_PRACTICE,

@@ -113,3 +113,14 @@ export const ZENO_HEAD = {
   credit: 'Marble bust identified as Zeno of Citium, Roman copy after a Greek original. Museo Archeologico Nazionale di Napoli, inv. 6128 (Farnese collection). Photo: Jeremy Weate (2011), CC BY 2.0, via Wikimedia Commons. Not modified by this course apart from Wikimedia’s 960 px resize.',
   url: 'https://commons.wikimedia.org/wiki/File:Zeno_of_Citium_-_Museo_archeologico_nazionale_di_Napoli.jpg',
 };
+
+export const DAOZANG_JINGSHANG = {
+  /** Recorded in public/media/cn2/SOURCES.md (rights checked 2026-11-07). */
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/cn2/daozang-jingshang-1445.jpg',
+  width: 900,
+  height: 1276,
+  alt: '一页灰色调的古籍扫描：上方留有空白天头，下面是有边框的版面，竖排大字楷书自右向左排列。右起第一行是"墨子卷之十"，第二行低几格是"經上第四十"，以下各行连续刻写经文，不分条；左下边框外有小字"沛九"。',
+  credit: '《正統道藏》太清部沛字號第九冊《墨子》卷之十，明正統十年（1445）內府刊本。中國國家圖書館藏（善本書號 02607）。書格（shuge.org）據該館膠片整理，經 Wikimedia Commons 公有領域發佈；本課縮放並轉為 JPEG，未裁切。',
+  url: 'http://read.nlc.cn/allSearch/searchDetail?searchType=10024&showType=1&indexName=data_892&fid=411999005947',
+};
