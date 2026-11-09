@@ -91,6 +91,9 @@ export interface ParseOptions {
   /** Citations may name the author before the title: （严复《论世变之亟》）, as in the
    *  modern-period courses. Without this only （《书·篇》） is recognised. */
   authorCites?: boolean;
+  /** Author-first citations followed by a note marker, as in the 知识、推理与辩论 manuscript:
+   *  （商羯罗主《因明入正理论》，玄奘译）[^46]. Only quotes cited this way become sources. */
+  citeNoteRefs?: boolean;
 }
 
 export function parseCourse(code: string, raw: string, opts: ParseOptions): CourseText {
@@ -182,6 +185,15 @@ export function parseCourse(code: string, raw: string, opts: ParseOptions): Cour
             text,
           });
           continue;
+        }
+        if (opts.citeNoteRefs) {
+          // （作者《书》，译者）[^n]: the citation becomes the label, the note button stays in the passage.
+          const cite = text.match(/（([^（）《》]*《[^（）]*》[^（）]*)）\s*\d*\s*$/);
+          if (cite) {
+            const tail = /（[^（）《》]*《[^（）]*》[^（）]*）\s*((?:<button type="button" class="fn-ref"[^>]*>\d+<\/button>)?)\s*(<\/p>\s*<\/blockquote>\s*)$/;
+            out.push({ kind: 'source', html: html.replace(tail, '$1$2'), cite: cite[1], text });
+            continue;
+          }
         }
         const cite = text.match(opts.authorCites ? /（([^（）《》]*《[^（）]*》[^（）]*)）\s*$/ : /（(《[^（）]*》[^（）]*)）\s*$/);
         if (cite && (opts.citedQuotesAreSources || /[「」]|曰|也/.test(text))) {

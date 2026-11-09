@@ -8,6 +8,8 @@ import { CN7 } from './cn7';
 import { CN8 } from './cn8';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
+import { IN2 } from './in2';
+import { IN3 } from './in3';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
@@ -211,6 +213,40 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
       const i = IN1.SECTIONS.findIndex((s) => s.title.startsWith('三、'));
       return i >= 0 ? i : undefined;
     })(),
+  },
+  IN2: {
+    code: 'IN2',
+    text: IN2,
+    name: '早期佛教与阿毗达磨',
+    tier: '● 核心',
+    en: 'Early Buddhism and Abhidharma: Suffering, No-Self and Dependent Origination',
+    method: '检验还原分析（把人分析为部分）及其所受的反驳',
+    background: '大纲建议先读「印度哲学的起源」（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 2,
+    // IN4 lists this course as its background.
+    recommendFrom: ['IN4'],
+    leadsTo: ['IN3', 'IN4', 'S4', 'D2'],
+    sourceNote: '巴利文据 SuttaCentral 所载摩诃僧祇本（bilara-data），梵文据 GRETIL 所收电子本；版本与权利见附录。中文是本章试译。',
+    // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
+    origLang: (html) => (html.includes('ṁ') ? 'pi' : 'sa'),
+  },
+  IN3: {
+    code: 'IN3',
+    text: IN3,
+    name: '知识、推理与辩论',
+    tier: '● 核心',
+    en: 'Knowledge, Inference and Debate: Nyāya, Vaiśeṣika and the Buddhist Logicians',
+    method: '把推理形式化，并运用似因（谬误）理论',
+    background: '大纲建议先读「什么是哲学？」，「形式推理」也有帮助；印度哲学的推荐顺序是「印度哲学的起源」→「早期佛教与阿毗达磨」→ 本课（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 3,
+    // IN5 lists this course as helpful background.
+    recommendFrom: ['IN5'],
+    leadsTo: ['S1', 'S6', 'D3'],
+    sourceNote: '梵文据 GRETIL 所收电子本（陈那《集量论》第一章据 Steinkellner 2005 的复原本），汉文据 CBETA《大正藏》电子本；版本与权利见附录。中文是本章试译。',
+    srcNote: (cite) => (/玄奘译/.test(cite) ? '据 CBETA《大正藏》第 32 册第 1630 号，字形照录' : '原文见注释'),
+    origLang: () => 'sa',
   },
   GR1: {
     code: 'GR1',

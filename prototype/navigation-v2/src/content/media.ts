@@ -23,6 +23,16 @@ export type MediaId =
   | 'mahavira-folio'
   | 'many-sided'
   | 'evidence-workshop'
+  // 早期佛教与阿毗达磨
+  | 'do-explorer'
+  | 'chariot-explorer'
+  | 'abhidharma-lab'
+  | 'therigatha-voices'
+  // 知识、推理与辩论
+  | 'five-member'
+  | 'trairupya-lab'
+  | 'apoha-explorer'
+  | 'navya-workshop'
   // 古希腊哲学的起源
   | 'parmenides-explorer'
   | 'change-explorer'
@@ -125,6 +135,24 @@ const ANCHORS: Anchor[] = [
   { id: 'many-sided', code: 'IN1', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('syādvāda') && b.text.includes('不可言说') },
   // 五 · after the two readings of the Cārvāka and the boundary problem that follows them.
   { id: 'evidence-workshop', code: 'IN1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('当然，即使接受温和的读法') },
+
+  // 二 · after the table of four readings and the paragraph weighing them.
+  { id: 'do-explorer', code: 'IN2', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('四种读法不一定互相排斥') },
+  // 三 · after the lamp and the milk (the paragraph on what the similes do not do).
+  { id: 'chariot-explorer', code: 'IN2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('它没有做到什么') },
+  // 四 · after the two classifications of dharmas.
+  { id: 'abhidharma-lab', code: 'IN2', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('本章不要求读者记住这些数目') },
+  // 七 · after the table that keeps verse, inference and later accounts apart.
+  { id: 'therigatha-voices', code: 'IN2', section: '七、', match: (b) => b.kind === 'html' && b.text.includes('苏摩') && b.text.includes('后来的说法') && b.text.includes('帕塔查拉') },
+
+  // 三 · after the three five-membered arguments set side by side.
+  { id: 'five-member', code: 'IN3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('比较这三行') },
+  // 四 · after the hetucakra table.
+  { id: 'trairupya-lab', code: 'IN3', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('九种情况中，只有两种是好的理由') },
+  // 五 · after Ratnakīrti's position on apoha.
+  { id: 'apoha-explorer', code: 'IN3', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('也就是说，听到') },
+  // 七 · after the table of definition one and definition two (the kitchen).
+  { id: 'navya-workshop', code: 'IN3', section: '七、', match: (b) => b.kind === 'html' && b.text.includes('定义二') && b.text.includes('厨房是火之所在') },
 
   // 二 · after the step-by-step reconstruction of Parmenides' argument (end of fragment 8).
   { id: 'parmenides-explorer', code: 'GR1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('在残篇 8 的后面部分') },

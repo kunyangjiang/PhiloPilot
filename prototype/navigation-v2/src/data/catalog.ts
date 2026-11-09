@@ -59,6 +59,7 @@ export const COURSES: Course[] = [
   // Domain B — others used in the topic view
   c('IN1', '印度哲学的起源与早期思想争论：自我、宇宙与解脱', 'core', 'B', 'in'),
   c('IN2', '早期佛教与阿毗达磨：苦、无我与缘起', 'core', 'B', 'in'),
+  c('IN3', '知识、推理与辩论：正理、胜论与佛教因明', 'core', 'B', 'in'),
   c('EA3', '经验论、启蒙与自由主义的起源', 'core', 'B', 'ea'),
   c('EA4', '康德：批判、自主与判断', 'core', 'B', 'ea'),
   c('EA11', '1950 年后的道德与政治哲学', 'extended', 'B', 'ea'),
@@ -97,6 +98,8 @@ const SHORT: Record<string, string> = {
   CN8: '体系、马克思主义与当代中国哲学',
   EA4: '康德',
   IN1: '印度哲学的起源',
+  IN2: '早期佛教与阿毗达磨',
+  IN3: '知识、推理与辩论',
   GR1: '古希腊哲学的起源',
   GR2: '柏拉图',
   GR3: '亚里士多德',
@@ -254,7 +257,7 @@ export const HUMAN_NATURE = {
       links: [
         { code: 'S8', where: '§5 情感 · §6 意志软弱' },
         { code: 'EA3', where: '§4 休谟论道德与宗教' },
-        { code: 'IN2', where: '§6 伦理与心' },
+        { code: 'IN2', where: '六、伦理、心与道 · 业就是意图 · 慈与悲' },
         { code: 'GR1', where: '五、苏格拉底与省察 · 美德即知识？' },
         { code: 'GR2', where: '四、正义在灵魂与城邦中 · 灵魂的三个部分' },
         { code: 'GR4', where: '三、斯多亚派 · 激情：错误的判断 · 智者不是没有情感' },
