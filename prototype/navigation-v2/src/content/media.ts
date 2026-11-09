@@ -33,6 +33,14 @@ export type MediaId =
   | 'trairupya-lab'
   | 'apoha-explorer'
   | 'navya-workshop'
+  // 大乘哲学：中观与瑜伽行派
+  | 'catuskoti-workshop'
+  | 'yogacara-lab'
+  | 'three-natures'
+  // 权威、语言与义务：弥曼差派
+  | 'injunction-workshop'
+  | 'sentence-lab'
+  | 'self-validity'
   // 古希腊哲学的起源
   | 'parmenides-explorer'
   | 'change-explorer'
@@ -153,6 +161,20 @@ const ANCHORS: Anchor[] = [
   { id: 'apoha-explorer', code: 'IN3', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('也就是说，听到') },
   // 七 · after the table of definition one and definition two (the kitchen).
   { id: 'navya-workshop', code: 'IN3', section: '七、', match: (b) => b.kind === 'html' && b.text.includes('定义二') && b.text.includes('厨房是火之所在') },
+
+  // 二 · after the paragraph on whether the four corners break the laws of logic.
+  { id: 'catuskoti-workshop', code: 'IN4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('四句违反逻辑吗') },
+  // 四 · after the comparison with Berkeley and Kant (the paragraph on the practical aim).
+  { id: 'yogacara-lab', code: 'IN4', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('还有一点比这张表更重要') },
+  // 五 · after Śāntideva's reply on the lamp (end of 识的究竟地位).
+  { id: 'three-natures', code: 'IN4', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('接着，寂天回答') },
+
+  // 一 · after the śyena table (how Mīmāṃsā reads a command).
+  { id: 'injunction-workshop', code: 'IN5', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('这里可以看到弥曼差派思考命令的方式') },
+  // 三 · after why the dispute matters (the Frege comparison closes the section).
+  { id: 'sentence-lab', code: 'IN5', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('SEP 的作者把普拉巴卡拉派的理论和弗雷格') },
+  // 四 · after the comparison with Nyāya and the Buddhists.
+  { id: 'self-validity', code: 'IN5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('对第三种立场，帕尔塔萨拉提的回答是') },
 
   // 二 · after the step-by-step reconstruction of Parmenides' argument (end of fragment 8).
   { id: 'parmenides-explorer', code: 'GR1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('在残篇 8 的后面部分') },

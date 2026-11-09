@@ -2,4 +2,7 @@
 import raw from '@content/GR4_SAMPLE_DRAFT.md?raw';
 import { parseCourse } from './course';
 
-export const GR4 = parseCourse('GR4', raw, { exPrefix: 'gr4', summaryStart: '本课一句话' });
+const parsed = parseCourse('GR4', raw, { exPrefix: 'gr4', summaryStart: '本课一句话' });
+// The guide has no bolded core question (its first bold is a reading note); the
+// question is the guide's own title, verbatim, as in CN7.
+export const GR4 = { ...parsed, CORE_QUESTION: parsed.SECTIONS[0].title.replace(/^[^：]*：/, '') };

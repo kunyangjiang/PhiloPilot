@@ -10,6 +10,8 @@ import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
+import { IN4 } from './in4';
+import { IN5 } from './in5';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
@@ -246,6 +248,44 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['S1', 'S6', 'D3'],
     sourceNote: '梵文据 GRETIL 所收电子本（陈那《集量论》第一章据 Steinkellner 2005 的复原本），汉文据 CBETA《大正藏》电子本；版本与权利见附录。中文是本章试译。',
     srcNote: (cite) => (/玄奘译/.test(cite) ? '据 CBETA《大正藏》第 32 册第 1630 号，字形照录' : '原文见注释'),
+    origLang: () => 'sa',
+  },
+  IN4: {
+    code: 'IN4',
+    text: IN4,
+    name: '大乘哲学',
+    tier: '● 核心',
+    en: 'Mahāyāna Philosophy: Madhyamaka and Yogācāra',
+    method: '把辩证的否定当作论证来读，并评估所受的反驳',
+    background: '大纲建议先读「早期佛教与阿毗达磨」（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 4,
+    // IN6 lists this course as helpful background (CN5 lists it too; it is shown below as a link onward).
+    recommendFrom: ['IN6'],
+    leadsTo: ['CN5', 'D2', 'D3'],
+    sourceNote: '梵文据 GRETIL 所收电子本，汉文据 CBETA《大正藏》电子本（只作为历史上的翻译引用）；版本与权利见附录。中文是本章试译。',
+    srcNote: (cite) =>
+      /玄奘译/.test(cite)
+        ? '历史上的翻译：据 CBETA《大正藏》第 31 册第 1590 号，字形照录'
+        : /波罗颇蜜多罗译/.test(cite)
+          ? '历史上的翻译：据 CBETA《大正藏》第 30 册第 1566 号，字形照录'
+          : '原文见注释',
+    origLang: () => 'sa',
+  },
+  IN5: {
+    code: 'IN5',
+    text: IN5,
+    name: '权威、语言与义务',
+    tier: '● 核心',
+    en: 'Authority, Language and Duty: Mīmāṃsā',
+    method: '追踪一场注释传统中的争论，并重构关于权威的论证',
+    background: '大纲建议先读「印度哲学的起源」，「知识、推理与辩论」也有帮助（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 5,
+    // IN6 lists this course as helpful background.
+    recommendFrom: ['IN6'],
+    leadsTo: ['IN6', 'S1', 'S6'],
+    sourceNote: '梵文据 GRETIL 所收电子本；第三、四部分所引未经校对的电子本已对照印本，见注释与附录。中文是本章试译。',
     origLang: () => 'sa',
   },
   GR1: {
