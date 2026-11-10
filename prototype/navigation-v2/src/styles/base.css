@@ -832,6 +832,22 @@ main:focus,
   line-height: 1.6;
   color: var(--ink-2);
 }
+/* Judeo-Arabic in Hebrew script (JW1, Maimonides): right to left like the
+   Arabic; the Chinese reference under it is set small. */
+[data-style] .source--primary .source-orig:is(:lang(jrb), :lang(he)) p {
+  font-family: 'Noto Serif Hebrew', 'SBL Hebrew', 'Ezra SIL', 'David', 'Times New Roman', serif;
+  font-size: 20px;
+  line-height: 1.9;
+  unicode-bidi: plaintext;
+  text-align: start;
+  hyphens: manual;
+}
+[data-style] .source--primary .source-orig:is(:lang(jrb), :lang(he)) p + p {
+  font-family: var(--sans, inherit);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;

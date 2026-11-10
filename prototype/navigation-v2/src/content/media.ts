@@ -139,7 +139,17 @@ export type MediaId =
   | 'translation-lab'
   | 'debate-workshop'
   | 'new-confucian-comparison'
-  | 'practice-contradiction';
+  | 'practice-contradiction'
+  // 犹太哲学：从萨阿迪亚到列维纳斯
+  | 'negative-theology'
+  | 'creation-eternity'
+  // 从古代晚期到经院哲学
+  | 'anselm-lab'
+  | 'universals-workshop'
+  | 'five-ways'
+  // 近代早期理性主义与新科学
+  | 'doubt-cogito'
+  | 'elisabeth-objection';
 
 interface Anchor {
   id: MediaId;
@@ -376,6 +386,20 @@ const ANCHORS: Anchor[] = [
   { id: 'zhuxi-letter', code: 'CN6', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('读《朱子语类》时要记住') },
   // 七 · after the 袁枚 evidence paragraph.
   { id: 'shiguan-page', code: 'CN6', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('这是一条关于实际活动的证据：十三位女性聚会') },
+  // 二 · after the table on why negation and affirmation differ in standing.
+  { id: 'negative-theology', code: 'JW1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格的最后一行最重要。肯定的描述即使谨慎') },
+  // 三 · after Gersonides on creation.
+  { id: 'creation-eternity', code: 'JW1', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这个立场在犹太传统中极少见') },
+  // 三 · after the table of criticisms and the note under it.
+  { id: 'anselm-lab', code: 'EA1', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('（本章的整理；阿奎那和康德的批评') },
+  // 四 · after the table of four positions.
+  { id: 'universals-workshop', code: 'EA1', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('实质的实在论') && b.text.includes('唯名论') },
+  // 五 · after "Aquinas rejected Anselm's argument".
+  { id: 'five-ways', code: 'EA1', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('还要注意：阿奎那拒绝了安瑟伦的论证') },
+  // 二 · after "the cogito's certainty reaches only the present thinking self".
+  { id: 'doubt-cogito', code: 'EA2', section: '二、', match: (b) => b.kind === 'html' && b.text.includes('的确定性，只及于现在思想着的我') },
+  // 三 · after the 'vapours' paragraph (before Elisabeth's own position).
+  { id: 'elisabeth-objection', code: 'EA2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('她还指出另一类事实') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

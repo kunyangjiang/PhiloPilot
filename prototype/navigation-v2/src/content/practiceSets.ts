@@ -7,6 +7,8 @@ import { CN5_PRACTICE } from './practice-cn5';
 import { CN6_PRACTICE } from './practice-cn6';
 import { CN7_PRACTICE } from './practice-cn7';
 import { CN8_PRACTICE } from './practice-cn8';
+import { EA1_PRACTICE } from './practice-ea1';
+import { EA2_PRACTICE } from './practice-ea2';
 import { EA4_PRACTICE } from './practice-ea4';
 import { IN1_PRACTICE } from './practice-in1';
 import { IN2_PRACTICE } from './practice-in2';
@@ -25,6 +27,7 @@ import { GR1_PRACTICE } from './practice-gr1';
 import { GR2_PRACTICE } from './practice-gr2';
 import { GR3_PRACTICE } from './practice-gr3';
 import { GR4_PRACTICE } from './practice-gr4';
+import { JW1_PRACTICE } from './practice-jw1';
 
 // Question sets of each published course. A course without an entry here
 // shows its manuscript prompts as before (read-only, no answer box).
@@ -37,6 +40,8 @@ const SETS: Record<string, PracticeSet[]> = {
   CN6: CN6_PRACTICE,
   CN7: CN7_PRACTICE,
   CN8: CN8_PRACTICE,
+  EA1: EA1_PRACTICE,
+  EA2: EA2_PRACTICE,
   EA4: EA4_PRACTICE,
   IN1: IN1_PRACTICE,
   IN2: IN2_PRACTICE,
@@ -55,6 +60,7 @@ const SETS: Record<string, PracticeSet[]> = {
   GR2: GR2_PRACTICE,
   GR3: GR3_PRACTICE,
   GR4: GR4_PRACTICE,
+  JW1: JW1_PRACTICE,
 };
 
 export const MAX_QUESTIONS = 3;

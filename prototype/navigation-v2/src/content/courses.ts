@@ -6,6 +6,8 @@ import { CN5, AWAKENING_SECTION } from './cn5';
 import { CN6, NATURE_SECTION } from './cn6';
 import { CN7 } from './cn7';
 import { CN8 } from './cn8';
+import { EA1 } from './ea1';
+import { EA2 } from './ea2';
 import { EA4 } from './ea4';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
@@ -24,6 +26,7 @@ import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
 import { GR4 } from './gr4';
+import { JW1 } from './jw1';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -184,6 +187,41 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     sourceNote: '毛泽东著作据中文马克思主义文库所载《毛泽东选集》本（不是1937年的讲稿）；其他文本据中文维基文库；冯友兰、金岳霖的几句话是转引，出处见注释。版本与授权见附录。',
     srcNote: (cite) =>
       /转引/.test(cite) ? '转引的文字，出处见注释' : /^毛泽东/.test(cite) ? '据中文马克思主义文库所载《毛泽东选集》本' : '据中文维基文库录文，字形照录',
+  },
+  EA1: {
+    code: 'EA1',
+    text: EA1,
+    name: '从古代晚期到经院哲学',
+    tier: '● 核心',
+    en: 'From Late Antiquity to Scholasticism',
+    method: '跟随一个神学—哲学的论证；区分一个词的不同意义（共相）',
+    background: '大纲建议先读「亚里士多德」；「希腊化与罗马哲学」（斯多亚派与新柏拉图主义的背景）和「法拉比与阿维森纳」「安萨里、阿威罗伊与西方伊斯兰思想」（阿拉伯的来源）有帮助（推荐背景，不是必需）',
+    tradition: 'ea',
+    position: 1,
+    // EA2 lists this course as recommended background.
+    recommendFrom: ['EA2'],
+    leadsTo: ['EA2'],
+    sourceNote: '拉丁文据十九世纪公有领域印本的扫描本逐字核对（《忏悔录》von Raumer 1876 年本、《哲学的慰藉》Peiper 1871 年本、《宣讲》Migne《拉丁教父集》第 158 卷、《神学大全》1880 年巴黎本，以及《拉丁教父集》第 122、197、178 卷所收的爱留根纳、希尔德加德、爱洛依丝和 Denifle 编《巴黎大学文献集》第一卷），只引短段；其他著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对',
+    origLang: () => 'la',
+  },
+  EA2: {
+    code: 'EA2',
+    text: EA2,
+    name: '近代早期理性主义与新科学',
+    tier: '● 核心',
+    en: 'Early Modern Rationalism and the New Science',
+    method: '逐步重建一篇沉思；评估对它的反驳',
+    background: '大纲建议先读「从古代晚期到经院哲学」（推荐背景，不是必需）',
+    tradition: 'ea',
+    position: 2,
+    // EA3 lists this course as recommended background (EA3 is not yet published).
+    recommendFrom: ['EA3'],
+    leadsTo: ['EA3'],
+    sourceNote: '拉丁文和法文据 Adam 与 Tannery 编《笛卡尔全集》、van Vloten 与 Land 编《斯宾诺莎著作集》、Gerhardt 编《莱布尼茨哲学著作集》、Brunschvicg 编帕斯卡《思想录》的扫描本逐字核对，保留初版拼写，只引短段；卡文迪什和康韦一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
+    // Latin (Descartes, Spinoza) and French (Elisabeth, Leibniz) alternate.
+    origLang: (html) => (/[éèêàùç]|\b(?:qu|n|l|d|c)['’]/i.test(html.replace(/<[^>]+>/g, '')) ? 'fr' : 'la'),
   },
   EA4: {
     code: 'EA4',
@@ -520,6 +558,27 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: () => '据扫描页面逐字录出',
     // ʿAbduh's Arabic and Iqbal's English alternate.
     origLang: (html) => (/[؀-ۿ]/.test(html) ? 'ar' : 'en'),
+  },
+  JW1: {
+    code: 'JW1',
+    text: JW1,
+    name: '犹太哲学：从萨阿迪亚到列维纳斯',
+    tier: '◐ 核心选修',
+    en: 'Jewish Philosophy: Saadia to Levinas',
+    method: '阅读否定神学；比较对同一个问题的不同回答',
+    background: '大纲认为「安萨里、阿威罗伊与西方伊斯兰思想」和「从古代晚期到经院哲学」有帮助（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 6,
+    recommendFrom: [],
+    leadsTo: ['S12'],
+    sourceNote: '犹太—阿拉伯文据 Munk 1856 年巴黎本《迷途指津》的页面图像逐字录出；拉丁文据 van Vloten 与 Land 1895 年本《神学政治论》、德文据 1783 年柏林初版《耶路撒冷》的扫描本逐字核对，只引短段；《创造之书》和《光辉之书》各一句据 Sefaria 的数字文本；其他著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对',
+    // Maimonides' Judeo-Arabic (Hebrew script), Spinoza's Latin and Mendelssohn's German.
+    origLang: (html) => {
+      const t = html.replace(/<[^>]+>/g, '');
+      if (/[\u0590-\u05FF]/.test(t)) return 'jrb';
+      return /[äöüß]|\b(?:und|der|die|das|nicht|ist)\b/.test(t) ? 'de' : 'la';
+    },
   },
 };
 

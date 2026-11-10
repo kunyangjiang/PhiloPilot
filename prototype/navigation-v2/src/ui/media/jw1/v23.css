@@ -1,0 +1,76 @@
+/* V23 components (JW1, EA1, EA2). Builds on ia1/v21.css and ia3/v22.css.
+   Swiss style: rules, not boxes. */
+
+.article .v23-he {
+  margin: 4px 0;
+  font-family: 'Noto Serif Hebrew', 'SBL Hebrew', 'Ezra SIL', 'David', 'Times New Roman', serif;
+  font-size: 20px;
+  line-height: 1.9;
+  text-align: right;
+  unicode-bidi: plaintext;
+}
+
+/* a short table of attributes: each row a label and a value */
+.v23-dl {
+  display: grid;
+  grid-template-columns: minmax(0, 7em) minmax(0, 1fr);
+  margin: 8px 0 12px;
+  border-top: 2px solid var(--ink);
+}
+.v23-dl > dt,
+.v23-dl > dd {
+  margin: 0;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.v23-dl > dt {
+  padding-right: 10px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* beliefs that survive or fall at a stage of doubt */
+.v23-beliefs {
+  margin: 8px 0 12px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.article .v23-beliefs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.v23-beliefs b {
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.v23-beliefs li.is-doubt span {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.v23-beliefs li.is-doubt b {
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+@media (max-width: 600px) {
+  .v23-dl {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .v23-dl > dt {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v22-bar i,
+  .v23-beliefs li {
+    transition: none;
+  }
+}
