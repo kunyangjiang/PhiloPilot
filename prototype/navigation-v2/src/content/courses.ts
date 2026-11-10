@@ -17,6 +17,9 @@ import { IN7 } from './in7';
 import { IN8 } from './in8';
 import { IA1 } from './ia1';
 import { IA2 } from './ia2';
+import { IA3 } from './ia3';
+import { IA4 } from './ia4';
+import { IA5 } from './ia5';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
@@ -455,13 +458,68 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '大纲建议先读「翻译运动、凯拉姆与哲学的兴起」和「亚里士多德」（推荐背景，不是必需）',
     tradition: 'ia',
     position: 2,
-    // IA3 depends on this course (intellectual dependency, not a lock). EA1 lists it
-    // only as helpful and belongs to another tradition, so it is shown as a 后续 link.
-    recommendFrom: ['IA3'],
+    // IA3 depends on this course (intellectual dependency, not a lock); IA4 lists it
+    // as its background. EA1 lists it only as helpful and belongs to another
+    // tradition, so it is shown as a 后续 link.
+    recommendFrom: ['IA3', 'IA4'],
     leadsTo: ['IA3', 'EA1'],
     sourceNote: '阿拉伯文据 Forget 1892 年校订本《指要与诠解》（公有领域）的扫描页面逐字录出；其他著作一律转述。版本与权利见附录。中文是本章试译。',
     srcNote: () => '据 Forget 1892 年校订本扫描页面逐字录出',
     origLang: () => 'ar',
+  },
+  IA3: {
+    code: 'IA3',
+    text: IA3,
+    name: '安萨里、阿威罗伊与西方伊斯兰思想',
+    tier: '● 核心',
+    en: 'Ghazālī, Averroes and Western Islamic Thought: Causation, Reason and Society',
+    method: '评价围绕同一个例子（火与棉花）的双方交锋',
+    background: '大纲建议先读「法拉比与阿维森纳」：安萨里批评的主要是阿维森纳的立场（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 3,
+    // IA5 lists this course as recommended background.
+    recommendFrom: ['IA5'],
+    // The curriculum's → links, after the recommended chain (IA3 → IA4); this
+    // course is also listed as helpful before JW1.
+    leadsTo: ['IA4', 'EA1', 'S2', 'S3', 'D3', 'JW1'],
+    sourceNote: '阿拉伯文据安萨里《哲学家的矛盾》开罗 1302 年本、阿威罗伊《矛盾的矛盾》Bouyges 1930 年本、《决断论》Müller 1859 年本和伊本·赫勒敦《历史绪论》Quatremère 1858 年本的扫描页面逐字录出，只引短句；其他著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据扫描页面逐字录出',
+    origLang: () => 'ar',
+  },
+  IA4: {
+    code: 'IA4',
+    text: IA4,
+    name: '照明学派、苏非形而上学与后古典诸派',
+    tier: '○ 拓展',
+    en: 'Illumination, Sufi Metaphysics and the Post-Classical Schools',
+    method: '对认识的种类作概念分析（在场的知识）',
+    background: '大纲建议先读「法拉比与阿维森纳」（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 4,
+    recommendFrom: [],
+    // The curriculum's → link, after the recommended chain (IA4 → IA5).
+    leadsTo: ['IA5', 'D3'],
+    sourceNote: '波斯文据 Nicholson 1925 年校订本《玛斯纳维》第一卷的扫描页面逐字录出（只录鲁米的原诗，不含 Nicholson 的译文和注释）；苏赫拉瓦迪、伊本·阿拉比、穆拉·萨德拉等人的著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据 Nicholson 1925 年本扫描页面逐字录出',
+    // The only original-language passages are Rūmī's Persian verses.
+    origLang: () => 'fa',
+  },
+  IA5: {
+    code: 'IA5',
+    text: IA5,
+    name: '近现代伊斯兰与阿拉伯思想',
+    tier: '○ 拓展',
+    en: 'Modern Islamic and Arabic Thought',
+    method: '评价以古典资源为基础的现代论证',
+    background: '大纲建议先读「安萨里、阿威罗伊与西方伊斯兰思想」（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 5,
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote: '阿拉伯文据阿布笃《认主独一论》开罗 1906 年本的扫描页面逐字录出；英文据伊克巴尔《伊斯兰宗教思想的重建》1934 年牛津版的扫描页面逐字录出，只引短句，依据是引用而不是公有领域；其他现代著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据扫描页面逐字录出',
+    // ʿAbduh's Arabic and Iqbal's English alternate.
+    origLang: (html) => (/[؀-ۿ]/.test(html) ? 'ar' : 'en'),
   },
 };
 

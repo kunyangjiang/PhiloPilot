@@ -3,6 +3,11 @@ import { LETTERS, type Option, type PracticeSet, type Question } from '../conten
 import { getExercise, getPractice, setPractice, type PracticeState } from '../state/store';
 import '../styles/practice.css';
 
+// Dispatched (bubbling) from the set whenever an answer changes. The reader
+// listens for it so that the layout shift caused by opening feedback is not
+// mistaken for reading (Reader.tsx).
+export const PRACTICE_CHANGE = 'pp-practice-change';
+
 // One 想一想 block as a short run of selection questions (see content/practice.ts).
 // Each question is answered, checked and, if wrong, retried on its own; the
 // answers stay on this device. No score is kept.
@@ -224,14 +229,16 @@ export default function Practice({
     return typeof v === 'string' ? v.trim() : '';
   });
 
+  const box = useRef<HTMLElement>(null);
   const update = (qid: string, v: PracticeState[string]) => {
     const next = { ...state, [qid]: v };
     setState(next);
     setPractice(code, setKey, next);
+    box.current?.dispatchEvent(new Event(PRACTICE_CHANGE, { bubbles: true }));
   };
 
   return (
-    <aside className="exercise pq" aria-label={`想一想（${set.label}）`}>
+    <aside ref={box} className="exercise pq" aria-label={`想一想（${set.label}）`}>
       <p className="ex-tag">想一想 · {set.label}</p>
       <p className="pq-lede">{set.lede}</p>
       <ol className="pq-list">

@@ -816,6 +816,22 @@ main:focus,
   line-height: 1.6;
   color: var(--ink-2);
 }
+/* Persian verse (IA4, Rūmī): a passage may hold two couplets, so only the
+   last paragraph (the Chinese reference) is set small. */
+[data-style] .source--primary .source-orig:lang(fa) p {
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Scheherazade New', 'Traditional Arabic', 'Arabic Typesetting', serif;
+  font-size: 21px;
+  line-height: 1.9;
+  unicode-bidi: plaintext;
+  text-align: start;
+  hyphens: manual;
+}
+[data-style] .source--primary .source-orig:lang(fa) p:last-child {
+  font-family: var(--sans, inherit);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;

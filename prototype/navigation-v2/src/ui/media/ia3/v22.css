@@ -1,0 +1,104 @@
+/* V22 components (IA3, IA4, IA5): levels, small grids and chains.
+   Builds on ia1/v21.css. Swiss style: rules, not boxes. */
+
+.v22-level {
+  display: grid;
+  grid-template-columns: minmax(0, 7em) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.v22-level-k {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.v22-bar {
+  display: inline-flex;
+  gap: 3px;
+}
+.v22-bar i {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--ink);
+  transition: background-color 0.2s ease;
+}
+.v22-bar i.is-on {
+  background: var(--ink);
+}
+
+.v22-rows {
+  margin: 8px 0 12px;
+  border-top: 2px solid var(--ink);
+}
+.v22-row {
+  padding: 8px 0 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.article .v22-row > p {
+  margin: 0 0 6px;
+}
+
+.v22-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+}
+.v22-chain span {
+  display: inline-block;
+  min-width: 34px;
+  padding: 4px 8px;
+  border: 1px solid var(--ink);
+  font-size: 14px;
+  text-align: center;
+}
+.v22-chain span.is-self {
+  background: var(--ink);
+  color: #fff;
+}
+
+.v22-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}
+.v22-btn {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.v22-btn[aria-pressed='true'] {
+  background: var(--ink);
+  color: #fff;
+}
+.v22-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.v22-btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .v22-level {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .v22-level b {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v22-bar i {
+    transition: none;
+  }
+}

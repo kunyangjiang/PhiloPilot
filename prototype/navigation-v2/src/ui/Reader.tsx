@@ -7,6 +7,7 @@ import { readPct } from '../state/reading';
 import { TopBar } from './Chrome';
 import Diagram from './Diagram';
 import Exercise from './Exercise';
+import { PRACTICE_CHANGE } from './Practice';
 import Media from './media/Media';
 import { mediaAfter } from '../content/media';
 import Wayfinder, { crumbsFor, go } from './Wayfinder';
@@ -129,6 +130,11 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   const [drawer, setDrawer] = useState(false);
   const [barsHidden, setBarsHidden] = useState(false);
   const userMoved = useRef(false);
+  // Set while a 想一想 answer has just changed the layout (feedback opening,
+  // focus moving to it): the browser's small scroll adjustment is not reading,
+  // so it must not move the bookmark or progress. Cleared by the next genuine
+  // input anywhere on the page (see the scroll effect below).
+  const practiceHold = useRef(false);
   const lastTop = useRef(0);
   const tocBtn = useRef<HTMLButtonElement>(null);
   const railRef = useRef<HTMLElement>(null);
@@ -144,6 +150,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     setNote(null);
     setDrawer(false);
     userMoved.current = false;
+    practiceHold.current = false;
     const sc = scrollRef.current;
     if (!sc) return;
     sc.scrollTop = 0;
@@ -173,8 +180,10 @@ export default function Reader({ route }: { route: ReaderRoute }) {
       lastTop.current = sc.scrollTop;
     }
     // Progress counts only the learner's own reading, never a programmatic jump
-    // (resume, search result, back/forward).
-    if (userMoved.current) bumpProgress(code, section, f > 0.97 ? 1 : f);
+    // (resume, search result, back/forward) and never a layout shift caused by
+    // answering a 想一想 question.
+    const own = userMoved.current && !practiceHold.current;
+    if (own) bumpProgress(code, section, f > 0.97 ? 1 : f);
     const blocks = [...sc.querySelectorAll<HTMLElement>('.article [data-block]')];
     const y = sc.getBoundingClientRect().top + 140;
     let cur = blocks[0];
@@ -190,7 +199,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     setActiveH(h);
     // Only the learner's own scrolling moves the saved position; programmatic
     // jumps (opening a section, back/forward) never overwrite it.
-    if (cur && userMoved.current) {
+    if (cur && own) {
       setPosition(code, {
         section,
         block: Number(cur.dataset.block),
@@ -213,11 +222,21 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     const mark = () => (userMoved.current = true);
     const evs = ['wheel', 'pointerdown', 'touchstart', 'keydown'] as const;
     evs.forEach((ev) => sc.addEventListener(ev, mark, { passive: true }));
+    // A practice answer (Practice.tsx dispatches PRACTICE_CHANGE) holds saving;
+    // any later input anywhere releases it. Capture on document, so the input
+    // that precedes the answer's click is handled before the hold is set, and
+    // so the Back to Top button (outside the reader) also releases it.
+    const hold = () => (practiceHold.current = true);
+    const release = () => (practiceHold.current = false);
+    sc.addEventListener(PRACTICE_CHANGE, hold);
+    evs.forEach((ev) => document.addEventListener(ev, release, { capture: true, passive: true }));
     onScroll();
     const iv = window.setInterval(() => setProg(getProgress(code)), 1200);
     return () => {
       sc.removeEventListener('scroll', h);
       evs.forEach((ev) => sc.removeEventListener(ev, mark));
+      sc.removeEventListener(PRACTICE_CHANGE, hold);
+      evs.forEach((ev) => document.removeEventListener(ev, release, { capture: true }));
       cancelAnimationFrame(raf);
       window.clearInterval(iv);
     };

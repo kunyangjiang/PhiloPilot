@@ -57,6 +57,15 @@ export type MediaId =
   // 法拉比与阿维森纳
   | 'necessary-existent'
   | 'flying-man'
+  // 安萨里、阿威罗伊与西方伊斯兰思想
+  | 'fire-cotton'
+  | 'cohesion-model'
+  // 照明学派、苏非形而上学与后古典诸派
+  | 'presence-explorer'
+  | 'substantial-motion'
+  // 近现代伊斯兰与阿拉伯思想
+  | 'iqbal-method'
+  | 'double-movement'
   // V21 images (approved 2026-11-09)
   | 'roy-miniature'
   | 'vivekananda-1893'
@@ -223,6 +232,18 @@ const ANCHORS: Anchor[] = [
   { id: 'necessary-existent', code: 'IA2', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。现代宗教哲学中的') },
   // 五 · after "不要把飞人读成……" (before the comparison with Descartes).
   { id: 'flying-man', code: 'IA2', section: '五、', match: (b) => b.kind === 'html' && b.text.includes('不要把飞人读成') },
+  // 三 · after 必然性与障碍 (Averroes' fourth point), before the Avicenna comparison.
+  { id: 'fire-cotton', code: 'IA3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这样，安萨里第二种进路中关于奇迹的说法') },
+  // 六 · after the three generations ("这是一个循环的理论").
+  { id: 'cohesion-model', code: 'IA3', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('这是一个循环的理论') },
+  // 二 · after the four-kinds-of-knowledge table.
+  { id: 'presence-explorer', code: 'IA4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。') && b.text.includes('现代的反驳') },
+  // 五 · after the Zayd table.
+  { id: 'substantial-motion', code: 'IA4', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最后一列很重要') },
+  // 二 · in the five-step reconstruction, before its summary table.
+  { id: 'iqbal-method', code: 'IA5', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('所以，一个合理的评价是') },
+  // 三 · after the evaluation of the polygamy worked example.
+  { id: 'double-movement', code: 'IA5', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('所以，这个例子说明的，不是') },
   // V21 images, approved 2026-11-09 (content/V21_*_IMAGE_APPROVAL_SHEET.md).
   { id: 'roy-miniature', code: 'IN8', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('1813 年，英国议会') },
   { id: 'vivekananda-1893', code: 'IN8', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('辨喜是孟加拉的神秘主义者') },
