@@ -1,0 +1,81 @@
+// PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
+// curriculum and never counted in course totals or course progress.
+// The eight titles and directions were sealed by the product owner. Only
+// CASE 02 is written; the others list title, direction and subjects only and
+// open nothing.
+
+export interface CaseEntry {
+  /** Two-digit case number, also the route id (#/cases/02). */
+  no: string;
+  title: string;
+  /** Only for written cases (taken from the manuscript). */
+  genre?: string;
+  /** One sentence, limited to the sealed direction. */
+  premise: string;
+  subjects: string[];
+  available: boolean;
+}
+
+export const CASES: CaseEntry[] = [
+  {
+    no: '01',
+    title: '不存在的原作',
+    premise: '一位修复师和一名学生面对一项修复决定。',
+    subjects: ['艺术作品的同一性', '作者意图', '复制与临摹'],
+    available: false,
+  },
+  {
+    no: '02',
+    title: '分洪',
+    genre: '灾难惊悚 / 政治与道德哲学 / 职场文学',
+    premise: '一场虚构的洪水里，水文预报员沈槐要把一个不确定的预报交给决策者；要不要启用蓄洪区，不由她决定。',
+    subjects: ['后果主义与权利', '制度与补偿', '墨家与孟子', '道德运气'],
+    available: true,
+  },
+  {
+    no: '03',
+    title: '白马非马',
+    premise: '商标审查员的职场喜剧。',
+    subjects: ['逻辑', '名与实', '公孙龙与墨辩', '指称'],
+    available: false,
+  },
+  {
+    no: '04',
+    title: '合法的命令',
+    premise: '一位资深法官和一名书记员回看一场审判。',
+    subjects: ['法律与道德', '哈特与富勒', '拉德布鲁赫', '《克力同》'],
+    available: false,
+  },
+  {
+    no: '05',
+    title: '镜中之城',
+    premise: '一个模拟研究组要决定是否关闭他们的模拟（设定为虚构推想）。',
+    subjects: ['他心', '道德地位', '模型能否作为证据'],
+    available: false,
+  },
+  {
+    no: '06',
+    title: '失落的第九卷',
+    premise: '一位语文学家与一座寺院的守护者之间的分歧。',
+    subjects: ['证言与知识来源', '正理派与陈那'],
+    available: false,
+  },
+  {
+    no: '07',
+    title: '译名之争',
+    premise: '历史一线只以文献呈现，另一条线发生在当下。',
+    subjects: ['翻译与概念'],
+    available: false,
+  },
+  {
+    no: '08',
+    title: '最后一座图书馆',
+    premise: '时间紧迫，几方力量围绕一座图书馆的去留。',
+    subjects: ['财产与正义', '诺齐克与罗尔斯'],
+    available: false,
+  },
+];
+
+/** Case code used for local storage keys (philopilot.v2.case02.…). */
+export const caseCode = (no: string) => 'CASE' + no;
+export const caseByNo = (no: string) => CASES.find((c) => c.no === no);

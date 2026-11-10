@@ -1,0 +1,358 @@
+/* ── PhiloPilot Cases (哲学案例) ────────────────────────────────────────────────
+   Minimal additions for the Cases entry, overview, CASE 02 front page and
+   reader. Everything else reuses the course pages' classes and tokens
+   (wayfinder, course-grid, read-card, toc-list, reader, rail, article). */
+
+/* Top bar entry: a section tab, not a button and not a search label —
+   the section name in bold over a thick rule in the four entrance colours
+   (the same family as the 四格 PhiloPilot mark). */
+.topbar-cases {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  height: 40px;
+  padding: 4px 2px 0;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.tc-rule {
+  display: flex;
+  height: 4px;
+  transform-origin: top;
+  transition: transform var(--t, 0.15s);
+}
+.tc-rule i {
+  flex: 1;
+}
+.tc-rule i:nth-child(1) {
+  background: var(--c-history);
+}
+.tc-rule i:nth-child(2) {
+  background: var(--c-questions);
+}
+.tc-rule i:nth-child(3) {
+  background: var(--c-dialogue);
+}
+.tc-rule i:nth-child(4) {
+  background: var(--c-methods);
+}
+.topbar-cases:hover {
+  color: var(--open);
+}
+.topbar-cases:hover .tc-rule,
+.topbar-cases[aria-current='page'] .tc-rule {
+  transform: scaleY(1.75);
+}
+.topbar-cases:focus-visible {
+  outline-offset: 4px;
+}
+@media (max-width: 600px) {
+  .topbar-cases {
+    font-size: 14px;
+  }
+}
+@media (max-width: 420px) {
+  /* Room for brand, 哲学案例 and 搜索 on one line. */
+  .brand-sub {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tc-rule {
+    transition: none;
+  }
+}
+[data-motion='none'] .tc-rule {
+  transition: none;
+}
+
+/* ── Overview ── */
+.cases-body {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+.cases-head {
+  max-width: 760px;
+  margin-bottom: 40px;
+}
+.cases-title {
+  margin: 0 0 16px;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.cases-lede {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.8;
+}
+.cases-lede small,
+.cases-avail {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.cases-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 2px solid var(--ink);
+}
+.case-card {
+  border-bottom: 1px solid var(--rule);
+}
+.case-card:nth-child(odd) {
+  border-right: 1px solid var(--rule);
+}
+.case-link {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-areas: 'no main' 'no status';
+  grid-template-rows: auto 1fr;
+  gap: 8px 16px;
+  height: 100%;
+  padding: 20px 20px 22px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.case-card:nth-child(even) .case-link {
+  padding-left: 20px;
+}
+.case-no {
+  grid-area: no;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink-3);
+}
+.case-main {
+  grid-area: main;
+  display: grid;
+  gap: 4px;
+}
+.case-t {
+  font-size: 20px;
+  font-weight: 700;
+}
+.case-genre {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.case-premise {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.case-subj {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.case-subj-k {
+  margin-right: 8px;
+  color: var(--ink-3);
+}
+.case-status {
+  grid-area: status;
+  align-self: end;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.case-st {
+  color: var(--ink-3);
+}
+.is-planned .case-t,
+.is-planned .case-premise {
+  color: var(--ink-2);
+}
+.is-open .case-no {
+  color: var(--accent);
+}
+.case-st--open {
+  padding: 2px 8px;
+  background: var(--accent);
+  color: var(--accent-ink, #fff);
+}
+.is-open .case-link:hover .case-t,
+.is-open .case-link:focus-visible .case-t {
+  color: var(--open);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.case-go {
+  transition: transform var(--t, 0.15s);
+}
+.is-open .case-link:hover .case-go {
+  transform: translateX(4px);
+}
+
+/* ── CASE 02 front page ── */
+.case-fiction {
+  margin: 16px 0 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+.case-content-note {
+  margin: 16px 0 24px;
+  padding: 10px 14px;
+  border-left: 4px solid var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.ccn-k {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+}
+.case-courses {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.case-courses small {
+  color: var(--ink-2);
+}
+
+/* ── Reader ── */
+.case-reader .rail-path a {
+  color: inherit;
+}
+/* The novel: a calm reading column. */
+.case-novel {
+  font-size: 18px;
+  line-height: 2;
+}
+.case-novel p {
+  margin: 0 0 1.1em;
+}
+.case-article--appendix ol,
+.case-article--appendix ul {
+  padding-left: 1.6em;
+}
+.case-article a {
+  color: var(--open);
+  overflow-wrap: anywhere;
+}
+.case-px-note {
+  margin: 0 0 8px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* 附录二 决策点 */
+.dp {
+  margin: 32px 0 40px;
+}
+.dp-h {
+  margin-top: 16px;
+}
+.dp-part {
+  border-bottom: 1px solid var(--rule);
+}
+.dp-part > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  font-family: var(--sans, inherit);
+  font-size: 15px;
+  font-weight: 700;
+  list-style: none;
+}
+.dp-part > summary::-webkit-details-marker {
+  display: none;
+}
+.dp-part > summary::after {
+  content: '+';
+  margin-left: auto;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.dp-part[open] > summary::after {
+  content: '−';
+}
+.dp-part > summary small {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+.dp-part > summary:hover {
+  color: var(--open);
+}
+.dp-n {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+}
+.dp-part--later .dp-n {
+  border-style: dashed;
+}
+.dp-body {
+  padding: 0 0 12px 32px;
+}
+
+@media (max-width: 900px) {
+  /* The course front page moves the start button up on narrow screens; the
+     fiction disclosure and content note stay above it. */
+  .course-main > .case-fiction,
+  .course-main > .case-content-note {
+    order: 0;
+  }
+  .cases-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .case-card:nth-child(odd) {
+    border-right: 0;
+  }
+  .case-card:nth-child(even) .case-link {
+    padding-left: 0;
+  }
+}
+@media (max-width: 600px) {
+  .cases-title {
+    font-size: 32px;
+  }
+  .case-link {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 6px 12px;
+  }
+  .case-no {
+    font-size: 22px;
+  }
+  .case-novel {
+    font-size: 17px;
+    line-height: 1.95;
+  }
+  .dp-body {
+    padding-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-go {
+    transition: none;
+  }
+}
+[data-motion='none'] .case-go {
+  transition: none;
+}

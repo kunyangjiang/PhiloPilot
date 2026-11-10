@@ -41,6 +41,13 @@ export type MediaId =
   | 'injunction-workshop'
   | 'sentence-lab'
   | 'self-validity'
+  // 梵、自我与世界：吠檀多派
+  | 'upanisad-explorer'
+  | 'adhyasa-workshop'
+  | 'brahman-self-world'
+  // 意识、物质与修行：数论与瑜伽派
+  | 'tattva-explorer'
+  | 'purusa-workshop'
   // 古希腊哲学的起源
   | 'parmenides-explorer'
   | 'change-explorer'
@@ -175,6 +182,18 @@ const ANCHORS: Anchor[] = [
   { id: 'sentence-lab', code: 'IN5', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('SEP 的作者把普拉巴卡拉派的理论和弗雷格') },
   // 四 · after the comparison with Nyāya and the Buddhists.
   { id: 'self-validity', code: 'IN5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('对第三种立场，帕尔塔萨拉提的回答是') },
+
+  // 一 · after "what the table shows" (four passages, three readings).
+  { id: 'upanisad-explorer', code: 'IN6', section: '一、', match: (b) => b.kind === 'html' && b.text.includes('这个表说明了什么') },
+  // 二 · after the two remarks on the rope and the snake (adhyāsa).
+  { id: 'adhyasa-workshop', code: 'IN6', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('这个例子有两点值得注意') },
+  // 六 · after the 总表 of the three schools.
+  { id: 'brahman-self-world', code: 'IN6', section: '六、', match: (b) => b.kind === 'html' && b.text.includes('具有无量美好属性的人格神（毗湿奴）') },
+
+  // 二 · where the chapter introduces the tattva structure (it replaces the former text diagram).
+  { id: 'tattva-explorer', code: 'IN7', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('把这几颂合起来，可以整理成一张结构图') },
+  // 三 · after the comparison with Descartes.
+  { id: 'purusa-workshop', code: 'IN7', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最重要的区别在第二行') },
 
   // 二 · after the step-by-step reconstruction of Parmenides' argument (end of fragment 8).
   { id: 'parmenides-explorer', code: 'GR1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('在残篇 8 的后面部分') },

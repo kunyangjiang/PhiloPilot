@@ -1,0 +1,108 @@
+/* 吠檀多派 (IN6) and 数论与瑜伽派 (IN7) components.
+   Built on the shared md-*, c3/c5, c7-tag, ip-* and ix-* classes; only what they lack is here. */
+
+/* reading cards, one per school */
+.i6-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 8px 0;
+  border-top: 2px solid var(--ink);
+}
+.i6-card {
+  padding: 8px 12px 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.i6-card + .i6-card {
+  padding-left: 12px;
+  border-left: 1px solid var(--rule);
+}
+.i6-card.is-gap {
+  color: var(--ink-2);
+}
+.i6-card-h {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.article .i6-card p {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+/* two directions side by side */
+.i6-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 16px;
+  margin: 8px 0;
+}
+.i6-two > .ip-claim {
+  grid-column: 1 / -1;
+}
+
+/* a reconstructed argument whose steps can be opened */
+.i6-steps {
+  margin: 8px 0;
+  padding-left: 1.6em;
+}
+.article .i6-steps li {
+  margin: 2px 0;
+}
+.i6-step {
+  display: block;
+  width: 100%;
+  padding: 4px 8px;
+  border: 0;
+  border-left: 2px solid transparent;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+}
+.i6-step.is-key {
+  border-left-color: var(--ink);
+  font-weight: 700;
+}
+.i6-step.is-on {
+  background: var(--ink);
+  color: #fff;
+}
+.i6-step:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* the three schools' pictures */
+.i6-fig {
+  max-width: 560px;
+  color: var(--ink);
+}
+.i6-fig .i6-dep {
+  stroke-width: 1.2;
+}
+.i6-fig text.i6-inv {
+  fill: #fff;
+}
+
+@media (max-width: 640px) {
+  .i6-cards,
+  .i6-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .i6-card + .i6-card {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .i6-step {
+    transition: none;
+  }
+}
+[data-motion='none'] .i6-step {
+  transition: none;
+}

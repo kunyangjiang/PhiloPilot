@@ -122,10 +122,13 @@ main:focus,
   min-height: 40px;
   align-items: center;
 }
+/* The PhiloPilot mark: the home page's four entrance shapes in one 2×2
+   grid (drawn in Chrome.tsx with the --c-* region colours). */
 .brand-mark {
-  width: 18px;
-  height: 18px;
-  background: var(--accent);
+  width: 22px;
+  height: 22px;
+  flex: none;
+  display: block;
 }
 .brand-name {
   font-family: var(--head);

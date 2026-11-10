@@ -248,10 +248,13 @@ export default function Practice({
         ))}
       </ol>
       <p className="pq-foot">选择只保存在这台设备上，不计分。</p>
-      <button type="button" className="ex-hint-btn" aria-expanded={orig} onClick={() => setOrig((o) => !o)}>
-        {orig ? '收起本章原题' : '本章原题与提示（建议做完再看）'}
-      </button>
-      {orig && (
+      {/* Sets without an original exercise (CASE 02) have no 原题 toggle. */}
+      {promptHtml && (
+        <button type="button" className="ex-hint-btn" aria-expanded={orig} onClick={() => setOrig((o) => !o)}>
+          {orig ? '收起本章原题' : '本章原题与提示（建议做完再看）'}
+        </button>
+      )}
+      {orig && promptHtml && (
         <div className="ex-hint">
           <div dangerouslySetInnerHTML={{ __html: promptHtml }} />
           {hintHtml && <div dangerouslySetInnerHTML={{ __html: hintHtml }} />}

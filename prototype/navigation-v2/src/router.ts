@@ -9,7 +9,11 @@ export type Route =
   | { name: 'questions' }
   | { name: 'topic'; topic: string }
   | { name: 'course'; code: string }
-  | { name: 'reader'; code: string; section: number; block?: number };
+  | { name: 'reader'; code: string; section: number; block?: number }
+  // PhiloPilot Cases (哲学案例), outside the curriculum.
+  | { name: 'cases' }
+  | { name: 'case'; no: string }
+  | { name: 'caseReader'; no: string; part: number; block?: number };
 
 export function parseHash(hash: string): Route {
   const [path, query = ''] = hash.replace(/^#/, '').split('?');
@@ -19,6 +23,14 @@ export function parseHash(hash: string): Route {
   if (parts[0] === 'questions') return { name: 'questions' };
   if (parts[0] === 'region' && (parts[1] === 'history' || parts[1] === 'dialogue' || parts[1] === 'methods'))
     return { name: 'region', region: parts[1] };
+  if (parts[0] === 'cases') {
+    if (!parts[1]) return { name: 'cases' };
+    if (parts[2] === 'read') {
+      const b = params.get('b');
+      return { name: 'caseReader', no: parts[1], part: Number(parts[3] ?? 0) || 0, block: b != null ? Number(b) : undefined };
+    }
+    return { name: 'case', no: parts[1] };
+  }
   if (parts[0] === 'course' && parts[1]) {
     if (parts[2] === 'read') {
       const section = Number(parts[3] ?? 0) || 0;
@@ -44,6 +56,12 @@ export function routeToHash(r: Route): string {
       return `#/course/${r.code}`;
     case 'reader':
       return `#/course/${r.code}/read/${r.section}${r.block != null ? `?b=${r.block}` : ''}`;
+    case 'cases':
+      return '#/cases';
+    case 'case':
+      return `#/cases/${r.no}`;
+    case 'caseReader':
+      return `#/cases/${r.no}/read/${r.part}${r.block != null ? `?b=${r.block}` : ''}`;
   }
 }
 

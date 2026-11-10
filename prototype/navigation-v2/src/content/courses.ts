@@ -12,6 +12,8 @@ import { IN2 } from './in2';
 import { IN3 } from './in3';
 import { IN4 } from './in4';
 import { IN5 } from './in5';
+import { IN6 } from './in6';
+import { IN7 } from './in7';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
@@ -286,6 +288,38 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     recommendFrom: ['IN6'],
     leadsTo: ['IN6', 'S1', 'S6'],
     sourceNote: '梵文据 GRETIL 所收电子本；第三、四部分所引未经校对的电子本已对照印本，见注释与附录。中文是本章试译。',
+    origLang: () => 'sa',
+  },
+  IN6: {
+    code: 'IN6',
+    text: IN6,
+    name: '梵、自我与世界',
+    tier: '● 核心',
+    en: 'Brahman, Self and World: Vedānta',
+    method: '比较对同一个问题的三种对立回答，并通过注释来阅读原典',
+    background: '大纲建议先读「印度哲学的起源」，「权威、语言与义务」和「大乘哲学」也有帮助（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 6,
+    // IN8 lists any of IN1–IN7 as background.
+    recommendFrom: ['IN8'],
+    leadsTo: ['S4', 'S5', 'S12'],
+    sourceNote: '梵文据 GRETIL 所收电子本；商羯罗序论的四句和《梵经注》3.2.22 已对照印本，见注释与附录。中文是本章试译。',
+    origLang: () => 'sa',
+  },
+  IN7: {
+    code: 'IN7',
+    text: IN7,
+    name: '意识、物质与修行',
+    tier: '○ 拓展',
+    en: 'Consciousness, Matter and Practice: Sāṃkhya and Yoga',
+    method: '评估一个二元论论证，并与笛卡尔的二元论比较',
+    background: '大纲建议先读「印度哲学的起源」（推荐背景，不是必需）',
+    tradition: 'in',
+    position: 7,
+    // IN8 lists any of IN1–IN7 as background.
+    recommendFrom: ['IN8'],
+    leadsTo: ['S5'],
+    sourceNote: '梵文据 GRETIL 所收电子本；《梵经》2.2.3 及商羯罗注已对照印本，见注释与附录。中文是本章试译。',
     origLang: () => 'sa',
   },
   GR1: {

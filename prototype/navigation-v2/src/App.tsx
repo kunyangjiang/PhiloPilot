@@ -8,6 +8,10 @@ import CoursePage from './ui/CoursePage';
 import Reader from './ui/Reader';
 import SearchPalette from './ui/SearchPalette';
 import BackToTop from './ui/BackToTop';
+import CasesPage from './ui/cases/CasesPage';
+import CaseFront from './ui/cases/CaseFront';
+import CaseReader from './ui/cases/CaseReader';
+import { caseByNo } from './content/cases';
 import { isPublished } from './content/courses';
 import { nameOf } from './data/catalog';
 
@@ -27,6 +31,13 @@ function Page({ route }: { route: Route }) {
       // Only published courses have a reader; anything else shows the
       // course page, which says the course is not available.
       return isPublished(route.code) ? <Reader route={route} /> : <CoursePage code={route.code} />;
+    // Cases: only a written case opens; any other case number shows the overview.
+    case 'cases':
+      return <CasesPage />;
+    case 'case':
+      return caseByNo(route.no)?.available ? <CaseFront /> : <CasesPage />;
+    case 'caseReader':
+      return caseByNo(route.no)?.available ? <CaseReader route={route} /> : <CasesPage />;
   }
 }
 
@@ -38,13 +49,13 @@ export default function App() {
     document.title = titleFor(route);
     window.scrollTo(0, 0);
     // Move focus to the new page for keyboard and screen-reader users.
-    if (!first.current && route.name !== 'reader') document.getElementById('main')?.focus({ preventScroll: true });
+    if (!first.current && route.name !== 'reader' && route.name !== 'caseReader') document.getElementById('main')?.focus({ preventScroll: true });
     first.current = false;
   }, [route]);
 
   // The reader keeps its own key so section changes do not remount the page
   // (a different course does).
-  const key = route.name === 'reader' ? 'reader-' + route.code : routeToHash(route);
+  const key = route.name === 'reader' ? 'reader-' + route.code : route.name === 'caseReader' ? 'case-reader-' + route.no : routeToHash(route);
   return (
     <div className={'app app--' + route.name}>
       <a className="skip-link" href="#main" onClick={(e) => (e.preventDefault(), document.getElementById('main')?.focus())}>
@@ -74,5 +85,12 @@ function titleFor(r: Route) {
       return `${base} · ${nameOf(r.code)}`;
     case 'reader':
       return `${base} · 阅读：${nameOf(r.code)}`;
+    case 'cases':
+      return `${base} · 哲学案例`;
+    case 'case':
+    case 'caseReader': {
+      const c = caseByNo(r.no);
+      return c?.available ? `${base} · 哲学案例 ${c.no}《${c.title}》` : `${base} · 哲学案例`;
+    }
   }
 }
