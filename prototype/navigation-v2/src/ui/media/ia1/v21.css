@@ -1,0 +1,123 @@
+/* V21 components (IN8, IA1, IA2): original passages, numbered steps, two-column
+   comparisons and the flying-man channels. Swiss style: rules, not boxes. */
+
+.article .v21-en {
+  margin: 4px 0;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.article .v21-ar {
+  margin: 4px 0;
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Scheherazade New', 'Traditional Arabic', 'Arabic Typesetting', serif;
+  font-size: 21px;
+  line-height: 1.9;
+  text-align: right;
+}
+
+.v21-steps {
+  margin: 8px 0 12px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+.article .v21-step {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.v21-n {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+.v21-step.is-on {
+  background: var(--paper-2, #f4f1ea);
+}
+.v21-step.is-on .v21-n {
+  background: var(--ink);
+  color: #fff;
+}
+
+.v21-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 8px 0 12px;
+  border-top: 2px solid var(--ink);
+}
+.v21-two > div {
+  padding: 8px 12px 10px 0;
+}
+.v21-two > div + div {
+  padding-left: 12px;
+  border-left: 1px solid var(--rule);
+}
+.article .v21-two h4 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.article .v21-two p {
+  margin: 0 0 6px;
+}
+
+.v21-checks {
+  display: grid;
+  gap: 6px;
+  margin: 8px 0;
+}
+.v21-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+}
+.v21-check input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex: none;
+}
+.v21-check small {
+  display: block;
+  color: var(--ink-2);
+}
+
+.v21-aware {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border-left: 4px solid var(--ink);
+}
+.article .v21-aware ul {
+  margin: 4px 0 0;
+  padding-left: 1.2em;
+}
+.v21-aware li.is-gone {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+
+@media (max-width: 600px) {
+  .v21-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .v21-two > div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+/* a printed or written page the reader may want to read: a little wider */
+.g4-fig.v21-page img {
+  max-width: 480px;
+}

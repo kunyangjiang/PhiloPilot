@@ -14,6 +14,9 @@ import { IN4 } from './in4';
 import { IN5 } from './in5';
 import { IN6 } from './in6';
 import { IN7 } from './in7';
+import { IN8 } from './in8';
+import { IA1 } from './ia1';
+import { IA2 } from './ia2';
 import { GR1 } from './gr1';
 import { GR2 } from './gr2';
 import { GR3 } from './gr3';
@@ -25,8 +28,8 @@ import type { CourseText } from './course';
 // Chinese wording is a presentation translation.
 
 /** Tradition sections of 历史与传统 that have a readable course. */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学' };
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太' };
 
 export interface PublishedCourse {
   code: string;
@@ -208,7 +211,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '无前置要求，可以直接阅读',
     tradition: 'in',
     position: 1,
-    recommendFrom: ['IN2', 'IN5', 'IN6', 'IN7'],
+    recommendFrom: ['IN2', 'IN5', 'IN6', 'IN7', 'IN8'],
     leadsTo: ['IN2', 'IN5', 'IN6', 'IN7'],
     sourceNote: '梵文据 GRETIL 所收电子本，巴利文据 SuttaCentral 所载摩诃僧祇本；版本与权利见附录。中文是本章试译。',
     // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
@@ -229,7 +232,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     tradition: 'in',
     position: 2,
     // IN4 lists this course as its background.
-    recommendFrom: ['IN4'],
+    recommendFrom: ['IN4', 'IN8'],
     leadsTo: ['IN3', 'IN4', 'S4', 'D2'],
     sourceNote: '巴利文据 SuttaCentral 所载摩诃僧祇本（bilara-data），梵文据 GRETIL 所收电子本；版本与权利见附录。中文是本章试译。',
     // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
@@ -246,7 +249,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     tradition: 'in',
     position: 3,
     // IN5 lists this course as helpful background.
-    recommendFrom: ['IN5'],
+    recommendFrom: ['IN5', 'IN8'],
     leadsTo: ['S1', 'S6', 'D3'],
     sourceNote: '梵文据 GRETIL 所收电子本（陈那《集量论》第一章据 Steinkellner 2005 的复原本），汉文据 CBETA《大正藏》电子本；版本与权利见附录。中文是本章试译。',
     srcNote: (cite) => (/玄奘译/.test(cite) ? '据 CBETA《大正藏》第 32 册第 1630 号，字形照录' : '原文见注释'),
@@ -263,7 +266,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     tradition: 'in',
     position: 4,
     // IN6 lists this course as helpful background (CN5 lists it too; it is shown below as a link onward).
-    recommendFrom: ['IN6'],
+    recommendFrom: ['IN6', 'IN8'],
     leadsTo: ['CN5', 'D2', 'D3'],
     sourceNote: '梵文据 GRETIL 所收电子本，汉文据 CBETA《大正藏》电子本（只作为历史上的翻译引用）；版本与权利见附录。中文是本章试译。',
     srcNote: (cite) =>
@@ -285,7 +288,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     tradition: 'in',
     position: 5,
     // IN6 lists this course as helpful background.
-    recommendFrom: ['IN6'],
+    recommendFrom: ['IN6', 'IN8'],
     leadsTo: ['IN6', 'S1', 'S6'],
     sourceNote: '梵文据 GRETIL 所收电子本；第三、四部分所引未经校对的电子本已对照印本，见注释与附录。中文是本章试译。',
     origLang: () => 'sa',
@@ -321,6 +324,22 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     leadsTo: ['S5'],
     sourceNote: '梵文据 GRETIL 所收电子本；《梵经》2.2.3 及商羯罗注已对照印本，见注释与附录。中文是本章试译。',
     origLang: () => 'sa',
+  },
+  IN8: {
+    code: 'IN8',
+    text: IN8,
+    name: '近代与殖民时期的印度哲学',
+    tier: '○ 拓展',
+    en: 'Modern and Colonial-Era Indian Philosophy',
+    method: '评估对古典思想的近代重新解释：它在哪里忠实，在哪里创新',
+    background: '大纲建议先读印度哲学的任何一门课程（IN1—IN7 中任何一门；推荐背景，不是必需）',
+    tradition: 'in',
+    position: 8,
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote: '英文原文据公有领域的印本或数字本（英文维基文库、archive.org 扫描本、mkgandhi.org、古腾堡计划等），逐句核对；版本与权利见附录。中文是本章试译。',
+    srcNote: () => '英文原文据公有领域的印本或数字本，逐句核对；版本见注释与附录',
+    origLang: () => 'en',
   },
   GR1: {
     code: 'GR1',
@@ -372,7 +391,8 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '大纲建议先读「柏拉图」（推荐背景，不是必需）',
     tradition: 'gr',
     position: 3,
-    recommendFrom: ['GR4', 'IA2', 'EA1'],
+    recommendFrom: ['GR4', 'IA1', 'IA2', 'EA1'],
+    // IA1 lists this course as helpful background, IA2 as recommended.
     leadsTo: ['IA2', 'EA1', 'S7'],
     sourceNote: '希腊文据 Perseus 与 First1KGreek 数字本（Bywater、Ross、Bekker、Langkavel 诸本）；版本与权利见附录。中文是本章试译。',
     origLang: () => 'grc',
@@ -408,6 +428,40 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
       const i = GR4.SECTIONS.findIndex((s) => s.title.startsWith('六、'));
       return i >= 0 ? i : undefined;
     })(),
+  },
+  IA1: {
+    code: 'IA1',
+    text: IA1,
+    name: '翻译运动、凯拉姆与哲学的兴起',
+    tier: '● 核心',
+    en: 'Translation, Kalām and the Rise of Falsafa',
+    method: '重构支持和反对同一个论题（世界是永恒的）的成对论证',
+    background: '大纲认为「亚里士多德」有帮助（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 1,
+    recommendFrom: ['IA2'],
+    leadsTo: ['IA2'],
+    sourceNote: '《古兰经》经文据 Tanzil 项目（tanzil.net）的简明本（quran-simple），逐字照录，按其 CC BY 3.0 条件注明来源、不作改动；其他阿拉伯文作者一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '经文据 Tanzil 项目（tanzil.net）简明本，逐字照录',
+    origLang: () => 'ar',
+  },
+  IA2: {
+    code: 'IA2',
+    text: IA2,
+    name: '法拉比与阿维森纳',
+    tier: '● 核心',
+    en: 'Al-Fārābī and Avicenna: The Systematic Philosophy of Being and Soul',
+    method: '重构一个形而上学证明（必然存在者）和一个思想实验（飞人）',
+    background: '大纲建议先读「翻译运动、凯拉姆与哲学的兴起」和「亚里士多德」（推荐背景，不是必需）',
+    tradition: 'ia',
+    position: 2,
+    // IA3 depends on this course (intellectual dependency, not a lock). EA1 lists it
+    // only as helpful and belongs to another tradition, so it is shown as a 后续 link.
+    recommendFrom: ['IA3'],
+    leadsTo: ['IA3', 'EA1'],
+    sourceNote: '阿拉伯文据 Forget 1892 年校订本《指要与诠解》（公有领域）的扫描页面逐字录出；其他著作一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据 Forget 1892 年校订本扫描页面逐字录出',
+    origLang: () => 'ar',
   },
 };
 

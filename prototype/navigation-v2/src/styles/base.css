@@ -800,6 +800,22 @@ main:focus,
   font-family: 'Times New Roman', 'Palatino Linotype', 'Noto Serif', 'DejaVu Serif', serif;
   hyphens: manual;
 }
+/* Arabic (IA1, IA2): each paragraph takes its own direction, so the Arabic
+   reads right to left and the Chinese reference under it left to right. */
+[data-style] .source--primary .source-orig:lang(ar) p {
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Scheherazade New', 'Traditional Arabic', 'Arabic Typesetting', serif;
+  font-size: 21px;
+  line-height: 1.9;
+  unicode-bidi: plaintext;
+  text-align: start;
+  hyphens: manual;
+}
+[data-style] .source--primary .source-orig:lang(ar) p + p {
+  font-family: var(--sans, inherit);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;

@@ -221,3 +221,77 @@ export const SHIGUAN_PAGE = {
   credit: '邓汉仪辑《诗观》二集「闺秀别卷」卷首，慎墨堂刻本（清康熙），此本为乾隆十五至十七年（1750—1752）重修本，第 40 册第 3 页。中国国家图书馆藏（善本书号 A03320）；扫描件带有该馆水印。经 Wikimedia Commons，公有领域；本课使用 Wikimedia 生成的该页 1280 像素图像，未作其他修改。',
   url: 'https://commons.wikimedia.org/wiki/File:NLC892-412000006559-139026_%E8%A9%A9%E8%A7%80%E5%88%9D%E9%9B%86_%E8%A9%A9%E8%A7%80%E4%BA%8C%E9%9B%86_%E8%A9%A9%E8%A7%80%E4%BA%8C%E9%9B%86%E9%96%A8%E7%A7%80%E5%88%A5%E5%8D%B7_%E7%AC%AC40%E5%86%8A.pdf',
 };
+
+// V21 images (IN8, IA1, IA2), approved by the Product Owner on 2026-11-09
+// (content/V21_*_IMAGE_APPROVAL_SHEET.md); records in public/media/<course>/SOURCES.md.
+const COMMONS = 'https://commons.wikimedia.org/wiki/';
+
+export const ROY_MINIATURE = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/in8/roy-modern-review-1934.jpg',
+  width: 948,
+  height: 1485,
+  alt: '一页旧杂志的插图：椭圆形框里是一位留及肩黑发、唇上有髭的男子的半身像，头戴有花纹的低帽，身穿深色长袍，衣襟和腰带有浅色花边，颈上戴珠串。图下印着英文说明。',
+  title: '拉姆莫汉·罗伊像（象牙细密画，十九世纪）',
+  credit: '"Portrait of Raja Rammohun Roy. Ivory Miniature. Delhi School, 19th century"，原件藏伦敦维多利亚与阿尔伯特博物馆；此为《现代评论》（The Modern Review）第 55 卷（1934 年 1—6 月）所印的复制图。经 Wikimedia Commons，公有领域；本课未作修改。',
+  url: COMMONS + 'File:Portrait_of_Raja_RamMohun_Roy.jpg',
+};
+
+export const VIVEKANANDA_1893 = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/in8/vivekananda-chicago-1893.jpg',
+  width: 224,
+  height: 313,
+  alt: '一张黑白半身照：一位年轻男子头缠宽大的头巾，身穿深色长袍，侧脸望向左方。照片两侧空白处有竖写的手写字和签名。',
+  title: '辨喜在芝加哥，1893 年',
+  credit: 'Thomas Harrison 摄，1893 年，芝加哥；据 Commons，最早刊于 Neely 编《宗教议会史》（1893）。照片上的题字和签名是后加的。经 Wikimedia Commons，公有领域；本课未作修改。',
+  url: COMMONS + 'File:Swami_Vivekananda_1893_Chicago_image_Harrison.jpg',
+};
+
+export const RAMABAI_1887 = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/in8/ramabai-1887-frontispiece.jpg',
+  width: 1125,
+  height: 1545,
+  alt: '一张黑白半身照：一位女子用白色的长纱巾包住头发和肩膀，正面望向前方。照片下面是她的英文手写签名"Ramabai"。',
+  title: '拉玛拜，《高种姓印度妇女》卷首像',
+  credit: '拉玛拜《高种姓印度妇女》（The High-Caste Hindu Woman，费城，1887 年印）卷首像及签名；archive.org 所藏加州大学图书馆本 highcastehinduwo00ramaiala。经 Wikimedia Commons，公有领域；本课未作修改。',
+  url: COMMONS + 'File:Pandita_Ramabai_Sarasvati_1858-1922_front-page-portrait.jpg',
+};
+
+
+export const TAGORE_SCHOOL = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/in8/tagore-santiniketan-1903.jpg',
+  width: 700,
+  height: 518,
+  alt: '一张褪色的棕色老照片，边缘破损：树下，三十来个穿浅色长衫的男孩和青年分几排站坐，前排中间坐着两位留胡须的成年男子。照片下方的衬纸上有几行英文手写注记和日期。',
+  title: '泰戈尔与圣蒂尼克坦梵行学舍的师生',
+  credit: '摄影者不详。Commons 定为 1903 年；照片衬纸上的手写注记写有"Brahmacharya Asram in Santiniketan 1905"和"1903—1906"，确切年份不能确定。Commons 来源为 oldindianphotos.in 网站。经 Wikimedia Commons，公有领域；本课未作修改。',
+  url: COMMONS + 'File:Rabindranath_Tagore_with_Brahmacharyashrama_boys,_Santiniketan,_1903.jpg',
+};
+
+export const DIOSCORIDES_1224 = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/ia1/dioscorides-arabic-1224-honey.jpg',
+  width: 1280,
+  height: 1755,
+  alt: '一张米黄色的写本纸页，用褐色墨水书写十几行阿拉伯文，几个标题和标点用红色。纸页右下角有铅笔写的博物馆编号。',
+  title: '狄奥斯科里德斯《药物论》阿拉伯文译本的一页（1224 年）',
+  credit: '狄奥斯科里德斯《药物论》阿拉伯文译本散页，抄写者 ʿAbdallāh ibn al-Faḍl，伊历 621 年 / 公元 1224 年。纽约大都会艺术博物馆藏，57.51.21（此为该页的文字面）。大都会艺术博物馆开放获取，CC0；经 Wikimedia Commons，本课使用 Wikimedia 生成的 1280 像素图像，未作其他修改。',
+  url: COMMONS + 'File:%22Preparing_Medicine_from_Honey%22,_from_a_Dispersed_Manuscript_of_an_Arabic_Translation_of_De_Materia_Medica_of_Dioscorides_MET_DP164666.jpg',
+};
+
+
+
+export const FORGET_P142 = {
+  available: true,
+  src: import.meta.env.BASE_URL + 'media/ia2/forget-1892-p142.jpg',
+  width: 1510,
+  height: 2562,
+  alt: '一页印刷的阿拉伯文书页，页码 142。正文约二十行，几段以加横线的"إشارة"（指要）开头，字间有小写拉丁字母 a 到 g 标出异读；页面下方一条短线以下是用法文写的校勘注。',
+  title: 'Forget 校订本《指要与诠解》第 142 页',
+  credit: '阿维森纳《指要与诠解》，J. Forget 校订（莱顿：Brill，1892），第 142 页；archive.org 所藏俄亥俄州立大学本 kitbalishrtwaalt00avic，公有领域。本课第四部分的两段引文就是从这一页录出的。本课未作修改。',
+  url: 'https://archive.org/details/kitbalishrtwaalt00avic/page/n141',
+};
+

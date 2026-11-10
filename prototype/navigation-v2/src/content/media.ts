@@ -48,6 +48,22 @@ export type MediaId =
   // 意识、物质与修行：数论与瑜伽派
   | 'tattva-explorer'
   | 'purusa-workshop'
+  // 近代与殖民时期的印度哲学
+  | 'gandhi-ambedkar-workshop'
+  | 'reinterpretation-lab'
+  // 翻译运动、凯拉姆与哲学的兴起
+  | 'occasionalism-lab'
+  | 'eternity-workshop'
+  // 法拉比与阿维森纳
+  | 'necessary-existent'
+  | 'flying-man'
+  // V21 images (approved 2026-11-09)
+  | 'roy-miniature'
+  | 'vivekananda-1893'
+  | 'ramabai-1887'
+  | 'tagore-school'
+  | 'dioscorides-1224'
+  | 'forget-p142'
   // 古希腊哲学的起源
   | 'parmenides-explorer'
   | 'change-explorer'
@@ -194,6 +210,26 @@ const ANCHORS: Anchor[] = [
   { id: 'tattva-explorer', code: 'IN7', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('把这几颂合起来，可以整理成一张结构图') },
   // 三 · after the comparison with Descartes.
   { id: 'purusa-workshop', code: 'IN7', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最重要的区别在第二行') },
+
+  // 四 · after the Gandhi–Ambedkar table and the 1932 paragraph.
+  { id: 'gandhi-ambedkar-workshop', code: 'IN8', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表是本章的整理。两人的分歧在 1932 年达到顶点') },
+  // 七 · after the four questions are applied to Ambedkar's Buddhism.
+  { id: 'reinterpretation-lab', code: 'IN8', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('用这四个问题检验一种重新解释') },
+  // 三 · after the two-schools table.
+  { id: 'occasionalism-lab', code: 'IA1', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最后一行要特别注意') },
+  // 四 · after the paired arguments on the eternity of the world.
+  { id: 'eternity-workshop', code: 'IA1', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表是本章的整理。前三行的论证和反驳') },
+  // 四 · after the three-proofs table.
+  { id: 'necessary-existent', code: 'IA2', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。现代宗教哲学中的') },
+  // 五 · after "不要把飞人读成……" (before the comparison with Descartes).
+  { id: 'flying-man', code: 'IA2', section: '五、', match: (b) => b.kind === 'html' && b.text.includes('不要把飞人读成') },
+  // V21 images, approved 2026-11-09 (content/V21_*_IMAGE_APPROVAL_SHEET.md).
+  { id: 'roy-miniature', code: 'IN8', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('1813 年，英国议会') },
+  { id: 'vivekananda-1893', code: 'IN8', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('辨喜是孟加拉的神秘主义者') },
+  { id: 'ramabai-1887', code: 'IN8', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('1888 年，她在美国出版了《高种姓印度妇女》') },
+  { id: 'tagore-school', code: 'IN8', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('泰戈尔是诗人、作曲家、画家') },
+  { id: 'dioscorides-1224', code: 'IA1', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('从八世纪中叶到十世纪末') },
+  { id: 'forget-p142', code: 'IA2', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('阿维森纳在几部著作中都证明了必然存在者的存在') },
 
   // 二 · after the step-by-step reconstruction of Parmenides' argument (end of fragment 8).
   { id: 'parmenides-explorer', code: 'GR1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('在残篇 8 的后面部分') },
