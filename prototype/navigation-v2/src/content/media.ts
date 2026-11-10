@@ -149,7 +149,11 @@ export type MediaId =
   | 'five-ways'
   // 近代早期理性主义与新科学
   | 'doubt-cogito'
-  | 'elisabeth-objection';
+  | 'elisabeth-objection'
+  // V24 · 经验论、启蒙与自由主义的起源 / 德国观念论与浪漫主义 / 黑格尔之后
+  | 'hume-induction'
+  | 'dialectic-stepper'
+  | 'critique-sorter';
 
 interface Anchor {
   id: MediaId;
@@ -400,6 +404,12 @@ const ANCHORS: Anchor[] = [
   { id: 'doubt-cogito', code: 'EA2', section: '二、', match: (b) => b.kind === 'html' && b.text.includes('的确定性，只及于现在思想着的我') },
   // 三 · after the 'vapours' paragraph (before Elisabeth's own position).
   { id: 'elisabeth-objection', code: 'EA2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('她还指出另一类事实') },
+  // V24 · EA3 三 · after the method summary table and the note under it.
+  { id: 'hume-induction', code: 'EA3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表可以用在其他的怀疑论证上') },
+  // V24 · EA5 四 · after "用这张表时请注意两点" (how to follow a dialectical argument).
+  { id: 'dialectic-stepper', code: 'EA5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('用这张表时请注意两点') },
+  // V24 · EA6 六 · after the table comparing the five forms of critique.
+  { id: 'critique-sorter', code: 'EA6', section: '六、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('批评的形式') && b.text.includes('它没有做到什么') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

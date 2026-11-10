@@ -8,7 +8,10 @@ import { CN7 } from './cn7';
 import { CN8 } from './cn8';
 import { EA1 } from './ea1';
 import { EA2 } from './ea2';
+import { EA3 } from './ea3';
 import { EA4 } from './ea4';
+import { EA5 } from './ea5';
+import { EA6 } from './ea6';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
@@ -215,13 +218,37 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '大纲建议先读「从古代晚期到经院哲学」（推荐背景，不是必需）',
     tradition: 'ea',
     position: 2,
-    // EA3 lists this course as recommended background (EA3 is not yet published).
+    // EA3 lists this course as recommended background.
     recommendFrom: ['EA3'],
     leadsTo: ['EA3'],
     sourceNote: '拉丁文和法文据 Adam 与 Tannery 编《笛卡尔全集》、van Vloten 与 Land 编《斯宾诺莎著作集》、Gerhardt 编《莱布尼茨哲学著作集》、Brunschvicg 编帕斯卡《思想录》的扫描本逐字核对，保留初版拼写，只引短段；卡文迪什和康韦一律转述。版本与权利见附录。中文是本章试译。',
     srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
     // Latin (Descartes, Spinoza) and French (Elisabeth, Leibniz) alternate.
     origLang: (html) => (/[éèêàùç]|\b(?:qu|n|l|d|c)['’]/i.test(html.replace(/<[^>]+>/g, '')) ? 'fr' : 'la'),
+  },
+  EA3: {
+    code: 'EA3',
+    text: EA3,
+    name: '经验论、启蒙与自由主义的起源',
+    tier: '● 核心',
+    en: 'Empiricism, Enlightenment and the Origins of Liberalism',
+    method: '分析一个怀疑论证的结构（归纳问题）',
+    background: '大纲建议先读「近代早期理性主义与新科学」（推荐背景，不是必需）',
+    tradition: 'ea',
+    position: 3,
+    // EA4 lists this course as recommended background; EA7, EA11 and LA1 do too.
+    recommendFrom: ['EA4', 'EA7', 'EA11', 'LA1'],
+    leadsTo: ['EA4'],
+    sourceNote:
+      '英文、拉丁文和法文据公有领域印本的扫描本逐字核对（培根《新工具》Fowler 1878 年本、霍布斯《利维坦》1909 年重印本、洛克《人类理智论》1753 年本和《政府论》1764 年本、贝克莱《人类知识原理》Krauth 1874 年本、休谟 Selby-Bigge 1902 年本和 Green 与 Grose 本、孟德斯鸠 1849 年本、卢梭 1791 年本、阿斯特尔 1706 年本、夏特莱 1740 年本、沃斯通克拉夫特 1796 年本），保留原拼写，只引短段；伏尔泰一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
+    // English throughout, except Bacon (Latin) and Montesquieu, Rousseau, du Châtelet (French).
+    origLang: (html) => {
+      const t = html.replace(/<[^>]+>/g, '');
+      if (/[éèêàùçô]|\b(?:qu|n|l|d|c|s)['’]/i.test(t)) return 'fr';
+      if (/\b(?:et|est|quae|naturae|tantum|vero)\b/.test(t)) return 'la';
+      return 'en';
+    },
   },
   EA4: {
     code: 'EA4',
@@ -241,6 +268,43 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
       const i = EA4.SECTIONS.findIndex((s) => s.title.startsWith('四、道德哲学'));
       return i >= 0 ? i : undefined;
     })(),
+  },
+  EA5: {
+    code: 'EA5',
+    text: EA5,
+    name: '德国观念论与浪漫主义',
+    tier: '● 核心',
+    en: 'German Idealism and Romanticism',
+    method: '跟随一个辩证的论证；评估对一个体系的批评',
+    background: '大纲建议先读「康德」（推荐背景，不是必需；观念论者回应的正是康德留下的问题）',
+    tradition: 'ea',
+    position: 5,
+    // EA6 lists this course as recommended background.
+    recommendFrom: ['EA6'],
+    leadsTo: ['EA6', 'EA12'],
+    sourceNote:
+      '德文据公有领域印本的扫描本逐字核对（《费希特全集》1845 年本、《谢林全集》1857 年本、黑格尔《逻辑学》1812 年初版和 Lasson 编《精神现象学》《法哲学原理》《世界历史哲学讲演录》、施莱尔马赫《论宗教》1799 年初版），保留原拼写，只引短段；君特罗德据开放获取的研究论文转引，施莱格尔一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
+    origLang: () => 'de',
+  },
+  EA6: {
+    code: 'EA6',
+    text: EA6,
+    name: '黑格尔之后：马克思、克尔凯郭尔、叔本华与尼采',
+    tier: '● 核心',
+    en: 'After Hegel: Marx, Kierkegaard, Schopenhauer and Nietzsche',
+    method: '在谱系学和意识形态批判的论证中，区分"批评"与"驳倒"',
+    background: '大纲建议先读「德国观念论与浪漫主义」（推荐背景，不是必需；马克思和克尔凯郭尔都从黑格尔出发）',
+    tradition: 'ea',
+    position: 6,
+    // EA9 lists this course as recommended background; EA12 too.
+    recommendFrom: ['EA9', 'EA12'],
+    leadsTo: ['EA9', 'EA12'],
+    sourceNote:
+      '德文和丹麦文据公有领域印本的扫描本逐字核对（费尔巴哈《基督教的本质》1883 年本、恩格斯《路德维希·费尔巴哈》1888 年本所附《提纲》、《资本论》第一卷 1883 年第三版、克尔凯郭尔《全集》第一版、叔本华《作为意志和表象的世界》1844 年第二版、尼采《道德的谱系》1887 年初版），保留原拼写，只引短段；《1844 年手稿》、1859 年序言和《共产党宣言》一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
+    // German, except the Kierkegaard passages (Danish).
+    origLang: (html) => (/[æøåÆØÅ]|\b(?:og|Aand|Ethiske|Inderligheds|Mennesket|Angest)\b/.test(html.replace(/<[^>]+>/g, '')) ? 'da' : 'de'),
   },
   IN1: {
     code: 'IN1',

@@ -3,12 +3,13 @@ import './v23.css';
 export { Band, Claim, Limits, Seg, Step, Tag, useSavedIx, Verdict } from '../ia3/shared';
 
 // Shared by the V23 components: 犹太哲学：从萨阿迪亚到列维纳斯 (JW1),
-// 从古代晚期到经院哲学 (EA1) and 近代早期理性主义与新科学 (EA2).
+// 从古代晚期到经院哲学 (EA1) and 近代早期理性主义与新科学 (EA2), and since V24 by
+// the EA3, EA5 and EA6 components (English, German and Danish passages).
 // Every Judeo-Arabic, Latin or French line quoted in them is one of the
-// chapters' own checked passages (content/JW1_, EA1_, EA2_SAMPLE_DRAFT.md)
+// chapters' own checked passages (content/JW1_, EA1_, EA2_, EA3_, EA5_, EA6_SAMPLE_DRAFT.md)
 // with the chapters' own translation; nothing is quoted from anywhere else.
 
-type Lang = 'jrb' | 'la' | 'fr';
+type Lang = 'jrb' | 'la' | 'fr' | 'en' | 'de' | 'da';
 
 /** An original-language passage with its reference and the chapter's translation. */
 export function OrigSrc({ src, orig, lang, zh }: { src: string; orig: string; lang: Lang; zh?: string }) {
