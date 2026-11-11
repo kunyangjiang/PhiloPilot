@@ -157,7 +157,10 @@ export type MediaId =
   // V25 · 自由主义、功利主义与实用主义 / 逻辑、语言与分析哲学的兴起 / 现象学、存在主义与诠释学
   | 'harm-principle'
   | 'russell-scope'
-  | 'bad-faith-sorter';
+  | 'bad-faith-sorter'
+  | 'rigidity-tester'
+  | 'distribution-chooser'
+  | 'writing-hierarchy';
 
 interface Anchor {
   id: MediaId;
@@ -420,6 +423,12 @@ const ANCHORS: Anchor[] = [
   { id: 'russell-scope', code: 'EA8', section: '三、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('否定的辖域窄') && b.text.includes('否定的辖域宽') },
   // V25 · EA9 三 · after the table of bad-faith scenes.
   { id: 'bad-faith-sorter', code: 'EA9', section: '三、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('只肯定了哪一面') && b.text.includes('为什么是自欺') },
+  // V26 · EA10 三 · after the table of the "______ 本来可能不是 ______" test.
+  { id: 'rigidity-tester', code: 'EA10', section: '三、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('本来可能不是') && b.text.includes('太阳系的行星数目') },
+  // V26 · EA11 四 · after the table of the four economies.
+  { id: 'distribution-chooser', code: 'EA11', section: '四、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('经济 C') && b.text.includes('处境最差的群体') },
+  // V26 · EA12 四 · after the step-by-step deconstructive reading of Saussure.
+  { id: 'writing-hierarchy', code: 'EA12', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('文本自己确立的等级') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

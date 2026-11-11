@@ -16,6 +16,9 @@ import { EA6_PRACTICE } from './practice-ea6';
 import { EA7_PRACTICE } from './practice-ea7';
 import { EA8_PRACTICE } from './practice-ea8';
 import { EA9_PRACTICE } from './practice-ea9';
+import { EA10_PRACTICE } from './practice-ea10';
+import { EA11_PRACTICE } from './practice-ea11';
+import { EA12_PRACTICE } from './practice-ea12';
 import { IN1_PRACTICE } from './practice-in1';
 import { IN2_PRACTICE } from './practice-in2';
 import { IN3_PRACTICE } from './practice-in3';
@@ -55,6 +58,9 @@ const SETS: Record<string, PracticeSet[]> = {
   EA7: EA7_PRACTICE,
   EA8: EA8_PRACTICE,
   EA9: EA9_PRACTICE,
+  EA10: EA10_PRACTICE,
+  EA11: EA11_PRACTICE,
+  EA12: EA12_PRACTICE,
   IN1: IN1_PRACTICE,
   IN2: IN2_PRACTICE,
   IN3: IN3_PRACTICE,

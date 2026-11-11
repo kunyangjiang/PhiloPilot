@@ -15,6 +15,9 @@ import { EA6 } from './ea6';
 import { EA7 } from './ea7';
 import { EA8 } from './ea8';
 import { EA9 } from './ea9';
+import { EA10 } from './ea10';
+import { EA11 } from './ea11';
+import { EA12 } from './ea12';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
@@ -364,6 +367,57 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
       '德文据公有领域印本的扫描本逐字核对（胡塞尔《逻辑研究》第二卷 1901 年初版、《观念》第一卷 1913 年原刊），保留原正字法，只引短段；海德格尔、萨特、波伏瓦、梅洛-庞蒂、伽达默尔、阿伦特和法农的著作仍受版权保护，一律转述。版本与权利见附录。中文是本章试译。',
     srcNote: () => '据公有领域印本的扫描本逐字核对，保留原正字法',
     origLang: () => 'de',
+  },
+  EA10: {
+    code: 'EA10',
+    text: EA10,
+    name: '1950 年后的分析哲学：自然主义、意义与模态',
+    tier: '● 核心',
+    en: 'Analytic Philosophy After 1950: Naturalism, Meaning and Modality',
+    method: '用平实的话重述技术性的论证；评估思想实验',
+    background: '大纲建议先读「逻辑、语言与分析哲学的兴起」（推荐背景，不是必需；蒯因、克里普克和戴维森都从弗雷格、罗素和卡尔纳普留下的问题出发）',
+    tradition: 'ea',
+    position: 10,
+    // No published course lists this one as recommended background (EA11: "EA10 not needed").
+    recommendFrom: [],
+    leadsTo: ['S2', 'S5', 'S6', 'S10'],
+    sourceNote:
+      '本章所读的哲学家的著作都仍受版权保护，一律依据《斯坦福哲学百科全书》的条目转述，不引原文段落；条目中引用的短语只作为条目的引用标出。出处见注释和附录。',
+    srcNote: () => '依据《斯坦福哲学百科全书》的条目转述',
+  },
+  EA11: {
+    code: 'EA11',
+    text: EA11,
+    name: '1950 年后的道德与政治哲学',
+    tier: '○ 拓展',
+    en: 'Moral and Political Philosophy After 1950: Anscombe to Rawls',
+    method: '用反驳检验一种理论；把理论用到案例上',
+    background: '大纲建议先读「经验论、启蒙与自由主义的起源」和「自由主义、功利主义与实用主义」（推荐背景，不是必需）；不需要先读「1950 年后的分析哲学」',
+    tradition: 'ea',
+    position: 11,
+    recommendFrom: [],
+    leadsTo: ['S7', 'S8', 'S9'],
+    sourceNote:
+      '本章所读的哲学家的著作都仍受版权保护，一律依据《斯坦福哲学百科全书》和《互联网哲学百科全书》的条目转述，不引原文段落；条目中引用的短语只作为条目的引用标出。出处见注释和附录。',
+    srcNote: () => '依据哲学百科全书的条目转述',
+  },
+  EA12: {
+    code: 'EA12',
+    text: EA12,
+    name: '批判理论、结构主义、后结构主义与女性主义理论',
+    tier: '○ 拓展',
+    en: 'Critical Theory, Structuralism, Post-structuralism and Feminist Theory',
+    method: '评估对知识和权力的批判；比较相互竞争的读法',
+    background: '大纲建议先读「黑格尔之后：马克思、克尔凯郭尔、叔本华与尼采」和「现象学、存在主义与诠释学」（推荐背景，不是必需）',
+    tradition: 'ea',
+    position: 12,
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote:
+      '法文据法语维基文库所录索绪尔《普通语言学教程》1971 年 Payot 本逐字核对，只引短段，页码依录入本的标注；霍克海默、阿多诺、马尔库塞、福柯、德里达、德勒兹、伊利格瑞、克里斯蒂娃、巴特勒、哈拉维和哈贝马斯的著作仍受版权保护，一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据法语维基文库所录 1971 年 Payot 本逐字核对',
+    // Only Saussure is quoted in the original (French).
+    origLang: () => 'fr',
   },
   IN1: {
     code: 'IN1',
