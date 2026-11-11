@@ -170,7 +170,13 @@ export type MediaId =
   // 日本哲学 · 韩国哲学 · 拉丁美洲哲学
   | 'uji-readings'
   | 'four-seven-voices'
-  | 'normative-premises';
+  | 'normative-premises'
+  // 什么是哲学？问题、论证与阅读
+  | 'argument-roles'
+  // 形式推理：命题逻辑与谓词逻辑
+  | 'validity-checker'
+  // 概念、案例与思想实验
+  | 'case-dials';
 
 interface Anchor {
   id: MediaId;
@@ -451,6 +457,12 @@ const ANCHORS: Anchor[] = [
   { id: 'four-seven-voices', code: 'KR1', section: '四、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('郑之云（天命图）') && b.text.includes('栗谷（1572）') },
   // V28 · LA1 一 · after the table setting Sepúlveda's and Las Casas' arguments side by side.
   { id: 'normative-premises', code: 'LA1', section: '一、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('共同的框架') && b.text.includes('证据的类型') },
+  // V29 · A1 五 · after the table of the four kinds of objection.
+  { id: 'argument-roles', code: 'A1', section: '五、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('反驳的对象') && b.text.includes('相关性') },
+  // V29 · A2 二 · after the table of six forms checked by truth table.
+  { id: 'validity-checker', code: 'A2', section: '二、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('假言三段论') && b.text.includes('反例行（如果无效）') },
+  // V29 · A3 五 · after the table of four cases and the two principles' predictions.
+  { id: 'case-dials', code: 'A3', section: '五、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('做与允许的预测') && b.text.includes('双重效果的预测') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

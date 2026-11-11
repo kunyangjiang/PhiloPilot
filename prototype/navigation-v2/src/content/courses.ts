@@ -42,15 +42,20 @@ import { GR2 } from './gr2';
 import { GR3 } from './gr3';
 import { GR4 } from './gr4';
 import { JW1 } from './jw1';
+import { A1 } from './a1';
+import { A2 } from './a2';
+import { A3 } from './a3';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
 // planning/CURRICULUM_REFERENCE_DRAFT.md (method focus, background, links);
 // Chinese wording is a presentation translation.
 
-/** Tradition sections of 历史与传统 that have a readable course. */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学' };
+/** Tradition sections of 历史与传统 that have a readable course, plus 'fm':
+ *  the Foundations and Methods courses (domain A), which belong to the 哲学方法
+ *  region rather than to a tradition section (see canonicalOf in ui/nav.ts). */
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la' | 'fm';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学', fm: '哲学方法' };
 
 export interface PublishedCourse {
   code: string;
@@ -61,7 +66,7 @@ export interface PublishedCourse {
   en: string;
   method: string;
   background: string;
-  /** Tradition section of 历史与传统 this course belongs to, and its place there. */
+  /** Tradition section of 历史与传统 this course belongs to (or 'fm' for a methods course), and its place there. */
   tradition: Tradition;
   position: number;
   /** Courses that list this one as recommended background. */
@@ -873,7 +878,76 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
       return /[äöüß]|\b(?:und|der|die|das|nicht|ist)\b/.test(t) ? 'de' : 'la';
     },
   },
+  // ── Foundations and Methods (domain A): listed in the 哲学方法 region. ──
+  A1: {
+    code: 'A1',
+    text: A1,
+    name: '什么是哲学？问题、论证与阅读',
+    tier: '● 核心',
+    en: 'What Is Philosophy? Questions, Arguments and Reading',
+    method: '找出文本所回答的问题，重建并评价论证',
+    background: '无前置要求',
+    tradition: 'fm',
+    position: 1,
+    // A2 and A3 name this course as recommended background, and so does IN3.
+    recommendFrom: ['A2', 'A3', 'IN3'],
+    leadsTo: ['A2', 'A3', 'A4'],
+    sourceNote: '希腊文据 Perseus 数字图书馆所收 Burnet 校本（CC BY-SA 4.0），《孟子》《墨子》据中文维基文库录文，梵文据 GRETIL 电子本；只引短段，所引段落都与本网站相关课程所用的文本相同。版本与权利见附录。中文是本章试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
+  A2: {
+    code: 'A2',
+    text: A2,
+    name: '形式推理：命题逻辑与谓词逻辑',
+    tier: '○ 拓展',
+    en: 'Formal Reasoning: Propositional and Predicate Logic',
+    method: '把论证译成符号，用真值表和自然演绎检验有效性',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'fm',
+    position: 2,
+    // EA8 names this course as helpful background, and so does IN3.
+    recommendFrom: ['EA8', 'IN3'],
+    leadsTo: ['S11', 'S6'],
+    sourceNote: '本章的原文只有《墨子·小取》的两小段，据中文维基文库录文。真值表、规则和证明都是本章编写并逐行核对的。版本与权利见附录。中文是本章试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
+  A3: {
+    code: 'A3',
+    text: A3,
+    name: '概念、案例与思想实验',
+    tier: '● 核心',
+    en: 'Concepts, Cases and Thought Experiments',
+    method: '用反例和变换案例检验关于概念的主张，并反思直觉的可靠性',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'fm',
+    position: 3,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: ['S1', 'S5', 'S7'],
+    sourceNote: '希腊文据 Perseus 数字图书馆所收 Burnet 校本（CC BY-SA 4.0），《庄子》与《老子、庄子与道家传统》所用的录文相同，《哲学研究》§66 的两句德文据 wittgensteinproject.org 录文；当代案例一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
 };
+
+// Methods courses quote short passages from several traditions; the note and
+// the language are decided per citation.
+function srcNoteA(cite: string) {
+  if (/柏拉图/.test(cite)) return '希腊文据 Perseus 所收 Burnet 校本（CC BY-SA 4.0）';
+  if (/正理经/.test(cite)) return '据 GRETIL 电子本';
+  if (/哲学研究/.test(cite)) return '德文据 wittgensteinproject.org 录文';
+  if (/庄子/.test(cite)) return '录文与《老子、庄子与道家传统》相同';
+  return '据中文维基文库录文';
+}
+function origLangA(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
+  if (/[äöüß»«]/.test(t)) return 'de';
+  if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  return 'zh-Hant';
+}
 
 export const isPublished = (code: string) => code in PUBLISHED;
 export const published = (code: string): PublishedCourse | undefined => PUBLISHED[code];

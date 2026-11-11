@@ -38,7 +38,9 @@ setCtxResolver(originOf);
 /** The canonical place of a course in the curriculum (independent of how it was reached). */
 export const canonicalOf = (code: string): Crumb[] => {
   const c = PUBLISHED[code];
-  return c ? [regionCrumb('history'), traditionCrumb(c.tradition)] : [];
+  if (!c) return [];
+  // Foundations and Methods courses live in the 哲学方法 region, not in a tradition section.
+  return c.tradition === 'fm' ? [regionCrumb('methods')] : [regionCrumb('history'), traditionCrumb(c.tradition)];
 };
 
 export function goRegion(id: RegionId) {
