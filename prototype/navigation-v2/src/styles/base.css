@@ -877,6 +877,21 @@ main:focus,
   line-height: 1.6;
   color: var(--ink-2);
 }
+/* Japanese (JP1) and classical Chinese (KR1, and the verse Dōgen quotes in
+   JP1): set in the serif text face like the translation; the Chinese
+   reference under the passage is set small. */
+[data-style] .source--primary .source-orig:is(:lang(ja), :lang(zh-Hant)) p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.9;
+  hyphens: manual;
+}
+[data-style] .source--primary .source-orig:is(:lang(ja), :lang(zh-Hant)) p:last-child {
+  font-family: var(--sans, inherit);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
 .source-trans p {
   font-family: var(--serif);
   font-size: 16.5px;

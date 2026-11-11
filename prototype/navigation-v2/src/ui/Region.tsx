@@ -60,11 +60,12 @@ function scrollToTradition(id: string, smooth: boolean) {
 export default function Region({ region }: { region: R }) {
   const r = REGIONS.find((x) => x.id === region)!;
   useEscape(() => navigate({ name: 'home' }));
-  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in, ?t=gr, ?t=ia, ?t=af) points at its section of this page.
+  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in, ?t=gr, ?t=ia, ?t=af, ?t=jp, ?t=kr, ?t=la) points at its section of this page;
+  // ?t=ot (the curriculum's 日本、韩国与拉丁美洲 group) points at the first of its three sections.
   useEffect(() => {
-    const m = location.hash.match(/t=(cn|ea|in|gr|ia|af)/);
+    const m = location.hash.match(/t=(cn|ea|in|gr|ia|af|jp|kr|la|ot)/);
     if (!m) return;
-    const t = window.setTimeout(() => scrollToTradition(m[1], false), 0);
+    const t = window.setTimeout(() => scrollToTradition(m[1] === 'ot' ? 'jp' : m[1], false), 0);
     return () => window.clearTimeout(t);
   }, []);
   // The pinned list of traditions sits at the same height as a heading scrolled into view.
@@ -105,7 +106,9 @@ export default function Region({ region }: { region: R }) {
                       <span className="tl-count">{t.count} 门</span>
                     </>
                   );
-                  return t.id in TRADITION_NAME ? (
+                  // The 日本、韩国与拉丁美洲 group has three sections (one per tradition); its link goes to the first.
+                  const target = t.id === 'ot' ? 'jp' : t.id;
+                  return target in TRADITION_NAME ? (
                     <li key={t.id} className="is-here">
                       <a
                         className="tl-link"
@@ -113,7 +116,7 @@ export default function Region({ region }: { region: R }) {
                         onClick={(e) => {
                           e.preventDefault();
                           history.replaceState(history.state, '', `#/region/history?t=${t.id}`);
-                          scrollToTradition(t.id, true);
+                          scrollToTradition(target, true);
                         }}
                       >
                         {cells}
@@ -124,7 +127,7 @@ export default function Region({ region }: { region: R }) {
                   );
                 })}
               </ol>
-              <p className="pg-note">原型展开「希腊与罗马」「中国」「印度」「伊斯兰、阿拉伯与犹太」「欧洲与北大西洋」和「非洲与非洲裔」六个传统。</p>
+              <p className="pg-note">原型展开全部七个传统；「日本、韩国与拉丁美洲」在大纲中是一组，这里按日本、韩国、拉丁美洲分成三节。</p>
             </section>
             <section>
               <h2 className="sec-h" id="trad-gr" tabIndex={-1}>希腊与罗马哲学 · 4 门课</h2>
@@ -139,6 +142,12 @@ export default function Region({ region }: { region: R }) {
               <CourseTable codes={UNITS.filter((u) => /^EA\d/.test(u.code)).map((u) => u.code)} />
               <h2 className="sec-h" id="trad-af" tabIndex={-1}>非洲与非洲裔哲学 · 3 门课</h2>
               <CourseTable codes={UNITS.filter((u) => /^AF\d/.test(u.code)).map((u) => u.code)} />
+              <h2 className="sec-h" id="trad-jp" tabIndex={-1}>日本哲学 · 1 门课</h2>
+              <CourseTable codes={['JP1']} />
+              <h2 className="sec-h" id="trad-kr" tabIndex={-1}>韩国哲学 · 1 门课</h2>
+              <CourseTable codes={['KR1']} />
+              <h2 className="sec-h" id="trad-la" tabIndex={-1}>拉丁美洲哲学 · 1 门课</h2>
+              <CourseTable codes={['LA1']} />
             </section>
           </div>
         )}

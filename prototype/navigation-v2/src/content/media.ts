@@ -166,7 +166,11 @@ export type MediaId =
   // 后殖民与当代非洲哲学
   | 'decolonize-compare'
   // 非洲裔与黑色大西洋哲学
-  | 'experience-argument';
+  | 'experience-argument'
+  // 日本哲学 · 韩国哲学 · 拉丁美洲哲学
+  | 'uji-readings'
+  | 'four-seven-voices'
+  | 'normative-premises';
 
 interface Anchor {
   id: MediaId;
@@ -441,6 +445,12 @@ const ANCHORS: Anchor[] = [
   { id: 'decolonize-compare', code: 'AF2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('阿皮亚和后期的洪通基没有单独列出') },
   // V27 · AF3 三 · after the reading of Cooper p. 134 (two problems, one unacknowledged factor).
   { id: 'experience-argument', code: 'AF3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('［本章的重建］请注意这句话的结构') },
+  // V28 · JP1 二 · after step four of the five-step reading (the two English renderings of 有時).
+  { id: 'uji-readings', code: 'JP1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('四、译本。') },
+  // V28 · KR1 四 · after the table comparing the five positions in the Four–Seven debate.
+  { id: 'four-seven-voices', code: 'KR1', section: '四、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('郑之云（天命图）') && b.text.includes('栗谷（1572）') },
+  // V28 · LA1 一 · after the table setting Sepúlveda's and Las Casas' arguments side by side.
+  { id: 'normative-premises', code: 'LA1', section: '一、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('共同的框架') && b.text.includes('证据的类型') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

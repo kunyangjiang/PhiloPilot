@@ -21,6 +21,9 @@ import { EA12 } from './ea12';
 import { AF1 } from './af1';
 import { AF2 } from './af2';
 import { AF3 } from './af3';
+import { JP1 } from './jp1';
+import { KR1 } from './kr1';
+import { LA1 } from './la1';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
@@ -46,8 +49,8 @@ import type { CourseText } from './course';
 // Chinese wording is a presentation translation.
 
 /** Tradition sections of 历史与传统 that have a readable course. */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学' };
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学' };
 
 export interface PublishedCourse {
   code: string;
@@ -474,6 +477,63 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: () => '据公有领域印本逐字核对，页码依原书',
     // Only the nineteenth-century English texts are quoted in the original.
     origLang: () => 'en',
+  },
+  JP1: {
+    code: 'JP1',
+    text: JP1,
+    name: '日本哲学：佛教思想、江户儒学与京都学派',
+    tier: '◐ 核心选修',
+    en: 'Japanese Philosophy: Buddhist Thought, Neo-Confucian Edo and the Kyoto School',
+    method: '解读翻译过来的术语；把一篇难读的禅宗文本当作论证来读',
+    background: '大纲认为「魏晋玄学与中国佛学」和「宋明理学至清代」有帮助（推荐背景，不是必需）',
+    tradition: 'jp',
+    position: 1,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: ['S7', 'D3'],
+    sourceNote:
+      '日文据公有领域的文本：《歎異抄》据真宗大谷派《真宗圣典》的文字，道元《正法眼藏·有时》据学术论文所引的文字，西田《善的研究》据青空文库本（底本为岩波文库 1950 年本）；二十世纪仍受版权保护的著作一律依据《斯坦福哲学百科全书》的条目转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域文本，来源见注释',
+    // Japanese passages, except the classical Chinese verse Dōgen quotes.
+    origLang: (html) => (/[぀-ヿ]/.test(html.replace(/<[^>]+>/g, '').replace(/（[^）]*）/g, '')) ? 'ja' : 'zh-Hant'),
+  },
+  KR1: {
+    code: 'KR1',
+    text: KR1,
+    name: '韩国哲学：佛教、理学论争与现代',
+    tier: '◐ 核心选修',
+    en: 'Korean Philosophy: Buddhism, Neo-Confucian Debates and Modernity',
+    method: '跟随一场精细的技术性论争（四端七情），比较各方立场',
+    background: '大纲建议先读「宋明理学至清代」（推荐背景，不是必需）',
+    tradition: 'kr',
+    position: 1,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote:
+      '汉文原文据中文维基文库的录文（元晓、义湘据《大正新修大藏经》本，退溪、栗谷据文集刊本），字形保留繁体，没有对照韩国古典翻译院的标点本核对；近现代著作一律依据《斯坦福哲学百科全书》的条目转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据中文维基文库录文，字形保留繁体',
+    // All original passages are classical Chinese (hanmun).
+    origLang: () => 'zh-Hant',
+  },
+  LA1: {
+    code: 'LA1',
+    text: LA1,
+    name: '拉丁美洲哲学：征服、独立与解放',
+    tier: '◐ 核心选修',
+    en: 'Latin American Philosophy: Conquest, Independence and Liberation',
+    method: '在历史语境中评价关于权利与解放的规范论证',
+    background: '大纲建议先读「经验论、启蒙与自由主义的起源」（推荐背景，不是必需）',
+    tradition: 'la',
+    position: 1,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote:
+      '西班牙文据西班牙文维基文库的录文（索尔·胡安娜、玻利瓦尔、马蒂、巴雷达、马里亚特吉），都是公有领域的文本，没有对照校勘本核对；拉丁文和葡萄牙文著作以及二十世纪仍受版权保护的著作，一律依据《斯坦福哲学百科全书》和《互联网哲学百科全书》的条目转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据西班牙文维基文库录文',
+    // All original passages are Spanish (a Latin phrase inside one is part of the Spanish text).
+    origLang: () => 'es',
   },
   IN1: {
     code: 'IN1',

@@ -86,7 +86,9 @@ export const COURSES: Course[] = [
   c('AF1', '非洲哲学思想：来源、争论与方法', 'core', 'B', 'af'),
   c('AF2', '后殖民与当代非洲哲学', 'extended', 'B', 'af'),
   c('AF3', '非洲裔与黑色大西洋哲学', 'elective', 'B', 'af'),
+  c('JP1', '日本哲学：佛教思想、江户儒学与京都学派', 'elective', 'B', 'ot'),
   c('KR1', '韩国哲学：佛教、理学论争与现代', 'elective', 'B', 'ot'),
+  c('LA1', '拉丁美洲哲学：征服、独立与解放', 'elective', 'B', 'ot'),
   // Domain C
   c('S4', '人格、自我与自由意志', 'core', 'C'),
   c('S7', '伦理学：对与善、道德修养', 'core', 'C'),
@@ -247,7 +249,7 @@ export const HUMAN_NATURE = {
       links: [
         { code: 'CN1', where: '三、孟子：人性善与扩充 · 四、荀子：性恶、伪与礼义' },
         { code: 'CN6', where: '二、宇宙论与理气 · 张载：两种性，两种知 · 程颐：性即理与穷理' },
-        { code: 'KR1', where: '§4 四端七情之辩' },
+        { code: 'KR1', where: '四、四端七情之辩' },
         { code: 'CN4', where: '二、韩非：法、术、势 · 出发点：利用人的好恶 · 不恃人之为吾善' },
       ],
     },

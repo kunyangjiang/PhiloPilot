@@ -9,7 +9,7 @@ export { Band, Claim, Limits, Seg, Step, Tag, useSavedIx, Verdict } from '../ia3
 // chapters' own checked passages (content/JW1_, EA1_, EA2_, EA3_, EA5_, EA6_SAMPLE_DRAFT.md)
 // with the chapters' own translation; nothing is quoted from anywhere else.
 
-type Lang = 'jrb' | 'la' | 'fr' | 'en' | 'de' | 'da';
+type Lang = 'jrb' | 'la' | 'fr' | 'en' | 'de' | 'da' | 'ja' | 'zh-Hant' | 'es';
 
 /** An original-language passage with its reference and the chapter's translation. */
 export function OrigSrc({ src, orig, lang, zh }: { src: string; orig: string; lang: Lang; zh?: string }) {
