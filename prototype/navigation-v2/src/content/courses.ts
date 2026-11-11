@@ -12,6 +12,9 @@ import { EA3 } from './ea3';
 import { EA4 } from './ea4';
 import { EA5 } from './ea5';
 import { EA6 } from './ea6';
+import { EA7 } from './ea7';
+import { EA8 } from './ea8';
+import { EA9 } from './ea9';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
@@ -238,7 +241,8 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     position: 3,
     // EA4 lists this course as recommended background; EA7, EA11 and LA1 do too.
     recommendFrom: ['EA4', 'EA7', 'EA11', 'LA1'],
-    leadsTo: ['EA4'],
+    // Curriculum: EA3 → EA4 (course entry) and EA3 → EA7 (recommended path chains).
+    leadsTo: ['EA4', 'EA7'],
     sourceNote:
       '英文、拉丁文和法文据公有领域印本的扫描本逐字核对（培根《新工具》Fowler 1878 年本、霍布斯《利维坦》1909 年重印本、洛克《人类理智论》1753 年本和《政府论》1764 年本、贝克莱《人类知识原理》Krauth 1874 年本、休谟 Selby-Bigge 1902 年本和 Green 与 Grose 本、孟德斯鸠 1849 年本、卢梭 1791 年本、阿斯特尔 1706 年本、夏特莱 1740 年本、沃斯通克拉夫特 1796 年本），保留原拼写，只引短段；伏尔泰一律转述。版本与权利见附录。中文是本章试译。',
     srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
@@ -305,6 +309,61 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
     // German, except the Kierkegaard passages (Danish).
     origLang: (html) => (/[æøåÆØÅ]|\b(?:og|Aand|Ethiske|Inderligheds|Mennesket|Angest)\b/.test(html.replace(/<[^>]+>/g, '')) ? 'da' : 'de'),
+  },
+  EA7: {
+    code: 'EA7',
+    text: EA7,
+    name: '自由主义、功利主义与实用主义',
+    tier: '○ 拓展',
+    en: 'Liberalism, Utilitarianism and Pragmatism',
+    method: '把相互竞争的价值标准用到具体的案例上；检验一种意义理论',
+    background: '大纲建议先读「经验论、启蒙与自由主义的起源」（推荐背景，不是必需；本章会回到休谟的“是与应当”、洛克的同意和沃斯通克拉夫特论教育）',
+    tradition: 'ea',
+    position: 7,
+    // EA11 lists this course (with EA3) as recommended background.
+    recommendFrom: ['EA11'],
+    leadsTo: ['S7', 'S9'],
+    sourceNote:
+      '英文据公有领域印本的扫描本逐字核对（边沁《道德与立法原理导论》1879 年重印本、密尔《论自由》1859 年初版、《功利主义》1863 年初版和《妇女的屈从地位》1869 年初版、泰勒·密尔《妇女的选举权》1859 年本、西季威克《伦理学方法》第七版、皮尔士 1877—1878 年和 1905 年的期刊原刊、詹姆士《实用主义》1907 年本、杜威《我们怎样思维》1910 年初版和《民主主义与教育》1916 年初版、亚当斯《民主与社会伦理》1902 年初版、杜波依斯《黑人的灵魂》1903 年初版），保留原拼写，只引短段；杜威《逻辑：探究的理论》和《公众及其问题》一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原拼写',
+    origLang: () => 'en',
+  },
+  EA8: {
+    code: 'EA8',
+    text: EA8,
+    name: '逻辑、语言与分析哲学的兴起',
+    tier: '● 核心',
+    en: 'Logic, Language and the Rise of Analytic Philosophy',
+    method: '对语言作逻辑分析；检验所提出的意义标准',
+    background: '无前置要求，可以直接阅读；大纲认为拓展课程「形式推理：命题逻辑与谓词逻辑」会有帮助（不是必需；本章自己逐步引入所需的符号）',
+    tradition: 'ea',
+    position: 8,
+    // EA10 lists this course as recommended background.
+    recommendFrom: ['EA10'],
+    leadsTo: ['EA10', 'S6'],
+    sourceNote:
+      '德文和英文据公有领域印本的扫描本逐字核对（弗雷格《算术基础》1884 年初版和《论涵义与指称》1892 年原刊、罗素《论指称》1905 年原刊、维特根斯坦《逻辑哲学论》1922 年德英对照本的德文），保留原正字法，只引短段；《哲学研究》、卡尔纳普、艾耶尔、赖尔、奥斯汀、斯特劳森和克里普克一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原正字法',
+    // German (Frege, Tractatus), except the Russell passages (English).
+    origLang: (html) => (/[äöüßÄÖÜ„]|\b(?:und|der|die|das|ist|nicht|wir|ein|eine|es)\b/.test(html.replace(/<[^>]+>/g, '')) ? 'de' : 'en'),
+  },
+  EA9: {
+    code: 'EA9',
+    text: EA9,
+    name: '现象学、存在主义与诠释学',
+    tier: '● 核心',
+    en: 'Phenomenology, Existentialism and Hermeneutics',
+    method: '现象学的描述；解释一部艰深的文本',
+    background: '大纲建议先读「黑格尔之后：马克思、克尔凯郭尔、叔本华与尼采」（推荐背景，不是必需；海德格尔对焦虑和沉沦的说明借用了克尔凯郭尔）',
+    tradition: 'ea',
+    position: 9,
+    // EA12 lists this course (with EA6) as recommended background.
+    recommendFrom: ['EA12'],
+    leadsTo: ['S5', 'D6'],
+    sourceNote:
+      '德文据公有领域印本的扫描本逐字核对（胡塞尔《逻辑研究》第二卷 1901 年初版、《观念》第一卷 1913 年原刊），保留原正字法，只引短段；海德格尔、萨特、波伏瓦、梅洛-庞蒂、伽达默尔、阿伦特和法农的著作仍受版权保护，一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本的扫描本逐字核对，保留原正字法',
+    origLang: () => 'de',
   },
   IN1: {
     code: 'IN1',

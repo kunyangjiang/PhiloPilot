@@ -153,7 +153,11 @@ export type MediaId =
   // V24 · 经验论、启蒙与自由主义的起源 / 德国观念论与浪漫主义 / 黑格尔之后
   | 'hume-induction'
   | 'dialectic-stepper'
-  | 'critique-sorter';
+  | 'critique-sorter'
+  // V25 · 自由主义、功利主义与实用主义 / 逻辑、语言与分析哲学的兴起 / 现象学、存在主义与诠释学
+  | 'harm-principle'
+  | 'russell-scope'
+  | 'bad-faith-sorter';
 
 interface Anchor {
   id: MediaId;
@@ -410,6 +414,12 @@ const ANCHORS: Anchor[] = [
   { id: 'dialectic-stepper', code: 'EA5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('用这张表时请注意两点') },
   // V24 · EA6 六 · after the table comparing the five forms of critique.
   { id: 'critique-sorter', code: 'EA6', section: '六、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('批评的形式') && b.text.includes('它没有做到什么') },
+  // V25 · EA7 二 · after the table of reasons the harm principle admits or excludes.
+  { id: 'harm-principle', code: 'EA7', section: '二、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('限制自由的理由') && b.text.includes('伤害原则允许吗') },
+  // V25 · EA8 三 · after the table of the two scopes of negation.
+  { id: 'russell-scope', code: 'EA8', section: '三、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('否定的辖域窄') && b.text.includes('否定的辖域宽') },
+  // V25 · EA9 三 · after the table of bad-faith scenes.
+  { id: 'bad-faith-sorter', code: 'EA9', section: '三、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('只肯定了哪一面') && b.text.includes('为什么是自欺') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
