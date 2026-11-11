@@ -44,6 +44,19 @@ function CourseTable({ codes }: { codes: string[] }) {
   );
 }
 
+// Bottom edge of the sticky top bar and wayfinder.
+const barsBottom = () => document.querySelector('.wayfinder')?.getBoundingClientRect().bottom ?? 124;
+
+// Scroll a tradition's section heading to just below the sticky top bar and wayfinder, then focus it.
+function scrollToTradition(id: string, smooth: boolean) {
+  const h = document.getElementById('trad-' + id);
+  if (!h) return;
+  const bars = barsBottom();
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: h.getBoundingClientRect().top + window.scrollY - bars - 24, behavior: smooth && !reduce ? 'smooth' : 'auto' });
+  h.focus({ preventScroll: true });
+}
+
 export default function Region({ region }: { region: R }) {
   const r = REGIONS.find((x) => x.id === region)!;
   useEscape(() => navigate({ name: 'home' }));
@@ -51,13 +64,18 @@ export default function Region({ region }: { region: R }) {
   useEffect(() => {
     const m = location.hash.match(/t=(cn|ea|in|gr|ia)/);
     if (!m) return;
-    const t = window.setTimeout(() => {
-      const h = document.getElementById('trad-' + m[1]);
-      if (!h) return;
-      window.scrollTo(0, h.getBoundingClientRect().top + window.scrollY - 130);
-      h.focus({ preventScroll: true });
-    }, 0);
+    const t = window.setTimeout(() => scrollToTradition(m[1], false), 0);
     return () => window.clearTimeout(t);
+  }, []);
+  // The pinned list of traditions sits at the same height as a heading scrolled into view.
+  useEffect(() => {
+    const fit = () => {
+      const nav = document.querySelector<HTMLElement>('.trad-nav');
+      if (nav) nav.style.setProperty('--trad-nav-top', barsBottom() + 24 + 'px');
+    };
+    fit();
+    window.addEventListener('resize', fit);
+    return () => window.removeEventListener('resize', fit);
   }, []);
   return (
     <main id="main" tabIndex={-1} className={'pg pg-region pg-region--' + region}>
@@ -76,16 +94,35 @@ export default function Region({ region }: { region: R }) {
 
         {region === 'history' && (
           <div className="region-cols">
-            <section>
+            <section className="trad-nav">
               <h2 className="sec-h">七个传统</h2>
               <ol className="trad-list">
-                {TRADITIONS.map((t, i) => (
-                  <li key={t.id} className={t.id in TRADITION_NAME ? 'is-here' : ''}>
-                    <span className="tl-no">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="tl-name">{t.name}</span>
-                    <span className="tl-count">{t.count} 门</span>
-                  </li>
-                ))}
+                {TRADITIONS.map((t, i) => {
+                  const cells = (
+                    <>
+                      <span className="tl-no">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="tl-name">{t.name}</span>
+                      <span className="tl-count">{t.count} 门</span>
+                    </>
+                  );
+                  return t.id in TRADITION_NAME ? (
+                    <li key={t.id} className="is-here">
+                      <a
+                        className="tl-link"
+                        href={`#/region/history?t=${t.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          history.replaceState(history.state, '', `#/region/history?t=${t.id}`);
+                          scrollToTradition(t.id, true);
+                        }}
+                      >
+                        {cells}
+                      </a>
+                    </li>
+                  ) : (
+                    <li key={t.id}>{cells}</li>
+                  );
+                })}
               </ol>
               <p className="pg-note">原型展开「希腊与罗马」「中国」「印度」「伊斯兰、阿拉伯与犹太」和「欧洲与北大西洋」五个传统。</p>
             </section>
