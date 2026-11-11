@@ -178,7 +178,13 @@ export default function CoursePage({ code }: { code: string }) {
           <ul className="next-list">
             {course.recommendFrom.map((c) => (
               <li key={'r' + c}>
-                <span className="nl-k">{TRADITION_NAME[course.tradition]} · 下一门</span> {linked(c)}
+                {/* A course in another tradition (EA9 → AF3) is named by its own tradition. */}
+                <span className="nl-k">
+                  {(PUBLISHED[c]?.tradition ?? course.tradition) === course.tradition
+                    ? `${TRADITION_NAME[course.tradition]} · 下一门`
+                    : `${TRADITION_NAME[PUBLISHED[c].tradition]} · 可接着读`}
+                </span>{' '}
+                {linked(c)}
               </li>
             ))}
             {course.leadsTo

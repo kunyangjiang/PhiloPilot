@@ -10,7 +10,7 @@ export { Band, Claim, Limits, Seg, Src, Tag, BASIS, type Basis } from '../in2/sh
 // chapters' own translation; nothing is quoted from anywhere else.
 
 /** Saved component state, per course and component. */
-export function useSavedIx<T extends object>(code: 'IN4' | 'IN5' | 'IN6' | 'IN7' | 'IN8' | 'IA1' | 'IA2' | 'IA3' | 'IA4' | 'IA5' | 'JW1' | 'EA1' | 'EA2' | 'EA3' | 'EA5' | 'EA6' | 'EA7' | 'EA8' | 'EA9' | 'EA10' | 'EA11' | 'EA12', id: string, init: T) {
+export function useSavedIx<T extends object>(code: 'IN4' | 'IN5' | 'IN6' | 'IN7' | 'IN8' | 'IA1' | 'IA2' | 'IA3' | 'IA4' | 'IA5' | 'JW1' | 'EA1' | 'EA2' | 'EA3' | 'EA5' | 'EA6' | 'EA7' | 'EA8' | 'EA9' | 'EA10' | 'EA11' | 'EA12' | 'AF1' | 'AF2' | 'AF3', id: string, init: T) {
   const [st, setSt] = useState<T>(() => ({ ...init, ...getMedia<Partial<T>>(code, id, init) }));
   const save = (next: T) => {
     setSt(next);

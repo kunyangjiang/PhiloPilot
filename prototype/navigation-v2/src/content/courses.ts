@@ -18,6 +18,9 @@ import { EA9 } from './ea9';
 import { EA10 } from './ea10';
 import { EA11 } from './ea11';
 import { EA12 } from './ea12';
+import { AF1 } from './af1';
+import { AF2 } from './af2';
+import { AF3 } from './af3';
 import { IN1 } from './in1';
 import { IN2 } from './in2';
 import { IN3 } from './in3';
@@ -43,8 +46,8 @@ import type { CourseText } from './course';
 // Chinese wording is a presentation translation.
 
 /** Tradition sections of 历史与传统 that have a readable course. */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太' };
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学' };
 
 export interface PublishedCourse {
   code: string;
@@ -360,8 +363,8 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '大纲建议先读「黑格尔之后：马克思、克尔凯郭尔、叔本华与尼采」（推荐背景，不是必需；海德格尔对焦虑和沉沦的说明借用了克尔凯郭尔）',
     tradition: 'ea',
     position: 9,
-    // EA12 lists this course (with EA6) as recommended background.
-    recommendFrom: ['EA12'],
+    // EA12 lists this course (with EA6) as recommended background; AF3 calls it helpful.
+    recommendFrom: ['EA12', 'AF3'],
     leadsTo: ['S5', 'D6'],
     sourceNote:
       '德文据公有领域印本的扫描本逐字核对（胡塞尔《逻辑研究》第二卷 1901 年初版、《观念》第一卷 1913 年原刊），保留原正字法，只引短段；海德格尔、萨特、波伏瓦、梅洛-庞蒂、伽达默尔、阿伦特和法农的著作仍受版权保护，一律转述。版本与权利见附录。中文是本章试译。',
@@ -418,6 +421,59 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: () => '据法语维基文库所录 1971 年 Payot 本逐字核对',
     // Only Saussure is quoted in the original (French).
     origLang: () => 'fr',
+  },
+  AF1: {
+    code: 'AF1',
+    text: AF1,
+    name: '非洲哲学思想：来源、争论与方法',
+    tier: '● 核心',
+    en: 'African Philosophical Thought: Sources, Debates and Methods',
+    method: '来源批判：衡量口头的、书面的和有争议的来源',
+    background: '无前置要求，可以直接阅读',
+    tradition: 'af',
+    position: 1,
+    // AF2 lists this course as its background.
+    recommendFrom: ['AF2'],
+    leadsTo: ['AF2', 'S4', 'D2'],
+    sourceNote:
+      '本章所读的二十世纪和当代非洲哲学家的著作都仍受版权保护，一律依据《斯坦福哲学百科全书》和《互联网哲学百科全书》的条目转述；《寻找扎拉·雅各布》（CC BY 4.0）的文字注明出处。古埃及文献和《探究》的原文本章没有阅读，不引原文段落。出处见注释和附录。',
+    srcNote: () => '依据哲学百科全书的条目转述',
+  },
+  AF2: {
+    code: 'AF2',
+    text: AF2,
+    name: '后殖民与当代非洲哲学',
+    tier: '○ 拓展',
+    en: 'Postcolonial and Contemporary African Philosophy',
+    method: '评估关于概念及其去殖民化的论证',
+    background: '大纲建议先读「非洲哲学思想：来源、争论与方法」（推荐背景，不是必需）',
+    tradition: 'af',
+    position: 2,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote:
+      '本章所读的哲学家的著作都仍受版权保护，一律依据《斯坦福哲学百科全书》和《互联网哲学百科全书》的条目转述，不引原文段落；条目中引用的短语只作为条目的引用标出。出处见注释和附录。',
+    srcNote: () => '依据哲学百科全书的条目转述',
+  },
+  AF3: {
+    code: 'AF3',
+    text: AF3,
+    name: '非洲裔与黑色大西洋哲学',
+    tier: '◐ 核心选修',
+    en: 'Africana and Black Atlantic Philosophy',
+    method: '把关于生活经验的陈述当作哲学论证来读',
+    background: '无前置要求；大纲认为「现象学、存在主义与诠释学」有帮助（推荐背景，不是必需）',
+    tradition: 'af',
+    position: 3,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: ['D6'],
+    sourceNote:
+      '英文据公有领域的十九世纪印本逐字核对（道格拉斯《自述》1845 年波士顿本、库珀《来自南方的声音》1892 年本、杜波依斯《种族的保存》1897 年本和《黑人的灵魂》1903 年第二版），页码依原书；法农、戈登、戴维斯、洛德、胡克斯和克伦肖等人的著作仍受版权保护，一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: () => '据公有领域印本逐字核对，页码依原书',
+    // Only the nineteenth-century English texts are quoted in the original.
+    origLang: () => 'en',
   },
   IN1: {
     code: 'IN1',

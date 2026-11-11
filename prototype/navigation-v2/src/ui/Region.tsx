@@ -60,9 +60,9 @@ function scrollToTradition(id: string, smooth: boolean) {
 export default function Region({ region }: { region: R }) {
   const r = REGIONS.find((x) => x.id === region)!;
   useEscape(() => navigate({ name: 'home' }));
-  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in, ?t=gr, ?t=ia) points at its section of this page.
+  // A tradition in the breadcrumb (?t=cn, ?t=ea, ?t=in, ?t=gr, ?t=ia, ?t=af) points at its section of this page.
   useEffect(() => {
-    const m = location.hash.match(/t=(cn|ea|in|gr|ia)/);
+    const m = location.hash.match(/t=(cn|ea|in|gr|ia|af)/);
     if (!m) return;
     const t = window.setTimeout(() => scrollToTradition(m[1], false), 0);
     return () => window.clearTimeout(t);
@@ -124,7 +124,7 @@ export default function Region({ region }: { region: R }) {
                   );
                 })}
               </ol>
-              <p className="pg-note">原型展开「希腊与罗马」「中国」「印度」「伊斯兰、阿拉伯与犹太」和「欧洲与北大西洋」五个传统。</p>
+              <p className="pg-note">原型展开「希腊与罗马」「中国」「印度」「伊斯兰、阿拉伯与犹太」「欧洲与北大西洋」和「非洲与非洲裔」六个传统。</p>
             </section>
             <section>
               <h2 className="sec-h" id="trad-gr" tabIndex={-1}>希腊与罗马哲学 · 4 门课</h2>
@@ -137,6 +137,8 @@ export default function Region({ region }: { region: R }) {
               <CourseTable codes={UNITS.filter((u) => /^(IA\d|JW1)$/.test(u.code)).map((u) => u.code)} />
               <h2 className="sec-h" id="trad-ea" tabIndex={-1}>欧洲与北大西洋哲学 · 12 门课</h2>
               <CourseTable codes={UNITS.filter((u) => /^EA\d/.test(u.code)).map((u) => u.code)} />
+              <h2 className="sec-h" id="trad-af" tabIndex={-1}>非洲与非洲裔哲学 · 3 门课</h2>
+              <CourseTable codes={UNITS.filter((u) => /^AF\d/.test(u.code)).map((u) => u.code)} />
             </section>
           </div>
         )}

@@ -84,6 +84,8 @@ export const COURSES: Course[] = [
   c('EA11', '1950 年后的道德与政治哲学', 'extended', 'B', 'ea'),
   c('EA12', '批判理论、结构主义、后结构主义与女性主义理论', 'extended', 'B', 'ea'),
   c('AF1', '非洲哲学思想：来源、争论与方法', 'core', 'B', 'af'),
+  c('AF2', '后殖民与当代非洲哲学', 'extended', 'B', 'af'),
+  c('AF3', '非洲裔与黑色大西洋哲学', 'elective', 'B', 'af'),
   c('KR1', '韩国哲学：佛教、理学论争与现代', 'elective', 'B', 'ot'),
   // Domain C
   c('S4', '人格、自我与自由意志', 'core', 'C'),

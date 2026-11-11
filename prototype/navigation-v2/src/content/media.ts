@@ -160,7 +160,13 @@ export type MediaId =
   | 'bad-faith-sorter'
   | 'rigidity-tester'
   | 'distribution-chooser'
-  | 'writing-hierarchy';
+  | 'writing-hierarchy'
+  // 非洲哲学思想
+  | 'source-weigh'
+  // 后殖民与当代非洲哲学
+  | 'decolonize-compare'
+  // 非洲裔与黑色大西洋哲学
+  | 'experience-argument';
 
 interface Anchor {
   id: MediaId;
@@ -429,6 +435,12 @@ const ANCHORS: Anchor[] = [
   { id: 'distribution-chooser', code: 'EA11', section: '四、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('经济 C') && b.text.includes('处境最差的群体') },
   // V26 · EA12 四 · after the step-by-step deconstructive reading of Saussure.
   { id: 'writing-hierarchy', code: 'EA12', section: '四、', match: (b) => b.kind === 'html' && b.text.includes('文本自己确立的等级') },
+  // V27 · AF1 六 · after the table of what each kind of evidence can show about the Ḥatäta.
+  { id: 'source-weigh', code: 'AF1', section: '六、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('流传的途径') && b.text.includes('学者的动机与语境') },
+  // V27 · AF2 五 · after the table of six approaches and the paragraph under it.
+  { id: 'decolonize-compare', code: 'AF2', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('阿皮亚和后期的洪通基没有单独列出') },
+  // V27 · AF3 三 · after the reading of Cooper p. 134 (two problems, one unacknowledged factor).
+  { id: 'experience-argument', code: 'AF3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('［本章的重建］请注意这句话的结构') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
