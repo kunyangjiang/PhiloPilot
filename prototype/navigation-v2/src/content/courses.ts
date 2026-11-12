@@ -48,6 +48,9 @@ import { A3 } from './a3';
 import { A4 } from './a4';
 import { S1 } from './s1';
 import { S2 } from './s2';
+import { S3 } from './s3';
+import { S4 } from './s4';
+import { S5 } from './s5';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -988,6 +991,57 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteA,
     origLang: origLangA,
   },
+  S3: {
+    code: 'S3',
+    text: S3,
+    name: '因果、规律与时间',
+    tier: '○ 拓展',
+    en: 'Causation, Laws and Time',
+    method: '用反例检验关于因果的分析',
+    background: '大纲建议先读「概念、案例与思想实验」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 3,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '休谟《人类理智研究》与《经验论、启蒙与自由主义的起源》所用的文本相同；安萨里《哲学家的矛盾》和阿威罗伊《矛盾的矛盾》与《安萨里、阿威罗伊与西方伊斯兰思想》相同；《数论颂》与《意识、物质与修行》相同；《中论》与《大乘哲学》相同；《中部》与《早期佛教与阿毗达磨》相同；《忏悔录》与《从古代晚期到经院哲学》相同；《周易》与《法家与汉代思想》相同；道元《有时》一句与《日本哲学：佛教思想、江户儒学与京都学派》相同（该课没有对照校订本）。当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS,
+    origLang: origLangS,
+  },
+  S4: {
+    code: 'S4',
+    text: S4,
+    name: '人格、自我与自由意志',
+    tier: '● 核心',
+    en: 'Persons, Self and Free Will',
+    method: '用疑难案例检验人格同一性的标准',
+    background: '大纲建议先读「概念、案例与思想实验」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 4,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '洛克《人类理智论》和休谟《人性论》与《经验论、启蒙与自由主义的起源》所用的文本相同；《弥兰王问经》与《早期佛教与阿毗达磨》相同；《论语》与《孔子、孟子与荀子》相同；西塞罗《论命运》与《希腊化与罗马哲学》相同；康德《实践理性批判》与《康德》相同。帕菲特和其他当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS,
+    origLang: origLangS,
+  },
+  S5: {
+    code: 'S5',
+    text: S5,
+    name: '心灵哲学与意识',
+    tier: '● 核心',
+    en: 'Philosophy of Mind and Consciousness',
+    method: '分析关于意识的思想实验',
+    background: '大纲建议先读「概念、案例与思想实验」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 5,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '笛卡尔《第一哲学沉思集》和伊丽莎白致笛卡尔的信与《近代早期理性主义与新科学》所用的文本相同；《数论颂》与《意识、物质与修行》相同；世亲《唯识二十论》与《大乘哲学》相同；阿维森纳《指要与诠解》与《法拉比与阿维森纳》相同；《孟子》《荀子》与《孔子、孟子与荀子》相同。杰克逊、查尔默斯、内格尔、塞尔等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS,
+    origLang: origLangS,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1009,6 +1063,27 @@ function origLangA(html: string) {
   if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
   if (/[äöüß»«]/.test(t)) return 'de';
   if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  return 'zh-Hant';
+}
+
+// S3–S5 quote short checked passages in many languages: the language is
+// decided per passage, and the note for the Chinese source blocks per citation.
+function srcNoteS(cite: string) {
+  if (/周易/.test(cite)) return '录文据中文维基文库，与《法家与汉代思想》相同';
+  if (/论语|孟子|荀子/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  return '据中文维基文库录文';
+}
+function origLangS(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/[؀-ۿ]/.test(t)) return 'ar';
+  if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
+  if (/[぀-ヿ]/.test(t)) return 'ja';
+  if (/ṁ/.test(t)) return 'pi';
+  if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  if (/[äöüß]/.test(t)) return 'de';
+  if (/[éèêàç]|\bvous\b/.test(t)) return 'fr';
+  if (/\b(est|sed|quid|igitur|ergo|autem|inquit|enim)\b/i.test(t)) return 'la';
+  if (/[A-Za-z]/.test(t)) return 'en';
   return 'zh-Hant';
 }
 

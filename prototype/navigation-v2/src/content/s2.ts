@@ -2,7 +2,7 @@
 import raw from '@content/S2_SAMPLE_DRAFT.md?raw';
 import { parseCourse } from './course';
 
-const parsed = parseCourse('S2', raw, { exPrefix: 's2' });
+const parsed = parseCourse('S2', raw, { exPrefix: 's2', citeNoteRefs: true });
 
 // The core question is the bold sentence after "这一章的核心问题是：", verbatim.
 const coreM = raw.match(/这一章的核心问题是：\*\*(.+?)\*\*/);

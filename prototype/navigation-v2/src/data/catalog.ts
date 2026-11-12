@@ -92,7 +92,9 @@ export const COURSES: Course[] = [
   // Domain C
   c('S1', '知识与怀疑', 'core', 'C'),
   c('S2', '形而上学：存在、实体、共相与模态', 'core', 'C'),
+  c('S3', '因果、规律与时间', 'extended', 'C'),
   c('S4', '人格、自我与自由意志', 'core', 'C'),
+  c('S5', '心灵哲学与意识', 'core', 'C'),
   c('S7', '伦理学：对与善、道德修养', 'core', 'C'),
   c('S8', '元伦理学与道德心理学', 'extended', 'C'),
   // Domain D

@@ -182,7 +182,13 @@ export type MediaId =
   // 知识与怀疑
   | 'case-analyser'
   // 形而上学：存在、实体、共相与模态
-  | 'universals-test';
+  | 'universals-test'
+  // 因果、规律与时间
+  | 'causation-cases'
+  // 人格、自我与自由意志
+  | 'identity-cases'
+  // 心灵哲学与意识
+  | 'thought-experiment-map';
 
 interface Anchor {
   id: MediaId;
@@ -475,6 +481,12 @@ const ANCHORS: Anchor[] = [
   { id: 'case-analyser', code: 'S1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的组件把第一、二部分的几个案例放在一起') },
   // V30 · S2 三 · after the table of accounts of universals and the note under it.
   { id: 'universals-test', code: 'S2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最后一行特别说明') },
+  // V31 · S3 三 · after the table of six causal cases and the note under it.
+  { id: 'causation-cases', code: 'S3', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理，') && b.text.includes('下面的组件把这些案例') },
+  // V31 · S4 二 · after the table of six identity cases and three criteria, and the note under it.
+  { id: 'identity-cases', code: 'S4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章根据第二部分的介绍整理的') },
+  // V31 · S5 四 · after the table setting the three thought experiments side by side.
+  { id: 'thought-experiment-map', code: 'S5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。下面的组件请你逐一检查') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
