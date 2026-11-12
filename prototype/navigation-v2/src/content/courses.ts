@@ -51,6 +51,9 @@ import { S2 } from './s2';
 import { S3 } from './s3';
 import { S4 } from './s4';
 import { S5 } from './s5';
+import { S6 } from './s6';
+import { S7 } from './s7';
+import { S8 } from './s8';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -1042,6 +1045,60 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteS,
     origLang: origLangS,
   },
+  S6: {
+    code: 'S6',
+    text: S6,
+    name: '语言、意义与指称',
+    tier: '● 核心',
+    en: 'Language, Meaning and Reference',
+    method: '通过疑难案例比较几种指称理论',
+    background: '无前置要求；大纲认为「形式推理：命题逻辑与谓词逻辑」会有帮助（不是必需）',
+    tradition: 'sys',
+    position: 6,
+    // The curriculum lists no onward course for S6. Courses that point to S6
+    // (A2, EA8, EA10, IN3, IN5, CN2) do so through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '弗雷格《论涵义与指称》、罗素《论指称》和维特根斯坦《逻辑哲学论》与《逻辑、语言与分析哲学的兴起》所用的文本相同；陈那、法称和宝称与《知识、推理与辩论》相同；夏巴拉和法称《量释论》1.226 与《权威、语言与义务》相同；《墨子》《荀子·正名》与《墨家、名家与后期墨经》相同；《古兰经》与《翻译运动、凯拉姆与哲学的兴起》相同。克里普克、奥斯汀、塞尔、格莱斯等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS6to8,
+    origLang: origLangS6to8,
+  },
+  S7: {
+    code: 'S7',
+    text: S7,
+    name: '伦理学：对与善、道德修养',
+    tier: '● 核心',
+    en: 'Ethics: Right, Good and Moral Cultivation',
+    method: '把几种相互竞争的伦理框架用到同一个案例上',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 7,
+    // The curriculum lists no onward course for S7 (S8 and D4 name S7 as
+    // background; as with A3 in V31, that is not added here as an onward link).
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '密尔《功利主义》与《自由主义、功利主义与实用主义》所用的文本相同；康德《奠基》与《康德》相同；亚里士多德《尼各马可伦理学》与《亚里士多德》相同；《孟子》2A6 与《孔子、孟子与荀子》相同；《墨子·耕柱》和《孟子·滕文公上》与《墨家、名家与后期墨经》相同；《传习录》与《宋明理学至清代》相同；《增支部》与《早期佛教与阿毗达磨》相同；爱比克泰德与《希腊化与罗马哲学》相同。当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS6to8,
+    origLang: origLangS6to8,
+  },
+  S8: {
+    code: 'S8',
+    text: S8,
+    name: '元伦理学与道德心理学',
+    tier: '○ 拓展',
+    en: 'Metaethics and Moral Psychology',
+    method: '通过权衡反驳确定自己的元伦理学立场',
+    background: '大纲建议先读「伦理学：对与善、道德修养」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 8,
+    // The curriculum lists no onward course for S8. EA11 points to S8 through
+    // its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '休谟《人性论》与《经验论、启蒙与自由主义的起源》所用的文本相同；第欧根尼·拉尔修与《希腊化与罗马哲学》相同；《孟子》2A6 与《孔子、孟子与荀子》相同；《传习录》与《宋明理学至清代》相同。摩尔、麦凯、戴维森等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS6to8,
+    origLang: origLangS6to8,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1083,6 +1140,27 @@ function origLangS(html: string) {
   if (/[äöüß]/.test(t)) return 'de';
   if (/[éèêàç]|\bvous\b/.test(t)) return 'fr';
   if (/\b(est|sed|quid|igitur|ergo|autem|inquit|enim)\b/i.test(t)) return 'la';
+  if (/[A-Za-z]/.test(t)) return 'en';
+  return 'zh-Hant';
+}
+
+// S6–S8 (V32) add their own helpers rather than changing srcNoteS / origLangS,
+// so S3–S5 render exactly as before. Chinese source blocks name the course
+// whose checked text they reuse; two of S6's German passages have no umlaut,
+// so German is also recognised by a few function words.
+function srcNoteS6to8(cite: string) {
+  if (/墨子|荀子|滕文公/.test(cite)) return '录文据中文维基文库，与《墨家、名家与后期墨经》相同';
+  if (/孟子/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/傳習錄|传习录/.test(cite)) return '录文据中文维基文库，与《宋明理学至清代》相同';
+  return '据中文维基文库录文';
+}
+function origLangS6to8(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/[؀-ۿ]/.test(t)) return 'ar';
+  if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
+  if (/ṁ/.test(t)) return 'pi';
+  if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  if (/[äöüß]|\b(und|der|die|das|ist|nicht|heisst|wenn)\b/.test(t)) return 'de';
   if (/[A-Za-z]/.test(t)) return 'en';
   return 'zh-Hant';
 }

@@ -188,7 +188,13 @@ export type MediaId =
   // 人格、自我与自由意志
   | 'identity-cases'
   // 心灵哲学与意识
-  | 'thought-experiment-map';
+  | 'thought-experiment-map'
+  // 语言、意义与指称
+  | 'reference-cases'
+  // 伦理学：对与善、道德修养
+  | 'framework-case'
+  // 元伦理学与道德心理学
+  | 'metaethics-map';
 
 interface Anchor {
   id: MediaId;
@@ -487,6 +493,12 @@ const ANCHORS: Anchor[] = [
   { id: 'identity-cases', code: 'S4', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章根据第二部分的介绍整理的') },
   // V31 · S5 四 · after the table setting the three thought experiments side by side.
   { id: 'thought-experiment-map', code: 'S5', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。下面的组件请你逐一检查') },
+  // V32 · S6 一 · after the table of six cases and two theories of names, and the paragraph under it.
+  { id: 'reference-cases', code: 'S6', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章根据第一部分的介绍整理的') },
+  // V32 · S7 七 · after the table setting the frameworks side by side on 阿梅的周六, and the paragraph under it.
+  { id: 'framework-case', code: 'S7', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表格还说明了一件事') },
+  // V32 · S8 四 · after the table of five positions and their costs, and the paragraph under it.
+  { id: 'metaethics-map', code: 'S8', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理，每一行都有许多变体') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

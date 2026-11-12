@@ -95,6 +95,7 @@ export const COURSES: Course[] = [
   c('S3', '因果、规律与时间', 'extended', 'C'),
   c('S4', '人格、自我与自由意志', 'core', 'C'),
   c('S5', '心灵哲学与意识', 'core', 'C'),
+  c('S6', '语言、意义与指称', 'core', 'C'),
   c('S7', '伦理学：对与善、道德修养', 'core', 'C'),
   c('S8', '元伦理学与道德心理学', 'extended', 'C'),
   // Domain D
@@ -262,7 +263,7 @@ export const HUMAN_NATURE = {
       text: '怎样变好：扩充萌芽、矫正本性，还是长期练习？',
       links: [
         { code: 'CN1', where: '三、孟子 · 四、荀子 · 六、三种修养观' },
-        { code: 'S7', where: '§6 修养与实践' },
+        { code: 'S7', where: '六、修养与实践 · 儒家：四端与扩充 · 斯多亚派：判断的练习' },
         { code: 'GR3', where: '六、德性、实践智慧与人的繁荣 · 德性：两种，以及它们怎样产生' },
         { code: 'GR4', where: '六、哲学作为治疗与生活方式 · 练习 · 哲学治疗的限度' },
         { code: 'IN1', where: '三、行动、再生与解脱 · 四、沙门的另一条路（不害与苦行）' },
@@ -287,7 +288,7 @@ export const HUMAN_NATURE = {
       id: 'q-emotion',
       text: '情感与理性，在道德中各起什么作用？',
       links: [
-        { code: 'S8', where: '§5 情感 · §6 意志软弱' },
+        { code: 'S8', where: '五、情感与道德动机 · 情感是一种判断吗？ · 六、意志软弱与道德运气' },
         { code: 'EA3', where: '四、休谟论道德与宗教 · 理性是激情的奴隶 · 道德出于情感' },
         { code: 'IN2', where: '六、伦理、心与道 · 业就是意图 · 慈与悲' },
         { code: 'GR1', where: '五、苏格拉底与省察 · 美德即知识？' },
