@@ -54,6 +54,9 @@ import { S5 } from './s5';
 import { S6 } from './s6';
 import { S7 } from './s7';
 import { S8 } from './s8';
+import { S9 } from './s9';
+import { S10 } from './s10';
+import { S11 } from './s11';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -1099,6 +1102,60 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteS6to8,
     origLang: origLangS6to8,
   },
+  S9: {
+    code: 'S9',
+    text: S9,
+    name: '政治哲学：权威、正义与权利',
+    tier: '● 核心',
+    en: 'Political Philosophy: Authority, Justice and Rights',
+    method: '评价关于政治义务和正当性的论证',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 9,
+    // The curriculum lists no onward course for S9. CN4, EA7, EA11 and GR2
+    // point to S9 through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '柏拉图的希腊文与《柏拉图》所用的文本相同；霍布斯、洛克、卢梭与《经验论、启蒙与自由主义的起源》相同；密尔与《自由主义、功利主义与实用主义》相同；甘地与《近代与殖民时期的印度哲学》相同；《论语》《荀子》与《孔子、孟子与荀子》相同；《墨子》与《墨家、名家与后期墨经》相同；《韩非子》与《法家与汉代思想》相同。罗尔斯、诺齐克、伯林等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS9to11,
+    origLang: origLangS9to11,
+  },
+  S10: {
+    code: 'S10',
+    text: S10,
+    name: '科学哲学',
+    tier: '● 核心',
+    en: 'Philosophy of Science',
+    method: '通过哲学的和历史的案例评价最佳说明推理',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 10,
+    // The curriculum lists no onward course for S10. EA10 points to S10
+    // through its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '休谟与《经验论、启蒙与自由主义的起源》所用的文本相同；《墨子》与《墨家、名家与后期墨经》相同；《淮南子》与《法家与汉代思想》相同。波普尔、库恩、拉卡托斯等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS9to11,
+    origLang: origLangS9to11,
+  },
+  S11: {
+    code: 'S11',
+    text: S11,
+    name: '逻辑与数学哲学',
+    tier: '○ 拓展',
+    en: 'Philosophy of Logic and Mathematics',
+    method: '分析悖论并比较各种回应',
+    background: '大纲建议先读「形式推理：命题逻辑与谓词逻辑」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 11,
+    // The curriculum lists no onward course for S11. A2 points to S11 through
+    // its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《墨子》与《墨家、名家与后期墨经》所用的文本相同；《正理经》与《知识、推理与辩论》相同；《中论》与《大乘哲学》相同。塔斯基、克里普克、普利斯特、哥德尔等当代著作一律转述。版本与权利见附录。中文是本章或相应课程的试译。',
+    srcNote: srcNoteS9to11,
+    origLang: origLangS9to11,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1161,6 +1218,27 @@ function origLangS6to8(html: string) {
   if (/ṁ/.test(t)) return 'pi';
   if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
   if (/[äöüß]|\b(und|der|die|das|ist|nicht|heisst|wenn)\b/.test(t)) return 'de';
+  if (/[A-Za-z]/.test(t)) return 'en';
+  return 'zh-Hant';
+}
+
+// S9–S11 (V33) add their own helpers, so S3–S8 render exactly as before.
+// Chinese source blocks name the course whose checked text they reuse; the
+// Rousseau passage is French, the Nyāya and Madhyamaka passages Sanskrit.
+function srcNoteS9to11(cite: string) {
+  if (/韩非子|韓非子|淮南子/.test(cite)) return '录文据中文维基文库，与《法家与汉代思想》相同';
+  if (/论语|論語|荀子/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/墨子/.test(cite)) return '录文据中文维基文库，与《墨家、名家与后期墨经》相同';
+  return '据中文维基文库录文';
+}
+function origLangS9to11(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/[؀-ۿ]/.test(t)) return 'ar';
+  if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
+  if (/ṁ/.test(t)) return 'pi';
+  if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  if (/[éèêàçù]|(une|qui|des|les|et)/.test(t)) return 'fr';
+  if (/[äöüß]/.test(t)) return 'de';
   if (/[A-Za-z]/.test(t)) return 'en';
   return 'zh-Hant';
 }

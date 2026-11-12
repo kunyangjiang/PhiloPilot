@@ -98,6 +98,9 @@ export const COURSES: Course[] = [
   c('S6', '语言、意义与指称', 'core', 'C'),
   c('S7', '伦理学：对与善、道德修养', 'core', 'C'),
   c('S8', '元伦理学与道德心理学', 'extended', 'C'),
+  c('S9', '政治哲学：权威、正义与权利', 'core', 'C'),
+  c('S10', '科学哲学', 'core', 'C'),
+  c('S11', '逻辑与数学哲学', 'extended', 'C'),
   // Domain D
   c('D1', '比较哲学：方法与陷阱', 'core', 'D'),
   c('D2', '自我、人格与无我', 'extended', 'D'),

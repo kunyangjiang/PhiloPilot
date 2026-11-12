@@ -194,7 +194,10 @@ export type MediaId =
   // 伦理学：对与善、道德修养
   | 'framework-case'
   // 元伦理学与道德心理学
-  | 'metaethics-map';
+  | 'metaethics-map'
+  | 'obligation-grounds'
+  | 'anomaly-case'
+  | 'liar-responses';
 
 interface Anchor {
   id: MediaId;
@@ -499,6 +502,12 @@ const ANCHORS: Anchor[] = [
   { id: 'framework-case', code: 'S7', section: '七、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表格还说明了一件事') },
   // V32 · S8 四 · after the table of five positions and their costs, and the paragraph under it.
   { id: 'metaethics-map', code: 'S8', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理，每一行都有许多变体') },
+  // V33 · S9 一 · after the table of five grounds of political obligation and the paragraph under it.
+  { id: 'obligation-grounds', code: 'S9', section: '一、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理，它只列出每一种理由最常见的反驳') },
+  // V33 · S10 四 · after the two planets and the paragraph that compares them.
+  { id: 'anomaly-case', code: 'S10', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('两个故事用的是同一个办法') },
+  // V33 · S11 二 · after the table of responses to the liar and the paragraph under it.
+  { id: 'liar-responses', code: 'S11', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章依据条目的整理。下面的组件请你选择一种回应') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
