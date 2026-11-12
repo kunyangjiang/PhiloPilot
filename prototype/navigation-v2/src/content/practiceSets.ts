@@ -67,6 +67,10 @@ import { D4_PRACTICE } from './practice-d4';
 import { D5_PRACTICE } from './practice-d5';
 import { D6_PRACTICE } from './practice-d6';
 import { D7_PRACTICE } from './practice-d7';
+import { D8_PRACTICE } from './practice-d8';
+import { D9_PRACTICE } from './practice-d9';
+import { D10_PRACTICE } from './practice-d10';
+import { D11_PRACTICE } from './practice-d11';
 
 // Question sets of each published course. A course without an entry here
 // shows its manuscript prompts as before (read-only, no answer box).
@@ -139,6 +143,10 @@ const SETS: Record<string, PracticeSet[]> = {
   D5: D5_PRACTICE,
   D6: D6_PRACTICE,
   D7: D7_PRACTICE,
+  D8: D8_PRACTICE,
+  D9: D9_PRACTICE,
+  D10: D10_PRACTICE,
+  D11: D11_PRACTICE,
 };
 
 export const MAX_QUESTIONS = 3;

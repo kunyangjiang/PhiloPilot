@@ -66,6 +66,10 @@ import { D4 } from './d4';
 import { D5 } from './d5';
 import { D6 } from './d6';
 import { D7 } from './d7';
+import { D8 } from './d8';
+import { D9 } from './d9';
+import { D10 } from './d10';
+import { D11 } from './d11';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -1327,6 +1331,76 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteD5toD7,
     origLang: origLangD5toD7,
   },
+  D8: {
+    code: 'D8',
+    text: D8,
+    name: '生命伦理学',
+    tier: '○ 拓展',
+    en: 'Bioethics',
+    method: '用个人的与关系的进路进行案例推理',
+    background: '大纲建议先读「伦理学：对与善、道德修养」（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 8,
+    // The curriculum lists no onward course for D8, and no course points to it.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《论语》2.6—2.8 据中文维基文库（本周期新核对，修订版本见附录）；《贝尔蒙报告》一句为美国政府文件（公有领域）。SEP、IEP、比彻姆与查尔德里斯、汤姆森、马奎斯、扬、基翁、佩雷特、佩萨德等、范瑞平、梅茨等现代著作一律转述。宋秀琴、方蕾和东城医院的案例是虚构的。本章不是医疗或法律建议；法律事实只作为例子，可能已经改变。版本与权利见附录。中文是本章的试译。',
+    srcNote: srcNoteD8toD11,
+    origLang: origLangD8toD11,
+  },
+  D9: {
+    code: 'D9',
+    text: D9,
+    name: '环境伦理学',
+    tier: '○ 拓展',
+    en: 'Environmental Ethics',
+    method: '用困难的案例检验关于道德地位的论证',
+    background: '大纲建议先读「伦理学：对与善、道德修养」（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 9,
+    // The curriculum lists no onward course for D9, and no course points to it.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《孟子》1A7、7A45 与《庄子·秋水》《马蹄》据中文维基文库（本周期新核对，修订版本见附录）；《慈经》据 SuttaCentral 的巴利文根本文本。SEP、IPCC、施密特豪森、米勒等现代著作和报告一律转述。本章没有使用原住民传统的材料（没有取得有关社群有文件记录的许可）。青溪的案例是虚构的。版本与权利见附录。中文是本章的试译。',
+    srcNote: srcNoteD8toD11,
+    origLang: origLangD8toD11,
+  },
+  D10: {
+    code: 'D10',
+    text: D10,
+    name: '传播与交流：我们实际知道什么',
+    tier: '○ 拓展',
+    en: 'Transmission and Exchange: What Is Actually Known',
+    method: '评价关于影响的历史证据',
+    background: '大纲建议先读两门「历史与传统」课程（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 10,
+    // The curriculum lists no onward course for D10. CN5 points to D10 through
+    // its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '阿奎那《原因之书注》序言一句据 Corpus Thomisticum 电子本（Saffrey 校勘本）；第欧根尼·拉尔修 9.61 与《希腊化与罗马哲学》相同；阿育王法敕依据胡尔奇 1925 年的英译转述。SEP、比姆博的书评等现代著作一律转述；许多例子沿用其他课程的介绍，各自的出处见注释。版本与权利见附录。中文是相应课程或本章的试译。',
+    srcNote: srcNoteD8toD11,
+    origLang: origLangD8toD11,
+  },
+  D11: {
+    code: 'D11',
+    text: D11,
+    name: '独立哲学研究（毕业项目）',
+    tier: '● 核心',
+    en: 'Independent Philosophical Project (Capstone)',
+    method: '两条同样有价值的路线：单一传统的研究，或比较的研究',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」；「诠释、翻译与哲学写作」与「比较哲学：方法与陷阱」也有帮助（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 11,
+    // The curriculum lists no onward course for D11, the last course. A4
+    // points to D11 through its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《尼各马可伦理学》1177b26—31、1178a5—10 与《游叙弗伦》4b—e 据 Perseus 数字本（Bywater 与 Burnet 校勘本，本周期新核对）；1178a9—10 与《亚里士多德》相同；《论语》13.18 与《孔子、孟子与荀子》相同。SEP 等现代著作一律转述。两条路线的示范研究是本章为了示范而写的，不是标准答案。项目工作不提交、不评分。版本与权利见附录。中文是相应课程或本章的试译。',
+    srcNote: srcNoteD8toD11,
+    origLang: origLangD8toD11,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1474,6 +1548,22 @@ function origLangD5toD7(html: string) {
   // when no Sanskrit diacritic is present.
   if (/[¿¡]/.test(t) || (/ñ/.test(t) && !/[āīūṛṃṇśṣḥṭḍ]/.test(t))) return 'es';
   return origLangD2toD4(html);
+}
+
+// D8–D11 (V37) add their own helpers, so earlier courses render exactly as
+// before. Analects 2.6–2.8 (D8), Mencius 1A7 and 7A45 and Zhuangzi 秋水 and
+// 马蹄 (D9) were checked this cycle; Analects 13.18 (D11) reuses CN1's checked
+// text. The language helper recognises the Metta Sutta's Pāli (D9), whose
+// opening verses have no ṁ, then defers to the V36 one.
+function srcNoteD8toD11(cite: string) {
+  if (/论语》13\.18/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/论语|孟子|庄子/.test(cite)) return '录文据中文维基文库（本周期新核对，修订版本见附录）';
+  return '据中文维基文库录文';
+}
+function origLangD8toD11(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/sukhitattā|bhavantu|sabbabhūtesu/.test(t)) return 'pi';
+  return origLangD5toD7(html);
 }
 
 export const isPublished = (code: string) => code in PUBLISHED;

@@ -209,7 +209,15 @@ export type MediaId =
   // 哲学中的性别、种族与帝国
   | 'canon-correction-evaluator'
   // 技术哲学与人工智能
-  | 'responsibility-analyzer';
+  | 'responsibility-analyzer'
+  // 生命伦理学
+  | 'bioethics-case-approaches'
+  // 环境伦理学
+  | 'standing-tester'
+  // 传播与交流：我们实际知道什么
+  | 'evidence-rater'
+  // 独立哲学研究（毕业项目）
+  | 'project-planner';
 
 interface Anchor {
   id: MediaId;
@@ -538,6 +546,14 @@ const ANCHORS: Anchor[] = [
   { id: 'canon-correction-evaluator', code: 'D6', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你几个假想的纠正方案') },
   // V36 · D7 五 · after the responsibility table, its three remarks and the paragraph introducing the exercise.
   { id: 'responsibility-analyzer', code: 'D7', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习让你把几种视角分别用到江北医院的几个参与者上') },
+  // V37 · D8 六 · after the table "一个案例，两种进路" and its third remark.
+  { id: 'bioethics-case-approaches', code: 'D8', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('第三，保护病人不受强迫') },
+  // V37 · D9 三 · after the table on the 青溪 fish and the paragraph that follows it.
+  { id: 'standing-tester', code: 'D9', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('这张表说明：同样一个水库') },
+  // V37 · D10 四 · after the evidence matrix and the paragraph on what it is for.
+  { id: 'evidence-rater', code: 'D10', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('这张矩阵有一个用处') },
+  // V37 · D11 五 · after the eight-part structure and the paragraph on part 8.
+  { id: 'project-planner', code: 'D11', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('第 8 部分特别重要') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
