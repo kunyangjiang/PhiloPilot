@@ -63,6 +63,9 @@ import { D1 } from './d1';
 import { D2 } from './d2';
 import { D3 } from './d3';
 import { D4 } from './d4';
+import { D5 } from './d5';
+import { D6 } from './d6';
+import { D7 } from './d7';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -1271,6 +1274,59 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteD2toD4,
     origLang: origLangD2toD4,
   },
+  D5: {
+    code: 'D5',
+    text: D5,
+    name: '跨传统的政治秩序与正当性',
+    tier: '○ 拓展',
+    en: 'Political Order and Legitimacy across Traditions',
+    method: '在同一个问题上比较对权威的不同证成',
+    background: '大纲建议先读「政治哲学：权威、正义与权利」和一门「历史与传统」课程（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 5,
+    // The curriculum lists no onward course for D5. CN4 points to D5 through
+    // its own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《孟子》1B7、1B8、5A5、7B14 与《论语》12.7 据中文维基文库（本周期新核对，修订版本见附录）；《韩非子》与《法家与汉代思想》相同；《利论》据 GRETIL 电子本（Kangle 校本，本周期新核对）；安贝德卡尔据《安贝德卡尔著作与演说集》第一卷；柏拉图与《柏拉图》相同。马萨博、尼雷尔等现代著作一律转述。澄港的案例是虚构的。版本与权利见附录。中文是相应课程或本章的试译。',
+    srcNote: srcNoteD5toD7,
+    origLang: origLangD5toD7,
+  },
+  D6: {
+    code: 'D6',
+    text: D6,
+    name: '哲学中的性别、种族与帝国',
+    tier: '● 核心',
+    en: 'Gender, Race and Empire in Philosophy',
+    method: '来源与正典批判：问谁被收入，凭什么理由，纠正需要什么',
+    background: '大纲建议先读两门「历史与传统」课程（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 6,
+    // The curriculum lists no onward course for D6. CN7, CN8, EA9, EA12, AF2,
+    // AF3, LA1, IN8 and IA5 point to D6 through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '本章引用的原文全部沿用其他课程已经核对过的文字：伊丽莎白、阿斯特尔、索尔·胡安娜、《大森林奥义书》、《长老尼偈》、康德、杜波依斯、库珀、麦考莱与《正理经》，各自的来源见注释。SEP、帕克、夏皮罗、米尔斯、克莱因格尔德等现代著作一律转述。第六部分把 PhiloPilot 自己的课程体系当作公开标明的案例。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteD5toD7,
+    origLang: origLangD5toD7,
+  },
+  D7: {
+    code: 'D7',
+    text: D7,
+    name: '技术哲学与人工智能',
+    tier: '○ 拓展',
+    en: 'Philosophy of Technology and Artificial Intelligence',
+    method: '把伦理原则应用到没有先例的案例上',
+    background: '大纲建议先读「心灵哲学与意识」或「伦理学：对与善、道德修养」（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 7,
+    // The curriculum lists no onward course for D7, and no course points to it.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《论语》2.3 与《孔子、孟子与荀子》《政治哲学：权威、正义与权利》相同。SEP、NTSB 报告、ProPublica、巴特林等、朗等、克莱因伯格等、舒尔德乔娃、阿恩茨等、黄柏恒、姆兰比等现代著作和报告一律转述，数字依据原始报告或论文摘要。江北医院的案例是虚构的。关于当前人工智能能力的描述写于 2026 年，可能过时。版本与权利见附录。',
+    srcNote: srcNoteD5toD7,
+    origLang: origLangD5toD7,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1399,6 +1455,25 @@ function origLangD2toD4(html: string) {
   const t = html.replace(/<[^>]+>/g, '');
   if (/puggalo|kkhandh|bhikkhave/.test(t)) return 'pi';
   return origLangS12toD1(html);
+}
+
+// D5, D6 and D7 (V36) add their own helpers, so earlier courses render
+// exactly as before. D5's Mencius passages and Analects 12.7 were checked
+// this cycle; Analects 2.3 (D7) reuses the checked text of earlier courses.
+// The language helper recognises Sor Juana's Spanish (D6), then defers to the
+// V35 one.
+function srcNoteD5toD7(cite: string) {
+  if (/韩非子|韓非子/.test(cite)) return '录文据中文维基文库，与《法家与汉代思想》相同';
+  if (/论语》2\.3/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/论语|孟子/.test(cite)) return '录文据中文维基文库（本周期新核对，修订版本见附录）';
+  return '据中文维基文库录文';
+}
+function origLangD5toD7(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  // Sanskrit also uses ñ (jñāna, pañca), so ñ alone counts as Spanish only
+  // when no Sanskrit diacritic is present.
+  if (/[¿¡]/.test(t) || (/ñ/.test(t) && !/[āīūṛṃṇśṣḥṭḍ]/.test(t))) return 'es';
+  return origLangD2toD4(html);
 }
 
 export const isPublished = (code: string) => code in PUBLISHED;

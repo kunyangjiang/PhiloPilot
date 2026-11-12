@@ -203,7 +203,13 @@ export type MediaId =
   | 'comparison-repair'
   | 'selfhood-cases'
   | 'argument-standards'
-  | 'ethical-case-analyzer';
+  | 'ethical-case-analyzer'
+  // 跨传统的政治秩序与正当性
+  | 'legitimacy-comparison'
+  // 哲学中的性别、种族与帝国
+  | 'canon-correction-evaluator'
+  // 技术哲学与人工智能
+  | 'responsibility-analyzer';
 
 interface Anchor {
   id: MediaId;
@@ -526,6 +532,12 @@ const ANCHORS: Anchor[] = [
   { id: 'argument-standards', code: 'D3', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你几个论证') },
   // V35 · D4 六 · after the five-point checklist and the paragraph introducing the exercise.
   { id: 'ethical-case-analyzer', code: 'D4', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习让你把几种框架应用到同一个情况上') },
+  // V36 · D5 六 · after the chapter's judgment and the paragraph introducing the exercise.
+  { id: 'legitimacy-comparison', code: 'D5', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习让你把几种回答分别应用到澄港的几个决定上') },
+  // V36 · D6 六 · after the seven-step procedure and the paragraph introducing the exercise.
+  { id: 'canon-correction-evaluator', code: 'D6', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你几个假想的纠正方案') },
+  // V36 · D7 五 · after the responsibility table, its three remarks and the paragraph introducing the exercise.
+  { id: 'responsibility-analyzer', code: 'D7', section: '五、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习让你把几种视角分别用到江北医院的几个参与者上') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
