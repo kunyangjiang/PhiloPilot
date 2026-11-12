@@ -4,7 +4,7 @@ import { PUBLISHED } from '../content/courses';
 import { navigate } from '../router';
 import { TopBar, NotBuilt, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
-import { goTopic } from './nav';
+import { goCourse, goTopic, QUESTIONS_CRUMB } from './nav';
 
 // The 哲学问题 entrance.
 // Featured-topic rule (deterministic, data-driven): the large block shows the
@@ -46,7 +46,21 @@ export default function Questions() {
                 <li key={t.id}>
                   <span className="qo-title">{t.title}</span>
                   <span className="qo-q">{t.question}</span>
-                  <span className="qo-c">{t.courses.map((c) => nameOf(c, NAMES)).join(' · ')}</span>
+                  {/* A topic not yet expanded may still link a published systematic course (S1, S2). */}
+                  <span className="qo-c">
+                    {t.courses.map((c, i) => (
+                      <span key={c}>
+                        {i > 0 && ' · '}
+                        {c in PUBLISHED ? (
+                          <button className="inline-link" onClick={() => goCourse(c, [QUESTIONS_CRUMB])}>
+                            {PUBLISHED[c].name}
+                          </button>
+                        ) : (
+                          nameOf(c, NAMES)
+                        )}
+                      </span>
+                    ))}
+                  </span>
                 </li>
               ))}
             </ul>

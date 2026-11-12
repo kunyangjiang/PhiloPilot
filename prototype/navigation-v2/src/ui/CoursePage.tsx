@@ -195,7 +195,10 @@ export default function CoursePage({ code }: { code: string }) {
                 </li>
               ))}
           </ul>
-          <p className="note">以上联系均来自课程大纲。</p>
+          {/* S1 and S2: the curriculum names courses that lead to them, but none that follow. */}
+          <p className="note">
+            {course.recommendFrom.length + course.leadsTo.length === 0 ? '课程大纲没有为这门课列出后续课程。' : '以上联系均来自课程大纲。'}
+          </p>
         </section>
       </div>
     </main>

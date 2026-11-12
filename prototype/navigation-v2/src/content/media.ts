@@ -176,7 +176,13 @@ export type MediaId =
   // 形式推理：命题逻辑与谓词逻辑
   | 'validity-checker'
   // 概念、案例与思想实验
-  | 'case-dials';
+  | 'case-dials'
+  // 诠释、翻译与哲学写作
+  | 'translation-lens'
+  // 知识与怀疑
+  | 'case-analyser'
+  // 形而上学：存在、实体、共相与模态
+  | 'universals-test';
 
 interface Anchor {
   id: MediaId;
@@ -463,6 +469,12 @@ const ANCHORS: Anchor[] = [
   { id: 'validity-checker', code: 'A2', section: '二、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('假言三段论') && b.text.includes('反例行（如果无效）') },
   // V29 · A3 五 · after the table of four cases and the two principles' predictions.
   { id: 'case-dials', code: 'A3', section: '五、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('做与允许的预测') && b.text.includes('双重效果的预测') },
+  // V30 · A4 四 · after the table setting 道, dharma and logos side by side.
+  { id: 'translation-lens', code: 'A4', section: '四、', match: (b) => b.kind === 'html' && b.tag === 'table' && b.text.includes('译法改变了什么') && b.text.includes('一个译名会遮蔽什么') },
+  // V30 · S1 二 · after the paragraph that introduces the case analyser (under the table of four theories).
+  { id: 'case-analyser', code: 'S1', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的组件把第一、二部分的几个案例放在一起') },
+  // V30 · S2 三 · after the table of accounts of universals and the note under it.
+  { id: 'universals-test', code: 'S2', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章的整理。最后一行特别说明') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

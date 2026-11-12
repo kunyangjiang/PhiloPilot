@@ -46,6 +46,9 @@ import { JW1_PRACTICE } from './practice-jw1';
 import { A1_PRACTICE } from './practice-a1';
 import { A2_PRACTICE } from './practice-a2';
 import { A3_PRACTICE } from './practice-a3';
+import { A4_PRACTICE } from './practice-a4';
+import { S1_PRACTICE } from './practice-s1';
+import { S2_PRACTICE } from './practice-s2';
 
 // Question sets of each published course. A course without an entry here
 // shows its manuscript prompts as before (read-only, no answer box).
@@ -97,6 +100,9 @@ const SETS: Record<string, PracticeSet[]> = {
   A1: A1_PRACTICE,
   A2: A2_PRACTICE,
   A3: A3_PRACTICE,
+  A4: A4_PRACTICE,
+  S1: S1_PRACTICE,
+  S2: S2_PRACTICE,
 };
 
 export const MAX_QUESTIONS = 3;

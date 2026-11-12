@@ -39,8 +39,11 @@ setCtxResolver(originOf);
 export const canonicalOf = (code: string): Crumb[] => {
   const c = PUBLISHED[code];
   if (!c) return [];
-  // Foundations and Methods courses live in the 哲学方法 region, not in a tradition section.
-  return c.tradition === 'fm' ? [regionCrumb('methods')] : [regionCrumb('history'), traditionCrumb(c.tradition)];
+  // Foundations and Methods courses live in the 哲学方法 region, not in a tradition section;
+  // systematic courses (domain C) live under the 哲学问题 entrance.
+  if (c.tradition === 'fm') return [regionCrumb('methods')];
+  if (c.tradition === 'sys') return [QUESTIONS_CRUMB];
+  return [regionCrumb('history'), traditionCrumb(c.tradition)];
 };
 
 export function goRegion(id: RegionId) {

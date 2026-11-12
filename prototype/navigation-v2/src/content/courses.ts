@@ -45,6 +45,9 @@ import { JW1 } from './jw1';
 import { A1 } from './a1';
 import { A2 } from './a2';
 import { A3 } from './a3';
+import { A4 } from './a4';
+import { S1 } from './s1';
+import { S2 } from './s2';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -53,9 +56,11 @@ import type { CourseText } from './course';
 
 /** Tradition sections of 历史与传统 that have a readable course, plus 'fm':
  *  the Foundations and Methods courses (domain A), which belong to the 哲学方法
- *  region rather than to a tradition section (see canonicalOf in ui/nav.ts). */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la' | 'fm';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学', fm: '哲学方法' };
+ *  region rather than to a tradition section, and 'sys': the systematic
+ *  courses (domain C), which belong to the 哲学问题 entrance (see canonicalOf
+ *  in ui/nav.ts). */
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la' | 'fm' | 'sys';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学', fm: '哲学方法', sys: '哲学问题' };
 
 export interface PublishedCourse {
   code: string;
@@ -889,8 +894,8 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '无前置要求',
     tradition: 'fm',
     position: 1,
-    // A2 and A3 name this course as recommended background, and so does IN3.
-    recommendFrom: ['A2', 'A3', 'IN3'],
+    // A2, A3, A4 and S1 name this course as recommended background, and so does IN3.
+    recommendFrom: ['A2', 'A3', 'A4', 'S1', 'IN3'],
     leadsTo: ['A2', 'A3', 'A4'],
     sourceNote: '希腊文据 Perseus 数字图书馆所收 Burnet 校本（CC BY-SA 4.0），《孟子》《墨子》据中文维基文库录文，梵文据 GRETIL 电子本；只引短段，所引段落都与本网站相关课程所用的文本相同。版本与权利见附录。中文是本章试译。',
     srcNote: srcNoteA,
@@ -923,10 +928,63 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
     tradition: 'fm',
     position: 3,
+    // S2 names this course as recommended background.
+    recommendFrom: ['S2'],
+    // Curriculum: "Feeds S2, S4, S7". S2 is listed once, under recommendFrom.
+    leadsTo: ['S2', 'S4', 'S7'],
+    sourceNote: '希腊文据 Perseus 数字图书馆所收 Burnet 校本（CC BY-SA 4.0），《庄子》与《老子、庄子与道家传统》所用的录文相同，《哲学研究》§66 的两句德文据 wittgensteinproject.org 录文；当代案例一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
+  A4: {
+    code: 'A4',
+    text: A4,
+    name: '诠释、翻译与哲学写作',
+    tier: '○ 拓展',
+    en: 'Interpretation, Translation and Philosophical Writing',
+    method: '比较同一段文字的几种译法和注释读法，并把一种理解写成结构完整的论证',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'fm',
+    position: 4,
+    // No published course lists this one as recommended background yet (D1 and D11 will).
+    recommendFrom: [],
+    leadsTo: ['D1', 'D11'],
+    sourceNote: '《老子》第一章（王弼本、帛书甲本、河上公章句、王弼注）和《庄子·秋水》与《老子、庄子与道家传统》所用的录文相同；赫拉克利特 B1 与《古希腊哲学的起源》相同；《弥曼差经》1.1.2 与《权威、语言与义务》相同；《约翰福音》1:1 据中文维基文库所收和合本。其余文本一律转述。版本与权利见附录。中文是本章试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
+  // ── Systematic courses (domain C): listed under the 哲学问题 entrance. ──
+  S1: {
+    code: 'S1',
+    text: S1,
+    name: '知识与怀疑',
+    tier: '● 核心',
+    en: 'Knowledge and Skepticism',
+    method: '评价怀疑论的论证和关于辩护的理论',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 1,
     // No published course lists this one as recommended background.
     recommendFrom: [],
-    leadsTo: ['S1', 'S5', 'S7'],
-    sourceNote: '希腊文据 Perseus 数字图书馆所收 Burnet 校本（CC BY-SA 4.0），《庄子》与《老子、庄子与道家传统》所用的录文相同，《哲学研究》§66 的两句德文据 wittgensteinproject.org 录文；当代案例一律转述。版本与权利见附录。中文是本章试译。',
+    leadsTo: [],
+    sourceNote: '塞克斯都《皮浪学说纲要》与《希腊化与罗马哲学》所用的文本相同；《正理经》、陈那《集量论》复原本与《知识、推理与辩论》相同；《回诤论》与《大乘哲学》相同；《庄子·秋水》与《老子、庄子与道家传统》相同。笛卡尔、休谟、安萨里和当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteA,
+    origLang: origLangA,
+  },
+  S2: {
+    code: 'S2',
+    text: S2,
+    name: '形而上学：存在、实体、共相与模态',
+    tier: '● 核心',
+    en: 'Metaphysics: Being, Substance, Universals and Modality',
+    method: '用测试案例比较关于共相的对立理论',
+    background: '大纲建议先读「概念、案例与思想实验」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 2,
+    // No published course lists this one as recommended background.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '亚里士多德《范畴篇》与《亚里士多德》所用的文本相同；《胜论经》与《知识、推理与辩论》相同；《朱子语类》与《宋明理学至清代》相同。阿维森纳、穆拉·萨德拉和当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
     srcNote: srcNoteA,
     origLang: origLangA,
   },
@@ -936,9 +994,14 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
 // the language are decided per citation.
 function srcNoteA(cite: string) {
   if (/柏拉图/.test(cite)) return '希腊文据 Perseus 所收 Burnet 校本（CC BY-SA 4.0）';
-  if (/正理经/.test(cite)) return '据 GRETIL 电子本';
+  if (/塞克斯都/.test(cite)) return '希腊文据 First1KGreek 所收 Mutschmann 校本（CC BY-SA），与《希腊化与罗马哲学》相同';
+  if (/范畴篇/.test(cite)) return '希腊文据 First1KGreek 所收 Bekker 本（CC BY-SA），与《亚里士多德》相同';
+  if (/赫拉克利特/.test(cite)) return '希腊文与《古希腊哲学的起源》所用的文本相同';
+  if (/集量论/.test(cite)) return '据 Steinkellner 2005 年复原本，与《知识、推理与辩论》相同';
+  if (/正理经|胜论经|弥曼差经|回诤论/.test(cite)) return '据 GRETIL 电子本';
+  if (/朱子語類/.test(cite)) return '录文与《宋明理学至清代》相同';
   if (/哲学研究/.test(cite)) return '德文据 wittgensteinproject.org 录文';
-  if (/庄子/.test(cite)) return '录文与《老子、庄子与道家传统》相同';
+  if (/庄子|老子/.test(cite)) return '录文与《老子、庄子与道家传统》相同';
   return '据中文维基文库录文';
 }
 function origLangA(html: string) {
