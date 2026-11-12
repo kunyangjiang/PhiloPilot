@@ -60,6 +60,9 @@ import { S11 } from './s11';
 import { S12 } from './s12';
 import { S13 } from './s13';
 import { D1 } from './d1';
+import { D2 } from './d2';
+import { D3 } from './d3';
+import { D4 } from './d4';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -1214,6 +1217,60 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteS12toD1,
     origLang: origLangS12toD1,
   },
+  D2: {
+    code: 'D2',
+    text: D2,
+    name: '自我、人格与无我',
+    tier: '○ 拓展',
+    en: 'Self, Person and No-Self',
+    method: '用共同的案例比较相互竞争的自我理论',
+    background: '大纲建议先读「早期佛教与阿毗达磨」或「经验论、启蒙与自由主义的起源」，再加「非洲哲学思想」或「孔子、孟子与荀子」；「人格、自我与自由意志」也有帮助（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 2,
+    // The curriculum lists no onward course for D2. AF1, IN1 and IN2 point to
+    // D2 through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《相应部》与《弥兰王问经》据 SuttaCentral，与《起源与早期论争》《早期佛教与阿毗达磨》相同；寂天与《大乘哲学》相同；《论语》与《孔子、孟子与荀子》相同；休谟与《经验论、启蒙与自由主义的起源》相同。帕菲特、维雷杜、吉耶克、门基蒂等现代著作一律转述。版本与权利见附录。中文是相应课程或本章的试译。',
+    srcNote: srcNoteD2toD4,
+    origLang: origLangD2toD4,
+  },
+  D3: {
+    code: 'D3',
+    text: D3,
+    name: '跨传统的知识、怀疑与论证规则',
+    tier: '● 核心',
+    en: 'Knowledge, Skepticism and the Rules of Argument across Traditions',
+    method: '比较不同传统中好的论证的标准',
+    background: '大纲建议先读「亚里士多德」「墨家、名家与后期墨经」「知识、推理与辩论」「安萨里、阿威罗伊与西方伊斯兰思想」中的两门（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 3,
+    // The curriculum lists no onward course for D3. CN2, CN3, IN2, IN3, GR3,
+    // IA3 and IA4 point to D3 through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《正理经》据 GRETIL 电子本（1.2.1—3、4.2.50 为本周期新核对）；《墨子》与《墨家、名家与后期墨经》相同；《齐物论》据中文维基文库（修订版本见附录）；塞克斯都、龙树、月称、亚里士多德、安萨里与相应课程相同。弗雷泽等现代著作一律转述。版本与权利见附录。中文是相应课程或本章的试译。',
+    srcNote: srcNoteD2toD4,
+    origLang: origLangD2toD4,
+  },
+  D4: {
+    code: 'D4',
+    text: D4,
+    name: '德性、关怀与关系：跨传统伦理',
+    tier: '○ 拓展',
+    en: 'Virtue, Care and Relation: Ethics across Traditions',
+    method: '把相互竞争的伦理框架应用到同一个实际案例上',
+    background: '大纲建议先读「伦理学：对与善、道德修养」和两门「历史与传统」课程（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 4,
+    // The curriculum lists no onward course for D4. CN1 and S7 point to D4
+    // through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '亚里士多德与《亚里士多德》《伦理学：对与善、道德修养》所用的文本相同；《孟子》《墨子》与《孔子、孟子与荀子》《墨家、名家与后期墨经》相同；寂天与《大乘哲学》相同。吉利根、诺丁斯、特龙托、赫尔德、基泰、梅茨等现代著作一律转述。周岚的案例是虚构的。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteD2toD4,
+    origLang: origLangD2toD4,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1325,6 +1382,23 @@ function origLangS12toD1(html: string) {
   if (/\b(est|quod|et|non|igitur|vero|esse|quo)\b/.test(t)) return 'la';
   if (/[A-Za-z]/.test(t)) return 'en';
   return 'zh-Hant';
+}
+
+// D2, D3 and D4 (V35) add their own helpers, so earlier courses render
+// exactly as before. The language helper defers to the V34 one, after
+// recognising a Pāli verse that has no ṁ (SN 22.22) and would otherwise be
+// tagged as Sanskrit.
+function srcNoteD2toD4(cite: string) {
+  if (/论语|孟子/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/墨子/.test(cite)) return '录文据中文维基文库，与《墨家、名家与后期墨经》相同';
+  if (/庄子|齐物论|齊物論/.test(cite)) return '录文据中文维基文库，修订版本见附录';
+  if (/因明入正理论|玄奘译/.test(cite)) return '据 CBETA《大正藏》第 32 册第 1630 号，与《知识、推理与辩论》相同';
+  return '据中文维基文库录文';
+}
+function origLangD2toD4(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/puggalo|kkhandh|bhikkhave/.test(t)) return 'pi';
+  return origLangS12toD1(html);
 }
 
 export const isPublished = (code: string) => code in PUBLISHED;

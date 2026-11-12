@@ -200,7 +200,10 @@ export type MediaId =
   | 'liar-responses'
   | 'argument-analyzer'
   | 'interpretation-evidence'
-  | 'comparison-repair';
+  | 'comparison-repair'
+  | 'selfhood-cases'
+  | 'argument-standards'
+  | 'ethical-case-analyzer';
 
 interface Anchor {
   id: MediaId;
@@ -517,6 +520,12 @@ const ANCHORS: Anchor[] = [
   { id: 'interpretation-evidence', code: 'S13', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习请你自己做一次同样的工作') },
   // V34 · D1 六 · after the worked repair and the paragraph introducing the exercise.
   { id: 'comparison-repair', code: 'D1', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你另一段有缺陷的比较') },
+  // V35 · D2 六 · after the evaluation and the paragraph introducing the exercise.
+  { id: 'selfhood-cases', code: 'D2', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习把四个案例交给你') },
+  // V35 · D3 六 · after the qualified conclusion and the paragraph introducing the exercise.
+  { id: 'argument-standards', code: 'D3', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你几个论证') },
+  // V35 · D4 六 · after the five-point checklist and the paragraph introducing the exercise.
+  { id: 'ethical-case-analyzer', code: 'D4', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习让你把几种框架应用到同一个情况上') },
 ];
 
 /** “code:section:block” → components placed right after that block. */
