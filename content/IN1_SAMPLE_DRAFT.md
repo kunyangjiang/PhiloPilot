@@ -1147,7 +1147,7 @@ IEP 的罗摩奴阇条目还介绍了他对不二论的一个更一般的反驳�
 
 [^40]: SEP《耆那哲学》第 1.2 节。该节引述了《阿迦朗伽经》1.1.21—25 的英译，本章只作了转述，没有复制该译文，也没有核对阿尔达摩揭陀语原文。同一节还说，在较早的经典中，伤害性的行为是束缚的唯一直接因素，在较晚的经典中，激情才变得重要，因而无意的伤害可以得到宽恕；该节为此引 Johnson 1995，本章没有阅读该书。
 
-[^41]: 《长部》第 2 经，dn2:29.2—4。巴利文据 SuttaCentral 所载的摩诃僧祇（Mahāsaṅgīti）本，下同。
+[^41]: 《长部》第 2 经，dn2:29.2—4。巴利文据 SuttaCentral 所载的 Mahāsaṅgīti 本，下同。
 
 [^42]: 苏嘉多的英译见 SuttaCentral dn2:29.4。关于 vāri 一词的其他理解，本章没有核对学术文献，这一段在出版前应请专家补充。
 
@@ -1203,11 +1203,11 @@ IEP 的罗摩奴阇条目还介绍了他对不二论的一个更一般的反驳�
 
 [^68]: Dhivan Thomas Jones, "Upaniṣadic Echoes in the Alagaddūpama Sutta", *Journal of the Oxford Centre for Buddhist Studies* 19 (2020)。本章读到的是期刊网站上的公开 PDF（见《来源与权利说明》），页码从略。"佛陀在巴利文三藏中没有直接讨论或批评奥义书"一语见该文结论部分。
 
-[^69]: 《相应部》22.59，SuttaCentral 编号 sn22.59:2.1—2.5；下一段引文为 sn22.59:6.1—6.7。巴利文据 SuttaCentral 所载摩诃僧祇本。地点和听众见 sn22.59:1.1—1.5，五位比丘心得解脱见 sn22.59:12.3。受、想、行三项的同样论证，本章核对了 sn22.59:3.1—4.6；识的一段和弟子们的回答没有逐字核对。
+[^69]: 《相应部》22.59，SuttaCentral 编号 sn22.59:2.1—2.5；下一段引文为 sn22.59:6.1—6.7。巴利文据 SuttaCentral 所载 Mahāsaṅgīti 本。地点和听众见 sn22.59:1.1—1.5，五位比丘心得解脱见 sn22.59:12.3。受、想、行三项的同样论证，本章核对了 sn22.59:3.1—4.6；识的一段和弟子们的回答没有逐字核对。
 
 [^70]: Alexander Wynne, "The Ātman and Its Negation: A Conceptual and Chronological Analysis of Early Buddhist Thought", *Journal of the International Association of Buddhist Studies* 33 (2010): 103—171。本章没有阅读，据 Jones 2020 注 30 的转述。"无我"（no-self）和"非我"（not-self）是本章对这两个英文说法的译名。
 
-[^71]: 《中部》第 22 经，mn22:25.5—25.7，据 SuttaCentral 所载摩诃僧祇本。第五、第六种见处首次列出，见 mn22:15.8—15.10。
+[^71]: 《中部》第 22 经，mn22:25.5—25.7，据 SuttaCentral 所载 Mahāsaṅgīti 本。第五、第六种见处首次列出，见 mn22:15.8—15.10。
 
 [^72]: 据 Jones 2020 的正文和注释。表中提到的前人著作本章都没有阅读，只据该文转述：K. R. Norman, "A Note on Attā in the Alagaddūpama-sutta"（1981）；Richard Gombrich, "Recovering the Buddha's Message"（1990）；K. N. Jayatilleke（1963）；Alexander Wynne（2010，关于《大因缘经》的推测）；Johannes Bronkhorst, *Greater Magadha*（2007），第 217—218 页；Kamaleswar Bhattacharya（1980、1989、1998 等）。"实际的词语回声"（actual verbal echoes）是 Jones 引述的诺曼的说法。《歌者奥义书》3.14.4 的短语照录 GRETIL 本（该本写作 pretyābhisaṃbhavitā asmīti）；3.14.1 和 3.14.4 的另外两句，正文第二部分已经引过。
 
@@ -1248,9 +1248,9 @@ IEP 的罗摩奴阇条目还介绍了他对不二论的一个更一般的反驳�
 - 《大森林奥义书》（甘婆派传本）的原文：GRETIL 所收 "Brhadaranyaka-Upanisad, Kanva recension, with the commentary ascribed to Samkara: Mula text extracted from the commented version"（<https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/1_veda/4_upa/brup___u.htm>）。GRETIL 的说明称，此本由 Sansknet 项目录入，已对照 V. P. Limaye 与 R. D. Vadekar 编 *Eighteen Principal Upaniṣads*（vol. 1, Poona 1958）和 TITUS 电子本核对；因从一种自定义天城体编码转换而来，分词不完全规则。
 - 《歌者奥义书》：GRETIL 所收同类电子本（<https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/1_veda/4_upa/chup___u.htm>）。
 - 《梨俱吠陀》第十卷：GRETIL 所收电子本（<https://gretil.sub.uni-goettingen.de/gretil/1_sanskr/1_veda/1_sam/1_rv/rv_10_u.htm>），只用于查找和初步核对。正文引用的三段，已改据 Aufrecht 的公有领域印本（见注 5、注 6 和下文《版权说明》）。
-- 《长部》第 2 经《沙门果经》的巴利文：SuttaCentral 所载摩诃僧祇（Mahāsaṅgīti）本，通过 SuttaCentral 在 GitHub 上公开的 bilara-data 数据读取（root/pli/ms/sutta/dn/dn2_root-pli-ms.json）。
+- 《长部》第 2 经《沙门果经》的巴利文：SuttaCentral 所载 Mahāsaṅgīti 本，通过 SuttaCentral 在 GitHub 上公开的 bilara-data 数据读取（root/pli/ms/sutta/dn/dn2_root-pli-ms.json）。
 - 同经的苏嘉多英译（translation/en/sujato/sutta/dn/dn2_translation-en-sujato.json）和《自说经》6.4 的苏嘉多英译（ud6.4），只用于帮助理解和核对内容，没有复制。
-- 《后世批判与回应》中《相应部》22.59 和《中部》第 22 经的巴利文：SuttaCentral 所载摩诃僧祇本，通过 SuttaCentral 的公开接口读取（sn22.59、mn22）。
+- 《后世批判与回应》中《相应部》22.59 和《中部》第 22 经的巴利文：SuttaCentral 所载 Mahāsaṅgīti 本，通过 SuttaCentral 的公开接口读取（sn22.59、mn22）。
 
 **引文核对。** 正文中的梵文和巴利文引文，除《梨俱吠陀》的三段以外，都是从上述电子本中复制的；《梨俱吠陀》的三段按 Aufrecht 本的分词录入（见注 5、注 6）。引文中的省略号（……或 …）是本章所加；GRETIL 本自身的拼写不规则之处，本章照录或在注释中说明，没有自行校改。中文的复述（例如因陀罗故事的各个阶段、五火说的路线、伽尔吉第一次发问的各层世界）也已对照原文。只通过 SEP 或其他二手来源读到、没有核对原文的材料，注释中都已逐一注明，主要包括：《谛义证得经》各条（编号据 SEP；只有"生、灭、住"一句（白衣派本 5.29，空衣派本 5.30）的梵文经网络检索得到，未据校勘本核对）、《阿迦朗伽经》1.1.21—25、《至尊释经》中的贾马利对话、《论可信者》第 14—15 颂、布遮跋陀的织布比喻、《后分》第 23 章、顺世论经的全部片段（tebhyaś caitanyam、pratyakṣam eva pramāṇam 等，据 Bhattacharya 2010）、莲花戒的《真实摄论细疏》，以及《摄一切见论》。
 

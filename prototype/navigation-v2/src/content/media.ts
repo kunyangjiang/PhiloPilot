@@ -197,7 +197,10 @@ export type MediaId =
   | 'metaethics-map'
   | 'obligation-grounds'
   | 'anomaly-case'
-  | 'liar-responses';
+  | 'liar-responses'
+  | 'argument-analyzer'
+  | 'interpretation-evidence'
+  | 'comparison-repair';
 
 interface Anchor {
   id: MediaId;
@@ -508,6 +511,12 @@ const ANCHORS: Anchor[] = [
   { id: 'anomaly-case', code: 'S10', section: '四、', match: (b) => b.kind === 'html' && b.text.startsWith('两个故事用的是同一个办法') },
   // V33 · S11 二 · after the table of responses to the liar and the paragraph under it.
   { id: 'liar-responses', code: 'S11', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('表格是本章依据条目的整理。下面的组件请你选择一种回应') },
+  // V34 · S12 二 · after the paragraph that introduces the three reconstructed arguments.
+  { id: 'argument-analyzer', code: 'S12', section: '二、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习把前两部分重建的三个论证放在一起') },
+  // V34 · S13 三 · after the worked interpretation of 《鹿柴》 and the paragraph introducing the exercise.
+  { id: 'interpretation-evidence', code: 'S13', section: '三、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习请你自己做一次同样的工作') },
+  // V34 · D1 六 · after the worked repair and the paragraph introducing the exercise.
+  { id: 'comparison-repair', code: 'D1', section: '六、', match: (b) => b.kind === 'html' && b.text.startsWith('下面的练习给你另一段有缺陷的比较') },
 ];
 
 /** “code:section:block” → components placed right after that block. */

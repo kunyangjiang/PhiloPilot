@@ -735,7 +735,7 @@ idappaccayatā 直译是"以此为条件性"，就是上面那句公式所说的
 
 ### 材料：《长老尼偈》是什么
 
-《长老尼偈》（Therīgāthā）是巴利文经藏《小部》中的一部诗集，收录早期比丘尼的偈颂。按照 SuttaCentral 所载的摩诃僧祇本，它共有 73 首诗（或诗组），按每首的偈数编为 16 集：第一集每首一偈，第二集每首两偈，以此类推，最后一集是一首很长的诗。[^66] 每首诗前面的署名，是一位长老尼的名字。
+《长老尼偈》（Therīgāthā）是巴利文经藏《小部》中的一部诗集，收录早期比丘尼的偈颂。按照 SuttaCentral 所载的 Mahāsaṅgīti 本，它共有 73 首诗（或诗组），按每首的偈数编为 16 集：第一集每首一偈，第二集每首两偈，以此类推，最后一集是一首很长的诗。[^66] 每首诗前面的署名，是一位长老尼的名字。
 
 在读这些诗之前，必须先说清楚几点：
 
@@ -1202,7 +1202,7 @@ nibbāna（涅槃）一词的字面意思就是"熄灭"，比如火或灯的熄�
 
 **原典的版本与读取方式。** 本章引用的原文，都是 2026-11-08 从下列公开电子文本中读取并逐段核对的。读取时使用标明用途的用户代理，每次请求之间有间隔，没有绕过任何访问限制，文件只保存在本地的临时工作目录中，用于核对，没有放入项目：
 
-- **巴利文**：SuttaCentral 所载的摩诃僧祇（Mahāsaṅgīti）本，通过 SuttaCentral 在 GitHub 上公开的 bilara-data 数据（published 分支，root/pli/ms/ 目录）读取。本章用到的文件：经藏 sn5.2、sn5.10、sn12.1、sn12.15、sn12.17、sn12.20、sn12.65、sn12.67、sn22.22、sn38.14、sn44.10、sn45.8、sn56.11、mn28、mn38、mn44、dn15、an1.235—247、an3.47、an6.63、dhp1—20、thig（全部 73 个文件，正文引用了 1.11、3.8、5.10、6.3、6.6、11.1）；论藏 ds1.1（《法集论》论母）、kv1.1、kv1.6（《论事》）；律藏 pli-tv-kd20（《小品》第十章）；《弥兰王问经》mil3.1.1、mil3.2.1、mil3.2.6（另读了 mil3.2.2，没有引用）。另外读取了 sn12.2、sn22.85、sn22.95、sn44.1、sn5.5、sn5.9，用于理解，正文没有引用。
+- **巴利文**：SuttaCentral 所载的 Mahāsaṅgīti 本，通过 SuttaCentral 在 GitHub 上公开的 bilara-data 数据（published 分支，root/pli/ms/ 目录）读取。本章用到的文件：经藏 sn5.2、sn5.10、sn12.1、sn12.15、sn12.17、sn12.20、sn12.65、sn12.67、sn22.22、sn38.14、sn44.10、sn45.8、sn56.11、mn28、mn38、mn44、dn15、an1.235—247、an3.47、an6.63、dhp1—20、thig（全部 73 个文件，正文引用了 1.11、3.8、5.10、6.3、6.6、11.1）；论藏 ds1.1（《法集论》论母）、kv1.1、kv1.6（《论事》）；律藏 pli-tv-kd20（《小品》第十章）；《弥兰王问经》mil3.1.1、mil3.2.1、mil3.2.6（另读了 mil3.2.2，没有引用）。另外读取了 sn12.2、sn22.85、sn22.95、sn44.1、sn5.5、sn5.9，用于理解，正文没有引用。
 - **梵文**：GRETIL 所收的以下电子本（plaintext 版本，<https://gretil.sub.uni-goettingen.de/gretil/corpustei/transformations/plaintext/>）：
   - 世亲《俱舍论》颂文（sa_vasubandhu-abhidharmakoza）和《俱舍论释》（sa_vasubandhu-abhidharmakozabhASya）。后者的页码和行码按 P. Pradhan 的校订本（修订第二版，Patna: K.P. Jayaswal Research Center, 1975）标注；文件头说明它"不只是转录，而是主要依据 Pradhan 本的最佳读法"，不是校勘本。
   - 《正理经》经文本（sa_gautama-nyAyasUtra），以及《正理经》与伐差耶那疏的合刊本（sa_gautama-nyAyasUtra-comm）。后者所标的页码，本章照录，没有核对它所依据的印本。
@@ -1217,7 +1217,7 @@ nibbāna（涅槃）一词的字面意思就是"熄灭"，比如火或灯的熄�
 
 | 原典 | 电子本 | 录入或校订依据 | 来源 | 电子本声明的使用条件 | 本章的处理 |
 |---|---|---|---|---|---|
-| 巴利三藏（经、律、论各篇，《弥兰王问经》，《长老尼偈》） | SuttaCentral bilara-data，root/pli/ms（摩诃僧祇本） | 摩诃僧祇（Mahāsaṅgīti）本 | <https://github.com/suttacentral/bilara-data> | 仓库的 LICENSE.md 说明，在 Bilara 中制作的译文以 CC0 贡献到公有领域；SuttaCentral 的《授权说明》页面说明巴利文等原典属于公有领域（前一章于 2026-11-06 读取） | 只用巴利文原文，没有使用英译；照录拼写（ṁ） |
+| 巴利三藏（经、律、论各篇，《弥兰王问经》，《长老尼偈》） | SuttaCentral bilara-data，root/pli/ms（Mahāsaṅgīti 本） | Mahāsaṅgīti 本 | <https://github.com/suttacentral/bilara-data> | 仓库的 LICENSE.md 说明，在 Bilara 中制作的译文以 CC0 贡献到公有领域；SuttaCentral 的《授权说明》页面说明巴利文等原典属于公有领域（前一章于 2026-11-06 读取） | 只用巴利文原文，没有使用英译；照录拼写（ṁ） |
 | 世亲《俱舍论》颂文 | GRETIL sa_vasubandhu-abhidharmakoza（文件版本 2020-07-31） | 录入者：数字梵文佛典录入项目（文件头注明"经尼泊尔龙树研究所和美国西来大学的数字梵文佛典项目许可"）；文件头说来源不明，可参照 Pradhan 1975 和 Gokhale 1946 | GRETIL plaintext | 本文件头：CC BY-NC-SA 4.0，并声明文件是"出于善意"提供，若有人主张版权将立即撤下 | 简短引用，注明出处；互动图示另引三偈（见下文"互动图示使用的补充引文"） |
 | 世亲《俱舍论释》 | GRETIL sa_vasubandhu-abhidharmakozabhASya（文件版本 2020-07-31） | 录入者：Dan Lusthaus、Paul Hackett；据 Pradhan 1975 和 Dwarikadas Shastri 1998；文件头注明原始电子本的来历不明，本文件是校正后的读法，不是校勘本 | GRETIL plaintext | 本文件头：CC BY-NC-SA 4.0，"出于善意"声明同上 | 页码和行码照录电子本；录入错误照录，在注释中说明 |
 | 《正理经》 | GRETIL sa_gautama-nyAyasUtra（文件版本 2020-07-31） | 录入者：Sansknet 项目；文件头没有写明印本，并注明"未经校对" | GRETIL plaintext | 本文件头：CC BY-NC-SA 4.0，"出于善意"声明同上 | 简短引用，注明出处 |

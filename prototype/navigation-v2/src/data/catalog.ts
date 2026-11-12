@@ -101,6 +101,8 @@ export const COURSES: Course[] = [
   c('S9', '政治哲学：权威、正义与权利', 'core', 'C'),
   c('S10', '科学哲学', 'core', 'C'),
   c('S11', '逻辑与数学哲学', 'extended', 'C'),
+  c('S12', '宗教哲学、死亡与人生意义', 'core', 'C'),
+  c('S13', '美学与艺术哲学', 'extended', 'C'),
   // Domain D
   c('D1', '比较哲学：方法与陷阱', 'core', 'D'),
   c('D2', '自我、人格与无我', 'extended', 'D'),

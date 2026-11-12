@@ -43,6 +43,8 @@ export const canonicalOf = (code: string): Crumb[] => {
   // systematic courses (domain C) live under the 哲学问题 entrance.
   if (c.tradition === 'fm') return [regionCrumb('methods')];
   if (c.tradition === 'sys') return [QUESTIONS_CRUMB];
+  // Comparative and contemporary courses (domain D) live in the 跨传统对话 region.
+  if (c.tradition === 'cmp') return [regionCrumb('dialogue')];
   return [regionCrumb('history'), traditionCrumb(c.tradition)];
 };
 

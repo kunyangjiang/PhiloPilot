@@ -57,6 +57,9 @@ import { S8 } from './s8';
 import { S9 } from './s9';
 import { S10 } from './s10';
 import { S11 } from './s11';
+import { S12 } from './s12';
+import { S13 } from './s13';
+import { D1 } from './d1';
 import type { CourseText } from './course';
 
 // Published courses: their text and their front-page facts. Facts come from
@@ -67,9 +70,10 @@ import type { CourseText } from './course';
  *  the Foundations and Methods courses (domain A), which belong to the 哲学方法
  *  region rather than to a tradition section, and 'sys': the systematic
  *  courses (domain C), which belong to the 哲学问题 entrance (see canonicalOf
- *  in ui/nav.ts). */
-export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la' | 'fm' | 'sys';
-export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学', fm: '哲学方法', sys: '哲学问题' };
+ *  in ui/nav.ts), and 'cmp': the comparative and contemporary courses
+ *  (domain D), which belong to the 跨传统对话 region (dialogue). */
+export type Tradition = 'cn' | 'ea' | 'in' | 'gr' | 'ia' | 'af' | 'jp' | 'kr' | 'la' | 'fm' | 'sys' | 'cmp';
+export const TRADITION_NAME: Record<Tradition, string> = { cn: '中国哲学', ea: '欧洲与北大西洋哲学', in: '印度哲学', gr: '希腊与罗马哲学', ia: '伊斯兰、阿拉伯与犹太', af: '非洲与非洲裔哲学', jp: '日本哲学', kr: '韩国哲学', la: '拉丁美洲哲学', fm: '哲学方法', sys: '哲学问题', cmp: '跨传统对话' };
 
 export interface PublishedCourse {
   code: string;
@@ -566,7 +570,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     position: 1,
     recommendFrom: ['IN2', 'IN5', 'IN6', 'IN7', 'IN8'],
     leadsTo: ['IN2', 'IN5', 'IN6', 'IN7'],
-    sourceNote: '梵文据 GRETIL 所收电子本，巴利文据 SuttaCentral 所载摩诃僧祇本；版本与权利见附录。中文是本章试译。',
+    sourceNote: '梵文据 GRETIL 所收电子本，巴利文据 SuttaCentral 所载 Mahāsaṅgīti 本；版本与权利见附录。中文是本章试译。',
     // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
     origLang: (html) => (html.includes('ṁ') ? 'pi' : 'sa'),
     topicSection: (() => {
@@ -587,7 +591,7 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     // IN4 lists this course as its background.
     recommendFrom: ['IN4', 'IN8'],
     leadsTo: ['IN3', 'IN4', 'S4', 'D2'],
-    sourceNote: '巴利文据 SuttaCentral 所载摩诃僧祇本（bilara-data），梵文据 GRETIL 所收电子本；版本与权利见附录。中文是本章试译。',
+    sourceNote: '巴利文据 SuttaCentral 所载 Mahāsaṅgīti 本（bilara-data），梵文据 GRETIL 所收电子本；版本与权利见附录。中文是本章试译。',
     // Pāli (SuttaCentral) is written with ṁ, the GRETIL Sanskrit with ṃ.
     origLang: (html) => (html.includes('ṁ') ? 'pi' : 'sa'),
   },
@@ -1156,6 +1160,60 @@ export const PUBLISHED: Record<string, PublishedCourse> = {
     srcNote: srcNoteS9to11,
     origLang: origLangS9to11,
   },
+  S12: {
+    code: 'S12',
+    text: S12,
+    name: '宗教哲学、死亡与人生意义',
+    tier: '● 核心',
+    en: 'Philosophy of Religion, Death and the Meaning of Life',
+    method: '评价支持和反对有神论的论证，以及不依靠有神论的意义的论证',
+    background: '大纲建议先读「什么是哲学？问题、论证与阅读」（推荐背景，不是必需）',
+    tradition: 'sys',
+    position: 12,
+    // The curriculum lists no onward course for S12. IN6 and JW1 point to S12
+    // through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '安瑟伦、阿奎那、波埃修、希尔德加德与《从古代晚期到经院哲学》所用的文本相同；阿维森纳与《法拉比与阿维森纳》相同；休谟《自然宗教对话录》与《经验论、启蒙与自由主义的起源》相同；帕斯卡与《近代早期理性主义与新科学》相同；施莱尔马赫与《德国观念论与浪漫主义》相同；柏拉图《游叙弗伦》与《什么是哲学？问题、论证与阅读》相同；《大森林奥义书》与《梵、自我与世界》相同；《相应部》与《早期佛教与阿毗达磨》相同；《老子》《庄子》与《道家传统》相同；伊壁鸠鲁与《希腊化与罗马哲学》相同。普兰丁格、罗、希克等当代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS12toD1,
+    origLang: origLangS12toD1,
+  },
+  S13: {
+    code: 'S13',
+    text: S13,
+    name: '美学与艺术哲学',
+    tier: '○ 拓展',
+    en: 'Aesthetics and Philosophy of Art',
+    method: '对一件作品提出并检验一个诠释的论证',
+    background: '无前置要求，可以直接阅读',
+    tradition: 'sys',
+    position: 13,
+    // The curriculum lists no onward course for S13, and no published course
+    // links to it yet.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '休谟《论趣味的标准》据 Hume Texts Online（davidhume.org）录文；康德与《康德》所用的文本相同；柏拉图与《柏拉图》相同；《论语》与《孔子、孟子与荀子》相同；谢赫《古画品录》和王维《鹿柴》据中文维基文库录文。科林伍德、迪基、列文森、卡罗尔、高特等当代著作一律转述。版本与权利见附录。中文是本章或相应课程的试译。',
+    srcNote: srcNoteS12toD1,
+    origLang: origLangS12toD1,
+  },
+  D1: {
+    code: 'D1',
+    text: D1,
+    name: '比较哲学：方法与陷阱',
+    tier: '● 核心',
+    en: 'Comparative Philosophy: Methods and Pitfalls',
+    method: '找出一个比较中隐含的假定',
+    background: '大纲建议先读两门来自不同传统的「历史与传统」课程；「诠释、翻译与哲学写作」也有帮助（推荐背景，不是必需）',
+    tradition: 'cmp',
+    position: 1,
+    // The curriculum lists no onward course for D1. CN7, CN8 and A4 point to
+    // D1 through their own leadsTo.
+    recommendFrom: [],
+    leadsTo: [],
+    sourceNote: '《高僧传》与道安的序与《魏晋玄学与中国佛学》所用的文本相同；《弥曼差经》与和合本《约翰福音》与《诠释、翻译与哲学写作》相同；黑格尔与《德国观念论与浪漫主义》相同；梁启超、蔡元培、梁漱溟、胡适、严复与《中国哲学与现代》相同。萨义德、戴维森、麦金太尔等现代著作一律转述。版本与权利见附录。中文是相应课程的试译。',
+    srcNote: srcNoteS12toD1,
+    origLang: origLangS12toD1,
+  },
 };
 
 // Methods courses quote short passages from several traditions; the note and
@@ -1237,8 +1295,34 @@ function origLangS9to11(html: string) {
   if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
   if (/ṁ/.test(t)) return 'pi';
   if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
-  if (/[éèêàçù]|(une|qui|des|les|et)/.test(t)) return 'fr';
+  if (/[éèêàçù]|\b(une|qui|des|les|et)\b/.test(t)) return 'fr';
   if (/[äöüß]/.test(t)) return 'de';
+  if (/[A-Za-z]/.test(t)) return 'en';
+  return 'zh-Hant';
+}
+
+// S12, S13 and D1 (V34) add their own helpers, so earlier courses render
+// exactly as before. Chinese source blocks name the course whose checked text
+// they reuse; the original-language passages are Latin, Arabic, English,
+// French, German, Greek, Sanskrit or Pāli.
+function srcNoteS12toD1(cite: string) {
+  if (/老子|庄子/.test(cite)) return '录文据中文维基文库，与《道家传统》相同';
+  if (/论语/.test(cite)) return '录文据中文维基文库，与《孔子、孟子与荀子》相同';
+  if (/高僧传|道安/.test(cite)) return '录文据中文维基文库，与《魏晋玄学与中国佛学》相同';
+  if (/约翰福音/.test(cite)) return '和合本（1919 年），与《诠释、翻译与哲学写作》相同';
+  if (/梁启超|蔡元培|梁漱溟|胡适|严复/.test(cite)) return '录文据中文维基文库，与《中国哲学与现代》相同';
+  if (/鹿柴/.test(cite)) return '录文据中文维基文库（《全唐诗》卷一二八）';
+  return '据中文维基文库录文';
+}
+function origLangS12toD1(html: string) {
+  const t = html.replace(/<[^>]+>/g, '');
+  if (/[؀-ۿ]/.test(t)) return 'ar';
+  if (/[Ͱ-Ͽἀ-῿]/.test(t)) return 'grc';
+  if (/ṁ/.test(t)) return 'pi';
+  if (/[āīūṛṃṇśṣḥ]/.test(t)) return 'sa';
+  if (/[éèêàçùôû]/.test(t)) return 'fr';
+  if (/[äöüßÄÖÜ]|\b(ist|und|das|daß)\b/.test(t)) return 'de';
+  if (/\b(est|quod|et|non|igitur|vero|esse|quo)\b/.test(t)) return 'la';
   if (/[A-Za-z]/.test(t)) return 'en';
   return 'zh-Hant';
 }
