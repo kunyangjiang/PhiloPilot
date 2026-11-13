@@ -2,8 +2,9 @@
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 01,
 // CASE 02, CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); any
-// others list title, direction and subjects only and open nothing. CASE 09 and
-// CASE 10 were added later at the product owner's request and are written as well.
+// others list title, direction and subjects only and open nothing. CASE 09,
+// CASE 10 and CASE 11 were added later at the product owner's request and are
+// written as well.
 
 export interface CaseEntry {
   /** Two-digit case number, also the route id (#/cases/02). */
@@ -96,6 +97,14 @@ export const CASES: CaseEntry[] = [
     genre: '恐怖小说 / 道家哲学与医学伦理 / 知觉与知识',
     premise: '一支医疗队来到深山，要在七天里为村里世代看护的、没有面孔的“混沌”凿开七窍；纪录片导演林朵记下了每一天（村庄、机构和人物均为虚构）。',
     subjects: ['无为与干预', '知觉、区分与知识', '代理同意与家长主义'],
+    available: true,
+  },
+  {
+    no: '11',
+    title: '分支',
+    genre: '恐怖小说 / 人格同一性与帕菲特 / 死亡与无我',
+    premise: '一座深空采矿站把工人“扫描、传输、销毁原件”送回地球；一次销毁失败了，工程师韩舟只剩四天，要和已经到家的另一个韩舟说话，每一句都隔着十一点四秒（站点、机构和人物均为虚构）。',
+    subjects: ['人格同一性与关系 R', '分支与复制品的地位', '对死亡的恐惧与无我'],
     available: true,
   },
 ];

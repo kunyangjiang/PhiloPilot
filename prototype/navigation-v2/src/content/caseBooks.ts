@@ -9,6 +9,7 @@ import { CASE07 } from './case07';
 import { CASE08 } from './case08';
 import { CASE09 } from './case09';
 import { CASE10 } from './case10';
+import { CASE11 } from './case11';
 import type { PracticeSet } from './practice';
 import { CASE01_PRACTICE } from './practice-case01';
 import { CASE02_PRACTICE } from './practice-case02';
@@ -20,6 +21,7 @@ import { CASE07_PRACTICE } from './practice-case07';
 import { CASE08_PRACTICE } from './practice-case08';
 import { CASE09_PRACTICE } from './practice-case09';
 import { CASE10_PRACTICE } from './practice-case10';
+import { CASE11_PRACTICE } from './practice-case11';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -129,6 +131,16 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'EA4', why: '附录一第 5、6 节：认识需要两种能力，“直观无概念是盲的”；显象、物自身与理论知识的界限（课程第二、三节）' },
       { code: 'S1', why: '附录一第 4、6 节：陈那“知觉离开概念”，庄子与惠子“你不是鱼”（课程第四节）' },
       { code: 'D8', why: '附录一第 7、8、9 节：知情同意的要素，家长主义与代替决定，家属参与不等于家属决定（课程第二节）' },
+    ],
+  },
+  '11': {
+    book: CASE11,
+    practice: CASE11_PRACTICE,
+    links: [
+      { code: 'S4', why: '附录一第 1、2、4、5、10 节：洛克的记忆标准及其困难，分裂与复制、关系 R 与“在生存中，重要的不是同一性”，动物论，传送与复制案例中的几种标准；无我与束论（课程第二、三节）' },
+      { code: 'D2', why: '附录一第 3、7、8 节：帕菲特“同一性不是重要的东西”，四种主张不要混在一起，帕菲特与佛教——一个有记载的比较；无我的论证，执著与关心（课程第二、三、五节）' },
+      { code: 'A3', why: '附录一第 6、10 节：思想实验检验什么与“直觉泵”，一次只改一处地变换案例，对直觉的怀疑（课程第四、五、六节）' },
+      { code: 'S12', why: '附录一第 9 节：伊壁鸠鲁“死亡对我们什么都不是”，剥夺说与时间的问题，不朽值得要吗（课程第六节）' },
     ],
   },
 };
