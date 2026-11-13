@@ -30,7 +30,8 @@ export default function CasesPage() {
             {open
               .map((c) => `${c.no}《${c.title}》`)
               .join('、')
-              .replace(/、(?=[^、]*$)/, '和 ')}。其余{numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。
+              .replace(/、(?=[^、]*$)/, '和 ')}。
+            {CASES.length > open.length && `其余${numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。`}
           </p>
         </header>
 

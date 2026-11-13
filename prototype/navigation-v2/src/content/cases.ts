@@ -1,8 +1,8 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
-// The eight titles and directions were sealed by the product owner. CASE 02,
-// CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); the others list title,
-// direction and subjects only and open nothing.
+// The eight titles and directions were sealed by the product owner. CASE 01,
+// CASE 02, CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); any
+// others list title, direction and subjects only and open nothing.
 
 export interface CaseEntry {
   /** Two-digit case number, also the route id (#/cases/02). */
@@ -20,9 +20,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '01',
     title: '不存在的原作',
-    premise: '一位修复师和一名学生面对一项修复决定。',
+    genre: '现实主义职业小说 / 艺术哲学 / 修复与复制',
+    premise: '一位修复师和一名学生面对一项修复决定：一张明末立轴上，渔翁的脸正在剥落，而这条船上原来也许没有人（画家、作品与文献均为虚构）。',
     subjects: ['艺术作品的同一性', '作者意图', '复制与临摹'],
-    available: false,
+    available: true,
   },
   {
     no: '02',

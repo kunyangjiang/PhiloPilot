@@ -1,4 +1,5 @@
 import type { CaseBook } from './caseBook';
+import { CASE01 } from './case01';
 import { CASE02 } from './case02';
 import { CASE03 } from './case03';
 import { CASE04 } from './case04';
@@ -7,6 +8,7 @@ import { CASE06 } from './case06';
 import { CASE07 } from './case07';
 import { CASE08 } from './case08';
 import type { PracticeSet } from './practice';
+import { CASE01_PRACTICE } from './practice-case01';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
 import { CASE04_PRACTICE } from './practice-case04';
@@ -26,6 +28,15 @@ export interface CaseText {
 }
 
 export const CASE_TEXTS: Record<string, CaseText> = {
+  '01': {
+    book: CASE01,
+    practice: CASE01_PRACTICE,
+    links: [
+      { code: 'S13', why: '附录一第 4、5 节：作者意图的几种立场与列文森的范畴意图；谢赫“六法”中的“传移模写”' },
+      { code: 'A4', why: '附录一第 4 节：作者意图论、《意图谬误》与伽达默尔的前见' },
+      { code: 'S2', why: '附录一第 3 节：实体作为“变化中的持存者”' },
+    ],
+  },
   '02': {
     book: CASE02,
     practice: CASE02_PRACTICE,

@@ -30,7 +30,7 @@ const plain = (b: CaseBlock, i: number) =>
   b.id ? (
     <h2 key={i} id={b.id} data-block={i} className="blk art-h" dangerouslySetInnerHTML={{ __html: b.html }} />
   ) : (
-    <div key={i} data-block={i} className="blk" dangerouslySetInnerHTML={{ __html: b.html }} />
+    <div key={i} data-block={i} className={'blk' + (b.tag === 'table' ? ' tbl-wrap' : '')} dangerouslySetInnerHTML={{ __html: b.html }} />
   );
 
 /** 附录二: each decision point opens on what was known at the time; the
