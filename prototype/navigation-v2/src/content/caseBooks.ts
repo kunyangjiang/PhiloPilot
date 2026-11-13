@@ -7,6 +7,7 @@ import { CASE05 } from './case05';
 import { CASE06 } from './case06';
 import { CASE07 } from './case07';
 import { CASE08 } from './case08';
+import { CASE09 } from './case09';
 import type { PracticeSet } from './practice';
 import { CASE01_PRACTICE } from './practice-case01';
 import { CASE02_PRACTICE } from './practice-case02';
@@ -16,6 +17,7 @@ import { CASE05_PRACTICE } from './practice-case05';
 import { CASE06_PRACTICE } from './practice-case06';
 import { CASE07_PRACTICE } from './practice-case07';
 import { CASE08_PRACTICE } from './practice-case08';
+import { CASE09_PRACTICE } from './practice-case09';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -105,6 +107,16 @@ export const CASE_TEXTS: Record<string, CaseText> = {
     links: [
       { code: 'S9', why: '附录一第 2、4、5、7 节：诺齐克的资格理论与边界约束，基本结构与罗尔斯的两个原则，公平的机会平等与墨子“尚贤”，公共广播之例' },
       { code: 'EA11', why: '附录一第 2、3、4、5、9 节：持有的正义，矫正与起点的问题，差别原则不是什么，基本善与道德上任意的东西，自愿的问题' },
+    ],
+  },
+  '09': {
+    book: CASE09,
+    practice: CASE09_PRACTICE,
+    links: [
+      { code: 'IN2', why: '附录一第 3 节：五蕴，《无我相经》的控制论证与无常论证，车喻“没有证明人不存在”（课程第三节）' },
+      { code: 'D2', why: '附录一第 3、8 节：无我论证否定的是什么样的“我”；休谟与帕菲特的束论（课程第二、三节）' },
+      { code: 'S12', why: '附录一第 5 节：伊壁鸠鲁“死亡与我们无关”的论证及其重建，卢克莱修的对称论证，剥夺说（课程第六节）' },
+      { code: 'S5', why: '附录一第 7、8 节：意识，阿维森纳的飞人，从行为到经验的推论的限度（课程第四、六节）' },
     ],
   },
 };

@@ -2,7 +2,8 @@
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 01,
 // CASE 02, CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); any
-// others list title, direction and subjects only and open nothing.
+// others list title, direction and subjects only and open nothing. CASE 09 was
+// added later at the product owner's request and is written as well.
 
 export interface CaseEntry {
   /** Two-digit case number, also the route id (#/cases/02). */
@@ -79,6 +80,14 @@ export const CASES: CaseEntry[] = [
     genre: '现实主义社会小说 / 财产与正义 / 公共机构',
     premise: '时间紧迫，几方力量围绕一座图书馆的去留。',
     subjects: ['财产与正义', '诺齐克与罗尔斯'],
+    available: true,
+  },
+  {
+    no: '09',
+    title: '九相',
+    genre: '恐怖小说 / 佛教哲学与心灵哲学 / 安宁疗护',
+    premise: '安宁疗护病区来了一位在殡仪馆做了四十年防腐和整容的老人，他说自己九天前已经死了；年轻医生许观在修九相观，开始一天一天地看见他的身体变成尸体（医院、寺院和人物均为虚构）。',
+    subjects: ['死亡与自我', '九想与无我', '科塔尔综合征与同意'],
     available: true,
   },
 ];

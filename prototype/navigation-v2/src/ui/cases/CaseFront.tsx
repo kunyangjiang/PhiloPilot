@@ -55,7 +55,9 @@ export default function CaseFront({ no }: { no: string }) {
               <button className="rc-go" onClick={() => read(first)}>
                 <span className="rc-k">尚未开始 · 共 {CHAPTERS.length} 章</span>
                 <span className="rc-t">开始阅读 →</span>
-                <span className="rc-s">从第一章「{CHAPTERS[0].name}」读起</span>
+                <span className="rc-s">
+                  从{/^[一二三四五六七八九十]+$/.test(CHAPTERS[0].no) ? '第一章' : CHAPTERS[0].no}「{CHAPTERS[0].name}」读起
+                </span>
               </button>
             )}
             {st.state === 'progress' && (

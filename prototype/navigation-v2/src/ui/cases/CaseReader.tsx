@@ -84,7 +84,7 @@ const Article = memo(function Article({ no, part }: { no: string; part: number }
   return (
     <article className={'article case-article' + (isAppendix(part) ? ' case-article--appendix' : ' case-novel')} aria-labelledby="sec-title">
       <p className="art-kicker">
-        {isAppendix(part) ? `《${TITLE}》 · 附录（不计入阅读进度）` : `《${TITLE}》 · 第 ${chapterNo} 章 / 共 ${CHAPTERS.length} 章`}
+        {isAppendix(part) ? `《${TITLE}》 · 附录（不计入阅读进度）` : `《${TITLE}》 · 第 ${chapterNo} 节 / 共 ${CHAPTERS.length} 节`}
       </p>
       <h1 id="sec-title" className="art-title">
         {s.title}
@@ -225,7 +225,9 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
   const goPart = (i: number) => navigate({ name: 'caseReader', no, part: i });
   const toFront = () => navigate({ name: 'case', no });
   const pct = casePct(book, progress, userMoved.current ? { part, frac } : undefined);
-  const label = (x: CaseSection) => (isAppendix(x.index) ? x.title : `第${x.no}章　${x.name}`);
+  // 序 and 终 (CASE 09) are not numbered chapters: they show their own title.
+  const label = (x: CaseSection) =>
+    isAppendix(x.index) || !/^[一二三四五六七八九十]+$/.test(x.no) ? x.title : `第${x.no}章　${x.name}`;
   const chapterNo = CHAPTERS.findIndex((c) => c.index === part) + 1;
 
   const railItem = (x: CaseSection) => {
@@ -286,7 +288,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
           <span aria-hidden="true">‹</span> 案例
         </button>
         <p className="rb-where">
-          <span className="rb-pos">{isAppendix(part) ? '附录' : `第 ${chapterNo} / ${CHAPTERS.length} 章`}</span>
+          <span className="rb-pos">{isAppendix(part) ? '附录' : `第 ${chapterNo} / ${CHAPTERS.length} 节`}</span>
           <span className="rb-title">{s.name}</span>
         </p>
         <button ref={tocBtn} className="rb-toc" aria-expanded={drawer} aria-controls="case-rail" onClick={() => (drawer ? closeDrawer() : setDrawer(true))}>

@@ -6,13 +6,13 @@ import CaseCrumbs from './CaseCrumbs';
 import { caseStatus } from './caseState';
 import '../../styles/cases.css';
 
-// 哲学案例 overview. Eight sealed cases; only written ones open. The others
+// 哲学案例 overview. The listed cases; only written ones open. The others
 // are plain text with no link, and say they are not written yet.
 
 export default function CasesPage() {
   useEscape(() => navigate({ name: 'home' }));
   const open = CASES.filter((c) => c.available);
-  const numerals = ['零', '一', '两', '三', '四', '五', '六', '七', '八'];
+  const numerals = ['零', '一', '两', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
   return (
     <main id="main" tabIndex={-1} className="pg pg-cases">
       <TopBar />
@@ -35,7 +35,7 @@ export default function CasesPage() {
           </p>
         </header>
 
-        <ol className="cases-list" aria-label="八个哲学案例">
+        <ol className="cases-list" aria-label={`${numerals[CASES.length] ?? CASES.length}个哲学案例`}>
           {CASES.map((c) => {
             const text = c.available ? caseText(c.no) : undefined;
             const st = text ? caseStatus(text.book) : undefined;
