@@ -3,11 +3,13 @@ import { CASE02 } from './case02';
 import { CASE03 } from './case03';
 import { CASE04 } from './case04';
 import { CASE05 } from './case05';
+import { CASE06 } from './case06';
 import type { PracticeSet } from './practice';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
 import { CASE04_PRACTICE } from './practice-case04';
 import { CASE05_PRACTICE } from './practice-case05';
+import { CASE06_PRACTICE } from './practice-case06';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -58,6 +60,18 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'S4', why: '附录一第 5、9 节：人格性、道德地位与行动者的区分；复制与分裂' },
       { code: 'S1', why: '附录一第 2 节：濠梁之辩与“他心问题”' },
       { code: 'A3', why: '附录一第 6 节：思想实验与类比检验什么' },
+    ],
+  },
+  '06': {
+    book: CASE06,
+    practice: CASE06_PRACTICE,
+    links: [
+      { code: 'IN3', why: '第四章与附录一第 2、3、4 节：《正理经》的四种量，陈那的现量与比量，法称' },
+      { code: 'IN5', why: '附录一第 2、4 节：伐差耶那论可信者，正理派与弥曼差派在举证责任上的分歧' },
+      { code: 'D3', why: '附录一第 4 节：陈那和法称把言语归入推理' },
+      { code: 'D10', why: '第五章与附录一第 6、7 节：证据的标准与五个问题' },
+      { code: 'S1', why: '附录一第 4、8 节：还原论与非还原论，小孩的问题，认知权威' },
+      { code: 'A4', why: '附录一第 5 节：语境、时代错置与注释作为哲学' },
     ],
   },
 };

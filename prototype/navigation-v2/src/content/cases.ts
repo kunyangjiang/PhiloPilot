@@ -1,7 +1,7 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 02,
-// CASE 03, CASE 04 and CASE 05 are written (see caseBooks.ts); the others list title,
+// CASE 03, CASE 04, CASE 05 and CASE 06 are written (see caseBooks.ts); the others list title,
 // direction and subjects only and open nothing.
 
 export interface CaseEntry {
@@ -59,9 +59,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '06',
     title: '失落的第九卷',
-    premise: '一位语文学家与一座寺院的守护者之间的分歧。',
+    genre: '哲学推理小说 / 知识论 / 手稿之谜',
+    premise: '一册题为"卷九"的清代因明手稿即将被大学图书馆收购，一位文献学者和一座寺院藏经楼的守护者，要弄清它是谁写的、怎样离开寺院，以及一句传了四五手的"只有八卷"还能不能信（寺院、人物与手稿均为虚构）。',
     subjects: ['证言与知识来源', '正理派与陈那'],
-    available: false,
+    available: true,
   },
   {
     no: '07',
