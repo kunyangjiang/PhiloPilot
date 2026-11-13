@@ -1,7 +1,7 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 02,
-// CASE 03, CASE 04, CASE 05, CASE 06 and CASE 07 are written (see caseBooks.ts); the others list title,
+// CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); the others list title,
 // direction and subjects only and open nothing.
 
 export interface CaseEntry {
@@ -75,9 +75,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '08',
     title: '最后一座图书馆',
+    genre: '现实主义社会小说 / 财产与正义 / 公共机构',
     premise: '时间紧迫，几方力量围绕一座图书馆的去留。',
     subjects: ['财产与正义', '诺齐克与罗尔斯'],
-    available: false,
+    available: true,
   },
 ];
 

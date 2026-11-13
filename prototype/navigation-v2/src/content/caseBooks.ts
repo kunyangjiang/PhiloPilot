@@ -5,6 +5,7 @@ import { CASE04 } from './case04';
 import { CASE05 } from './case05';
 import { CASE06 } from './case06';
 import { CASE07 } from './case07';
+import { CASE08 } from './case08';
 import type { PracticeSet } from './practice';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
@@ -12,6 +13,7 @@ import { CASE04_PRACTICE } from './practice-case04';
 import { CASE05_PRACTICE } from './practice-case05';
 import { CASE06_PRACTICE } from './practice-case06';
 import { CASE07_PRACTICE } from './practice-case07';
+import { CASE08_PRACTICE } from './practice-case08';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -84,6 +86,14 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'A4', why: '附录一第 5、6 节：翻译是一种诠释，注释作为哲学，语境与时代错置' },
       { code: 'S6', why: '附录一第 7 节：涵义与指称，意义与使用，荀子"名无固宜"' },
       { code: 'D4', why: '附录一第 3 节：课程中 eudaimonia 的另一个译名"人的繁荣"' },
+    ],
+  },
+  '08': {
+    book: CASE08,
+    practice: CASE08_PRACTICE,
+    links: [
+      { code: 'S9', why: '附录一第 2、4、5、7 节：诺齐克的资格理论与边界约束，基本结构与罗尔斯的两个原则，公平的机会平等与墨子“尚贤”，公共广播之例' },
+      { code: 'EA11', why: '附录一第 2、3、4、5、9 节：持有的正义，矫正与起点的问题，差别原则不是什么，基本善与道德上任意的东西，自愿的问题' },
     ],
   },
 };
