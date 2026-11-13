@@ -4,12 +4,14 @@ import { CASE03 } from './case03';
 import { CASE04 } from './case04';
 import { CASE05 } from './case05';
 import { CASE06 } from './case06';
+import { CASE07 } from './case07';
 import type { PracticeSet } from './practice';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
 import { CASE04_PRACTICE } from './practice-case04';
 import { CASE05_PRACTICE } from './practice-case05';
 import { CASE06_PRACTICE } from './practice-case06';
+import { CASE07_PRACTICE } from './practice-case07';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -72,6 +74,16 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'D10', why: '第五章与附录一第 6、7 节：证据的标准与五个问题' },
       { code: 'S1', why: '附录一第 4、8 节：还原论与非还原论，小孩的问题，认知权威' },
       { code: 'A4', why: '附录一第 5 节：语境、时代错置与注释作为哲学' },
+    ],
+  },
+  '07': {
+    book: CASE07,
+    practice: CASE07_PRACTICE,
+    links: [
+      { code: 'GR3', why: '第三、八章与附录一第 2、4 节：幸福，名字上的一致与内容上的分歧；燕子、孩子、梭伦与普里阿摩斯' },
+      { code: 'A4', why: '附录一第 5、6 节：翻译是一种诠释，注释作为哲学，语境与时代错置' },
+      { code: 'S6', why: '附录一第 7 节：涵义与指称，意义与使用，荀子"名无固宜"' },
+      { code: 'D4', why: '附录一第 3 节：课程中 eudaimonia 的另一个译名"人的繁荣"' },
     ],
   },
 };

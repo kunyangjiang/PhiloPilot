@@ -1,7 +1,7 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 02,
-// CASE 03, CASE 04, CASE 05 and CASE 06 are written (see caseBooks.ts); the others list title,
+// CASE 03, CASE 04, CASE 05, CASE 06 and CASE 07 are written (see caseBooks.ts); the others list title,
 // direction and subjects only and open nothing.
 
 export interface CaseEntry {
@@ -67,9 +67,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '07',
     title: '译名之争',
-    premise: '历史一线只以文献呈现，另一条线发生在当下。',
+    genre: '哲学小说 / 翻译与概念 / 出版与家族文献',
+    premise: '一位编辑在重印一部旧译本时，从两个版本的译名差异出发，逐步揭开译者与出版者之间一段被删去的往事。',
     subjects: ['翻译与概念'],
-    available: false,
+    available: true,
   },
   {
     no: '08',

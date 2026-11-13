@@ -241,6 +241,18 @@
 .case-novel p {
   margin: 0 0 1.1em;
 }
+/* Documents quoted inside the novel (letters, drafts, records; CASE 07):
+   set off from the narrative by a rule and a smaller size. */
+.case-novel blockquote {
+  margin: 1.6em 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--rule);
+  font-size: 16px;
+  line-height: 1.9;
+}
+.case-novel blockquote p {
+  margin: 0 0 0.8em;
+}
 .case-article--appendix ol,
 .case-article--appendix ul {
   padding-left: 1.6em;
