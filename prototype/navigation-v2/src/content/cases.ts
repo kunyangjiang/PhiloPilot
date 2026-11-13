@@ -2,8 +2,8 @@
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 01,
 // CASE 02, CASE 03, CASE 04, CASE 05, CASE 06, CASE 07 and CASE 08 are written (see caseBooks.ts); any
-// others list title, direction and subjects only and open nothing. CASE 09 was
-// added later at the product owner's request and is written as well.
+// others list title, direction and subjects only and open nothing. CASE 09 and
+// CASE 10 were added later at the product owner's request and are written as well.
 
 export interface CaseEntry {
   /** Two-digit case number, also the route id (#/cases/02). */
@@ -88,6 +88,14 @@ export const CASES: CaseEntry[] = [
     genre: '恐怖小说 / 佛教哲学与心灵哲学 / 安宁疗护',
     premise: '安宁疗护病区来了一位在殡仪馆做了四十年防腐和整容的老人，他说自己九天前已经死了；年轻医生许观在修九相观，开始一天一天地看见他的身体变成尸体（医院、寺院和人物均为虚构）。',
     subjects: ['死亡与自我', '九想与无我', '科塔尔综合征与同意'],
+    available: true,
+  },
+  {
+    no: '10',
+    title: '七窍',
+    genre: '恐怖小说 / 道家哲学与医学伦理 / 知觉与知识',
+    premise: '一支医疗队来到深山，要在七天里为村里世代看护的、没有面孔的“混沌”凿开七窍；纪录片导演林朵记下了每一天（村庄、机构和人物均为虚构）。',
+    subjects: ['无为与干预', '知觉、区分与知识', '代理同意与家长主义'],
     available: true,
   },
 ];

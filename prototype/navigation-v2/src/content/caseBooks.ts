@@ -8,6 +8,7 @@ import { CASE06 } from './case06';
 import { CASE07 } from './case07';
 import { CASE08 } from './case08';
 import { CASE09 } from './case09';
+import { CASE10 } from './case10';
 import type { PracticeSet } from './practice';
 import { CASE01_PRACTICE } from './practice-case01';
 import { CASE02_PRACTICE } from './practice-case02';
@@ -18,6 +19,7 @@ import { CASE06_PRACTICE } from './practice-case06';
 import { CASE07_PRACTICE } from './practice-case07';
 import { CASE08_PRACTICE } from './practice-case08';
 import { CASE09_PRACTICE } from './practice-case09';
+import { CASE10_PRACTICE } from './practice-case10';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -117,6 +119,16 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'D2', why: '附录一第 3、8 节：无我论证否定的是什么样的“我”；休谟与帕菲特的束论（课程第二、三节）' },
       { code: 'S12', why: '附录一第 5 节：伊壁鸠鲁“死亡与我们无关”的论证及其重建，卢克莱修的对称论证，剥夺说（课程第六节）' },
       { code: 'S5', why: '附录一第 7、8 节：意识，阿维森纳的飞人，从行为到经验的推论的限度（课程第四、六节）' },
+    ],
+  },
+  '10': {
+    book: CASE10,
+    practice: CASE10_PRACTICE,
+    links: [
+      { code: 'CN3', why: '附录一第 1、2、3、10 节：无为不是什么都不做与“為者敗之”，命名与区分从“名”到“封”，浑沌寓言证明了什么、没有证明什么，郭象的独化（课程第二、四、五、六节）' },
+      { code: 'EA4', why: '附录一第 5、6 节：认识需要两种能力，“直观无概念是盲的”；显象、物自身与理论知识的界限（课程第二、三节）' },
+      { code: 'S1', why: '附录一第 4、6 节：陈那“知觉离开概念”，庄子与惠子“你不是鱼”（课程第四节）' },
+      { code: 'D8', why: '附录一第 7、8、9 节：知情同意的要素，家长主义与代替决定，家属参与不等于家属决定（课程第二节）' },
     ],
   },
 };
