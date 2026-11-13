@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { COURSES, REGIONS, TOPICS } from '../data/catalog';
+import { COURSES, REGIONS, TIER_LABEL, TOPICS } from '../data/catalog';
 import { PUBLISHED } from '../content/courses';
 import { navigate, type Route } from '../router';
 
@@ -63,13 +63,13 @@ export default function SearchPalette() {
       ...TOPICS.map((t) => ({
         group: '问题',
         label: `${t.title}：${t.question}`,
-        sub: t.implemented ? '已展开' : '原型未展开',
-        go: t.implemented ? to({ name: 'topic', topic: t.id }) : undefined,
+        sub: `${t.courses.length} 门系统课`,
+        go: to({ name: 'topic', topic: t.id }),
       })),
       ...COURSES.map((c) => ({
         group: '课程',
         label: c.title,
-        sub: c.implemented ? '可阅读（样章草稿）' : '原型未实现',
+        sub: TIER_LABEL[c.tier],
         go: c.implemented ? to({ name: 'course', code: c.code }) : undefined,
       })),
       ...Object.values(PUBLISHED).flatMap((c) =>
@@ -136,7 +136,7 @@ export default function SearchPalette() {
           ))}
         </ul>
         <p className="pl-foot">
-          <span className="pl-keys">↑↓ 选择 · Enter 打开 · Esc 关闭 · </span>灰色条目在原型中尚未实现
+          <span className="pl-keys">↑↓ 选择 · Enter 打开 · Esc 关闭</span>
         </p>
       </div>
     </div>

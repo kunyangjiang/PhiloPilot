@@ -238,33 +238,12 @@
   font-size: 14px;
   line-height: 1.6;
 }
-.sh-path {
-  display: grid;
-  gap: 4px;
+.sh-stat {
   margin-top: 18px;
   padding-top: 10px;
   border-top: 1.5px solid currentColor;
   font-size: 13.5px;
-}
-.sh-path-k {
-  font-size: 12px;
-  opacity: 0.75;
-}
-.sh-path-step {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.sh-path-step i {
-  display: inline-grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  font-style: normal;
-  font-size: 11px;
   font-weight: 700;
-  border: 1.5px solid currentColor;
-  border-radius: 50%;
 }
 .sh-foot {
   display: flex;
@@ -281,16 +260,6 @@
 .sh-tile:focus-visible .sh-go {
   text-decoration: underline;
   text-underline-offset: 4px;
-}
-.sh-badge {
-  position: absolute;
-  top: 54px;
-  left: 24px;
-  padding: 2px 8px;
-  background: #fff;
-  color: var(--c-questions);
-  font-size: 12px;
-  font-weight: 700;
 }
 
 /* Strip: 72 cells, one per course */
@@ -792,7 +761,7 @@
   .sh-foot {
     margin-top: auto;
   }
-  .sh-path {
+  .sh-stat {
     margin-bottom: 14px;
   }
   .sh-strip-head {
@@ -922,15 +891,11 @@
   .lede--q {
     font-size: 19px;
   }
-  .q-layout,
   .topic-layout,
   .course-grid,
   .region-cols {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 36px;
-  }
-  .qf-title {
-    font-size: 36px;
   }
   /* Question detail: the recommendation comes right after the question. */
   .topic-main {
@@ -1245,39 +1210,17 @@
     font-size: 11px;
   }
   .sh-line,
-  .sh-path-k,
   .sh-foot {
     display: none;
   }
-  /* Same size boxes: titles share one line, steps sit on the bottom edge. */
-  .sh-path {
+  /* Same size boxes: titles share one line, the course count sits on the bottom edge. */
+  .sh-stat {
     order: 3;
-    gap: 3px;
     margin-top: auto;
     padding-top: 8px;
     border-top-width: 1px;
     font-size: 12px;
     line-height: 1.35;
-  }
-  .sh-path-step {
-    gap: 6px;
-    align-items: flex-start;
-  }
-  .sh-path-step i {
-    width: 15px;
-    height: 15px;
-    flex: none;
-    font-size: 9.5px;
-    border-width: 1px;
-  }
-  .sh-badge {
-    position: static;
-    order: 2;
-    align-self: flex-start;
-    margin: -4px 0 10px;
-    padding: 1px 6px;
-    font-size: 11px;
-    line-height: 1.4;
   }
   .sh-cells {
     grid-template-columns: repeat(18, minmax(0, 1fr));
@@ -1300,20 +1243,11 @@
   .core-q p {
     font-size: 16px;
   }
-  .q-feature {
-    padding: 22px 20px 20px;
+  .qg {
+    gap: 28px;
   }
-  .qf-title {
-    font-size: 30px;
-  }
-  .qf-q {
-    font-size: 17px;
-  }
-  .q-others ul {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .qo-c {
-    white-space: normal;
+  .qg-title {
+    font-size: 22px;
   }
   .q-row {
     grid-template-columns: 34px minmax(0, 1fr);
@@ -1573,4 +1507,10 @@
   .brand-sub {
     display: none;
   }
+}
+
+.sh-sub-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

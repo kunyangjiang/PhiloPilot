@@ -31,7 +31,7 @@ const Article = memo(function Article({ code, section }: { code: string; section
   return (
     <article className="article" aria-labelledby="sec-title">
       <p className="art-kicker">
-        {isAppendix(section) ? `${name} · 附录（不计入阅读进度）` : `${name} · 第 ${partNo(section)} 部分 / 共 ${READING.length} 部分`}
+        {isAppendix(section) ? `${name} · 附录` : `${name} · 第 ${partNo(section)} 部分 / 共 ${READING.length} 部分`}
       </p>
       <h1 id="sec-title" className="art-title">
         {s.title}
@@ -426,7 +426,7 @@ export default function Reader({ route }: { route: ReaderRoute }) {
               目录 · {READING.length} 部分 <span className="rail-pct">已读 {pct}%</span>
             </p>
             <ol>{READING.map(railItem)}</ol>
-            <p className="rail-group">附录 · 不计入进度</p>
+            <p className="rail-group">附录</p>
             <ol className="rail-appendix">{APPENDIX.map(railItem)}</ol>
             <div className="rail-back">
               <button onClick={() => navigate({ name: 'course', code })}>← 课程扉页</button>

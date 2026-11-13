@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { COURSES, METHOD_FOCI, REGIONS, TIER_LABEL, TRADITIONS } from '../data/catalog';
 import { UNITS } from '../data/units';
 import { navigate } from '../router';
-import { TopBar, NotBuilt, useEscape } from './Chrome';
+import { TopBar, useEscape } from './Chrome';
 import { goCourse, REGION_NO } from './nav';
-import { PUBLISHED, TRADITION_NAME } from '../content/courses';
+import { TRADITION_NAME } from '../content/courses';
 import Wayfinder from './Wayfinder';
 
 type R = 'history' | 'dialogue' | 'methods';
@@ -14,9 +14,11 @@ function CourseTable({ codes }: { codes: string[] }) {
     <table className="course-table">
       <thead>
         <tr>
-          <th scope="col">课程（示意译名）</th>
+          <th scope="col">课程</th>
           <th scope="col">层级</th>
-          <th scope="col">状态</th>
+          <th scope="col">
+            <span className="visually-hidden">打开</span>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -32,9 +34,7 @@ function CourseTable({ codes }: { codes: string[] }) {
                   <button className="btn btn--small btn--accent" onClick={() => goCourse(code)}>
                     打开课程 →
                   </button>
-                ) : (
-                  <NotBuilt />
-                )}
+                ) : null}
               </td>
             </tr>
           );
@@ -127,7 +127,6 @@ export default function Region({ region }: { region: R }) {
                   );
                 })}
               </ol>
-              <p className="pg-note">原型展开全部七个传统；「日本、韩国与拉丁美洲」在大纲中是一组，这里按日本、韩国、拉丁美洲分成三节。</p>
             </section>
             <section>
               <h2 className="sec-h" id="trad-gr" tabIndex={-1}>希腊与罗马哲学 · 4 门课</h2>
@@ -174,7 +173,6 @@ export default function Region({ region }: { region: R }) {
             </section>
           </div>
         )}
-        <p className="pg-note">本区域只展示课程结构；可阅读的内容目前有{Object.values(PUBLISHED).map((c) => `《${c.name}》`).join('')}。按 Esc 回到总览。</p>
       </div>
     </main>
   );

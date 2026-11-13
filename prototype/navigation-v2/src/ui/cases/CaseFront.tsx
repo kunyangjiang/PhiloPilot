@@ -87,7 +87,7 @@ export default function CaseFront({ no }: { no: string }) {
               <dt>篇幅</dt>
               <dd>
                 {CHAPTERS.length} 章 · 正文约 {(NOVEL_CHARS / 10000).toFixed(1)} 万字
-                <small className="facts-note">另有五个附录，放在小说之后，不计入阅读进度</small>
+                <small className="facts-note">另附哲学分析、决策点和练习</small>
               </dd>
             </div>
           </dl>
@@ -103,7 +103,6 @@ export default function CaseFront({ no }: { no: string }) {
               </li>
             ))}
           </ul>
-          <p className="note">哲学案例不属于课程体系；以上只是内容上的联系，均可在课程中找到。</p>
         </section>
 
         <section className="course-side" aria-label="目录">
@@ -126,7 +125,7 @@ export default function CaseFront({ no }: { no: string }) {
             })}
           </ol>
           <p className="note">
-            附录（在小说之后，不计入进度；会提到小说的结局，建议读完再看）：
+            附录会提到小说的结局，建议读完再看：
             {APPENDICES.map((s, i) => (
               <span key={s.index}>
                 {i > 0 && '、'}

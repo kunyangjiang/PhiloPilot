@@ -54,8 +54,3 @@ export function useEscape(fn: () => void) {
     return () => window.removeEventListener('keydown', k);
   });
 }
-
-/** Explicit, honest marker for anything that is not built in this prototype. */
-export function NotBuilt({ children = '原型未实现' }: { children?: string }) {
-  return <span className="not-built">{children}</span>;
-}

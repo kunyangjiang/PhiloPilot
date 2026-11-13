@@ -196,7 +196,7 @@ export const REGIONS: Region[] = [
     title: '哲学方法',
     en: 'Philosophical Methods',
     line: '重构论证、分析概念、诠释原典的工具',
-    stat: '4 门方法课 · 每门课一个方法重点',
+    stat: '4 门方法课 · 6 个方法重点',
     color: '#93dcc4',
   },
 ];

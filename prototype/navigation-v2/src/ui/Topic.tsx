@@ -2,21 +2,11 @@ import { courseByCode, decode, HUMAN_NATURE, nameOf, TOPICS } from '../data/cata
 import { PUBLISHED } from '../content/courses';
 import { navigate } from '../router';
 import { readingStatus } from '../state/reading';
-import { TopBar, NotBuilt, useEscape } from './Chrome';
+import { TopBar, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
-import { goCourse } from './nav';
+import { goCourse, QUESTIONS_CRUMB } from './nav';
 
 const QS = HUMAN_NATURE.questions;
-const READABLE = Object.values(PUBLISHED).map((c) => `《${c.name}》`).join('');
-/** “第 3 个问题”, “第 2、4 个问题”: where a readable course other than CN1 is linked. */
-const linkedAt = (code: string) => {
-  const n = QS.flatMap((q, i) => (q.links.some((l) => l.code === code) ? [i + 1] : []));
-  return n.length ? `第 ${n.join('、')} 个问题` : '';
-};
-const OTHERS = Object.values(PUBLISHED)
-  .filter((c) => c.code !== 'CN1' && linkedAt(c.code))
-  .map((c) => `《${c.name}》连到${linkedAt(c.code)}`)
-  .join('，');
 
 // Question detail. Hierarchy: the question (h1) › four sub-questions (main
 // structure) › one red recommendation card › every course reference under a
@@ -32,8 +22,23 @@ export default function Topic({ topic }: { topic: string }) {
         <TopBar />
         <Wayfinder page="topic" topic={tp.id} />
         <div className="pg-body">
-          <h1>{tp.title}</h1>
-          <p className="lede">这个问题在原型中尚未展开。</p>
+          <header className="pg-head">
+            <h1>{tp.title}</h1>
+            <p className="lede lede--q">{tp.question}</p>
+          </header>
+          <ul className="qg-courses qg-courses--page" aria-label="处理这个问题的课程">
+            {tp.courses.map((c) => (
+              <li key={c}>
+                {c in PUBLISHED ? (
+                  <button className="qg-course" onClick={() => goCourse(c, [QUESTIONS_CRUMB])}>
+                    {PUBLISHED[c].name} →
+                  </button>
+                ) : (
+                  nameOf(c)
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </main>
     );
@@ -87,17 +92,16 @@ export default function Topic({ topic }: { topic: string }) {
                 </li>
               ))}
             </ol>
-            <p className="note">问题与课程小节的分组是本原型的编辑示意。{READABLE}可以打开，其余课程在原型中未实现。</p>
           </section>
         </div>
 
         <aside className="start-card-wrap">
           <div className="start-card">
-            <p className="sc-k">推荐课程 · 原型中可阅读</p>
+            <p className="sc-k">推荐课程</p>
             <h2>建议从这门课开始</h2>
             <p className="sc-title">{courseByCode('CN1')!.title}</p>
             <p className="sc-why">
-              四个具体问题里有 {viaCN1} 个都连到这门课。原型中可以阅读的其他课程：{OTHERS}。
+              {QS.length} 个具体问题里有 {viaCN1} 个都连到这门课，它把孔子、孟子和荀子的三种回答放在一起读。
             </p>
             <button className="sc-go" onClick={() => open('CN1')}>
               打开这门课 →
@@ -105,18 +109,16 @@ export default function Topic({ topic }: { topic: string }) {
             {status.state !== 'new' && <p className="sc-state">{status.state === 'done' ? '你已读完这门课' : `你已读 ${status.pct}%`}</p>}
           </div>
           <details className="doc-details">
-            <summary>大纲中写明的课程联系（{HUMAN_NATURE.documented.length}）</summary>
+            <summary>接着读的路线（{HUMAN_NATURE.documented.length}）</summary>
             <ul className="doc-links">
               {HUMAN_NATURE.documented.map((d) => (
                 <li key={d.from + d.to}>
                   <span className="dl-path">
                     {nameOf(d.from)} → {nameOf(d.to)}
                   </span>
-                  <span className="dl-note">{decode(d.note)}</span>
                 </li>
               ))}
             </ul>
-            <NotBuilt>除《孔子、孟子与荀子》外均未实现</NotBuilt>
           </details>
         </aside>
       </div>

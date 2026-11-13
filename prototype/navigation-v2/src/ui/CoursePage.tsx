@@ -5,11 +5,23 @@ import { PUBLISHED, TRADITION_NAME, type Tradition } from '../content/courses';
 import { currentCtx, navigate } from '../router';
 import { getProgress } from '../state/store';
 import { readingStatus, resumeTarget } from '../state/reading';
-import { TopBar, NotBuilt, useEscape } from './Chrome';
+import { TopBar, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
 import { canonicalOf } from './nav';
 
 /** Label for a curriculum link to another course. */
+/** Recommended background, without the curriculum's bookkeeping wording. */
+const backgroundText = (s: string) =>
+  s
+    .replace(/（IN1—IN7 中任何一门；推荐背景，不是必需）/g, '')
+    .replace(/（推荐背景，不是必需）/g, '')
+    .replace(/（推荐背景，不是必需；/g, '（')
+    .replace(/；推荐背景，不是必需）/g, '）')
+    .replace(/（不是必需）/g, '')
+    .replace(/（不是必需；/g, '（')
+    .replace(/大纲建议先读/g, '建议先读')
+    .replace(/大纲认为(拓展课程)?(.+?)会?有帮助/g, '读过$1$2会有帮助');
+
 const linkKind = (code: string, tradition: Tradition) =>
   code.startsWith('S') ? '哲学问题' : code.startsWith('D') ? '跨传统对话' : code.toLowerCase().startsWith(tradition) ? `${TRADITION_NAME[tradition]} · 后续` : '后续';
 
@@ -34,12 +46,12 @@ export default function CoursePage({ code }: { code: string }) {
         <Wayfinder page="course" code={code} />
         <div className="pg-body">
           <h1>{nameOf(code)}</h1>
-          <p className="lede">这门课在原型中尚未实现。</p>
+          <p className="lede">没有找到这门课。</p>
         </div>
       </main>
     );
 
-  const { TITLE, SUBTITLE, STATUS_HTML, SECTIONS, READING, APPENDIX, TOTAL_CHARS, CORE_QUESTION, SUMMARY } = course.text;
+  const { TITLE, SUBTITLE, SECTIONS, READING, APPENDIX, TOTAL_CHARS, CORE_QUESTION, SUMMARY } = course.text;
   const status = readingStatus(code);
   const progress = getProgress(code);
   const read = (section: number, block?: number) => navigate({ name: 'reader', code, section, block });
@@ -53,9 +65,7 @@ export default function CoursePage({ code }: { code: string }) {
         {title}
       </button>
     ) : (
-      <>
-        {title} <NotBuilt>原型未实现</NotBuilt>
-      </>
+      <>{title}</>
     );
   };
 
@@ -73,7 +83,7 @@ export default function CoursePage({ code }: { code: string }) {
                 <a href={c.hash}>{c.label}</a>
               </span>
             ))}{' '}
-            · 第 {course.position} 门 · {course.tier}课程 <span className="draft-tag">样章草稿</span>
+            · 第 {course.position} 门 · {course.tier}课程
           </p>
           <h1 className="course-title">{TITLE}</h1>
           <p className="course-en">{SUBTITLE}</p>
@@ -123,7 +133,7 @@ export default function CoursePage({ code }: { code: string }) {
           <dl className="facts">
             <div>
               <dt>推荐背景</dt>
-              <dd>{course.background}</dd>
+              <dd>{backgroundText(course.background)}</dd>
             </div>
             <div>
               <dt>方法重点</dt>
@@ -133,14 +143,9 @@ export default function CoursePage({ code }: { code: string }) {
               <dt>篇幅</dt>
               <dd>
                 {READING.length} 部分 · 正文约 {(TOTAL_CHARS / 10000).toFixed(1)} 万字
-                <small className="facts-note">按页面显示文字计，含引文与练习；不含图表、注释与来源附录</small>
               </dd>
             </div>
           </dl>
-          <details className="draft-status">
-            <summary>草稿状态</summary>
-            <div dangerouslySetInnerHTML={{ __html: STATUS_HTML }} />
-          </details>
         </section>
 
         <section className="course-side" aria-label="阅读结构与位置">
@@ -163,7 +168,7 @@ export default function CoursePage({ code }: { code: string }) {
             })}
           </ol>
           <p className="note">
-            附录（不计入部分与进度）：
+            附录：
             {APPENDIX.map((s, i) => (
               <span key={s.index}>
                 {i > 0 && '、'}
@@ -174,31 +179,31 @@ export default function CoursePage({ code }: { code: string }) {
             ))}
           </p>
 
-          <h2 className="sec-h">读完以后</h2>
-          <ul className="next-list">
-            {course.recommendFrom.map((c) => (
-              <li key={'r' + c}>
-                {/* A course in another tradition (EA9 → AF3) is named by its own tradition. */}
-                <span className="nl-k">
-                  {(PUBLISHED[c]?.tradition ?? course.tradition) === course.tradition
-                    ? `${TRADITION_NAME[course.tradition]} · 下一门`
-                    : `${TRADITION_NAME[PUBLISHED[c].tradition]} · 可接着读`}
-                </span>{' '}
-                {linked(c)}
-              </li>
-            ))}
-            {course.leadsTo
-              .filter((c) => !course.recommendFrom.includes(c))
-              .map((c) => (
-                <li key={c}>
-                  <span className="nl-k">{linkKind(c, course.tradition)}</span> {linked(c)}
+          {course.recommendFrom.length + course.leadsTo.length > 0 && (
+            <>
+            <h2 className="sec-h">读完以后</h2>
+            <ul className="next-list">
+              {course.recommendFrom.map((c) => (
+                <li key={'r' + c}>
+                  {/* A course in another tradition (EA9 → AF3) is named by its own tradition. */}
+                  <span className="nl-k">
+                    {(PUBLISHED[c]?.tradition ?? course.tradition) === course.tradition
+                      ? `${TRADITION_NAME[course.tradition]} · 下一门`
+                      : `${TRADITION_NAME[PUBLISHED[c].tradition]} · 可接着读`}
+                  </span>{' '}
+                  {linked(c)}
                 </li>
               ))}
-          </ul>
-          {/* S1 and S2: the curriculum names courses that lead to them, but none that follow. */}
-          <p className="note">
-            {course.recommendFrom.length + course.leadsTo.length === 0 ? '课程大纲没有为这门课列出后续课程。' : '以上联系均来自课程大纲。'}
-          </p>
+              {course.leadsTo
+                .filter((c) => !course.recommendFrom.includes(c))
+                .map((c) => (
+                  <li key={c}>
+                    <span className="nl-k">{linkKind(c, course.tradition)}</span> {linked(c)}
+                  </li>
+                ))}
+            </ul>
+            </>
+          )}
         </section>
       </div>
     </main>

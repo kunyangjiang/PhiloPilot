@@ -1,20 +1,18 @@
-import { HUMAN_NATURE, nameOf, TOPICS, topicCourseCodes } from '../data/catalog';
+import { HUMAN_NATURE, nameOf, TOPICS } from '../data/catalog';
 import { NAMES } from '../data/units';
 import { PUBLISHED } from '../content/courses';
 import { navigate } from '../router';
-import { TopBar, NotBuilt, useEscape } from './Chrome';
+import { TopBar, useEscape } from './Chrome';
 import Wayfinder from './Wayfinder';
 import { goCourse, goTopic, QUESTIONS_CRUMB } from './nav';
 
-// The 哲学问题 entrance.
-// Featured-topic rule (deterministic, data-driven): the large block shows the
-// topic(s) marked `implemented` in the catalogue, i.e. the only question that
-// is fully built in this prototype. It says so on the block itself. The other
-// topics keep the curriculum order. No ranking or personalisation.
+// The 哲学问题 entrance: the ten questions in curriculum order, all with the
+// same weight. Each lists the systematic courses that take it up; a question
+// with its own page (人性与道德) also links to its sub-questions.
+const SYSTEMATIC = new Set(TOPICS.flatMap((t) => t.courses)).size;
+
 export default function Questions() {
   useEscape(() => navigate({ name: 'home' }));
-  const open = TOPICS.find((t) => t.implemented)!;
-  const others = TOPICS.filter((t) => !t.implemented);
   return (
     <main id="main" tabIndex={-1} className="pg pg-questions">
       <TopBar />
@@ -22,50 +20,39 @@ export default function Questions() {
       <div className="pg-body">
         <header className="pg-head">
           <h1>哲学问题</h1>
-          <p className="lede">从一个真实的问题出发，穿过各个传统。大纲共 {TOPICS.length} 个问题，原型中已展开 1 个。</p>
+          <p className="lede">
+            从一个真实的问题出发，穿过各个传统。{TOPICS.length} 个问题，{SYSTEMATIC} 门系统课。
+          </p>
         </header>
-        <div className="q-layout">
-          <div className="q-feature-wrap">
-            <button className="q-feature" onClick={() => goTopic(open.id)}>
-              <span className="qf-k">原型中目前唯一已展开的问题</span>
-              <span className="qf-title">{open.title}</span>
-              <span className="qf-q">{open.question}</span>
-              <span className="qf-meta">
-                {HUMAN_NATURE.questions.length} 个具体问题 · 连到 {topicCourseCodes().length} 门课 · 可读到{topicCourseCodes().filter((c) => c in PUBLISHED).map((c) => `《${PUBLISHED[c].name}》`).join('')}
+        <ol className="qg">
+          {TOPICS.map((t, i) => (
+            <li key={t.id} className="qg-card">
+              <span className="qg-no" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="qf-go">进入这个问题 →</span>
-            </button>
-            <p className="note">放在这里只因为它是唯一完整实现的问题，并不表示它比其他问题更重要。</p>
-          </div>
-          <section className="q-others" aria-labelledby="q-others-h">
-            <h2 id="q-others-h" className="q-others-h">
-              其他 {others.length} 个问题（按大纲顺序） <NotBuilt>原型未展开</NotBuilt>
-            </h2>
-            <ul>
-              {others.map((t) => (
-                <li key={t.id}>
-                  <span className="qo-title">{t.title}</span>
-                  <span className="qo-q">{t.question}</span>
-                  {/* A topic not yet expanded may still link a published systematic course (S1, S2). */}
-                  <span className="qo-c">
-                    {t.courses.map((c, i) => (
-                      <span key={c}>
-                        {i > 0 && ' · '}
-                        {c in PUBLISHED ? (
-                          <button className="inline-link" onClick={() => goCourse(c, [QUESTIONS_CRUMB])}>
-                            {PUBLISHED[c].name}
-                          </button>
-                        ) : (
-                          nameOf(c, NAMES)
-                        )}
-                      </span>
-                    ))}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
+              <h2 className="qg-title">{t.title}</h2>
+              <p className="qg-q">{t.question}</p>
+              <ul className="qg-courses" aria-label={`「${t.title}」的课程`}>
+                {t.courses.map((c) => (
+                  <li key={c}>
+                    {c in PUBLISHED ? (
+                      <button className="qg-course" onClick={() => goCourse(c, [QUESTIONS_CRUMB])}>
+                        {PUBLISHED[c].name} →
+                      </button>
+                    ) : (
+                      nameOf(c, NAMES)
+                    )}
+                  </li>
+                ))}
+              </ul>
+              {t.implemented && (
+                <button className="qg-more" onClick={() => goTopic(t.id)}>
+                  拆成 {HUMAN_NATURE.questions.length} 个具体问题，穿过各传统的课程 →
+                </button>
+              )}
+            </li>
+          ))}
+        </ol>
       </div>
     </main>
   );

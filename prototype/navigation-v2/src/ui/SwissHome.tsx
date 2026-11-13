@@ -3,17 +3,17 @@ import { REGIONS, type RegionId } from '../data/catalog';
 import { UNITS, type Unit } from '../data/units';
 import { lastReading } from '../state/reading';
 import { PUBLISHED } from '../content/courses';
+import { CASES } from '../content/cases';
 import { continueReading, goCourse, goTopic, regionHash } from './nav';
 
 // Modernist-mix homepage (Display Grid).
 // Header: the large display word 哲学, the question the page answers, and the
 // usual path stated once.
-// Focal point: four flat entrance panels, each saying which steps follow.
-// Below: the 72-course strip. It is a preview control: hover or arrow keys
-// show each course's name and status; only implemented courses open.
+// Focal point: four flat entrance panels.
+// Below: the 72-course strip. Hover or arrow keys show each course's name;
+// a click or Enter opens it.
 
 const ORDER: RegionId[] = ['history', 'questions', 'dialogue', 'methods'];
-const COUNT = Object.fromEntries(ORDER.map((r) => [r, UNITS.filter((u) => u.region === r).length])) as Record<RegionId, number>;
 const CELLS = ORDER.flatMap((r) => UNITS.filter((u) => u.region === r));
 const TIER = { core: '核心', elective: '核心选修', extended: '拓展' } as const;
 const IMPLEMENTED = new Set(Object.keys(PUBLISHED));
@@ -56,13 +56,17 @@ export default function SwissHome() {
           <h1 className="sh-display">哲学</h1>
         </div>
         <div className="sh-intro">
-          <p className="sh-kicker">
-            PhiloPilot · 哲学课程总览<span className="nowrap">（原型）</span>
-          </p>
+          <p className="sh-kicker">PhiloPilot · 哲学课程</p>
           <p className="sh-q">从哪里开始读？</p>
           <p className="sh-sub">
-            四个入口，同一套 72 门课程：从传统、问题、对话或方法读起都可以。
-            <small>每个入口进入后的步骤写在下面的方块里；也可以用搜索或「继续阅读」直接回到课程。</small>
+            四个入口，同一套 {CELLS.length} 门课程：从传统、问题、对话或方法读起都可以。
+            <small>
+              另有{' '}
+              <a href="#/cases" className="sh-sub-link">
+                {CASES.filter((c) => c.available).length} 个哲学案例
+              </a>
+              ，以小说写成。
+            </small>
           </p>
         </div>
         {status?.state === 'progress' ? (
@@ -104,19 +108,10 @@ export default function SwissHome() {
             <span className="sh-title">{r.title}</span>
             <span className="sh-en">{r.en}</span>
             <span className="sh-line">{r.line}。</span>
-            <span className="sh-path" aria-label="进入后的步骤">
-              <span className="sh-path-k">进入后</span>
-              {(r.id === 'questions' ? ['选一个问题（10 个）', '选一门课', '阅读'] : [`选一门课（${COUNT[r.id]} 门）`, '阅读']).map((s, i) => (
-                <span key={s} className="sh-path-step">
-                  <i>{i + 1}</i>
-                  {s}
-                </span>
-              ))}
-            </span>
+            <span className="sh-stat">{r.stat}</span>
             <span className="sh-foot">
               <span className="sh-go">进入「{r.title}」 →</span>
             </span>
-            {r.id === 'questions' && <span className="sh-badge">原型中可以一路读到正文</span>}
           </a>
         ))}
       </nav>
@@ -124,7 +119,7 @@ export default function SwissHome() {
       <figure className="sh-strip">
         <figcaption className="sh-strip-head">
           <span id="sh-strip-label">
-            <b>72 门课程</b> · 每格一门，颜色表示它属于哪个入口
+            <b>全部 {CELLS.length} 门课程</b>
           </span>
           <span className="sh-readout" aria-live="polite">
             {unit ? (
@@ -132,11 +127,10 @@ export default function SwissHome() {
                 <b>{unit.name}</b>{' '}
                 <small>
                   · {REGION_TITLE[unit.region]} · {unit.group} · {TIER[unit.tier]}
-                  {IMPLEMENTED.has(unit.code) ? ' · 可阅读，点击或按 Enter 打开' : ' · 原型未实现'}
                 </small>
               </>
             ) : (
-              <small>指向一格或用方向键查看课程名（示意译名）</small>
+              <small>指向一格查看课程</small>
             )}
           </span>
         </figcaption>
@@ -164,7 +158,7 @@ export default function SwissHome() {
                 role="option"
                 aria-selected={i === cursor}
                 aria-disabled={!open}
-                aria-label={`${u.name}（${REGION_TITLE[u.region]}，${open ? '可阅读' : '原型未实现'}）`}
+                aria-label={`${u.name}（${REGION_TITLE[u.region]}）`}
                 className={cls}
                 onMouseEnter={() => {
                   setUnit(u);
@@ -197,11 +191,9 @@ export default function SwissHome() {
               第 {cursor + 1} / {CELLS.length} 门 ·{' '}
               {IMPLEMENTED.has(pick.code) ? (
                 <button className="sh-pick-open" onClick={() => openUnit(pick)}>
-                  可阅读 · 打开课程 →
+                  打开课程 →
                 </button>
-              ) : (
-                '原型未实现'
-              )}
+              ) : null}
             </span>
           </div>
           <button className="sh-pick-step" onClick={() => move(1)} disabled={cursor === CELLS.length - 1} aria-label="下一门课程">

@@ -84,7 +84,7 @@ const Article = memo(function Article({ no, part }: { no: string; part: number }
   return (
     <article className={'article case-article' + (isAppendix(part) ? ' case-article--appendix' : ' case-novel')} aria-labelledby="sec-title">
       <p className="art-kicker">
-        {isAppendix(part) ? `《${TITLE}》 · 附录（不计入阅读进度）` : `《${TITLE}》 · 第 ${chapterNo} 节 / 共 ${CHAPTERS.length} 节`}
+        {isAppendix(part) ? `《${TITLE}》 · 附录` : `《${TITLE}》 · 第 ${chapterNo} 节 / 共 ${CHAPTERS.length} 节`}
       </p>
       <h1 id="sec-title" className="art-title">
         {s.title}
@@ -334,7 +334,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
               目录 · {CHAPTERS.length} 章 <span className="rail-pct">已读 {pct}%</span>
             </p>
             <ol>{CHAPTERS.map(railItem)}</ol>
-            <p className="rail-group">附录 · 不计入进度</p>
+            <p className="rail-group">附录</p>
             <ol className="rail-appendix">{APPENDICES.map(railItem)}</ol>
             <div className="rail-back">
               <button onClick={toFront}>← 案例首页</button>

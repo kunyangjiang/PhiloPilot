@@ -22,16 +22,7 @@ export default function CasesPage() {
           <p className="kicker">PhiloPilot Cases</p>
           <h1 className="cases-title">哲学案例</h1>
           <p className="cases-lede">
-            以小说写成的哲学案例。每个案例是一个独立的故事，故事之后附有哲学分析、决策点和练习。
-            <small>哲学案例不属于 72 门课程，不计入课程数，也不影响课程的阅读进度。</small>
-          </p>
-          <p className="cases-avail">
-            目前可以阅读的{open.length === 1 ? '只有 ' : '有 '}
-            {open
-              .map((c) => `${c.no}《${c.title}》`)
-              .join('、')
-              .replace(/、(?=[^、]*$)/, '和 ')}。
-            {CASES.length > open.length && `其余${numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。`}
+            {open.length} 个以小说写成的哲学案例。每个案例是一个独立的故事，故事之后附有哲学分析、决策点和练习。
           </p>
         </header>
 
