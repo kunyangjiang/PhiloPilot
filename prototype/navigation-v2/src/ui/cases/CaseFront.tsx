@@ -1,4 +1,4 @@
-import { APPENDICES, CHAPTERS, CONTENT_NOTE, FICTION_NOTE, GENRE, NOVEL_CHARS, TITLE } from '../../content/case02';
+import { caseText } from '../../content/caseBooks';
 import { PUBLISHED } from '../../content/courses';
 import { navigate } from '../../router';
 import { TopBar, useEscape } from '../Chrome';
@@ -7,20 +7,15 @@ import CaseCrumbs from './CaseCrumbs';
 import { caseResume, caseStatus } from './caseState';
 import '../../styles/cases.css';
 
-// Front page of CASE 02《分洪》: what it is, the content note, where to start
-// or resume, the chapters, and which courses it connects to.
+// Front page of a written case: what it is, the content note, where to start
+// or resume, the chapters, and which courses it connects to (see caseBooks.ts).
 
-// Courses the case actually draws on (see the manuscript, 第七章 and 附录一).
-const LINKS: { code: string; why: string }[] = [
-  { code: 'CN1', why: '第七章与附录一第 5 节：孟子“见牛未见羊”与推恩' },
-  { code: 'CN2', why: '附录一第 5 节：《墨子·大取》“断指以存腕”' },
-  { code: 'EA4', why: '附录一第 3 节：不把人仅仅当作手段' },
-];
-
-export default function CaseFront() {
+export default function CaseFront({ no }: { no: string }) {
   useEscape(() => navigate({ name: 'cases' }));
-  const st = caseStatus();
-  const read = (part: number, block?: number) => navigate({ name: 'caseReader', no: '02', part, block });
+  const { book, links: LINKS } = caseText(no)!;
+  const { APPENDICES, CHAPTERS, CONTENT_NOTE, FICTION_NOTE, GENRE, NOVEL_CHARS, TITLE } = book;
+  const st = caseStatus(book);
+  const read = (part: number, block?: number) => navigate({ name: 'caseReader', no, part, block });
   const first = CHAPTERS[0].index;
 
   return (
@@ -44,14 +39,16 @@ export default function CaseFront() {
             >
               哲学案例
             </a>{' '}
-            · 案例 02 · {GENRE}
+            · 案例 {no} · {GENRE}
           </p>
           <h1 className="course-title case-title">《{TITLE}》</h1>
           <p className="case-fiction">{FICTION_NOTE}</p>
-          <p className="case-content-note" role="note">
-            <span className="ccn-k">阅读提示</span>
-            {CONTENT_NOTE}
-          </p>
+          {CONTENT_NOTE && (
+            <p className="case-content-note" role="note">
+              <span className="ccn-k">阅读提示</span>
+              {CONTENT_NOTE}
+            </p>
+          )}
 
           <div className={'read-card read-card--' + st.state}>
             {st.state === 'new' && (
@@ -65,7 +62,7 @@ export default function CaseFront() {
               <button
                 className="rc-go"
                 onClick={() => {
-                  const t = caseResume();
+                  const t = caseResume(book);
                   read(t.part, t.block);
                 }}
               >

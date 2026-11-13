@@ -1,26 +1,17 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import {
-  CHAPTERS,
-  APPENDICES,
-  DECISIONS_INDEX,
-  PRACTICE_INDEX,
-  SECTIONS,
-  TITLE,
-  decisionPoints,
-  isAppendix,
-  type CaseBlock,
-  type CaseSection,
-} from '../../content/case02';
-import { CASE02_PRACTICE } from '../../content/practice-case02';
+import type { CaseBlock, CaseBook, CaseSection } from '../../content/caseBook';
+import { caseText } from '../../content/caseBooks';
+import { caseCode } from '../../content/cases';
+import type { PracticeSet } from '../../content/practice';
 import { navigate, type Route } from '../../router';
 import { bumpProgress, getProgress, isReduced, setPosition } from '../../state/store';
 import { TopBar } from '../Chrome';
 import Practice from '../Practice';
 import CaseCrumbs from './CaseCrumbs';
-import { CODE, casePct } from './caseState';
+import { casePct } from './caseState';
 import '../../styles/cases.css';
 
-// The CASE 02 reader. It follows the course reader (rail, compact bar and
+// The case reader (one per written case, chosen by the route's case number). It follows the course reader (rail, compact bar and
 // drawer on narrow screens, previous/next, saved place) but stands alone:
 // a case has no footnote panel, teaching components or course breadcrumbs.
 // Progress and the saved place use the case's own keys (see caseState.ts),
@@ -29,7 +20,11 @@ import '../../styles/cases.css';
 
 type CaseRoute = Extract<Route, { name: 'caseReader' }>;
 
-const DP = decisionPoints();
+const DPS = new Map<string, ReturnType<CaseBook['decisionPoints']>>();
+const dpOf = (book: CaseBook) => {
+  if (!DPS.has(book.no)) DPS.set(book.no, book.decisionPoints());
+  return DPS.get(book.no)!;
+};
 
 const plain = (b: CaseBlock, i: number) =>
   b.id ? (
@@ -40,7 +35,8 @@ const plain = (b: CaseBlock, i: number) =>
 
 /** 附录二: each decision point opens on what was known at the time; the
  *  other four parts (including what was known only later) are opened by the reader. */
-function Decisions({ s }: { s: CaseSection }) {
+function Decisions({ book, s }: { book: CaseBook; s: CaseSection }) {
+  const DP = dpOf(book);
   return (
     <>
       {DP.lead.map((b) => plain(b, s.blocks.indexOf(b)))}
@@ -65,22 +61,24 @@ function Decisions({ s }: { s: CaseSection }) {
   );
 }
 
-function Exercises() {
+function Exercises({ code, sets }: { code: string; sets: PracticeSet[] }) {
   return (
     <>
       <p className="blk case-px-note" data-block={0}>
         三组练习，分别对应附录二的三个决策点。有的题没有唯一正确答案，只列出每种立场的长处和代价。
       </p>
-      {CASE02_PRACTICE.map((set, i) => (
+      {sets.map((set, i) => (
         <div key={set.label} className="blk" data-block={i + 1}>
-          <Practice code={CODE} exerciseId={`${CODE}-practice-${set.label}`} set={set} promptHtml="" hintHtml="" />
+          <Practice code={code} exerciseId={`${code}-practice-${set.label}`} set={set} promptHtml="" hintHtml="" />
         </div>
       ))}
     </>
   );
 }
 
-const Article = memo(function Article({ part }: { part: number }) {
+const Article = memo(function Article({ no, part }: { no: string; part: number }) {
+  const { book, practice } = caseText(no)!;
+  const { CHAPTERS, DECISIONS_INDEX, PRACTICE_INDEX, SECTIONS, TITLE, isAppendix } = book;
   const s = SECTIONS[part];
   const chapterNo = CHAPTERS.findIndex((c) => c.index === part) + 1;
   return (
@@ -91,12 +89,22 @@ const Article = memo(function Article({ part }: { part: number }) {
       <h1 id="sec-title" className="art-title">
         {s.title}
       </h1>
-      {part === DECISIONS_INDEX ? <Decisions s={s} /> : part === PRACTICE_INDEX ? <Exercises /> : s.blocks.map(plain)}
+      {part === DECISIONS_INDEX ? (
+        <Decisions book={book} s={s} />
+      ) : part === PRACTICE_INDEX ? (
+        <Exercises code={caseCode(no)} sets={practice} />
+      ) : (
+        s.blocks.map(plain)
+      )}
     </article>
   );
 });
 
 export default function CaseReader({ route }: { route: CaseRoute }) {
+  const no = route.no;
+  const { book } = caseText(no)!;
+  const { APPENDICES, CHAPTERS, SECTIONS, TITLE, isAppendix } = book;
+  const CODE = caseCode(no);
   const part = Math.max(0, Math.min(SECTIONS.length - 1, route.part));
   const s = SECTIONS[part];
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -166,7 +174,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
         at: Date.now(),
       });
     }
-  }, [part, s]);
+  }, [CODE, part, s]);
 
   useEffect(() => {
     const sc = scrollRef.current;
@@ -177,8 +185,14 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
       raf = requestAnimationFrame(onScroll);
     };
     sc.addEventListener('scroll', h, { passive: true });
-    const mark = () => (userMoved.current = true);
-    const evs = ['wheel', 'pointerdown', 'touchstart', 'keydown'] as const;
+    // Answering a question or opening a decision point is not reading: its
+    // clicks and keys (and the focus jump to the feedback that follows) must
+    // not move the saved place. Wheel and swipe always count.
+    const mark = (e: Event) => {
+      if (e.type !== 'wheel' && e.type !== 'touchmove' && (e.target as Element | null)?.closest?.('.pq-q, summary')) return;
+      userMoved.current = true;
+    };
+    const evs = ['wheel', 'touchmove', 'pointerdown', 'touchstart', 'keydown'] as const;
     evs.forEach((ev) => sc.addEventListener(ev, mark, { passive: true }));
     onScroll();
     const iv = window.setInterval(() => setProg(getProgress(CODE)), 1200);
@@ -188,7 +202,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
       cancelAnimationFrame(raf);
       window.clearInterval(iv);
     };
-  }, [onScroll]);
+  }, [CODE, onScroll]);
 
   const closeDrawer = (refocus = true) => {
     setDrawer(false);
@@ -202,15 +216,15 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
     const k = (e: KeyboardEvent) => {
       if (e.key !== 'Escape' || e.defaultPrevented || document.querySelector('.palette, .dg-overlay')) return;
       if (drawer) closeDrawer();
-      else navigate({ name: 'case', no: '02' });
+      else navigate({ name: 'case', no });
     };
     window.addEventListener('keydown', k);
     return () => window.removeEventListener('keydown', k);
   });
 
-  const goPart = (i: number) => navigate({ name: 'caseReader', no: '02', part: i });
-  const toFront = () => navigate({ name: 'case', no: '02' });
-  const pct = casePct(progress, userMoved.current ? { part, frac } : undefined);
+  const goPart = (i: number) => navigate({ name: 'caseReader', no, part: i });
+  const toFront = () => navigate({ name: 'case', no });
+  const pct = casePct(book, progress, userMoved.current ? { part, frac } : undefined);
   const label = (x: CaseSection) => (isAppendix(x.index) ? x.title : `第${x.no}章　${x.name}`);
   const chapterNo = CHAPTERS.findIndex((c) => c.index === part) + 1;
 
@@ -263,7 +277,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
       <CaseCrumbs
         items={[
           { label: '哲学案例', kind: '栏目', route: { name: 'cases' } },
-          { label: TITLE, kind: '案例', route: { name: 'case', no: '02' } },
+          { label: TITLE, kind: '案例', route: { name: 'case', no } },
           { label: isAppendix(part) ? s.name : s.title, kind: isAppendix(part) ? '附录' : '章节' },
         ]}
       />
@@ -300,7 +314,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
                 </a>
                 <i aria-hidden="true"> › </i>
                 <a
-                  href="#/cases/02"
+                  href={`#/cases/${no}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setDrawer(false);
@@ -328,7 +342,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
 
           <div className="reader-body" key={part}>
             <style>{flash != null ? `.article [data-block="${flash}"]{background: var(--flash)}` : ''}</style>
-            <Article part={part} />
+            <Article no={no} part={part} />
             <aside className="margin" aria-hidden="true" />
             <footer className="section-nav">
               {part > 0 ? (

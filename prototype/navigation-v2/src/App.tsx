@@ -12,6 +12,7 @@ import CasesPage from './ui/cases/CasesPage';
 import CaseFront from './ui/cases/CaseFront';
 import CaseReader from './ui/cases/CaseReader';
 import { caseByNo } from './content/cases';
+import { caseText } from './content/caseBooks';
 import { isPublished } from './content/courses';
 import { nameOf } from './data/catalog';
 
@@ -35,9 +36,9 @@ function Page({ route }: { route: Route }) {
     case 'cases':
       return <CasesPage />;
     case 'case':
-      return caseByNo(route.no)?.available ? <CaseFront /> : <CasesPage />;
+      return caseByNo(route.no)?.available && caseText(route.no) ? <CaseFront no={route.no} /> : <CasesPage />;
     case 'caseReader':
-      return caseByNo(route.no)?.available ? <CaseReader route={route} /> : <CasesPage />;
+      return caseByNo(route.no)?.available && caseText(route.no) ? <CaseReader route={route} /> : <CasesPage />;
   }
 }
 

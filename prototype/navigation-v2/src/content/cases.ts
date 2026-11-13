@@ -1,8 +1,8 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
-// The eight titles and directions were sealed by the product owner. Only
-// CASE 02 is written; the others list title, direction and subjects only and
-// open nothing.
+// The eight titles and directions were sealed by the product owner. CASE 02
+// and CASE 03 are written (see caseBooks.ts); the others list title,
+// direction and subjects only and open nothing.
 
 export interface CaseEntry {
   /** Two-digit case number, also the route id (#/cases/02). */
@@ -35,9 +35,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '03',
     title: '白马非马',
-    premise: '商标审查员的职场喜剧。',
+    genre: '职场喜剧 / 逻辑与语言哲学 / 职场文学',
+    premise: '一个茶叶合作社要把村名"白马"注册成商标，而另一家公司早已注册了 WHITE HORSE；中年商标审查员方怀礼要决定，这个白马是不是那个马。',
     subjects: ['逻辑', '名与实', '公孙龙与墨辩', '指称'],
-    available: false,
+    available: true,
   },
   {
     no: '04',
@@ -76,6 +77,6 @@ export const CASES: CaseEntry[] = [
   },
 ];
 
-/** Case code used for local storage keys (philopilot.v2.case02.…). */
+/** Case code used for local storage keys (philopilot.v2.case02.…, philopilot.v2.case03.…). */
 export const caseCode = (no: string) => 'CASE' + no;
 export const caseByNo = (no: string) => CASES.find((c) => c.no === no);

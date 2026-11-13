@@ -1,3 +1,4 @@
+import { caseText } from '../../content/caseBooks';
 import { CASES } from '../../content/cases';
 import { navigate } from '../../router';
 import { TopBar, useEscape } from '../Chrome';
@@ -10,7 +11,8 @@ import '../../styles/cases.css';
 
 export default function CasesPage() {
   useEscape(() => navigate({ name: 'home' }));
-  const st = caseStatus();
+  const open = CASES.filter((c) => c.available);
+  const numerals = ['零', '一', '两', '三', '四', '五', '六', '七', '八'];
   return (
     <main id="main" tabIndex={-1} className="pg pg-cases">
       <TopBar />
@@ -23,11 +25,16 @@ export default function CasesPage() {
             以小说写成的哲学案例。每个案例是一个独立的故事，故事之后附有哲学分析、决策点和练习。
             <small>哲学案例不属于 72 门课程，不计入课程数，也不影响课程的阅读进度。</small>
           </p>
-          <p className="cases-avail">目前可以阅读的只有 02《分洪》。其余七个案例已确定题目和方向，尚未写作。</p>
+          <p className="cases-avail">
+            目前可以阅读的{open.length === 1 ? '只有 ' : '有 '}
+            {open.map((c) => `${c.no}《${c.title}》`).join('和 ')}。其余{numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。
+          </p>
         </header>
 
         <ol className="cases-list" aria-label="八个哲学案例">
           {CASES.map((c) => {
+            const text = c.available ? caseText(c.no) : undefined;
+            const st = text ? caseStatus(text.book) : undefined;
             const body = (
               <>
                 <span className="case-no" aria-hidden="true">
@@ -45,7 +52,7 @@ export default function CasesPage() {
                   </span>
                 </span>
                 <span className="case-status">
-                  {c.available ? (
+                  {st ? (
                     <>
                       <span className="case-st case-st--open">
                         {st.state === 'progress' ? `继续阅读 · 已读 ${st.pct}%` : st.state === 'done' ? '已读完' : '可以阅读'}
@@ -61,8 +68,8 @@ export default function CasesPage() {
               </>
             );
             return (
-              <li key={c.no} className={'case-card' + (c.available ? ' is-open' : ' is-planned')}>
-                {c.available ? (
+              <li key={c.no} className={'case-card' + (st ? ' is-open' : ' is-planned')}>
+                {st ? (
                   <a
                     className="case-link"
                     href={`#/cases/${c.no}`}
