@@ -2,10 +2,12 @@ import type { CaseBook } from './caseBook';
 import { CASE02 } from './case02';
 import { CASE03 } from './case03';
 import { CASE04 } from './case04';
+import { CASE05 } from './case05';
 import type { PracticeSet } from './practice';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
 import { CASE04_PRACTICE } from './practice-case04';
+import { CASE05_PRACTICE } from './practice-case05';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -45,6 +47,17 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'GR2', why: '第四、八、十章与附录一第 5 节：《克里同》中法律的话，“要么说服，要么服从”' },
       { code: 'S9', why: '附录一第 2、5 节：权威与政治义务，法律的效力与道德的正当性，公民不服从' },
       { code: 'S4', why: '附录一第 7 节：负责需要的控制条件与认知条件' },
+    ],
+  },
+  '05': {
+    book: CASE05,
+    practice: CASE05_PRACTICE,
+    links: [
+      { code: 'S5', why: '附录一第 3、4、6 节：功能主义与中文屋，现象意识，“从行为到经验”的推论的限度' },
+      { code: 'D7', why: '附录一第 3、5、7 节：为什么不能从语言推出意识，也不能断然否认；道德地位' },
+      { code: 'S4', why: '附录一第 5、9 节：人格性、道德地位与行动者的区分；复制与分裂' },
+      { code: 'S1', why: '附录一第 2 节：濠梁之辩与“他心问题”' },
+      { code: 'A3', why: '附录一第 6 节：思想实验与类比检验什么' },
     ],
   },
 };

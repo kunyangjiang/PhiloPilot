@@ -1,7 +1,7 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
 // The eight titles and directions were sealed by the product owner. CASE 02,
-// CASE 03 and CASE 04 are written (see caseBooks.ts); the others list title,
+// CASE 03, CASE 04 and CASE 05 are written (see caseBooks.ts); the others list title,
 // direction and subjects only and open nothing.
 
 export interface CaseEntry {
@@ -51,9 +51,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '05',
     title: '镜中之城',
-    premise: '一个模拟研究组要决定是否关闭他们的模拟（设定为虚构推想）。',
+    genre: '哲学科幻 / 心灵哲学与伦理学 / 研究所小说',
+    premise: '一座用真实街区的数据造出的模拟城市里，有居民在问卷上写下"这是第几次了"；删除期限只剩四个星期，研究组要决定，这座城只是那片街区的证据，还是里面另有其人（设定为虚构推想）。',
     subjects: ['他心', '道德地位', '模型能否作为证据'],
-    available: false,
+    available: true,
   },
   {
     no: '06',
