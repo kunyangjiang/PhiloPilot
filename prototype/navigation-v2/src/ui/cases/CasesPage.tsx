@@ -27,7 +27,10 @@ export default function CasesPage() {
           </p>
           <p className="cases-avail">
             目前可以阅读的{open.length === 1 ? '只有 ' : '有 '}
-            {open.map((c) => `${c.no}《${c.title}》`).join('和 ')}。其余{numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。
+            {open
+              .map((c) => `${c.no}《${c.title}》`)
+              .join('、')
+              .replace(/、(?=[^、]*$)/, '和 ')}。其余{numerals[CASES.length - open.length]}个案例已确定题目和方向，尚未写作。
           </p>
         </header>
 

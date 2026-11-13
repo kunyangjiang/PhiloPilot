@@ -1,7 +1,7 @@
 // PhiloPilot Cases (哲学案例): narrative cases, kept apart from the 72-course
 // curriculum and never counted in course totals or course progress.
-// The eight titles and directions were sealed by the product owner. CASE 02
-// and CASE 03 are written (see caseBooks.ts); the others list title,
+// The eight titles and directions were sealed by the product owner. CASE 02,
+// CASE 03 and CASE 04 are written (see caseBooks.ts); the others list title,
 // direction and subjects only and open nothing.
 
 export interface CaseEntry {
@@ -43,9 +43,10 @@ export const CASES: CaseEntry[] = [
   {
     no: '04',
     title: '合法的命令',
-    premise: '一位资深法官和一名书记员回看一场审判。',
-    subjects: ['法律与道德', '哈特与富勒', '拉德布鲁赫', '《克力同》'],
-    available: false,
+    genre: '法庭剧 / 法哲学与政治哲学 / 职场文学',
+    premise: '旧政权倒台十年后，资深法官伊莲娜·萨巴要审判一位老法官，审的是他二十年前判下的一个案子；她的书记员发现，那场审判的笔录是自己父亲记的。',
+    subjects: ['法律与道德', '哈特与富勒', '拉德布鲁赫', '《克里同》'],
+    available: true,
   },
   {
     no: '05',
@@ -77,6 +78,6 @@ export const CASES: CaseEntry[] = [
   },
 ];
 
-/** Case code used for local storage keys (philopilot.v2.case02.…, philopilot.v2.case03.…). */
+/** Case code used for local storage keys (philopilot.v2.case02.…, philopilot.v2.case04.…). */
 export const caseCode = (no: string) => 'CASE' + no;
 export const caseByNo = (no: string) => CASES.find((c) => c.no === no);

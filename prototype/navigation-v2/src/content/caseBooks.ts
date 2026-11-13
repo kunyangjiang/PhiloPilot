@@ -1,9 +1,11 @@
 import type { CaseBook } from './caseBook';
 import { CASE02 } from './case02';
 import { CASE03 } from './case03';
+import { CASE04 } from './case04';
 import type { PracticeSet } from './practice';
 import { CASE02_PRACTICE } from './practice-case02';
 import { CASE03_PRACTICE } from './practice-case03';
+import { CASE04_PRACTICE } from './practice-case04';
 
 // The written cases, by case number: the manuscript, its practice sets, and
 // the published courses it actually draws on (each with the place in the
@@ -33,6 +35,16 @@ export const CASE_TEXTS: Record<string, CaseText> = {
       { code: 'S6', why: '第四、七、十章与附录一第 4、5 节：涵义与指称，专名与因果—历史图景，连锁悖论' },
       { code: 'A3', why: '第五、九章与附录一第 5 节：模糊的概念，为了某个目的划一条线' },
       { code: 'A2', why: '附录一第 2 节：“属于”与“等于”的区分' },
+    ],
+  },
+  '04': {
+    book: CASE04,
+    practice: CASE04_PRACTICE,
+    links: [
+      { code: 'GR1', why: '第十章与附录一第 5 节：《申辩》，“宁愿服从神”与三十僭主命令逮捕勒翁' },
+      { code: 'GR2', why: '第四、八、十章与附录一第 5 节：《克里同》中法律的话，“要么说服，要么服从”' },
+      { code: 'S9', why: '附录一第 2、5 节：权威与政治义务，法律的效力与道德的正当性，公民不服从' },
+      { code: 'S4', why: '附录一第 7 节：负责需要的控制条件与认知条件' },
     ],
   },
 };
