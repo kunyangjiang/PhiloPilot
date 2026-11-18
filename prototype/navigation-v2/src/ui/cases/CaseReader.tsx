@@ -84,7 +84,7 @@ const Article = memo(function Article({ no, part }: { no: string; part: number }
   return (
     <article className={'article case-article' + (isAppendix(part) ? ' case-article--appendix' : ' case-novel')} aria-labelledby="sec-title">
       <p className="art-kicker">
-        {isAppendix(part) ? `《${TITLE}》 · 附录` : `《${TITLE}》 · 第 ${chapterNo} 节 / 共 ${CHAPTERS.length} 节`}
+        {isAppendix(part) ? `《${TITLE}》 · 附录` : `《${TITLE}》 · 第 ${chapterNo} 章 / 共 ${CHAPTERS.length} 章`}
       </p>
       <h1 id="sec-title" className="art-title">
         {s.title}
@@ -288,7 +288,7 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
           <span aria-hidden="true">‹</span> 案例
         </button>
         <p className="rb-where">
-          <span className="rb-pos">{isAppendix(part) ? '附录' : `第 ${chapterNo} / ${CHAPTERS.length} 节`}</span>
+          <span className="rb-pos">{isAppendix(part) ? '附录' : `第 ${chapterNo} / ${CHAPTERS.length} 章`}</span>
           <span className="rb-title">{s.name}</span>
         </p>
         <button ref={tocBtn} className="rb-toc" aria-expanded={drawer} aria-controls="case-rail" onClick={() => (drawer ? closeDrawer() : setDrawer(true))}>

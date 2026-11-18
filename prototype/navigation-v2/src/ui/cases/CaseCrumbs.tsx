@@ -23,7 +23,7 @@ export default function CaseCrumbs({ items }: { items: CaseCrumb[] }) {
               className={'wf-step ' + (current ? 'is-current' : 'is-past') + (i === 0 ? ' wf-home' : '')}
               aria-current={current ? 'location' : undefined}
             >
-              <span className="wf-level">{c.kind}</span>
+              {c.kind !== c.label && <span className="wf-level">{c.kind}</span>}
               {current || !c.route ? (
                 <span className="wf-label">{c.label}</span>
               ) : (

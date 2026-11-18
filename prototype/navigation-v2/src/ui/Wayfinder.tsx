@@ -62,7 +62,7 @@ export default function Wayfinder(props: Page) {
           const current = i === crumbs.length - 1;
           return (
             <li key={c.hash + i} className={'wf-step ' + (current ? 'is-current' : 'is-past') + (i === 0 ? ' wf-home' : '')} aria-current={current ? 'location' : undefined}>
-              <span className="wf-level">{c.kind}</span>
+              {c.kind !== c.label && <span className="wf-level">{c.kind}</span>}
               {current ? (
                 <span className="wf-label">{c.label}</span>
               ) : (

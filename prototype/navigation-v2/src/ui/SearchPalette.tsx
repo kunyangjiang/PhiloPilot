@@ -1,10 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { COURSES, REGIONS, TIER_LABEL, TOPICS } from '../data/catalog';
 import { PUBLISHED } from '../content/courses';
+import { CASES } from '../content/cases';
 import { navigate, type Route } from '../router';
 
-// Discreet global search over regions, questions, prototype courses and the
-// real headings of every published course. Opens with Ctrl/⌘+K or “/”.
+// Discreet global search over regions, questions, prototype courses, the
+// PhiloPilot Cases and the real headings of every published course. Opens
+// with Ctrl/⌘+K or “/”.
+
+const LIMIT = 40;
 
 let opener: (() => void) | null = null;
 export const openSearch = () => opener?.();
@@ -47,7 +51,7 @@ export default function SearchPalette() {
     } else lastFocus.current?.focus?.();
   }, [open]);
 
-  const items = useMemo<Item[]>(() => {
+  const { items, more } = useMemo(() => {
     // A course opened from search has no exploration origin: 首页 › course.
     const to = (r: Route) => () => {
       setOpen(false);
@@ -72,6 +76,12 @@ export default function SearchPalette() {
         sub: TIER_LABEL[c.tier],
         go: c.implemented ? to({ name: 'course', code: c.code }) : undefined,
       })),
+      ...CASES.map((c) => ({
+        group: '案例',
+        label: `《${c.title}》`,
+        sub: c.available ? c.subjects.join('、') : `${c.subjects.join('、')} · 尚未写作`,
+        go: c.available ? to({ name: 'case', no: c.no }) : undefined,
+      })),
       ...Object.values(PUBLISHED).flatMap((c) =>
         c.text.SECTIONS.flatMap((s) => [
           { group: '课文章节', label: s.title, sub: c.name, go: to({ name: 'reader', code: c.code, section: s.index }) },
@@ -86,7 +96,7 @@ export default function SearchPalette() {
     ];
     const needle = q.trim().toLowerCase();
     const list = needle ? all.filter((i) => (i.label + i.sub).toLowerCase().includes(needle)) : all.filter((i) => i.group !== '课文章节').slice(0, 14);
-    return list.slice(0, 40);
+    return { items: list.slice(0, LIMIT), more: list.length > LIMIT };
   }, [q]);
 
   if (!open) return null;
@@ -136,6 +146,7 @@ export default function SearchPalette() {
           ))}
         </ul>
         <p className="pl-foot">
+          {more && <span className="pl-more">只显示前 {LIMIT} 条，输入更多字可以缩小范围</span>}
           <span className="pl-keys">↑↓ 选择 · Enter 打开 · Esc 关闭</span>
         </p>
       </div>
