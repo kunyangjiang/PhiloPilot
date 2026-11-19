@@ -35,7 +35,7 @@
 | 原典 | 阿维森纳《指要与诠解》 | 引用阿拉伯文原文，本章试译 |
 | 本人的自述 | 阿维森纳的自传 | 当作自述来读，不一定每个细节都准确 |
 | 后学的整理 | 巴赫曼亚尔《获得之书》 | 只提到 |
-| 现代学者的解释 | SEP 的有关条目 | 注明是谁的解释 |
+| 现代学者的解释 | 《斯坦福哲学百科全书》（SEP）的有关条目 | 注明是谁的解释 |
 | 本章自己的重建 | 表格、分步重建、"后世批判与回应"中的回答 | 都标明"本章的重建"或"本章的整理" |
 
 **第三，两种常见的误读。**
@@ -476,7 +476,7 @@ SEP 的条目用两个比喻概括这个区分：可能的东西是"贫穷的"�
 
 ## 注释
 
-[^1]: 阿维森纳的自传（由弟子朱兹贾尼续写为传记）。本章据 SEP, "Ibn Sina [Avicenna]"（<https://plato.stanford.edu/entries/ibn-sina/>）所依据的 Gohlman 1974 年校订本和 Gutas 的英译的一般介绍转述，没有核对阿拉伯文原文。"四十遍"、"三个银币"等细节，据通行的介绍。
+[^1]: 阿维森纳的自传（由弟子朱兹贾尼续写为传记）。本章据《斯坦福哲学百科全书》（SEP）"Ibn Sina [Avicenna]"（<https://plato.stanford.edu/entries/ibn-sina/>）所依据的 Gohlman 1974 年校订本和 Gutas 的英译的一般介绍转述，没有核对阿拉伯文原文。"四十遍"、"三个银币"等细节，据通行的介绍。
 [^2]: 法拉比《论〈形而上学〉的目的》的立场，本章据 SEP, "Ibn Sina's Metaphysics"（<https://plato.stanford.edu/entries/ibn-sina-metaphysics/>）对阿维森纳形而上学主题的介绍和通行的研究概括转述，没有阅读法拉比原文。
 [^3]: SEP, "Greek Sources in Arabic and Islamic Philosophy"（<https://plato.stanford.edu/entries/arabic-islamic-greek/>）：马塔不懂希腊文，从叙利亚文翻译；他的学生包括法拉比；叶海亚·本·阿迪是马塔的学生。
 [^4]: SEP, "Arabic and Islamic Philosophy of Language and Logic"（<https://plato.stanford.edu/entries/arabic-islamic-language/>），Text 1："This art [of logic] is similar to the art of grammar"。本章转述；条目所引英译的译者，本章读取的文本中没有标明。

@@ -1478,7 +1478,7 @@
 
 **缩写与引用方式。** "SEP"指《斯坦福哲学百科》（*Stanford Encyclopedia of Philosophy*），正文中称"斯坦福哲学百科"。本课用到其中四个条目：*Mohism*（墨家，下称 SEP *Mohism*，含补充文档 *Texts and Authorship*）、*Mohist Canons*（后期墨家，下称 SEP *Mohist Canons*，含补充文档 *Textual History and Philological Issues*）、*School of Names*（名家，下称 SEP *School of Names*）、*Logic and Language in Early Chinese Philosophy*（下称 SEP *Logic and Language*）；网址和修订日期见"来源与权利说明"。《墨子》原文引自中文维基文库所收通行本，篇名用简体书写（如《墨子·兼爱上》）；后期墨家条目称"《经下》'景到'条"之类。"葛瑞汉编号"（A78、B66 等）指葛瑞汉（A. C. Graham）1978 年整理本的条目编号，本课只在 SEP 中核对过对应关系的地方使用。凡"本课设想""本课的例子"，都是本课为教学编写的内容，不是古代文献或学者的说法。
 
-[^1]: 《墨子》各组文献的大致年代（从公元前五世纪末到公元前三世纪），据 SEP *Mohism* 第 1 节及补充文档 *Texts and Authorship*。本课没有阅读该补充文档所引的专门研究原著。
+[^1]: 《墨子》各组文献的大致年代（从公元前五世纪末到公元前三世纪），据《斯坦福哲学百科全书》（SEP）*Mohism* 第 1 节及补充文档 *Texts and Authorship*。本课没有阅读该补充文档所引的专门研究原著。
 
 [^2]: 墨子生卒年无法确定、一般推测活动于公元前五世纪中后期，据 SEP *Mohism* 第 1 节的概述；《史记》"或曰并孔子时，或曰在其后"一句据中文维基文库《史记·孟子荀卿列传》核对。
 

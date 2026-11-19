@@ -129,7 +129,7 @@
 |---|---|---|
 | 正理派 | 知觉、推理、比较、言语（四种） | 《正理经》1.1.3 |
 | 佛教量论（陈那、法称） | 知觉、推理（两种） | 陈那《集量论》1.2（复原）；法称《正理一滴》1.2—1.3 |
-| 弥曼差派 | 认为"推定"（arthāpatti）是独立的知识来源；鸠摩利罗一系还认为"非认识"（anupalabdhi）是认识不存在的特殊来源 | SEP《印度古典知识论》第 7.2—7.3 节的概括 |
+| 弥曼差派 | 认为"推定"（arthāpatti）是独立的知识来源；鸠摩利罗一系还认为"非认识"（anupalabdhi）是认识不存在的特殊来源 | 《斯坦福哲学百科全书》（SEP）的《印度古典知识论》第 7.2—7.3 节的概括 |
 
 佛教只承认两种量，理由是：知识的对象只有两种。陈那说：
 
@@ -817,7 +817,7 @@
 
 [^1]: 安那姆跋陀《思择要集》（Tarkasaṃgraha）第 44 节（GRETIL 本的编号 AnTs_44）："svayam eva bhūyo darśanena yatra dhūmas tatra agnir iti mahānasādau vyāptiṃ gṛhītvā parvatasamīpaṃ gatas tadgate cāgnau sandihānaḥ parvate dhūmaṃ paśyan vyāptiṃ smarati yatra dhūmas tatrāgnir iti / tadantaraṃ vahnivyāpyadhūmavān ayaṃ parvata iti jñānam utpadyate"。本章的中文是概述。
 
-[^2]: 《正理经》、伐差耶那、乌底耶塔迦罗（约 600 年）、婆者斯钵底（约 900 年）、优陀衍那（约 975 年）和伽涅舍（约 1325 年）的年代，据 IEP 的 Nyāya 条目；乌底耶塔迦罗"约六世纪末"、商羯罗主和钵罗奢思多波陀"约六世纪"，据 SEP《印度古典逻辑》第 4.2 节；陈那"约 480—540 年"和法称年代的争论（包括 550—610 年的说法），据 SEP《法称》；婆者斯钵底"约 950 年"和优陀衍那"十一世纪"，据 SEP《伽涅舍》；宝称"十一世纪"，据 SEP《印度佛教心灵哲学》；鸠摩利罗"七世纪"和安那姆跋陀"十七世纪"，据 SEP《印度古典知识论》。本章没有核对这些年代所依据的专门研究。
+[^2]: 《正理经》、伐差耶那、乌底耶塔迦罗（约 600 年）、婆者斯钵底（约 900 年）、优陀衍那（约 975 年）和伽涅舍（约 1325 年）的年代，据 IEP 的 Nyāya 条目；乌底耶塔迦罗"约六世纪末"、商羯罗主和钵罗奢思多波陀"约六世纪"，据《斯坦福哲学百科全书》（SEP）的《印度古典逻辑》第 4.2 节；陈那"约 480—540 年"和法称年代的争论（包括 550—610 年的说法），据 SEP《法称》；婆者斯钵底"约 950 年"和优陀衍那"十一世纪"，据 SEP《伽涅舍》；宝称"十一世纪"，据 SEP《印度佛教心灵哲学》；鸠摩利罗"七世纪"和安那姆跋陀"十七世纪"，据 SEP《印度古典知识论》。本章没有核对这些年代所依据的专门研究。
 
 [^3]: SEP《印度古典逻辑》第 4.1 节：陈那关于推理和论证的三部著作都没有梵文原本传世；《正理门论》有汉译（该条目说，一部梵文写本已知存于西藏，尚未刊布），《因轮论》和《集量论》只有藏译。本章引用的《集量论》第一章梵文，据 Ernst Steinkellner 2005 年在网上发表的复原本（*Dignāga's Pramāṇasamuccaya, Chapter 1: A hypothetical reconstruction of the Sanskrit text with the help of the two Tibetan translations on the basis of the hitherto known Sanskrit fragments and the linguistic materials gained from Jinendrabuddhi's Ṭīkā*）。标题本身就说明它是"假设性的复原"。
 
