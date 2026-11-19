@@ -3,8 +3,8 @@ import type { CaseBlock, CaseBook, CaseSection } from '../../content/caseBook';
 import { caseText } from '../../content/caseBooks';
 import { caseCode } from '../../content/cases';
 import type { PracticeSet } from '../../content/practice';
-import { navigate, type Route } from '../../router';
-import { bumpProgress, getProgress, isReduced, setPosition } from '../../state/store';
+import { isFirstView, navigate, type Route } from '../../router';
+import { bumpProgress, getPosition, getProgress, isReduced, setPosition } from '../../state/store';
 import { TopBar } from '../Chrome';
 import Practice from '../Practice';
 import CaseCrumbs from './CaseCrumbs';
@@ -120,22 +120,35 @@ export default function CaseReader({ route }: { route: CaseRoute }) {
   const railRef = useRef<HTMLElement>(null);
 
   // Each navigation jumps to its block, or the top. Programmatic: it never
-  // counts as reading or moves the saved place.
+  // counts as reading or moves the saved place. On page load (a refresh, or a
+  // reopened link) the saved place wins when it is in this part, and is placed
+  // again once the web fonts have settled the layout.
   useLayoutEffect(() => {
     setDrawer(false);
     userMoved.current = false;
     const sc = scrollRef.current;
     if (!sc) return;
     sc.scrollTop = 0;
-    if (route.block != null) {
-      const el = sc.querySelector<HTMLElement>(`.article [data-block="${route.block}"]`);
-      if (el) {
-        sc.scrollTop = el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 120;
-        setFlash(route.block);
-        const t = window.setTimeout(() => setFlash(null), 2400);
-        return () => window.clearTimeout(t);
-      }
+    const saved = isFirstView() ? getPosition(CODE) : null;
+    const restore = saved != null && saved.section === part;
+    const target = restore ? saved.block : route.block;
+    if (target == null) return;
+    const place = () => {
+      const el = sc.querySelector<HTMLElement>(`.article [data-block="${target}"]`);
+      if (el) sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 120;
+      return el;
+    };
+    if (!place()) return;
+    if (restore) {
+      let live = true;
+      document.fonts?.ready.then(() => live && !userMoved.current && place());
+      return () => {
+        live = false;
+      };
     }
+    setFlash(target);
+    const t = window.setTimeout(() => setFlash(null), 2400);
+    return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route]);
 

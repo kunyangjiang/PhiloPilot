@@ -100,6 +100,17 @@ export function navigate(r: Route, opts: { replace?: boolean; ctx?: Crumb[] } = 
   window.dispatchEvent(new HashChangeEvent('hashchange'));
 }
 
+// ── Page load ────────────────────────────────────────────────────────────────
+// True until the first navigation after the page was loaded or refreshed
+// (navigate() and Back/Forward both fire one of these events). A reader opened
+// on page load restores the learner's saved place; later navigations keep their
+// own target (a block from the route, or the top).
+let firstView = true;
+const endFirstView = () => (firstView = false);
+window.addEventListener('hashchange', endFirstView);
+window.addEventListener('popstate', endFirstView);
+export const isFirstView = () => firstView;
+
 export function useRoute(): Route {
   const [route, setRoute] = useState<Route>(() => parseHash(location.hash));
   useEffect(() => {

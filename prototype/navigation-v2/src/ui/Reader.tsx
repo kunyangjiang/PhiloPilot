@@ -1,8 +1,8 @@
 import { memo, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { shortTitle, type Block, type Section } from '../content/course';
 import { PUBLISHED } from '../content/courses';
-import { navigate, type Route } from '../router';
-import { bumpProgress, getProgress, isReduced, setPosition } from '../state/store';
+import { isFirstView, navigate, type Route } from '../router';
+import { bumpProgress, getPosition, getProgress, isReduced, setPosition } from '../state/store';
 import { readPct } from '../state/reading';
 import { TopBar } from './Chrome';
 import Diagram from './Diagram';
@@ -146,6 +146,9 @@ export default function Reader({ route }: { route: ReaderRoute }) {
   // to the section or block already open still wins over where the learner
   // had scrolled. The jump is programmatic: userMoved is reset, so it never
   // counts as reading or moves the saved position.
+  // On page load (a refresh, or a reopened link) the saved place wins when it
+  // is in this section, since it is newer than any block in the URL; it is
+  // placed again once the web fonts have settled the layout.
   useLayoutEffect(() => {
     setNote(null);
     setDrawer(false);
@@ -154,15 +157,26 @@ export default function Reader({ route }: { route: ReaderRoute }) {
     const sc = scrollRef.current;
     if (!sc) return;
     sc.scrollTop = 0;
-    if (route.block != null) {
-      const el = sc.querySelector<HTMLElement>(`[data-block="${route.block}"]`);
-      if (el) {
-        sc.scrollTop = el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 120;
-        setFlash(route.block);
-        const t = window.setTimeout(() => setFlash(null), 2400);
-        return () => window.clearTimeout(t);
-      }
+    const saved = isFirstView() ? getPosition(code) : null;
+    const restore = saved != null && saved.section === section;
+    const target = restore ? saved.block : route.block;
+    if (target == null) return;
+    const place = () => {
+      const el = sc.querySelector<HTMLElement>(`[data-block="${target}"]`);
+      if (el) sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 120;
+      return el;
+    };
+    if (!place()) return;
+    if (restore) {
+      let live = true;
+      document.fonts?.ready.then(() => live && !userMoved.current && place());
+      return () => {
+        live = false;
+      };
     }
+    setFlash(target);
+    const t = window.setTimeout(() => setFlash(null), 2400);
+    return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route]);
 
